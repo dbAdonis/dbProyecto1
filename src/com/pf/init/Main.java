@@ -6,7 +6,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		
-		//ESTO ES UNA PRUEBA
+		//ESTO ES UNA PRUEBA 2
 	}
 
 }

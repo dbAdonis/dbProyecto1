@@ -9,10 +9,7 @@ public class Main {
 		ViewPrincipal vp = new ViewPrincipal();
 		vp.init();
 		
-		// ESTO ES UNA PRUEBA PARA MARCO
-		//PRUEBA PARA GABI
-		//Hola Freddy
-		//PARECE QUE ESTAMOS LISTOS PARA BRETEAR
+		
 	}
 
 }

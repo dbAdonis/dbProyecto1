@@ -3,7 +3,7 @@ package com.pf.mvc.controllers;
 public class ControllerPrueba {
 
 	public ControllerPrueba() {
-		// TODO Auto-generated constructor stub
+		// SI LES SALE ESTO ES PORQUE NO CAGAMOS
 	}
 
 }

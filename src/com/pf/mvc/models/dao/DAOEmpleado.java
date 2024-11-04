@@ -3,8 +3,6 @@ package com.pf.mvc.models.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import com.facturacion.mvc.models.vo.Factura;
 import com.mysql.jdbc.Connection;
 import com.pf.mvc.models.conn.Conexion;
 import com.pf.mvc.models.vo.Empleado;

@@ -3,31 +3,37 @@ package com.pf.mvc.models.vo;
 public class Producto {
 
 	private int id;
+	private String nombre, unidades, codigo;
 	private int idTipo;
 	private int idNaturaleza;
 	private int idCategoria;
-	private String nombre, unidades, codigo;
+	
 
-	public Producto(int idTipo, int idNaturaleza, int idCategoria, String nombre, String unidades, String codigo) {
+	public Producto( String nombre, String unidades, String codigo,int idTipo, int idNaturaleza, int idCategoria) {
 		this.id = 0;
-		this.idTipo = idTipo;
-		this.idNaturaleza = idNaturaleza;
-		this.idCategoria = idCategoria;
 		this.nombre = nombre;
 		this.unidades = unidades;
 		this.codigo = codigo;
+		this.idTipo = idTipo;
+		this.idNaturaleza = idNaturaleza;
+		this.idCategoria = idCategoria;
 	}
 
-	public Producto(int id, int idTipo, int idNaturaleza, int idCategoria, String nombre, String unidades,
-			String codigo) {
+	
+
+	public Producto(int id, String nombre, String unidades, String codigo, int idTipo, int idNaturaleza,
+			int idCategoria) {
+		super();
 		this.id = id;
-		this.idTipo = idTipo;
-		this.idNaturaleza = idNaturaleza;
-		this.idCategoria = idCategoria;
 		this.nombre = nombre;
 		this.unidades = unidades;
 		this.codigo = codigo;
+		this.idTipo = idTipo;
+		this.idNaturaleza = idNaturaleza;
+		this.idCategoria = idCategoria;
 	}
+
+
 
 	public int getId() {
 		return id;

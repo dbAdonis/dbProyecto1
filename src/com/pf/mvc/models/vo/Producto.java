@@ -7,9 +7,8 @@ public class Producto {
 	private int idTipo;
 	private int idNaturaleza;
 	private int idCategoria;
-	
 
-	public Producto( String nombre, String unidades, String codigo,int idTipo, int idNaturaleza, int idCategoria) {
+	public Producto(String nombre, String unidades, String codigo, int idTipo, int idNaturaleza, int idCategoria) {
 		this.id = 0;
 		this.nombre = nombre;
 		this.unidades = unidades;
@@ -18,8 +17,6 @@ public class Producto {
 		this.idNaturaleza = idNaturaleza;
 		this.idCategoria = idCategoria;
 	}
-
-	
 
 	public Producto(int id, String nombre, String unidades, String codigo, int idTipo, int idNaturaleza,
 			int idCategoria) {
@@ -32,8 +29,6 @@ public class Producto {
 		this.idNaturaleza = idNaturaleza;
 		this.idCategoria = idCategoria;
 	}
-
-
 
 	public int getId() {
 		return id;

@@ -8,11 +8,9 @@ import com.mysql.jdbc.Connection;
 import com.pf.mvc.models.conn.Conexion;
 import com.pf.mvc.models.vo.Lote;
 
-
 public class DAOLote extends Conexion implements DAO {
 
 	public DAOLote() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -27,13 +25,13 @@ public class DAOLote extends Conexion implements DAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setString(1, item.getNombre());
-		
+
 			ps.execute();
 
 			return true;
 
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 			return false;
 
 		} finally {
@@ -60,7 +58,7 @@ public class DAOLote extends Conexion implements DAO {
 			return true;
 
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 			return false;
 
 		} finally {
@@ -84,7 +82,7 @@ public class DAOLote extends Conexion implements DAO {
 			return true;
 
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 			return false;
 
 		} finally {
@@ -107,19 +105,14 @@ public class DAOLote extends Conexion implements DAO {
 
 			ResultSet rs = ps.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				item = new Lote(
-						rs.getInt("id_lote"), 
-						rs.getString("nombre")
-						);
+				item = new Lote(rs.getInt("id_lote"), rs.getString("nombre"));
 
 			}
 
-
-
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 		} finally {
 			desconectar(con);
 		}
@@ -139,21 +132,16 @@ public class DAOLote extends Conexion implements DAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				Lote p = new Lote(
-						rs.getInt("id_lote"), 
-						rs.getString("nombre")
-						);
-				
+				Lote p = new Lote(rs.getInt("id_lote"), rs.getString("nombre"));
+
 				list.add(p);
 
 			}
 
-
-
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 		} finally {
 			desconectar(con);
 		}

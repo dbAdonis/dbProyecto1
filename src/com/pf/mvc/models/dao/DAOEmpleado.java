@@ -5,33 +5,28 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 import com.pf.mvc.models.conn.Conexion;
+import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Empleado;
 
 public class DAOEmpleado extends Conexion implements DAO {
 
-	public DAOEmpleado() {}
-	
+	public DAOEmpleado() {
+	}
+
 	@Override
 	public boolean store(Object o) {
-		
+
 		Connection con = conectar();
-		String sql = "insert into empleados (id, nombre) values (?, ?)";
+		String sql = "insert into empleados (nombre) values (?, ?);";
 
 		try {
 			Empleado e = (Empleado) o;
 
 			PreparedStatement ps = con.prepareStatement(sql);
 
-			ps.setInt(1, e.getId());
-			ps.setString(2, e.getNombre());
+			ps.setString(1, e.getNombre());
 
 			ps.execute();
-
-			// 2.obtenemos el nuevo id
-			int id = getLastID();
-			e.setId(id);
-
-		
 
 			return true;
 
@@ -45,23 +40,20 @@ public class DAOEmpleado extends Conexion implements DAO {
 		}
 
 	}
-	
 
 	@Override
 	public boolean update(Object o, int id) {
 		Connection con = conectar();
-		String sql = "update empleado set id = ?, nombre = ? where id_empleado = ?";
+		String sql = "update empleados set nombre = ? where id_empleado = ?;";
 
 		try {
 
-			// 1. Realizar la actualizacion
 			Empleado e = (Empleado) o;
 
 			PreparedStatement ps = con.prepareStatement(sql);
 
-			ps.setInt(1, e.getId());
-			ps.setString(2, e.getNombre());
-			ps.setInt(3, id);
+			ps.setString(1, e.getNombre());
+			ps.setInt(2, id);
 
 			ps.execute();
 
@@ -77,16 +69,16 @@ public class DAOEmpleado extends Conexion implements DAO {
 		}
 	}
 
-	
 	@Override
 	public boolean destroy(int id) {
-		
+
 		Connection con = conectar();
 		String sql = "delete from empleados where id_empleados = ?;";
 
 		try {
 
 			PreparedStatement ps = con.prepareStatement(sql);
+			
 			ps.setInt(1, id);
 
 			ps.execute();
@@ -106,11 +98,11 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 	@Override
 	public Object getItem(int id) {
-		
+
 		Object item = null;
 
 		Connection con = conectar();
-		String sql = "select * from empleados where id_empleado = ?";
+		String sql = "select * from empleados where id_empleado = ?;";
 
 		try {
 
@@ -121,9 +113,8 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				Empleado e = new Empleado(rs.getInt("id_empleado"), rs.getString("nombre"));
+				item = new Empleado(rs.getInt("id_empleado"), rs.getString("nombre"));
 
-				item = e;
 			}
 
 		} catch (Exception e) {
@@ -137,39 +128,33 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 	}
 
-
 	@Override
 	public ArrayList<Object> getData() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public int getLastID() {//obtener el ultimo ID del empleado insertado
-
-		int id = 0;
+		ArrayList<Object> list = new ArrayList<Object>();
 
 		Connection con = conectar();
-		String sql = "select max(id_empleado) as id from empleados;";
+		String sql = "select * from empleados;";
 
 		try {
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
-			rs.next();
+			while (rs.next()) {
 
-			id = rs.getInt("id");
+				Empleado e = new Empleado(rs.getInt("id_empleado"), rs.getString("nombre"));
+
+				list.add(e);
+
+			}
 
 		} catch (Exception e) {
-			System.err.println("ERROR: " + e.getMessage());
-
+			System.err.println("Error: " + e.getMessage());
 		} finally {
 			desconectar(con);
 		}
 
-		return id;
-
+		return list;
 	}
-	
 
 }

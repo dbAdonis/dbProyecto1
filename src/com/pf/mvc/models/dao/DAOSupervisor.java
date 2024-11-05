@@ -8,11 +8,9 @@ import com.mysql.jdbc.Connection;
 import com.pf.mvc.models.conn.Conexion;
 import com.pf.mvc.models.vo.Supervisor;
 
-
 public class DAOSupervisor extends Conexion implements DAO {
 
 	public DAOSupervisor() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -109,10 +107,7 @@ public class DAOSupervisor extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				item = new Supervisor(
-						rs.getInt("id_supervisor"),
-						rs.getString("nombre")
-						);
+				item = new Supervisor(rs.getInt("id_supervisor"), rs.getString("nombre"));
 
 			}
 
@@ -138,21 +133,16 @@ public class DAOSupervisor extends Conexion implements DAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				Supervisor p = new Supervisor(
-						rs.getInt("id_supervisor"), 
-						rs.getString("nombre")
-						);
-				
+				Supervisor p = new Supervisor(rs.getInt("id_supervisor"), rs.getString("nombre"));
+
 				list.add(p);
 
 			}
 
-
-
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 		} finally {
 			desconectar(con);
 		}

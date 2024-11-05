@@ -8,11 +8,9 @@ import com.mysql.jdbc.Connection;
 import com.pf.mvc.models.conn.Conexion;
 import com.pf.mvc.models.vo.Naturaleza;
 
-
 public class DAONaturaleza extends Conexion implements DAO {
 
 	public DAONaturaleza() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -27,13 +25,13 @@ public class DAONaturaleza extends Conexion implements DAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setString(1, item.getNombre());
-			
+
 			ps.execute();
 
 			return true;
 
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 			return false;
 
 		} finally {
@@ -60,7 +58,7 @@ public class DAONaturaleza extends Conexion implements DAO {
 			return true;
 
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 			return false;
 
 		} finally {
@@ -84,7 +82,7 @@ public class DAONaturaleza extends Conexion implements DAO {
 			return true;
 
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 			return false;
 
 		} finally {
@@ -108,19 +106,14 @@ public class DAONaturaleza extends Conexion implements DAO {
 
 			ResultSet rs = ps.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				item = new Naturaleza(
-						rs.getInt("id_naturaleza"), 
-						rs.getString("nombre")
-						);
+				item = new Naturaleza(rs.getInt("id_naturaleza"), rs.getString("nombre"));
 
 			}
 
-
-
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 		} finally {
 			desconectar(con);
 		}
@@ -140,21 +133,16 @@ public class DAONaturaleza extends Conexion implements DAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				Naturaleza p = new Naturaleza(
-						rs.getInt("id_naturaleza"), 
-						rs.getString("nombre")
-						);
-				
+				Naturaleza p = new Naturaleza(rs.getInt("id_naturaleza"), rs.getString("nombre"));
+
 				list.add(p);
 
 			}
 
-
-
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 		} finally {
 			desconectar(con);
 		}

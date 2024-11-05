@@ -8,13 +8,9 @@ import com.mysql.jdbc.Connection;
 import com.pf.mvc.models.conn.Conexion;
 import com.pf.mvc.models.vo.Variedad;
 
-
-
 public class DAOVariedad extends Conexion implements DAO {
 
-	public DAOVariedad()  {
-		
-		
+	public DAOVariedad() {
 	}
 
 	@Override
@@ -29,14 +25,13 @@ public class DAOVariedad extends Conexion implements DAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setString(1, item.getNombre());
-			
 
 			ps.execute();
 
 			return true;
 
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 			return false;
 
 		} finally {
@@ -63,7 +58,7 @@ public class DAOVariedad extends Conexion implements DAO {
 			return true;
 
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 			return false;
 
 		} finally {
@@ -87,7 +82,7 @@ public class DAOVariedad extends Conexion implements DAO {
 			return true;
 
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 			return false;
 
 		} finally {
@@ -110,19 +105,14 @@ public class DAOVariedad extends Conexion implements DAO {
 
 			ResultSet rs = ps.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				item = new Variedad(
-						rs.getInt("id_variedad"), 
-						rs.getString("nombre")
-						);
+				item = new Variedad(rs.getInt("id_variedad"), rs.getString("nombre"));
 
 			}
 
-
-
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 		} finally {
 			desconectar(con);
 		}
@@ -143,21 +133,16 @@ public class DAOVariedad extends Conexion implements DAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				Variedad p = new Variedad(
-						rs.getInt("id_variedad"), 
-						rs.getString("nombre")
-						);
-				
+				Variedad p = new Variedad(rs.getInt("id_variedad"), rs.getString("nombre"));
+
 				list.add(p);
 
 			}
 
-
-
 		} catch (Exception e) {
-			System.err.println("Error: "+e.getMessage());
+			System.err.println("Error: " + e.getMessage());
 		} finally {
 			desconectar(con);
 		}

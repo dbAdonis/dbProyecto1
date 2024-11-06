@@ -8,7 +8,7 @@ public class Producto {
 	private int idNaturaleza;
 	private int idCategoria;
 
-	public Producto(String nombre, String unidades, String codigo, int idTipo, int idNaturaleza, int idCategoria) {
+	public Producto(String nombre, String unidades, String codigo, int idTipo, int idCategoria, int idNaturaleza) {
 		this.id = 0;
 		this.nombre = nombre;
 		this.unidades = unidades;
@@ -18,8 +18,7 @@ public class Producto {
 		this.idCategoria = idCategoria;
 	}
 
-	public Producto(int id, String nombre, String unidades, String codigo, int idTipo, int idNaturaleza,
-			int idCategoria) {
+	public Producto(int id, String nombre, String unidades, String codigo, int idTipo, int idCategoria, int idNaturaleza) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

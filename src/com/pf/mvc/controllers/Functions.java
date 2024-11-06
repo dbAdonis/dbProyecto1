@@ -1,31 +1,47 @@
 package com.pf.mvc.controllers;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
-import javax.swing.table.TableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Functions {
+
 	public Functions() {}
-	
 
- public void buscar(JTable tabla, String buscar, int... cols) {
+	public void buscar(JTextField tBuscar, TableRowSorter<DefaultTableModel> filtro) {
+
+		tBuscar.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String buscar = tBuscar.getText();
+				filtro.setRowFilter(RowFilter.regexFilter("(?i)"+buscar, 0, 1, 2));
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+		});
+
+	}
+	
+	public int getSelectedId(JTable table, ArrayList<Integer> ids) {
 		
-		TableRowSorter<TableModel> sorter = new TableRowSorter<>(tabla.getModel());
-		tabla.setRowSorter(sorter);
-        sorter.setRowFilter(RowFilter.regexFilter("(?i)"+buscar, cols));
-        //(?i) = case-insensitive
-
-	}
-	
-	public int getSelectedID(JTable tabla) {
-
-		int row = tabla.getSelectedRow();
-		if(row >= 0) {
-			return (int) tabla.getValueAt(row, 0);
-		}else {
-			return -1;
+		int row = table.getSelectedRow();
+		
+		if(row>-1) {
+			return ids.get(row);
 		}
-
+		return -1;
 	}
+
 }

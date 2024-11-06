@@ -29,14 +29,14 @@ public class ViewPrincipal extends JFrame {
 	public JButton btnSupervisor;
 	public JButton btnEmpleados;
 	private JPanel panel_4;
-	private JButton btnLote;
-	private JButton btnVariedad;
-	private JButton btnProducto;
-	private JButton btnNaturaleza;
-	private JButton btnCategoria;
-	private JButton btnTipo;
-	private JButton btnAplicacion;
-	private JButton btnReporte;
+	public JButton btnLote;
+	public JButton btnVariedad;
+	public JButton btnProducto;
+	public JButton btnNaturaleza;
+	public JButton btnCategoria;
+	public JButton btnTipo;
+	public JButton btnAplicacion;
+	public JButton btnReporte;
 
 	/**
 	 * Create the frame.

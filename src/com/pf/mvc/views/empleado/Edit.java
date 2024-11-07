@@ -14,7 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class Form extends JPanel {
+public class Edit extends JPanel {
 	/**
 	 * 
 	 */
@@ -40,7 +40,7 @@ public class Form extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Form() {
+	public Edit() {
 		setLayout(new BorderLayout(0, 0));
 		
 		panel = new JPanel();

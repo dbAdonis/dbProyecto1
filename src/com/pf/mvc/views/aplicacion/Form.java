@@ -132,7 +132,7 @@ public class Form extends JPanel {
 		panel_2.add(lblControl);
 		
 		cbxControl = new JComboBox();
-		cbxControl.setBounds(10, 599, 230, 20);
+		cbxControl.setBounds(10, 619, 230, 20);
 		panel_2.add(cbxControl);
 		
 		tPeriodoMPS = new JTextField();
@@ -152,6 +152,10 @@ public class Form extends JPanel {
 		cbxLote = new JComboBox();
 		cbxLote.setBounds(10, 190, 230, 20);
 		panel_2.add(cbxLote);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(10, 586, 230, 20);
+		panel_2.add(comboBox);
 		
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3, BorderLayout.CENTER);

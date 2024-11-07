@@ -7,6 +7,7 @@ public class Form extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
 	public Form() {
 
 	}

@@ -20,7 +20,7 @@ public class DAOAplicacion extends Conexion implements DAO {
 
         try {
             Aplicacion app = (Aplicacion) o;
-
+            
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, app.getPeriodo());
             ps.setInt(2, app.getSemana());

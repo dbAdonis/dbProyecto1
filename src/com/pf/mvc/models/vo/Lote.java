@@ -33,7 +33,7 @@ public class Lote {
 
 	@Override
 	public String toString() {
-		return "Lote [id=" + id + ", nombre=" + nombre + "]";
+		return nombre;
 	}
 
 }

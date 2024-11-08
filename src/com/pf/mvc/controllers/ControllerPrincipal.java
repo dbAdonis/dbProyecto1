@@ -21,6 +21,11 @@ public class ControllerPrincipal {
 		});
 		
 		
+		vp.btnAplicacion.addActionListener(e->{
+			
+			new ControllerAplicaciones(vp).index();
+			
+		});
 		
 		new ControllerProductos(vp).index();
 		vp.init();

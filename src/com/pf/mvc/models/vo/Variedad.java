@@ -33,7 +33,7 @@ public class Variedad {
 
 	@Override
 	public String toString() {
-		return "Variedad [id=" + id + ", nombre=" + nombre + "]";
+		return nombre;
 	}
 
 }

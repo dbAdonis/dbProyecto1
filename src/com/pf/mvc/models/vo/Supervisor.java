@@ -33,7 +33,7 @@ public class Supervisor {
 
 	@Override
 	public String toString() {
-		return "Supervisor [id=" + id + ", nombre=" + nombre + "]";
+		return nombre;
 	}
 
 }

@@ -18,13 +18,14 @@ public class Edit extends JPanel {
 	public JComboBox cbxTrabajador;
 	public JButton btnActualizar;
 	public JButton btnRegresar;
-	private JTextField tPeriodoWPS;
-	private JTextField tCantidad;
-	private JComboBox cbxFecha;
-	private JComboBox cbxLabor;
-	private JComboBox cbxFitoFerti;
-	private JComboBox cbxUnidades;
-	private JComboBox cbxControl;
+	public JTextField tPeriodoWPS;
+	public JTextField tCantidad;
+	public JComboBox cbxLabor;
+	public JComboBox cbxFitoFerti;
+	public JComboBox cbxUnidades;
+	public JComboBox cbxControl;
+	public JComboBox cbxLote;
+	public JTextField tFecha;
 
 	/**
 	 * Create the panel.
@@ -144,13 +145,14 @@ public class Edit extends JPanel {
 		tCantidad.setBounds(10, 479, 230, 20);
 		panel_2.add(tCantidad);
 		
-		cbxFecha = new JComboBox();
-		cbxFecha.setBounds(10, 144, 230, 20);
-		panel_2.add(cbxFecha);
-		
-		JComboBox cbxLote = new JComboBox();
+		cbxLote = new JComboBox();
 		cbxLote.setBounds(10, 190, 230, 20);
 		panel_2.add(cbxLote);
+		
+		tFecha = new JTextField();
+		tFecha.setColumns(10);
+		tFecha.setBounds(10, 137, 230, 20);
+		panel_2.add(tFecha);
 		
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3, BorderLayout.CENTER);

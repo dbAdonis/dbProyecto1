@@ -11,11 +11,10 @@ public class Aplicacion {
 	private int idLabor;
 	private int idProducto;
 	private int cantidad;
-	private String unidad;
 	private int idSupervisor;
 
 	public Aplicacion(int periodo, int semana, String fecha, int idLote, int idVariedad, int idEmpleado, int idLabor,
-			int idProducto, int cantidad, String unidad, int idSupervisor) {
+			int idProducto, int cantidad, int idSupervisor) {
 		this.id = -1;
 		this.periodo = periodo;
 		this.semana = semana;
@@ -26,12 +25,12 @@ public class Aplicacion {
 		this.idLabor = idLabor;
 		this.idProducto = idProducto;
 		this.cantidad = cantidad;
-		this.unidad = unidad;
+	
 		this.idSupervisor = idSupervisor;
 	}
 
 	public Aplicacion(int id, int periodo, int semana, String fecha, int idLote, int idVariedad,
-			int idEmpleado, int idLabor, int idProducto, int cantidad, String unidad, int idSupervisor) {
+			int idEmpleado, int idLabor, int idProducto, int cantidad, int idSupervisor) {
 		this.id = id;
 		this.periodo = periodo;
 		this.semana = semana;
@@ -42,7 +41,7 @@ public class Aplicacion {
 		this.idLabor = idLabor;
 		this.idProducto = idProducto;
 		this.cantidad = cantidad;
-		this.unidad = unidad;
+		
 		this.idSupervisor = idSupervisor;
 	}
 
@@ -126,14 +125,6 @@ public class Aplicacion {
 		this.cantidad = cantidad;
 	}
 
-	public String getUnidad() {
-		return unidad;
-	}
-
-	public void setUnidad(String unidad) {
-		this.unidad = unidad;
-	}
-
 	public int getIdSupervisor() {
 		return idSupervisor;
 	}
@@ -147,7 +138,7 @@ public class Aplicacion {
 		return "Aplicacion [id=" + id + ", periodo=" + periodo + ", semana=" + semana + ", fecha="
 				+ fecha + ", idLote=" + idLote + ", idVariedad=" + idVariedad + ", idEmpleado=" + idEmpleado
 				+ ", idLabor=" + idLabor + ", idProducto=" + idProducto + ", cantidad=" + cantidad + ", unidad="
-				+ unidad + ", idSupervisor=" + idSupervisor + "]";
+				+ ", idSupervisor=" + idSupervisor + "]";
 	}
 
 }

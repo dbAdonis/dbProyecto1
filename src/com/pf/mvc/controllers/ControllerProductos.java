@@ -55,6 +55,8 @@ public class ControllerProductos extends Functions implements Controller{
 			
 		});
 		
+		
+		
 		vp.setContenido(v, "Lista de productos");
 		
 	}

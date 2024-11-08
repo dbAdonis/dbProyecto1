@@ -18,14 +18,14 @@ public class Form extends JPanel {
 	public JComboBox cbxTrabajador;
 	public JButton btnAgregar;
 	public JButton btnRegresar;
-	private JTextField tPeriodoMPS;
-	private JTextField tCantidad;
-	private JComboBox cbxFecha;
-	private JComboBox cbxLote;
-	private JComboBox cbxLabor;
-	private JComboBox cbxFitoFerti;
-	private JComboBox cbxUnidades;
-	private JComboBox cbxControl;
+	public JTextField tPeriodoMPS;
+	public JTextField tCantidad;
+	public JComboBox cbxLote;
+	public JComboBox cbxLabor;
+	public JComboBox cbxFitoFerti;
+	public JComboBox cbxControl;
+	public JTextField tFecha;
+	public JTextField tUnidad;
 
 	/**
 	 * Create the panel.
@@ -122,17 +122,13 @@ public class Form extends JPanel {
 		lblUnidades.setBounds(10, 512, 230, 14);
 		panel_2.add(lblUnidades);
 		
-		cbxUnidades = new JComboBox();
-		cbxUnidades.setBounds(10, 539, 230, 20);
-		panel_2.add(cbxUnidades);
-		
 		JLabel lblControl = new JLabel("Control");
 		lblControl.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblControl.setBounds(10, 572, 230, 14);
 		panel_2.add(lblControl);
 		
 		cbxControl = new JComboBox();
-		cbxControl.setBounds(10, 619, 230, 20);
+		cbxControl.setBounds(10, 599, 230, 20);
 		panel_2.add(cbxControl);
 		
 		tPeriodoMPS = new JTextField();
@@ -145,17 +141,19 @@ public class Form extends JPanel {
 		tCantidad.setBounds(10, 479, 230, 20);
 		panel_2.add(tCantidad);
 		
-		cbxFecha = new JComboBox();
-		cbxFecha.setBounds(10, 144, 230, 20);
-		panel_2.add(cbxFecha);
-		
 		cbxLote = new JComboBox();
 		cbxLote.setBounds(10, 190, 230, 20);
 		panel_2.add(cbxLote);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(10, 586, 230, 20);
-		panel_2.add(comboBox);
+		tFecha = new JTextField();
+		tFecha.setColumns(10);
+		tFecha.setBounds(10, 144, 230, 20);
+		panel_2.add(tFecha);
+		
+		tUnidad = new JTextField();
+		tUnidad.setColumns(10);
+		tUnidad.setBounds(10, 539, 230, 20);
+		panel_2.add(tUnidad);
 		
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3, BorderLayout.CENTER);

@@ -13,7 +13,7 @@ import javax.swing.JButton;
 
 public class Index extends JPanel {
 	public JTextField tBuscar;
-	public JTable tableProductos;
+	public JTable tableConsumo;
 	public DefaultTableModel modelo;
 	public JButton btnAgregarConsumo;
 	public JButton btnEliminar;
@@ -49,9 +49,9 @@ public class Index extends JPanel {
 		
 		modelo = new DefaultTableModel();
 		
-		tableProductos = new JTable();
-		tableProductos.setModel(modelo);
-		scrollPane.setViewportView(tableProductos);
+		tableConsumo = new JTable();
+		tableConsumo.setModel(modelo);
+		scrollPane.setViewportView(tableConsumo);
 		
 		JPanel panel_2 = new JPanel();
 		add(panel_2, BorderLayout.SOUTH);

@@ -33,7 +33,7 @@ public class Empleado {
 
 	@Override
 	public String toString() {
-		return "Empleado [id=" + id + ", nombre=" + nombre + "]";
+		return nombre;
 	}
 
 }

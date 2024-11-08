@@ -16,7 +16,7 @@ public class DAOAplicacion extends Conexion implements DAO {
     @Override
     public boolean store(Object o) {
         Connection con = conectar();
-        String sql = "INSERT INTO aplicaciones (periodo, semana, fecha, id_lote, id_variedad, id_empleado, id_labor, id_producto, cantidad, unidad, id_supervisor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO aplicaciones (periodo, semana, fecha, id_lote, id_variedad, id_empleado, id_labor, id_producto, cantidad, id_supervisor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try {
             Aplicacion app = (Aplicacion) o;
@@ -31,8 +31,7 @@ public class DAOAplicacion extends Conexion implements DAO {
             ps.setInt(7, app.getIdLabor());
             ps.setInt(8, app.getIdProducto());
             ps.setInt(9, app.getCantidad());
-            ps.setString(10, app.getUnidad());
-            ps.setInt(11, app.getIdSupervisor());
+            ps.setInt(10, app.getIdSupervisor());
 
             ps.execute();
             return true;
@@ -49,7 +48,7 @@ public class DAOAplicacion extends Conexion implements DAO {
     @Override
     public boolean update(Object o, int id) {
         Connection con = conectar();
-        String sql = "UPDATE aplicaciones SET periodo = ?, semana = ?, fecha = ?, id_lote = ?, id_variedad = ?, id_empleado = ?, id_labor = ?, id_producto = ?, cantidad = ?, unidad = ?, id_supervisor = ? WHERE id_aplicacion = ?;";
+        String sql = "UPDATE aplicaciones SET periodo = ?, semana = ?, fecha = ?, id_lote = ?, id_variedad = ?, id_empleado = ?, id_labor = ?, id_producto = ?, cantidad = ?, id_supervisor = ? WHERE id_aplicacion = ?;";
 
         try {
             Aplicacion app = (Aplicacion) o;
@@ -64,9 +63,8 @@ public class DAOAplicacion extends Conexion implements DAO {
             ps.setInt(7, app.getIdLabor());
             ps.setInt(8, app.getIdProducto());
             ps.setInt(9, app.getCantidad());
-            ps.setString(10, app.getUnidad());
-            ps.setInt(11, app.getIdSupervisor());
-            ps.setInt(12, id);
+            ps.setInt(10, app.getIdSupervisor());
+            ps.setInt(11, id);
 
             ps.execute();
             return true;
@@ -123,7 +121,6 @@ public class DAOAplicacion extends Conexion implements DAO {
                     rs.getInt("id_labor"),
                     rs.getInt("id_producto"),
                     rs.getInt("cantidad"),
-                    rs.getString("unidad"),
                     rs.getInt("id_supervisor")
                 );
             }
@@ -160,7 +157,6 @@ public class DAOAplicacion extends Conexion implements DAO {
                     rs.getInt("id_labor"),
                     rs.getInt("id_producto"),
                     rs.getInt("cantidad"),
-                    rs.getString("unidad"),
                     rs.getInt("id_supervisor")
                 );
 

@@ -128,7 +128,7 @@ public class ViewPrincipal extends JFrame {
 		contenido.setPreferredSize(new Dimension(900, 600));
 		contenido.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel_1.add(contenido, BorderLayout.CENTER);
-		contenido.setLayout(new BorderLayout(20, 20));
+		contenido.setLayout(new BorderLayout(0, 0));
 	}
 
 	

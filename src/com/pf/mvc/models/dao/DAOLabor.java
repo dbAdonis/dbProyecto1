@@ -134,7 +134,7 @@ public class DAOLabor extends Conexion implements DAO{
 
 			while (rs.next()) {
 
-				Categoria p = new Categoria(rs.getInt("id_labor"), rs.getString("nombre"));
+				Labor p = new Labor(rs.getInt("id_labor"), rs.getString("nombre"));
 
 				list.add(p);
 

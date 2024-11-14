@@ -3,30 +3,30 @@ package com.pf.mvc.models.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
 import com.mysql.jdbc.Connection;
 import com.pf.mvc.models.conn.Conexion;
-import com.pf.mvc.models.vo.Categoria;
-import com.pf.mvc.models.vo.Empleado;
+import com.pf.mvc.models.vo.Finca;
 
-public class DAOEmpleado extends Conexion implements DAO {
+public class DAOFinca extends Conexion implements DAO{
 
-	public DAOEmpleado() {
+	public DAOFinca() {
+		
 	}
 
 	@Override
 	public boolean store(Object o) {
 
 		Connection con = conectar();
-		String sql = "insert into empleados (id_finca, nombre) values (?, ?);";
+		String sql = "insert into fincas (nombre) values (?);";
 
 		try {
 			
-			Empleado e = (Empleado) o;
+			Finca f = (Finca) o;
 
 			PreparedStatement ps = con.prepareStatement(sql);
 
-			ps.setInt(1, e.getIdFinca());
-			ps.setString(2, e.getNombre());
+			ps.setString(1, f.getNombre());
 
 			ps.execute();
 
@@ -46,15 +46,15 @@ public class DAOEmpleado extends Conexion implements DAO {
 	@Override
 	public boolean update(Object o, int id) {
 		Connection con = conectar();
-		String sql = "update empleados set nombre = ? where id_empleado = ?;";
+		String sql = "update fincas set nombre = ? where id_finca = ?;";
 
 		try {
 
-			Empleado e = (Empleado) o;
+			Finca f = (Finca) o;
 
 			PreparedStatement ps = con.prepareStatement(sql);
 
-			ps.setString(1, e.getNombre());
+			ps.setString(1, f.getNombre());
 			ps.setInt(2, id);
 
 			ps.execute();
@@ -75,7 +75,7 @@ public class DAOEmpleado extends Conexion implements DAO {
 	public boolean destroy(int id) {
 
 		Connection con = conectar();
-		String sql = "delete from empleados where id_empleado = ?;";
+		String sql = "delete from fincas where id_finca = ?;";
 
 		try {
 
@@ -104,7 +104,7 @@ public class DAOEmpleado extends Conexion implements DAO {
 		Object item = null;
 
 		Connection con = conectar();
-		String sql = "select * from empleados where id_empleado = ?;";
+		String sql = "select * from fincas where id_finca = ?;";
 
 		try {
 
@@ -115,7 +115,7 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				item = new Empleado(rs.getInt("id_empleado"), rs.getInt("id_finca"), rs.getString("nombre"));
+				item = new Finca(rs.getInt("id_finca"), rs.getString("nombre"));
 
 			}
 
@@ -135,7 +135,7 @@ public class DAOEmpleado extends Conexion implements DAO {
 		ArrayList<Object> list = new ArrayList<Object>();
 
 		Connection con = conectar();
-		String sql = "select * from empleados;";
+		String sql = "select * from fincas;";
 
 		try {
 
@@ -144,9 +144,9 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				Empleado e = new Empleado(rs.getInt("id_empleado"), rs.getInt("id_finca"), rs.getString("nombre"));
+				Finca item = new Finca(rs.getInt("id_finca"), rs.getString("nombre"));
 
-				list.add(e);
+				list.add(item);
 
 			}
 
@@ -158,5 +158,7 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 		return list;
 	}
+	
+	
 
 }

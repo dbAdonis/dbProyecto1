@@ -3,168 +3,370 @@ package com.pf.mvc.views.aplicacion;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JSpinner;
+import java.awt.FlowLayout;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Insets;
+import java.awt.Component;
+import java.awt.Rectangle;
+import java.awt.SystemColor;
+import javax.swing.border.EmptyBorder;
 
 public class Form extends JPanel {
-	public JTextField tWK;
-	public JTable tableProductos;
 	public JComboBox cbxVariedad;
 	public JComboBox cbxTrabajador;
 	public JButton btnAgregar;
 	public JButton btnRegresar;
-	public JTextField tPeriodoMPS;
-	public JTextField tCantidad;
 	public JComboBox cbxLote;
 	public JComboBox cbxLabor;
 	public JComboBox cbxFitoFerti;
-	public JComboBox cbxControl;
 	public JTextField tFecha;
-	public JTextField tUnidad;
+	public JTextField tUnidades;
+	public JSpinner tPeriodoMPS;
+	public JSpinner tWK;
+	public JSpinner tCantidad;
+	public DefaultTableModel modelo;
+	public JTable table;
+	public JButton btnLotes;
+	public JButton btnVariedades;
+	public JButton btnEmpleados;
+	public JButton btnLabores;
+	public JButton btnProductos;
 
 	/**
 	 * Create the panel.
 	 */
 	public Form() {
+		setPreferredSize(new Dimension(900, 580));
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.SOUTH);
 		
 		btnAgregar = new JButton("Agregar");
+		btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
+		btnAgregar.setPreferredSize(new Dimension(100, 23));
+		btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnAgregar.setFont(new Font("SansSerif", Font.BOLD, 12));
 		panel.add(btnAgregar);
 		
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
+		btnRegresar.setPreferredSize(new Dimension(100, 23));
+		btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnRegresar.setFont(new Font("SansSerif", Font.BOLD, 12));
 		panel.add(btnRegresar);
 		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setPreferredSize(new Dimension(250, 10));
-		panel_1.add(panel_2, BorderLayout.WEST);
-		panel_2.setLayout(null);
+		JPanel panel_4 = new JPanel();
+		panel_1.add(panel_4, BorderLayout.CENTER);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setOpaque(false);
+		panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), null, null, null));
+		FlowLayout flowLayout = (FlowLayout) panel_5.getLayout();
+		flowLayout.setHgap(20);
+		flowLayout.setVgap(12);
+		flowLayout.setAlignment(FlowLayout.LEADING);
+		panel_5.setPreferredSize(new Dimension(10, 45));
+		panel_4.add(panel_5, BorderLayout.NORTH);
 		
 		JLabel lblNombre = new JLabel("Perido MPS");
-		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNombre.setBounds(10, 11, 230, 14);
-		panel_2.add(lblNombre);
+		panel_5.add(lblNombre);
+		lblNombre.setFont(new Font("SansSerif", Font.BOLD, 15));
+		
+		tPeriodoMPS = new JSpinner();
+		tPeriodoMPS.setFont(new Font("Arial", Font.PLAIN, 12));
+		tPeriodoMPS.setPreferredSize(new Dimension(60, 20));
+		panel_5.add(tPeriodoMPS);
 		
 		JLabel lblCdigo = new JLabel("WK");
-		lblCdigo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblCdigo.setBounds(10, 64, 230, 14);
-		panel_2.add(lblCdigo);
+		panel_5.add(lblCdigo);
+		lblCdigo.setFont(new Font("SansSerif", Font.BOLD, 15));
 		
-		tWK = new JTextField();
-		tWK.setColumns(10);
-		tWK.setBounds(10, 86, 230, 20);
-		panel_2.add(tWK);
+		tWK = new JSpinner();
+		tWK.setFont(new Font("Arial", Font.PLAIN, 12));
+		tWK.setPreferredSize(new Dimension(60, 20));
+		panel_5.add(tWK);
 		
 		JLabel lblUnidadDeMedida = new JLabel("Fecha");
-		lblUnidadDeMedida.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUnidadDeMedida.setBounds(10, 117, 230, 14);
-		panel_2.add(lblUnidadDeMedida);
-		
-		JLabel lblUnidadDeMedida_1 = new JLabel("Lote");
-		lblUnidadDeMedida_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUnidadDeMedida_1.setBounds(10, 170, 230, 14);
-		panel_2.add(lblUnidadDeMedida_1);
-		
-		JLabel lblTipo = new JLabel("Variedad");
-		lblTipo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblTipo.setBounds(10, 223, 230, 14);
-		panel_2.add(lblTipo);
-		
-		JLabel lblCategora = new JLabel("Trabajador");
-		lblCategora.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblCategora.setBounds(10, 276, 230, 14);
-		panel_2.add(lblCategora);
-		
-		cbxVariedad = new JComboBox();
-		cbxVariedad.setBounds(10, 245, 230, 20);
-		panel_2.add(cbxVariedad);
-		
-		cbxTrabajador = new JComboBox();
-		cbxTrabajador.setBounds(10, 297, 230, 20);
-		panel_2.add(cbxTrabajador);
-		
-		JLabel lblLabor = new JLabel("Labor");
-		lblLabor.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblLabor.setBounds(10, 330, 230, 14);
-		panel_2.add(lblLabor);
-		
-		JLabel lblFito = new JLabel("Fitosanitario - Fertilizante");
-		lblFito.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFito.setBounds(10, 392, 230, 14);
-		panel_2.add(lblFito);
-		
-		cbxLabor = new JComboBox();
-		cbxLabor.setBounds(10, 357, 230, 20);
-		panel_2.add(cbxLabor);
-		
-		cbxFitoFerti = new JComboBox();
-		cbxFitoFerti.setBounds(10, 419, 230, 20);
-		panel_2.add(cbxFitoFerti);
-		
-		JLabel lblCantidad = new JLabel("Cantidad");
-		lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblCantidad.setBounds(10, 452, 230, 14);
-		panel_2.add(lblCantidad);
-		
-		JLabel lblUnidades = new JLabel("Unidades");
-		lblUnidades.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUnidades.setBounds(10, 512, 230, 14);
-		panel_2.add(lblUnidades);
-		
-		JLabel lblControl = new JLabel("Control");
-		lblControl.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblControl.setBounds(10, 572, 230, 14);
-		panel_2.add(lblControl);
-		
-		cbxControl = new JComboBox();
-		cbxControl.setBounds(10, 599, 230, 20);
-		panel_2.add(cbxControl);
-		
-		tPeriodoMPS = new JTextField();
-		tPeriodoMPS.setColumns(10);
-		tPeriodoMPS.setBounds(10, 31, 230, 20);
-		panel_2.add(tPeriodoMPS);
-		
-		tCantidad = new JTextField();
-		tCantidad.setColumns(10);
-		tCantidad.setBounds(10, 479, 230, 20);
-		panel_2.add(tCantidad);
-		
-		cbxLote = new JComboBox();
-		cbxLote.setBounds(10, 190, 230, 20);
-		panel_2.add(cbxLote);
+		panel_5.add(lblUnidadDeMedida);
+		lblUnidadDeMedida.setFont(new Font("SansSerif", Font.BOLD, 15));
 		
 		tFecha = new JTextField();
+		tFecha.setFont(new Font("Arial", Font.PLAIN, 12));
+		tFecha.setMinimumSize(new Dimension(80, 20));
+		panel_5.add(tFecha);
+		tFecha.setPreferredSize(new Dimension(100, 20));
 		tFecha.setColumns(10);
-		tFecha.setBounds(10, 144, 230, 20);
-		panel_2.add(tFecha);
 		
-		tUnidad = new JTextField();
-		tUnidad.setColumns(10);
-		tUnidad.setBounds(10, 539, 230, 20);
-		panel_2.add(tUnidad);
+		JPanel panel_6 = new JPanel();
+		panel_4.add(panel_6, BorderLayout.CENTER);
+		panel_6.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setOpaque(false);
+		panel_7.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
+		FlowLayout flowLayout_1 = (FlowLayout) panel_7.getLayout();
+		flowLayout_1.setAlignment(FlowLayout.LEADING);
+		flowLayout_1.setVgap(12);
+		flowLayout_1.setHgap(20);
+		panel_7.setPreferredSize(new Dimension(10, 45));
+		panel_6.add(panel_7, BorderLayout.NORTH);
+		
+		JLabel lblUnidadDeMedida_1 = new JLabel("Lote");
+		panel_7.add(lblUnidadDeMedida_1);
+		lblUnidadDeMedida_1.setFont(new Font("SansSerif", Font.BOLD, 15));
+		
+		cbxLote = new JComboBox();
+		cbxLote.setFont(new Font("Arial", Font.PLAIN, 12));
+		cbxLote.setPreferredSize(new Dimension(110, 20));
+		panel_7.add(cbxLote);
+		
+		btnLotes = new JButton("Ver lista de lotes");
+		btnLotes.setBackground(SystemColor.inactiveCaptionBorder);
+		btnLotes.setFocusable(false);
+		btnLotes.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnLotes.setPreferredSize(new Dimension(145, 23));
+		btnLotes.setFont(new Font("SansSerif", Font.ITALIC, 12));
+		panel_7.add(btnLotes);
+		
+		JPanel panel_8 = new JPanel();
+		panel_6.add(panel_8, BorderLayout.CENTER);
+		panel_8.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setOpaque(false);
+		panel_9.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
+		panel_9.setPreferredSize(new Dimension(10, 45));
+		FlowLayout flowLayout_2 = (FlowLayout) panel_9.getLayout();
+		flowLayout_2.setVgap(12);
+		flowLayout_2.setHgap(20);
+		flowLayout_2.setAlignment(FlowLayout.LEADING);
+		panel_8.add(panel_9, BorderLayout.NORTH);
+		
+		JLabel lblTipo = new JLabel("Variedad");
+		panel_9.add(lblTipo);
+		lblTipo.setFont(new Font("SansSerif", Font.BOLD, 15));
+		
+		cbxVariedad = new JComboBox();
+		cbxVariedad.setFont(new Font("Arial", Font.PLAIN, 12));
+		cbxVariedad.setPreferredSize(new Dimension(150, 20));
+		panel_9.add(cbxVariedad);
+		
+		btnVariedades = new JButton("Ver lista de variedades");
+		btnVariedades.setBackground(SystemColor.inactiveCaptionBorder);
+		btnVariedades.setFont(new Font("SansSerif", Font.ITALIC, 12));
+		btnVariedades.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnVariedades.setFocusable(false);
+		btnVariedades.setPreferredSize(new Dimension(145, 23));
+		panel_9.add(btnVariedades);
+		
+		JPanel panel_10 = new JPanel();
+		panel_8.add(panel_10, BorderLayout.CENTER);
+		panel_10.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_11 = new JPanel();
+		panel_11.setOpaque(false);
+		panel_11.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
+		panel_11.setPreferredSize(new Dimension(10, 45));
+		FlowLayout flowLayout_3 = (FlowLayout) panel_11.getLayout();
+		flowLayout_3.setAlignment(FlowLayout.LEADING);
+		flowLayout_3.setVgap(12);
+		flowLayout_3.setHgap(20);
+		panel_10.add(panel_11, BorderLayout.NORTH);
+		
+		JLabel lblCategora = new JLabel("Trabajador");
+		panel_11.add(lblCategora);
+		lblCategora.setFont(new Font("SansSerif", Font.BOLD, 15));
+		
+		cbxTrabajador = new JComboBox();
+		cbxTrabajador.setFont(new Font("Arial", Font.PLAIN, 12));
+		cbxTrabajador.setPreferredSize(new Dimension(340, 20));
+		panel_11.add(cbxTrabajador);
+		
+		btnEmpleados = new JButton("Ver lista de trabajadores");
+		btnEmpleados.setBackground(SystemColor.inactiveCaptionBorder);
+		btnEmpleados.setFont(new Font("SansSerif", Font.ITALIC, 12));
+		btnEmpleados.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnEmpleados.setFocusable(false);
+		btnEmpleados.setPreferredSize(new Dimension(145, 23));
+		panel_11.add(btnEmpleados);
+		
+		JPanel panel_12 = new JPanel();
+		panel_10.add(panel_12, BorderLayout.CENTER);
+		panel_12.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_13 = new JPanel();
+		panel_13.setOpaque(false);
+		panel_13.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
+		FlowLayout flowLayout_4 = (FlowLayout) panel_13.getLayout();
+		flowLayout_4.setVgap(12);
+		flowLayout_4.setHgap(20);
+		flowLayout_4.setAlignment(FlowLayout.LEADING);
+		panel_13.setPreferredSize(new Dimension(10, 45));
+		panel_12.add(panel_13, BorderLayout.NORTH);
+		
+		JLabel lblLabor = new JLabel("Labor");
+		panel_13.add(lblLabor);
+		lblLabor.setFont(new Font("SansSerif", Font.BOLD, 15));
+		
+		cbxLabor = new JComboBox();
+		cbxLabor.setFont(new Font("Arial", Font.PLAIN, 12));
+		cbxLabor.setPreferredSize(new Dimension(340, 20));
+		panel_13.add(cbxLabor);
+		
+		btnLabores = new JButton("Ver lista de labores");
+		btnLabores.setBackground(SystemColor.inactiveCaptionBorder);
+		btnLabores.setFont(new Font("SansSerif", Font.ITALIC, 12));
+		btnLabores.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnLabores.setFocusable(false);
+		btnLabores.setPreferredSize(new Dimension(145, 23));
+		panel_13.add(btnLabores);
+		
+		JPanel panel_14 = new JPanel();
+		panel_12.add(panel_14, BorderLayout.CENTER);
+		panel_14.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_15 = new JPanel();
+		panel_15.setOpaque(false);
+		panel_15.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
+		FlowLayout flowLayout_5 = (FlowLayout) panel_15.getLayout();
+		flowLayout_5.setVgap(12);
+		flowLayout_5.setHgap(20);
+		flowLayout_5.setAlignment(FlowLayout.LEADING);
+		panel_15.setPreferredSize(new Dimension(10, 45));
+		panel_14.add(panel_15, BorderLayout.NORTH);
+		
+		JLabel lblFito = new JLabel("Fitosanitario - Fertilizante");
+		panel_15.add(lblFito);
+		lblFito.setFont(new Font("SansSerif", Font.BOLD, 15));
+		
+		cbxFitoFerti = new JComboBox();
+		cbxFitoFerti.setFont(new Font("Arial", Font.PLAIN, 12));
+		cbxFitoFerti.setPreferredSize(new Dimension(300, 20));
+		panel_15.add(cbxFitoFerti);
+		
+		btnProductos = new JButton("Ver lista de productos");
+		btnProductos.setBackground(SystemColor.inactiveCaptionBorder);
+		btnProductos.setFont(new Font("SansSerif", Font.ITALIC, 12));
+		btnProductos.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnProductos.setFocusable(false);
+		btnProductos.setPreferredSize(new Dimension(145, 23));
+		panel_15.add(btnProductos);
+		
+		JPanel panel_16 = new JPanel();
+		panel_14.add(panel_16, BorderLayout.CENTER);
+		panel_16.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_17 = new JPanel();
+		panel_17.setOpaque(false);
+		panel_17.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
+		FlowLayout flowLayout_6 = (FlowLayout) panel_17.getLayout();
+		flowLayout_6.setVgap(12);
+		flowLayout_6.setHgap(20);
+		flowLayout_6.setAlignment(FlowLayout.LEADING);
+		panel_17.setPreferredSize(new Dimension(10, 45));
+		panel_16.add(panel_17, BorderLayout.NORTH);
+		
+		JLabel lblCantidad = new JLabel("Cantidad");
+		panel_17.add(lblCantidad);
+		lblCantidad.setFont(new Font("SansSerif", Font.BOLD, 15));
+		
+		tCantidad = new JSpinner();
+		tCantidad.setFont(new Font("Arial", Font.PLAIN, 12));
+		tCantidad.setPreferredSize(new Dimension(60, 20));
+		panel_17.add(tCantidad);
+		
+		JLabel lblUnidades = new JLabel("Unidades");
+		panel_17.add(lblUnidades);
+		lblUnidades.setFont(new Font("SansSerif", Font.BOLD, 15));
+		
+		tUnidades = new JTextField();
+		tUnidades.setEditable(false);
+		tUnidades.setFont(new Font("Arial", Font.PLAIN, 12));
+		panel_17.add(tUnidades);
+		tUnidades.setColumns(10);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setOpaque(false);
+		panel_16.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_3 = new JPanel();
-		panel_1.add(panel_3, BorderLayout.CENTER);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		panel_2.add(panel_3, BorderLayout.NORTH);
+		
+		JLabel lblTitulo = new JLabel("Titulo");
+		lblTitulo.setFont(new Font("SansSerif", Font.BOLD, 14));
+		panel_3.add(lblTitulo);
+		
+		JPanel panelContenido = new JPanel();
+		panel_2.add(panelContenido, BorderLayout.CENTER);
+		panelContenido.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		panel_3.add(scrollPane, BorderLayout.CENTER);
+		panelContenido.add(scrollPane, BorderLayout.CENTER);
 		
-		tableProductos = new JTable();
-		scrollPane.setViewportView(tableProductos);
+		modelo = new DefaultTableModel();
+		
+		table = new JTable();
+		table.setModel(modelo);
+		scrollPane.setViewportView(table);
 
+//		ImageIcon imgLote = new ImageIcon(getClass().getResource("/resources/List.png"));
+//		
+//		ImageIcon iconImgLote = new ImageIcon(imgLote.getImage().getScaledInstance(20, 27, Image.SCALE_DEFAULT));
+//		
+//		ImageIcon imgVariedad = new ImageIcon(getClass().getResource("/resources/List.png"));
+//		
+//		ImageIcon iconImgVariedad = new ImageIcon(imgVariedad.getImage().getScaledInstance(20, 25, Image.SCALE_DEFAULT));
+//	
+//		ImageIcon imgEmpleado = new ImageIcon(getClass().getResource("/resources/List.png"));
+//		
+//		ImageIcon iconImgEmpleado = new ImageIcon(imgEmpleado.getImage().getScaledInstance(20, 25, Image.SCALE_DEFAULT));
+//	
+//		ImageIcon imgLabor = new ImageIcon(getClass().getResource("/resources/List.png"));
+//		
+//		ImageIcon iconImgLabor = new ImageIcon(imgLabor.getImage().getScaledInstance(20, 25, Image.SCALE_DEFAULT));
+//	
+//		ImageIcon imgProducto = new ImageIcon(getClass().getResource("/resources/List.png"));
+//		
+//		ImageIcon iconImgProducto = new ImageIcon(imgProducto.getImage().getScaledInstance(20, 25, Image.SCALE_DEFAULT));
+//	
+//		btnLotes.setIcon(iconImgLote);
+//		btnVariedades.setIcon(iconImgVariedad);
+//		btnEmpleados.setIcon(iconImgEmpleado);
+//		btnLabores.setIcon(iconImgLabor);
+//		btnProductos.setIcon(iconImgProducto);
+	
+		
+	}
+	
+	public void setBtnLote(String imgButton) {
+		
+		ImageIcon imgBtn = new ImageIcon(getClass().getResource(imgButton));
+		
+		ImageIcon iconImgBtn = new ImageIcon(imgBtn.getImage().getScaledInstance(37, 34, Image.SCALE_DEFAULT));
+		
+		//btnAgregarLote.setIcon(iconImgBtn);
 		
 	}
 }
+

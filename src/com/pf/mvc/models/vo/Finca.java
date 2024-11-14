@@ -1,20 +1,17 @@
 package com.pf.mvc.models.vo;
 
-public class Empleado {
+public class Finca {
 
 	private int id;
-	private int idFinca;
 	private String nombre;
-
-	public Empleado(int idFinca, String nombre) {
+	
+	public Finca(String nombre) {
 		this.id = 0;
-		this.idFinca = idFinca;
 		this.nombre = nombre;
 	}
 
-	public Empleado(int id, int idFinca, String nombre) {
+	public Finca(int id, String nombre) {
 		this.id = id;
-		this.idFinca = idFinca;
 		this.nombre = nombre;
 	}
 
@@ -24,14 +21,6 @@ public class Empleado {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getIdFinca() {
-		return idFinca;
-	}
-
-	public void setIdFinca(int idFinca) {
-		this.idFinca = idFinca;
 	}
 
 	public String getNombre() {

@@ -1,4 +1,4 @@
-package com.pf.mvc.views.general;
+package com.pf.mvc.views.empleado;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
@@ -17,14 +17,14 @@ import java.awt.Color;
 import java.awt.SystemColor;
 
 public class Index extends JPanel {
-	public JTable table;
+	public JTable tableEmpleados;
 	public JTextField tBuscar;
 	public JTextField tNombre;
 	public DefaultTableModel modelo;
 	public JButton btnRegresar;
 	public JButton btnEliminar;
 	public JButton btnEditar;
-	public JButton btnRegistrar;
+	public JButton btnAgregar;
 	public JLabel lblTitulo;
 	public JButton btnActualizar;
 	public JButton btnCancelar;
@@ -90,16 +90,16 @@ public class Index extends JPanel {
 		
 		modelo = new DefaultTableModel();
 		
-		table = new JTable();
-		table.setModel(modelo);
-		scrollPane.setViewportView(table);
+		tableEmpleados = new JTable();
+		tableEmpleados.setModel(modelo);
+		scrollPane.setViewportView(tableEmpleados);
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(10, 105));
 		add(panel, BorderLayout.NORTH);
 		panel.setLayout(null);
 		
-		lblTitulo = new JLabel("Titulo");
+		lblTitulo = new JLabel("Registrar nuevo empleado");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblTitulo.setBounds(10, 11, 880, 17);
 		panel.add(lblTitulo);
@@ -115,12 +115,12 @@ public class Index extends JPanel {
 		tNombre.setBounds(75, 54, 390, 20);
 		panel.add(tNombre);
 		
-		btnRegistrar = new JButton("Registrar");
-		btnRegistrar.setBackground(SystemColor.inactiveCaptionBorder);
-		btnRegistrar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-		btnRegistrar.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnRegistrar.setBounds(486, 53, 94, 25);
-		panel.add(btnRegistrar);
+		btnAgregar = new JButton("Agregar");
+		btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
+		btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+		btnAgregar.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnAgregar.setBounds(486, 53, 94, 25);
+		panel.add(btnAgregar);
 		
 		btnActualizar = new JButton("Actualizar");
 		btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);

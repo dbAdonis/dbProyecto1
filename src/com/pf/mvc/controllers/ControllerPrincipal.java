@@ -1,6 +1,7 @@
 package com.pf.mvc.controllers;
 
 import com.pf.mvc.views.ViewPrincipal;
+import com.pf.mvc.views.menu.Menu;
 
 public class ControllerPrincipal {
 
@@ -12,22 +13,30 @@ public class ControllerPrincipal {
 	
 	public void init() {
 		
-		vp.setVisible(true);
+		Menu menu = new Menu();
 		
-		vp.btnProducto.addActionListener(e->{
-			
-			new ControllerProductos(vp).index();
-			
-		});
+		//vp.setVisible(true);
 		
-		
-		vp.btnAplicacion.addActionListener(e->{
+		menu.btnProductos.addActionListener(e->{
 			
-			new ControllerAplicaciones(vp).index();
+			new ControllerProductos(vp, menu).index();
 			
 		});
 		
-		new ControllerProductos(vp).index();
+		
+		menu.btnReportesDiarios.addActionListener(e->{
+			
+			new ControllerAplicaciones(vp, menu).index();
+			
+		});
+		
+		menu.btnGestionarPersonal.addActionListener(e->{
+			
+			new ControllerEmpleados(vp, menu).index();
+			
+		});
+		
+		vp.setContenido(menu, "Bienvenido(a) al sistema de Fino Follaje!");
 		vp.init();
 		
 	}

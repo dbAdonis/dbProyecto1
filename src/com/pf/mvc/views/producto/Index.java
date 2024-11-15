@@ -72,31 +72,48 @@ public class Index extends JPanel {
         add(panel_2, BorderLayout.SOUTH);
         
         btnAgregarProducto = new JButton("Agregar producto");
-        btnAgregarProducto.setPreferredSize(new Dimension(150, 23));
-        btnAgregarProducto.setBackground(SystemColor.inactiveCaptionBorder);
-        btnAgregarProducto.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        btnAgregarProducto.setFocusPainted(false);
+        btnAgregarProducto.setBorder(null);
+        btnAgregarProducto.setPreferredSize(new Dimension(200, 40));
+        btnAgregarProducto.setBackground(new Color(39, 174, 96));
+        btnAgregarProducto.setForeground(Color.WHITE);;
+        //btnAgregarProducto.setBackground(SystemColor.inactiveCaptionBorder);
+        //btnAgregarProducto.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
         btnAgregarProducto.setFont(new Font("Calibri", Font.BOLD, 16)); 
         panel_2.add(btnAgregarProducto);
         
         btnEditar = new JButton("Editar");
-        btnEditar.setPreferredSize(new Dimension(70, 23));
-        btnEditar.setBackground(SystemColor.inactiveCaptionBorder);
-        btnEditar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        btnEditar.setBorder(null);
+        btnEditar.setFocusPainted(false);
+        btnEditar.setPreferredSize(new Dimension(90, 40));
+		btnEditar.setBackground(new Color(204, 153, 0));
+		btnEditar.setForeground(Color.WHITE);
+        //btnEditar.setBackground(SystemColor.inactiveCaptionBorder);
+        //btnEditar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
         btnEditar.setFont(new Font("Calibri", Font.BOLD, 16));
         panel_2.add(btnEditar);
         
         btnEliminar = new JButton("Eliminar");
-        btnEliminar.setPreferredSize(new Dimension(70, 23));
-        btnEliminar.setBackground(SystemColor.inactiveCaptionBorder);
-        btnEliminar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        btnEliminar.setFocusPainted(false);
+        btnEliminar.setBorder(null);
+        btnEliminar.setPreferredSize(new Dimension(90, 40));
+		btnEliminar.setBackground(new Color(153, 0, 0));
+		btnEliminar.setForeground(Color.WHITE);
+        //btnEliminar.setBackground(SystemColor.inactiveCaptionBorder);
+        //btnEliminar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
         btnEliminar.setFont(new Font("Calibri", Font.BOLD, 16));
         panel_2.add(btnEliminar);
         
         btnRegresar = new JButton("Regresar");
-        btnRegresar.setPreferredSize(new Dimension(70, 23));
+        btnRegresar.setBorder(null);
+        btnRegresar.setFocusPainted(false);
+        btnRegresar.setPreferredSize(new Dimension(100, 40));
+		btnRegresar.setBackground(new Color(52, 108, 175));
+		btnRegresar.setForeground(Color.WHITE);
+		btnRegresar.setBounds(30, 340, 107, 42);
         btnRegresar.setFont(new Font("Calibri", Font.BOLD, 16)); 
-        btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
+        //btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        //btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
         panel_2.add(btnRegresar);
     }
 }

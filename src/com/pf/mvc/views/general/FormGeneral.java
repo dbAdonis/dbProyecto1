@@ -83,31 +83,43 @@ public class FormGeneral extends JPanel {
         tNombre.setColumns(10);
 
         btnRegistrar = new JButton("Registrar");
-        btnRegistrar.setBounds(246, 7, 70, 23);
+        btnRegistrar.setFocusPainted(false);
+        btnRegistrar.setPreferredSize(new Dimension(300, 40));
+        btnRegistrar.setBackground(new Color(39, 174, 96));
+        btnRegistrar.setForeground(Color.WHITE);
+        btnRegistrar.setBounds(246, 7, 95, 23);
         panel_5.add(btnRegistrar);
-        btnRegistrar.setPreferredSize(new Dimension(70, 23));
-        btnRegistrar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnRegistrar.setBackground(SystemColor.inactiveCaptionBorder);
+        //btnRegistrar.setBounds(30, 340, 107, 42);
+        //btnRegistrar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        //btnRegistrar.setBackground(SystemColor.inactiveCaptionBorder);
         btnRegistrar.setFont(new Font("Calibri", Font.BOLD, 16));
 
         btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBorder(null);
+        btnCancelar.setFocusPainted(false);
         btnCancelar.setEnabled(false);
         btnCancelar.setVisible(false);
-        btnCancelar.setPreferredSize(new Dimension(70, 23));
+        btnCancelar.setPreferredSize(new Dimension(100, 40));
+        btnCancelar.setBackground(new Color(52, 108, 175));
+        btnCancelar.setForeground(Color.WHITE);
         btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
-        btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnCancelar.setBackground(SystemColor.inactiveCaptionBorder);
-        btnCancelar.setBounds(336, 7, 70, 23);
+        //btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        //btnCancelar.setBackground(SystemColor.inactiveCaptionBorder);
+        btnCancelar.setBounds(364, 7, 95, 23);
         panel_5.add(btnCancelar);
 
         btnActualizar = new JButton("Actualizar");
+        btnActualizar.setFocusPainted(false);
+        btnActualizar.setBorder(null);
         btnActualizar.setEnabled(false);
         btnActualizar.setVisible(false);
-        btnActualizar.setPreferredSize(new Dimension(70, 23));
+        btnActualizar.setPreferredSize(new Dimension(200, 40));
+        btnActualizar.setBackground(new Color(39, 174, 96));
+        btnActualizar.setForeground(Color.WHITE);
         btnActualizar.setFont(new Font("Calibri", Font.BOLD, 16));
-        btnActualizar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
-        btnActualizar.setBounds(246, 7, 70, 23);
+        //btnActualizar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        //btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
+        btnActualizar.setBounds(246, 7, 109, 23);
         panel_5.add(btnActualizar);
 
         JPanel panel_4 = new JPanel();
@@ -116,17 +128,25 @@ public class FormGeneral extends JPanel {
         panel_2.add(panel_4, BorderLayout.SOUTH);
 
         btnEditar = new JButton("Editar");
-        btnEditar.setPreferredSize(new Dimension(70, 23));
+        btnEditar.setFocusPainted(false);
+        btnEditar.setBorder(null);
+        btnEditar.setPreferredSize(new Dimension(90, 40));
+		btnEditar.setBackground(new Color(204, 153, 0));
+		btnEditar.setForeground(Color.WHITE);
         btnEditar.setFont(new Font("Calibri", Font.BOLD, 16));
-        btnEditar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnEditar.setBackground(SystemColor.inactiveCaptionBorder);
+       // btnEditar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        //btnEditar.setBackground(SystemColor.inactiveCaptionBorder);
         panel_4.add(btnEditar);
 
         btnEliminar = new JButton("Eliminar");
-        btnEliminar.setPreferredSize(new Dimension(70, 23));
+        btnEliminar.setBorder(null);
+        btnEliminar.setFocusPainted(false);
+        btnEliminar.setPreferredSize(new Dimension(90, 40));
+		btnEliminar.setBackground(new Color(153, 0, 0));
+		btnEliminar.setForeground(Color.WHITE);
         btnEliminar.setFont(new Font("Calibri", Font.BOLD, 16));
-        btnEliminar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnEliminar.setBackground(SystemColor.inactiveCaptionBorder);
+       // btnEliminar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        //btnEliminar.setBackground(SystemColor.inactiveCaptionBorder);
         panel_4.add(btnEliminar);
     }
 }

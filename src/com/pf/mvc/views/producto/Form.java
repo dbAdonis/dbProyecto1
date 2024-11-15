@@ -48,17 +48,25 @@ public class Form extends JPanel {
 		add(panel, BorderLayout.SOUTH);
 		
 		btnAgregar = new JButton("Agregar");
+		btnAgregar.setFocusPainted(false);
+		btnAgregar.setBorder(null);
 		btnAgregar.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
-		btnAgregar.setPreferredSize(new Dimension(70, 23));
-		btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
-		btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+		btnAgregar.setPreferredSize(new Dimension(100, 40));
+		btnAgregar.setBackground(new Color(39, 174, 96));
+		btnAgregar.setForeground(Color.WHITE);		
+		//btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
+		//btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
 		panel.add(btnAgregar);
 		
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setFocusPainted(false);
+		btnRegresar.setBorder(null);
 		btnRegresar.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
-		btnRegresar.setPreferredSize(new Dimension(70, 23));
-		btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
-		btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+		btnRegresar.setPreferredSize(new Dimension(100, 40));
+		btnRegresar.setBackground(new Color(52, 108, 175));
+		btnRegresar.setForeground(Color.WHITE);
+		//btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
+		//btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
 		panel.add(btnRegresar);
 		
 		JPanel panel_1 = new JPanel();

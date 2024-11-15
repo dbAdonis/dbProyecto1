@@ -33,7 +33,7 @@ public class Menu extends JPanel {
      */
     
     public Menu() {
-        setPreferredSize(new Dimension(900, 580));
+        setPreferredSize(new Dimension(900, 600));
         setLayout(new BorderLayout(0, 0));
         
         panel_1 = new JPanel();
@@ -49,7 +49,8 @@ public class Menu extends JPanel {
         ImageIcon imgProductos = new ImageIcon(getClass().getResource("/resources/Productos.png"));
         
         panel = new JPanel();
-        panel.setOpaque(false);
+        //panel.setOpaque(false);
+        panel.setBackground(new Color(194, 227, 187));
         FlowLayout flowLayout_1 = (FlowLayout) panel.getLayout();
         flowLayout_1.setVgap(75);
         panel.setPreferredSize(new Dimension(10, 400));
@@ -66,7 +67,8 @@ public class Menu extends JPanel {
         panel.add(lblImagen);
         
         panel_2 = new JPanel();
-        panel_2.setOpaque(false);
+        panel_2.setBackground(new Color(194, 227, 187));
+        //panel_2.setOpaque(false);
         panel_2.setPreferredSize(new Dimension(10, 330));
         FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
         flowLayout.setVgap(50);
@@ -74,8 +76,8 @@ public class Menu extends JPanel {
         panel_1.add(panel_2, BorderLayout.CENTER);
         
         btnGestionarPersonal = new JButton("Gestionar personal");
-        btnGestionarPersonal.setBackground(SystemColor.inactiveCaptionBorder);
-        btnGestionarPersonal.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        btnGestionarPersonal.setBackground(new Color(211, 211, 211));
+        //btnGestionarPersonal.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
         panel_2.add(btnGestionarPersonal);
         btnGestionarPersonal.setFocusable(false);
         btnGestionarPersonal.setFont(new Font("Calibri", Font.BOLD, 16)); 
@@ -88,12 +90,12 @@ public class Menu extends JPanel {
         btnGestionarPersonal.setIcon(iconImgPersonal);
         
         btnReportesDiarios = new JButton("Reportes diarios");
-        btnReportesDiarios.setBackground(SystemColor.inactiveCaptionBorder);
+        btnReportesDiarios.setBackground(new Color(211, 211, 211));
         btnReportesDiarios.setPreferredSize(new Dimension(170, 111));
         panel_2.add(btnReportesDiarios);
         btnReportesDiarios.setFocusable(false);
         btnReportesDiarios.setFont(new Font("Calibri", Font.BOLD, 16)); // Calibri 16
-        btnReportesDiarios.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+        //btnReportesDiarios.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
         btnReportesDiarios.setHorizontalTextPosition(SwingConstants.CENTER);
         btnReportesDiarios.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnReportesDiarios.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -101,8 +103,8 @@ public class Menu extends JPanel {
         btnReportesDiarios.setIcon(iconImgForm);
         
         btnProductos = new JButton("Productos");
-        btnProductos.setBackground(SystemColor.inactiveCaptionBorder);
-        btnProductos.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(0, 0, 0), null, new Color(0, 0, 0), null));
+        btnProductos.setBackground(new Color(211, 211, 211));
+        //btnProductos.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(0, 0, 0), null, new Color(0, 0, 0), null));
         btnProductos.setPreferredSize(new Dimension(170, 111));
         panel_2.add(btnProductos);
         btnProductos.setFocusable(false);

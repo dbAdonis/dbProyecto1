@@ -34,10 +34,12 @@ public class Options extends JPanel {
 		panel_1.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(194, 227, 187));		
 		panel_2.setPreferredSize(new Dimension(10, 400));
 		panel_1.add(panel_2, BorderLayout.NORTH);
 
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(194, 227, 187));
 		panel_3.setPreferredSize(new Dimension(10, 330));
 		FlowLayout flowLayout_1 = (FlowLayout) panel_3.getLayout();
 		flowLayout_1.setHgap(100);
@@ -47,8 +49,9 @@ public class Options extends JPanel {
 		Font calibriFont = new Font("Calibri", Font.BOLD, 16);
 
 		btnFincaUno = new JButton("Finca 1");
-		btnFincaUno.setBackground(SystemColor.inactiveCaptionBorder);
-		btnFincaUno.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+		btnFincaUno.setFocusPainted(false);
+		btnFincaUno.setBackground(new Color(211, 211, 211));
+		//btnFincaUno.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
 		btnFincaUno.setFocusable(false);
 		btnFincaUno.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnFincaUno.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -59,8 +62,9 @@ public class Options extends JPanel {
 		panel_3.add(btnFincaUno);
 
 		btnFincaDos = new JButton("Finca 2");
-		btnFincaDos.setBackground(SystemColor.inactiveCaptionBorder);
-		btnFincaDos.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+		btnFincaDos.setFocusPainted(false);
+		btnFincaDos.setBackground(new Color(211, 211, 211));
+		//btnFincaDos.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
 		btnFincaDos.setFocusable(false);
 		btnFincaDos.setMinimumSize(new Dimension(70, 23));
 		btnFincaDos.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -81,10 +85,11 @@ public class Options extends JPanel {
 		panel_3.add(btnFincaDos);
 
 		btnMenu = new JButton("Menú");
+		btnMenu.setFocusPainted(false);
 		btnMenu.setFocusable(false);
-		btnMenu.setBackground(SystemColor.inactiveCaptionBorder);
+		btnMenu.setBackground(new Color(211, 211, 211));
 		btnMenu.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnMenu.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+		//btnMenu.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
 		btnMenu.setFont(calibriFont);
 		btnMenu.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnMenu.setVerticalAlignment(SwingConstants.BOTTOM);

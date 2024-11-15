@@ -43,13 +43,15 @@ public class ViewPrincipal extends JFrame {
 		panel_1.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(204, 204, 204));
+		panel_2.setForeground(Color.WHITE);
+		panel_2.setBackground(new Color(33, 51, 40));
 		panel_2.setBorder(new EmptyBorder(10, 10, 10, 10));
 		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
 		panel_2.setPreferredSize(new Dimension(10, 50));
 		panel_1.add(panel_2, BorderLayout.NORTH);
 
 		lTitulo = new JLabel("Titulo");
+		lTitulo.setForeground(Color.WHITE);
 		lTitulo.setFont(new Font("SansSerif", Font.PLAIN, 24));
 		panel_2.add(lTitulo);
 

@@ -81,8 +81,10 @@ public class Index extends JPanel {
 		add(panel_2, BorderLayout.SOUTH);
 
 		btnAgregarConsumo = new JButton("Realizar nuevo reporte");
+		btnAgregarConsumo.setFocusPainted(false);
+		btnAgregarConsumo.setBorder(null);
 		btnAgregarConsumo.setPreferredSize(new Dimension(200, 40));
-		btnAgregarConsumo.setBackground(new Color(0, 140, 35));
+		btnAgregarConsumo.setBackground(new Color(39, 174, 96));
 		btnAgregarConsumo.setForeground(Color.WHITE);
 		btnAgregarConsumo.setBounds(30, 340, 107, 42);
 		// btnAgregarConsumo.setBackground(SystemColor.inactiveCaptionBorder);
@@ -92,8 +94,10 @@ public class Index extends JPanel {
 		panel_2.add(btnAgregarConsumo);
 
 		btnEditar = new JButton("Editar");
+		btnEditar.setFocusPainted(false);
+		btnEditar.setBorder(null);
 		btnEditar.setPreferredSize(new Dimension(90, 40));
-		btnEditar.setBackground(new Color(255, 204, 0));
+		btnEditar.setBackground(new Color(204, 153, 0));
 		btnEditar.setForeground(Color.WHITE);
 		btnEditar.setBounds(30, 340, 107, 42);
 		// btnEditar.setBackground(SystemColor.inactiveCaptionBorder);
@@ -103,8 +107,10 @@ public class Index extends JPanel {
 		panel_2.add(btnEditar);
 
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setFocusPainted(false);
+		btnEliminar.setBorder(null);
 		btnEliminar.setPreferredSize(new Dimension(90, 40));
-		btnEliminar.setBackground(new Color(217, 1, 1));
+		btnEliminar.setBackground(new Color(153, 0, 0));
 		btnEliminar.setForeground(Color.WHITE);
 		btnEliminar.setBounds(30, 340, 107, 42);
 		// btnEliminar.setBackground(SystemColor.inactiveCaptionBorder);
@@ -114,8 +120,10 @@ public class Index extends JPanel {
 		panel_2.add(btnEliminar);
 
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setFocusPainted(false);
+		btnRegresar.setBorder(null);
 		btnRegresar.setPreferredSize(new Dimension(100, 40));
-		btnRegresar.setBackground(new Color(100, 149, 237));
+		btnRegresar.setBackground(new Color(52, 108, 175));
 		btnRegresar.setForeground(Color.WHITE);
 		btnRegresar.setBounds(30, 340, 107, 42);
 		// btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);

@@ -59,9 +59,11 @@ public class Edit extends JPanel {
 		add(panel, BorderLayout.SOUTH);
 
 		btnActualizar = new JButton("Actualizar");
-		btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
+		btnActualizar.setBorder(null);
+		btnActualizar.setBorderPainted(false);
+		//btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
 		btnActualizar.setPreferredSize(new Dimension(130, 40));
-		btnActualizar.setBackground(new Color(255, 204, 0));
+		btnActualizar.setBackground(new Color(39, 174, 96));
 		btnActualizar.setForeground(Color.WHITE);
 		btnActualizar.setBounds(30, 340, 107, 42);
 		//btnActualizar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
@@ -69,9 +71,11 @@ public class Edit extends JPanel {
 		panel.add(btnActualizar);
 
 		btnRegresar = new JButton("Regresar");
-		btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
+		btnRegresar.setBorder(null);
+		btnRegresar.setBorderPainted(false);
+		//btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
 		btnRegresar.setPreferredSize(new Dimension(100, 40));
-		btnRegresar.setBackground(new Color(100, 149, 237));
+		btnRegresar.setBackground(new Color(52, 108, 175));
 		btnRegresar.setForeground(Color.WHITE);
 		btnRegresar.setBounds(30, 340, 107, 42);
 		//btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));

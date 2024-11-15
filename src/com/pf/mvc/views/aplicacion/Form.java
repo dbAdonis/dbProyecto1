@@ -60,9 +60,11 @@ public class Form extends JPanel {
 		add(panel, BorderLayout.SOUTH);
 
 		btnAgregar = new JButton("Agregar");
+		btnAgregar.setFocusPainted(false);
+		btnAgregar.setBorder(null);
 		btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
 		btnAgregar.setPreferredSize(new Dimension(100, 40));
-		btnAgregar.setBackground(new Color(0, 140, 35));
+		btnAgregar.setBackground(new Color(39, 174, 96));
 		btnAgregar.setForeground(Color.WHITE);
 		btnAgregar.setBounds(30, 340, 107, 42);
 		//btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
@@ -70,9 +72,11 @@ public class Form extends JPanel {
 		panel.add(btnAgregar);
 
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setBorder(null);
+		btnRegresar.setFocusPainted(false);
 		btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
 		btnRegresar.setPreferredSize(new Dimension(100, 40));
-		btnRegresar.setBackground(new Color(100, 149, 237));
+		btnRegresar.setBackground(new Color(52, 108, 175));
 		btnRegresar.setForeground(Color.WHITE);
 		btnRegresar.setBounds(30, 340, 107, 42);
 		//btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));

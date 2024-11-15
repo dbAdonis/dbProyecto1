@@ -16,6 +16,8 @@ import java.awt.Font;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.FlowLayout;
+import javax.swing.border.LineBorder;
 
 public class Index extends JPanel {
     public JTable tableEmpleados;
@@ -39,24 +41,26 @@ public class Index extends JPanel {
         setLayout(new BorderLayout(0, 0));
         
         JPanel panel_1 = new JPanel();
+        panel_1.setBorder(null);
         add(panel_1, BorderLayout.CENTER);
         panel_1.setLayout(new BorderLayout(0, 0));
         
         JPanel panel_2 = new JPanel();
+        panel_2.setBorder(null);
         panel_2.setPreferredSize(new Dimension(10, 70));
         panel_1.add(panel_2, BorderLayout.NORTH);
-        panel_2.setLayout(null);
-        
-        JLabel lblBuscar = new JLabel("Buscar:");
-        lblBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblBuscar.setBounds(10, 27, 55, 20);
-        panel_2.add(lblBuscar);
-        
-        tBuscar = new JTextField();
-        tBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
-        tBuscar.setBounds(86, 22, 377, 30);
-        panel_2.add(tBuscar);
-        tBuscar.setColumns(10);
+         panel_2.setLayout(null);
+         
+         JLabel lblBuscar = new JLabel("Buscar:");
+         lblBuscar.setBounds(24, 25, 48, 20);
+         panel_2.add(lblBuscar);
+         lblBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
+         
+         tBuscar = new JTextField();
+         tBuscar.setBounds(91, 22, 370, 26);
+         panel_2.add(tBuscar);
+         tBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
+         tBuscar.setColumns(10);
         
         JPanel panel_3 = new JPanel();
         panel_1.add(panel_3, BorderLayout.CENTER);
@@ -117,7 +121,8 @@ public class Index extends JPanel {
         scrollPane.setViewportView(tableEmpleados);
         
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(10, 105));
+        panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+        panel.setPreferredSize(new Dimension(10, 200));
         add(panel, BorderLayout.NORTH);
         panel.setLayout(null);
         
@@ -137,35 +142,9 @@ public class Index extends JPanel {
         tNombre.setBounds(85, 54, 380, 30);
         panel.add(tNombre);
         
-        btnAgregar = new JButton("Agregar");
-        btnAgregar.setFocusPainted(false);
-        btnAgregar.setBorder(null);
-        btnAgregar.setPreferredSize(new Dimension(200, 40));
-        btnAgregar.setBackground(new Color(39, 174, 96));
-        btnAgregar.setForeground(Color.WHITE);
-        //btnAgregar.setBounds(30, 340, 107, 42);
-        //btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
-        //btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnAgregar.setFont(new Font("Calibri", Font.BOLD, 16));
-        btnAgregar.setBounds(485, 53, 110, 30);
-        panel.add(btnAgregar);
-        
-        btnActualizar = new JButton("Actualizar");
-        btnActualizar.setBorder(null);
-        btnActualizar.setFocusPainted(false);
-        btnActualizar.setPreferredSize(new Dimension(200, 40));
-        btnActualizar.setBackground(new Color(39, 174, 96));
-        btnActualizar.setForeground(Color.WHITE);
-       // btnActualizar.setBounds(30, 340, 107, 42);
-        //btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
-        //btnActualizar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnActualizar.setEnabled(false);
-        btnActualizar.setVisible(false);
-        btnActualizar.setFont(new Font("Calibri", Font.BOLD, 16));
-        btnActualizar.setBounds(605, 53, 110, 30);
-        panel.add(btnActualizar);
-        
         btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(280, 106, 110, 30);
+        panel.add(btnCancelar);
         btnCancelar.setBorder(null);
         btnCancelar.setFocusPainted(false);
         btnCancelar.setPreferredSize(new Dimension(100, 40));
@@ -177,7 +156,33 @@ public class Index extends JPanel {
         btnCancelar.setEnabled(false);
         btnCancelar.setVisible(false);
         btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
-        btnCancelar.setBounds(725, 53, 110, 30);
-        panel.add(btnCancelar);
+        
+        btnActualizar = new JButton("Actualizar");
+        btnActualizar.setBounds(145, 106, 110, 30);
+        panel.add(btnActualizar);
+        btnActualizar.setBorder(null);
+        btnActualizar.setFocusPainted(false);
+        btnActualizar.setPreferredSize(new Dimension(200, 40));
+        btnActualizar.setBackground(new Color(39, 174, 96));
+        btnActualizar.setForeground(Color.WHITE);
+        // btnActualizar.setBounds(30, 340, 107, 42);
+         //btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
+         //btnActualizar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+         btnActualizar.setEnabled(false);
+         btnActualizar.setVisible(false);
+         btnActualizar.setFont(new Font("Calibri", Font.BOLD, 16));
+         
+         btnAgregar = new JButton("Agregar");
+         btnAgregar.setBounds(10, 106, 110, 30);
+         panel.add(btnAgregar);
+         btnAgregar.setFocusPainted(false);
+         btnAgregar.setBorder(null);
+         btnAgregar.setPreferredSize(new Dimension(200, 40));
+         btnAgregar.setBackground(new Color(39, 174, 96));
+         btnAgregar.setForeground(Color.WHITE);
+         //btnAgregar.setBounds(30, 340, 107, 42);
+         //btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
+         //btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
+         btnAgregar.setFont(new Font("Calibri", Font.BOLD, 16));
     }
 }

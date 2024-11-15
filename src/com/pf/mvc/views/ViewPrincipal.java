@@ -10,11 +10,7 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.FlowLayout;
-import javax.swing.JButton;
 import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.Frame;
 
 public class ViewPrincipal extends JFrame {
 

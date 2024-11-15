@@ -24,7 +24,7 @@ public class Functions {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				String buscar = tBuscar.getText();
-				filtro.setRowFilter(RowFilter.regexFilter("(?i)"+buscar, 0, 1, 2));
+				filtro.setRowFilter(RowFilter.regexFilter("(?i)"+buscar));
 			}
 
 			@Override

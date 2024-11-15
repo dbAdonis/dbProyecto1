@@ -48,14 +48,14 @@ public class Form extends JPanel {
 		add(panel, BorderLayout.SOUTH);
 		
 		btnAgregar = new JButton("Agregar");
-		btnAgregar.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnAgregar.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		btnAgregar.setPreferredSize(new Dimension(70, 23));
 		btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
 		btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
 		panel.add(btnAgregar);
 		
 		btnRegresar = new JButton("Regresar");
-		btnRegresar.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnRegresar.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		btnRegresar.setPreferredSize(new Dimension(70, 23));
 		btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
 		btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
@@ -80,19 +80,20 @@ public class Form extends JPanel {
 		
 		JLabel lblNombre = new JLabel("Producto");
 		panel_4.add(lblNombre);
-		lblNombre.setFont(new Font("SansSerif", Font.BOLD, 14));
+		lblNombre.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		
 		cbxProductos = new JComboBox();
+		cbxProductos.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxProductos.setPreferredSize(new Dimension(200, 20));
 		panel_4.add(cbxProductos);
 		
 		JLabel lblAgregarNuevoEn = new JLabel("Agregar nuevo en la lista");
-		lblAgregarNuevoEn.setFont(new Font("SansSerif", Font.ITALIC, 13));
+		lblAgregarNuevoEn.setFont(new Font("Calibri", Font.ITALIC, 16)); // Fuente Calibri 16
 		panel_4.add(lblAgregarNuevoEn);
 		
 		btnProductos = new JButton("");
 		btnProductos.setPreferredSize(new Dimension(35, 23));
-		btnProductos.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnProductos.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		btnProductos.setBackground(SystemColor.scrollbar);
 		panel_4.add(btnProductos);
 		
@@ -111,25 +112,28 @@ public class Form extends JPanel {
 		
 		JLabel lblCdigo = new JLabel("Nombre");
 		panel_6.add(lblCdigo);
-		lblCdigo.setFont(new Font("SansSerif", Font.BOLD, 14));
+		lblCdigo.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		
 		tNombre = new JTextField();
+		tNombre.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_6.add(tNombre);
 		tNombre.setColumns(30);
 		
 		JLabel lblUnidadDeMedida = new JLabel("C\u00F3digo");
 		panel_6.add(lblUnidadDeMedida);
-		lblUnidadDeMedida.setFont(new Font("SansSerif", Font.BOLD, 14));
+		lblUnidadDeMedida.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		
 		tCodigo = new JTextField();
+		tCodigo.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_6.add(tCodigo);
 		tCodigo.setColumns(15);
 		
 		JLabel lblUnidadDeMedida_1 = new JLabel("Unidad de medida");
 		panel_6.add(lblUnidadDeMedida_1);
-		lblUnidadDeMedida_1.setFont(new Font("SansSerif", Font.BOLD, 14));
+		lblUnidadDeMedida_1.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		
 		tUnidad = new JTextField();
+		tUnidad.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_6.add(tUnidad);
 		tUnidad.setColumns(15);
 		
@@ -148,19 +152,20 @@ public class Form extends JPanel {
 		
 		JLabel lblTipo = new JLabel("Tipo");
 		panel_8.add(lblTipo);
-		lblTipo.setFont(new Font("SansSerif", Font.BOLD, 14));
+		lblTipo.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		
 		cbxTipos = new JComboBox();
+		cbxTipos.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxTipos.setPreferredSize(new Dimension(150, 20));
 		panel_8.add(cbxTipos);
 		
 		JLabel label = new JLabel("Agregar nuevo en la lista");
-		label.setFont(new Font("SansSerif", Font.ITALIC, 13));
+		label.setFont(new Font("Calibri", Font.ITALIC, 16)); // Fuente Calibri 16
 		panel_8.add(label);
 		
 		btnTipos = new JButton("");
 		btnTipos.setPreferredSize(new Dimension(35, 23));
-		btnTipos.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnTipos.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		btnTipos.setBackground(SystemColor.scrollbar);
 		panel_8.add(btnTipos);
 		
@@ -179,19 +184,20 @@ public class Form extends JPanel {
 		
 		JLabel lblCategora = new JLabel("Categor\u00EDa");
 		panel_10.add(lblCategora);
-		lblCategora.setFont(new Font("SansSerif", Font.BOLD, 14));
+		lblCategora.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		
 		cbxCategorias = new JComboBox();
+		cbxCategorias.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxCategorias.setPreferredSize(new Dimension(150, 20));
 		panel_10.add(cbxCategorias);
 		
 		JLabel label_1 = new JLabel("Agregar nuevo en la lista");
-		label_1.setFont(new Font("SansSerif", Font.ITALIC, 13));
+		label_1.setFont(new Font("Calibri", Font.ITALIC, 16)); // Fuente Calibri 16
 		panel_10.add(label_1);
 		
 		btnCategorias = new JButton("");
 		btnCategorias.setPreferredSize(new Dimension(35, 23));
-		btnCategorias.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnCategorias.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
 		btnCategorias.setBackground(SystemColor.scrollbar);
 		panel_10.add(btnCategorias);
 		

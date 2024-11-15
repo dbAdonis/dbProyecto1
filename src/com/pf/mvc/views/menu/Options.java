@@ -28,22 +28,24 @@ public class Options extends JPanel {
 	public Options() {
 		setPreferredSize(new Dimension(900, 580));
 		setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel_2 = new JPanel();
-		panel_2.setPreferredSize(new Dimension(10, 250));
+		panel_2.setPreferredSize(new Dimension(10, 400));
 		panel_1.add(panel_2, BorderLayout.NORTH);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setPreferredSize(new Dimension(10, 330));
 		FlowLayout flowLayout_1 = (FlowLayout) panel_3.getLayout();
 		flowLayout_1.setHgap(100);
-		flowLayout_1.setVgap(200);
+		flowLayout_1.setVgap(50);
 		panel_1.add(panel_3, BorderLayout.CENTER);
-		
+
+		Font calibriFont = new Font("Calibri", Font.BOLD, 16);
+
 		btnFincaUno = new JButton("Finca 1");
 		btnFincaUno.setBackground(SystemColor.inactiveCaptionBorder);
 		btnFincaUno.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
@@ -52,10 +54,10 @@ public class Options extends JPanel {
 		btnFincaUno.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnFincaUno.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnFincaUno.setPreferredSize(new Dimension(170, 111));
-		btnFincaUno.setFont(new Font("SansSerif", Font.BOLD, 14));
-		
+		btnFincaUno.setFont(calibriFont);
+
 		panel_3.add(btnFincaUno);
-		
+
 		btnFincaDos = new JButton("Finca 2");
 		btnFincaDos.setBackground(SystemColor.inactiveCaptionBorder);
 		btnFincaDos.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
@@ -65,61 +67,62 @@ public class Options extends JPanel {
 		btnFincaDos.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnFincaDos.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnFincaDos.setPreferredSize(new Dimension(170, 111));
-		btnFincaDos.setFont(new Font("SansSerif", Font.BOLD, 14));
-		
+		btnFincaDos.setFont(calibriFont);
+
 		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 75));
-		
+
 		lblLogo = new JLabel("");
-		lblLogo.setPreferredSize(new Dimension(150, 150));
-		
+		lblLogo.setPreferredSize(new Dimension(250, 250));
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		
+		lblLogo.setFont(calibriFont);
+
 		panel_2.add(lblLogo);
-		
+
 		panel_3.add(btnFincaDos);
-		
-		btnMenu = new JButton("Men\u00FA");
+
+		btnMenu = new JButton("Menú");
 		btnMenu.setFocusable(false);
 		btnMenu.setBackground(SystemColor.inactiveCaptionBorder);
 		btnMenu.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnMenu.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-		btnMenu.setFont(new Font("SansSerif", Font.BOLD, 14));
+		btnMenu.setFont(calibriFont);
 		btnMenu.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnMenu.setPreferredSize(new Dimension(170, 111));
-		
+
 		ImageIcon imgMenu = new ImageIcon(getClass().getResource("/resources/Home.png"));
-		
+
 		ImageIcon iconImgMenu = new ImageIcon(imgMenu.getImage().getScaledInstance(90, 81, Image.SCALE_DEFAULT));
-		
+
 		btnMenu.setIcon(iconImgMenu);
-		
+
 		panel_3.add(btnMenu);
-
 	}
-	
+
 	public void setImagesButtons(String logo, String fincaUno, String fincaDos) {
-		
-		ImageIcon imgLogo = new ImageIcon(getClass().getResource(logo));
-		
-		ImageIcon iconImgLogo = new ImageIcon(imgLogo.getImage().getScaledInstance((int) lblLogo.getPreferredSize().getWidth(), 
-				(int) lblLogo.getPreferredSize().getHeight(), Image.SCALE_DEFAULT));
-		
-		ImageIcon imgFincaUno = new ImageIcon(getClass().getResource(fincaUno));
-		
-		ImageIcon iconImgFincaUno = new ImageIcon(imgFincaUno.getImage().getScaledInstance(90, 81, Image.SCALE_DEFAULT));
-		
-		ImageIcon imgFincaDos = new ImageIcon(getClass().getResource(fincaDos));
-		
-		ImageIcon iconImgFincaDos = new ImageIcon(imgFincaDos.getImage().getScaledInstance(90, 81, Image.SCALE_DEFAULT));
-		btnFincaDos.setIcon(iconImgFincaDos);
-		
-		lblLogo.setIcon(iconImgLogo);
-		
-		btnFincaUno.setIcon(iconImgFincaUno);
-		
-		btnFincaDos.setIcon(iconImgFincaDos);
-		
-	}
 
+		ImageIcon imgLogo = new ImageIcon(getClass().getResource(logo));
+
+		ImageIcon iconImgLogo = new ImageIcon(
+				imgLogo.getImage().getScaledInstance((int) lblLogo.getPreferredSize().getWidth(),
+						(int) lblLogo.getPreferredSize().getHeight(), Image.SCALE_DEFAULT));
+
+		ImageIcon imgFincaUno = new ImageIcon(getClass().getResource(fincaUno));
+
+		ImageIcon iconImgFincaUno = new ImageIcon(
+				imgFincaUno.getImage().getScaledInstance(90, 75, Image.SCALE_DEFAULT));
+
+		ImageIcon imgFincaDos = new ImageIcon(getClass().getResource(fincaDos));
+
+		ImageIcon iconImgFincaDos = new ImageIcon(
+				imgFincaDos.getImage().getScaledInstance(90, 75, Image.SCALE_DEFAULT));
+
+		btnFincaDos.setIcon(iconImgFincaDos);
+
+		lblLogo.setIcon(iconImgLogo);
+
+		btnFincaUno.setIcon(iconImgFincaUno);
+
+		btnFincaDos.setIcon(iconImgFincaDos);
+	}
 }

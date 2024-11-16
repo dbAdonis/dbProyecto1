@@ -27,7 +27,7 @@ public class Index extends JPanel {
 	public JButton btnRegresar;
 	public JButton btnEliminar;
 	public JButton btnEditar;
-	public JButton btnRegistrar;
+	public JButton btnGuardar;
 	public JLabel lblTitulo;
 	public JButton btnActualizar;
 	public JButton btnCancelar;
@@ -139,18 +139,18 @@ public class Index extends JPanel {
 		tNombre.setBounds(75, 54, 390, 20);
 		panel.add(tNombre);
 
-		btnRegistrar = new JButton("Registrar");
-		btnRegistrar.setFocusPainted(false);
-		btnRegistrar.setBorder(null);
-		btnRegistrar.setPreferredSize(new Dimension(200, 40));
-		btnRegistrar.setBackground(new Color(39, 174, 96));
-		btnRegistrar.setForeground(Color.WHITE);
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.setFocusPainted(false);
+		btnGuardar.setBorder(null);
+		btnGuardar.setPreferredSize(new Dimension(200, 40));
+		btnGuardar.setBackground(new Color(39, 174, 96));
+		btnGuardar.setForeground(Color.WHITE);
 		// btnRegistrar.setBackground(SystemColor.inactiveCaptionBorder);
 		// btnRegistrar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null,
 		// Color.BLACK, null));
-		btnRegistrar.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnRegistrar.setBounds(486, 53, 94, 25);
-		panel.add(btnRegistrar);
+		btnGuardar.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnGuardar.setBounds(486, 53, 94, 25);
+		panel.add(btnGuardar);
 
 		btnActualizar = new JButton("Actualizar");
 		// btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);

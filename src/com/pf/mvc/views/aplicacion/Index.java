@@ -17,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 
 public class Index extends JPanel {
@@ -25,12 +26,11 @@ public class Index extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	public JTextField tBuscar;
-	public JTable tableConsumo;
+	public JTable table;
 	public DefaultTableModel modelo;
-	public JButton btnAgregarConsumo;
+	public JButton btnNuevo;
 	public JButton btnEliminar;
 	public JButton btnEditar;
-	public JButton btnRegresar;
 	public TableRowSorter<DefaultTableModel> filtro;
 
 	/**
@@ -65,33 +65,35 @@ public class Index extends JPanel {
 
 		modelo = new DefaultTableModel();
 		filtro = new TableRowSorter<DefaultTableModel>(modelo);
-		tableConsumo = new JTable(modelo);
-		tableConsumo.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tableConsumo.setRowHeight(30);
-		tableConsumo.setRowSorter(filtro);
-		tableConsumo.setModel(modelo);
+		table = new JTable(modelo);
+		table.setFont(new Font("Calibri", Font.PLAIN, 16));
+		table.setRowHeight(30);
+		table.setRowSorter(filtro);
+		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		ajustarColumnasYExpandirTabla(table);
+		table.setModel(modelo);
 
-		JTableHeader header = tableConsumo.getTableHeader();
+		JTableHeader header = table.getTableHeader();
 		header.setFont(new Font("Calibri", Font.BOLD, 16));
-		scrollPane.setViewportView(tableConsumo);
+		scrollPane.setViewportView(table);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel_2.setLayout((LayoutManager) new FlowLayout(FlowLayout.CENTER, 20, 0));
 		add(panel_2, BorderLayout.SOUTH);
 
-		btnAgregarConsumo = new JButton("Realizar nuevo reporte");
-		btnAgregarConsumo.setFocusPainted(false);
-		btnAgregarConsumo.setBorder(null);
-		btnAgregarConsumo.setPreferredSize(new Dimension(200, 40));
-		btnAgregarConsumo.setBackground(new Color(39, 174, 96));
-		btnAgregarConsumo.setForeground(Color.WHITE);
-		btnAgregarConsumo.setBounds(30, 340, 107, 42);
+		btnNuevo = new JButton("Nuevo Reporte");
+		btnNuevo.setFocusPainted(false);
+		btnNuevo.setBorder(null);
+		btnNuevo.setPreferredSize(new Dimension(150, 40));
+		btnNuevo.setBackground(new Color(39, 174, 96));
+		btnNuevo.setForeground(Color.WHITE);
+		btnNuevo.setBounds(30, 340, 107, 42);
 		// btnAgregarConsumo.setBackground(SystemColor.inactiveCaptionBorder);
 		// btnAgregarConsumo.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK,
 		// null, Color.BLACK, null));
-		btnAgregarConsumo.setFont(new Font("Calibri", Font.BOLD, 16));
-		panel_2.add(btnAgregarConsumo);
+		btnNuevo.setFont(new Font("Calibri", Font.BOLD, 16));
+		panel_2.add(btnNuevo);
 
 		btnEditar = new JButton("Editar");
 		btnEditar.setFocusPainted(false);
@@ -119,18 +121,57 @@ public class Index extends JPanel {
 		btnEliminar.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_2.add(btnEliminar);
 
-		btnRegresar = new JButton("Regresar");
-		btnRegresar.setFocusPainted(false);
-		btnRegresar.setBorder(null);
-		btnRegresar.setPreferredSize(new Dimension(100, 40));
-		btnRegresar.setBackground(new Color(52, 108, 175));
-		btnRegresar.setForeground(Color.WHITE);
-		btnRegresar.setBounds(30, 340, 107, 42);
-		// btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
-		// btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null,
-		// Color.BLACK, null));
-		btnRegresar.setFont(new Font("Calibri", Font.BOLD, 16));
-		panel_2.add(btnRegresar);
-
 	}
+
+	public void ajustarColumnasYExpandirTabla(JTable tabla) {
+	    int tableWidth = tabla.getWidth(); // Ancho total del contenedor
+	    int margin = 10; // Margen adicional para evitar texto cortado
+
+	    // Calcular los anchos necesarios
+	    int[] columnWidths = new int[tabla.getColumnCount()];
+	    int totalColumnWidth = 0;
+
+	    for (int columna = 0; columna < tabla.getColumnCount(); columna++) {
+	        TableColumn tableColumn = tabla.getColumnModel().getColumn(columna);
+	        int anchoMaximo = 0;
+
+	        // Ancho del encabezado
+	        Object headerValue = tableColumn.getHeaderValue();
+	        if (headerValue != null) {
+	            int anchoEncabezado = tabla.getFontMetrics(tabla.getTableHeader().getFont())
+	                    .stringWidth(headerValue.toString());
+	            anchoMaximo = Math.max(anchoMaximo, anchoEncabezado);
+	        }
+
+	        // Ancho del contenido en las celdas
+	        for (int fila = 0; fila < tabla.getRowCount(); fila++) {
+	            Object valorCelda = tabla.getValueAt(fila, columna);
+	            if (valorCelda != null) {
+	                int anchoCelda = tabla.getFontMetrics(tabla.getFont()).stringWidth(valorCelda.toString());
+	                anchoMaximo = Math.max(anchoMaximo, anchoCelda);
+	            }
+	        }
+
+	        columnWidths[columna] = anchoMaximo + margin; // Agregar margen
+	        totalColumnWidth += columnWidths[columna];
+	    }
+
+	    // Distribuir espacio restante proporcionalmente
+	    if (totalColumnWidth < tableWidth) {
+	        int extraWidth = (tableWidth - totalColumnWidth) / tabla.getColumnCount();
+
+	        for (int columna = 0; columna < tabla.getColumnCount(); columna++) {
+	            columnWidths[columna] += extraWidth;
+	        }
+	    }
+
+	    // Aplicar los anchos calculados
+	    for (int columna = 0; columna < tabla.getColumnCount(); columna++) {
+	        tabla.getColumnModel().getColumn(columna).setPreferredWidth(columnWidths[columna]);
+	    }
+
+	    // Hacer que la tabla ocupe todo el ancho disponible
+	    tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+	}
+
 }

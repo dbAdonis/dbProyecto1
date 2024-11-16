@@ -1,43 +1,60 @@
 package com.pf.mvc.controllers;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import com.pf.mvc.views.ViewPrincipal;
-import com.pf.mvc.views.menu.Menu;
 
 public class ControllerPrincipal {
 
 	private ViewPrincipal vp;
-	
+	private JButton botonSeleccionado;
+
 	public ControllerPrincipal() {
 		vp = new ViewPrincipal();
 	}
-	
+
 	public void init() {
-		
-		Menu menu = new Menu();
-		
-		//vp.setVisible(true);
-		
-		menu.btnProductos.addActionListener(e->{
-			
-			new ControllerProductos(vp, menu).index();
-			
+		vp.setVisible(true);
+
+		vp.btnGestionarPersonal.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setSelectedButton(vp.btnGestionarPersonal);
+				new ControllerEmpleados(vp).index();
+			}
 		});
-		
-		
-		menu.btnReportesDiarios.addActionListener(e->{
-			
-			new ControllerAplicaciones(vp, menu).index();
-			
+
+		vp.btnReportesDiarios.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setSelectedButton(vp.btnReportesDiarios);
+				new ControllerAplicaciones(vp).index();
+			}
 		});
-		
-		menu.btnGestionarPersonal.addActionListener(e->{
-			
-			new ControllerEmpleados(vp, menu).index();
-			
+
+		vp.btnProductos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setSelectedButton(vp.btnProductos);
+				new ControllerProductos(vp).index();
+			}
 		});
-		
-		vp.setContenido(menu, "Bienvenido(a) al sistema de Fino Follaje!");
+
+		setSelectedButton(vp.btnGestionarPersonal);
+		new ControllerEmpleados(vp).index();
 		vp.init();
-		
+	}
+
+	private void setSelectedButton(JButton button) {
+		if (botonSeleccionado != null) {
+			botonSeleccionado.setBackground(null);
+			botonSeleccionado.setForeground(Color.white);
+		}
+
+		botonSeleccionado = button;
+		botonSeleccionado.setBackground(Color.WHITE);
+		botonSeleccionado.setForeground(Color.BLACK);
 	}
 }

@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import com.pf.mvc.models.dao.DAOLabor;
 import com.pf.mvc.models.dao.DAOLote;
 import com.pf.mvc.models.dao.DAOVariedad;
+import com.pf.mvc.models.vo.Empleado;
+import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.models.vo.Labor;
 import com.pf.mvc.models.vo.Lote;
 import com.pf.mvc.models.vo.Variedad;
@@ -14,23 +16,19 @@ import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
 import com.pf.mvc.views.menu.Menu;
 
-public class ControllerLabores extends Functions implements Controller  {
-	
+public class ControllerLabores extends Functions implements Controller {
+
 	private DAOLabor dao;
-	private Index v;
-	private boolean fincaUno;
 	private int idApp;
 	private ViewPrincipal vp;
-	private Menu menu;
-	
-	public ControllerLabores(boolean fincaUno, ViewPrincipal vp, Menu menu) {
+	private ArrayList<Integer> ids = new ArrayList<>();
+
+	public ControllerLabores(ViewPrincipal vp) {
 		this.dao = new DAOLabor();
-		this.fincaUno = fincaUno;
 		this.vp = vp;
-		this.menu = menu;
 		this.idApp = -1;
 	}
-	
+
 	public int getIdApp() {
 		return idApp;
 	}
@@ -41,141 +39,147 @@ public class ControllerLabores extends Functions implements Controller  {
 
 	@Override
 	public void index() {
-		
-		this.v = new Index();
-		
-		v.modelo.setDataVector(getData(), getColumns());
-		
-		v.btnRegistrar.addActionListener(e->{
-			
+
+		Index in = new Index();
+
+		in.modelo.setDataVector(getData(), getColumns());
+
+		in.btnGuardar.addActionListener(e -> {
+
 			create();
-			
+
 		});
-		
-		v.btnEditar.addActionListener(e->{
-			
-			int row = v.table.getSelectedRow();
-			if(row > -1) {
-				int id = (int) v.table.getValueAt(row, 0);
-				edit(id);
-				
-				v.btnRegistrar.setEnabled(false);
-				v.btnRegistrar.setVisible(false);
-				v.btnActualizar.setEnabled(true);
-				v.btnActualizar.setVisible(true);
-				v.btnCancelar.setEnabled(true);
-				v.btnCancelar.setVisible(true);
-				
-				v.lblTitulo.setText("Editar labor");
-			}else {
-				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
+
+		in.btnEditar.addActionListener(e -> {
+
+			int selectedRow = in.table.getSelectedRow();
+			if (selectedRow == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para editar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
 			}
-			
-			
+
+			int id = getSelectedId(in.table, ids);
+			edit(id);
+
 		});
-		
-		v.btnEliminar.addActionListener(e->{
-			int row = v.table.getSelectedRow();
-			if(row > -1) {
-			int id = (int) v.table.getValueAt(row, 0);
-			destroy(id);
-			}else {
-				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
+
+		in.btnEliminar.addActionListener(e -> {
+
+			int selectedRow = in.table.getSelectedRow();
+			if (selectedRow == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
 			}
-			
+
+			int id = getSelectedId(in.table, ids);
+			dao.destroy(id);
+			index();
+
 		});
-		
-		v.btnRegresar.addActionListener(e->{
-			
-			ControllerAplicaciones ca = new ControllerAplicaciones(vp, menu);
-			
-			ca.index(fincaUno);
-			
-			if(idApp < 1) {
-			ca.create();
-			}
-			
-			if(idApp > 0) {
-				ca.edit(idApp);	
-				}
-			
-		});
-		
-		vp.setContenido(v, "Labores");
-		
-		v.btnRegistrar.setEnabled(true);
-		v.btnRegistrar.setVisible(true);
-		v.btnActualizar.setEnabled(false);
-		v.btnActualizar.setVisible(false);
-		v.btnCancelar.setEnabled(false);
-		v.btnCancelar.setVisible(false);
-		
-		v.lblTitulo.setText("Registrar nueva labor");
+
+		vp.setContenido(in, "Labores");
+
+		in.btnGuardar.setEnabled(true);
+		in.btnGuardar.setVisible(true);
+		in.btnActualizar.setEnabled(false);
+		in.btnActualizar.setVisible(false);
+		in.btnCancelar.setEnabled(false);
+		in.btnCancelar.setVisible(false);
+
+		in.lblTitulo.setText("Registrar nueva labor");
 	}
 
 	@Override
 	public void create() {
-		
-		String nombre = v.tNombre.getText();
-		
-		 Labor item = new Labor(nombre);
-		
-		store(item);
-		
-		v.tNombre.setText("");
-		
+		Index in = new Index();
+
+		in.btnGuardar.addActionListener(e -> {
+			String nombre = in.tNombre.getText();
+
+			if (nombre.isEmpty()) {
+				JOptionPane.showMessageDialog(in, "El campo debe estar completo.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			Labor item = new Labor(nombre);
+
+			store(item);
+
+			in.tNombre.setText("");
+
+			index();
+		});
+
+		in.btnCancelar.addActionListener(e -> {
+
+			actualizarTabla();
+
+			index();
+
+		});
+
+		in.tNombre.setText("");
+
 	}
 
 	@Override
 	public void edit(int id) {
+		Index in = new Index();
+
 		Labor la = (Labor) dao.getItem(id);
-		
-		v.tNombre.setText(la.getNombre());
-		
-		v.btnActualizar.addActionListener(e->{
-			String nombre = v.tNombre.getText();
-			
+
+		in.tNombre.setText(la.getNombre());
+
+		in.btnActualizar.addActionListener(e -> {
+			String nombre = in.tNombre.getText();
+
 			Labor item = new Labor(nombre);
-			
+
 			update(item, id);
-			
+
 		});
-		
-		v.btnCancelar.addActionListener(e->{
-			
-			v.tNombre.setText("");
-			
+
+		in.btnCancelar.addActionListener(e -> {
+
+			in.tNombre.setText("");
+
 			index();
-			
+
 		});
-		
-		
+
 	}
 
 	@Override
 	public Object[][] getData() {
-		
+
 		ArrayList<Object> list = dao.getData();
-		Object [][] data = new Object [list.size()][getColumns().length];
-		
+
+		ids.clear();
+
+		Object[][] data = new Object[list.size()][getColumns().length];
+
 		int i = 0;
-		
+
 		for (Object o : list) {
-			 
+
 			Labor item = (Labor) o;
-			
-			data[i][0] = item.getId();
-			data[i][1] = item.getNombre();
-			
+
+			ids.add(item.getId());
+
+			data[i][0] = item.getNombre();
+
 			i++;
 		}
-		
+
 		return data;
 	}
 
 	@Override
 	public String[] getColumns() {
-		return new String [] {"ID", "Nombre"};
+		return new String[] { "Nombre" };
 	}
 
 	@Override
@@ -188,14 +192,20 @@ public class ControllerLabores extends Functions implements Controller  {
 	public void update(Object o, int id) {
 		dao.update(o, id);
 		index();
-		
+
 	}
 
 	@Override
 	public void destroy(int id) {
 		dao.destroy(id);
 		index();
-		
+
+	}
+
+	public void actualizarTabla() {
+		Index in = new Index();
+		in.modelo.setDataVector(getData(), getColumns());
+
 	}
 
 }

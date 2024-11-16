@@ -6,12 +6,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
+import javax.swing.JOptionPane;
 import com.pf.mvc.models.dao.DAOCategoria;
 import com.pf.mvc.models.dao.DAONaturaleza;
 import com.pf.mvc.models.dao.DAOProducto;
@@ -21,8 +18,6 @@ import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Producto;
 import com.pf.mvc.models.vo.Tipo;
 import com.pf.mvc.views.ViewPrincipal;
-import com.pf.mvc.views.general.FormGeneral;
-import com.pf.mvc.views.menu.Menu;
 import com.pf.mvc.views.producto.Edit;
 import com.pf.mvc.views.producto.Form;
 import com.pf.mvc.views.producto.Index;
@@ -32,21 +27,15 @@ public class ControllerProductos extends Functions implements Controller {
 	private DAOProducto dao;
 	private ViewPrincipal vp;
 	private ArrayList<Integer> ids = new ArrayList<>();
-	private Menu menu;
 	private boolean btnOn;
 	private boolean btnOff;
-	private Form f;
-	private Edit v;
-	private boolean fincaUno;
 	private int idApp;
 
-	public ControllerProductos(ViewPrincipal vp, Menu menu) {
+	public ControllerProductos(ViewPrincipal vp) {
 		dao = new DAOProducto();
 		this.vp = vp;
-		this.menu = menu;
 		this.btnOn = false;
 		this.btnOff = true;
-		this.fincaUno = false;
 		this.idApp = -1;
 	}
 
@@ -55,124 +44,91 @@ public class ControllerProductos extends Functions implements Controller {
 
 		idApp = -1;
 
-		Index v = new Index();
+		Index in = new Index();
 
-		v.modelo.setDataVector(getData(), getColumns());
+		in.modelo.setDataVector(getData(), getColumns());
 
-		v.btnAgregarProducto.addActionListener(e -> {
+		in.btnNuevo.addActionListener(e -> {
 
 			create();
 
 		});
 
-		v.btnEditar.addActionListener(e -> {
+		in.btnEditar.addActionListener(e -> {
 
-			int id = getSelectedId(v.tableProductos, ids);
+			int selectedRow = in.table.getSelectedRow();
+			if (selectedRow == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para editar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			int id = getSelectedId(in.table, ids);
 			edit(id);
 
 		});
 
-		v.btnEliminar.addActionListener(e -> {
+		in.btnEliminar.addActionListener(e -> {
 
-			Producto item = (Producto) dao.getItem(getSelectedId(v.tableProductos, ids));
+			int selectedRow = in.table.getSelectedRow();
+			if (selectedRow == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 
-			dao.destroy(item.getId());
-
+			int id = getSelectedId(in.table, ids);
+			dao.destroy(id);
 			index();
 
 		});
 
-		v.btnRegresar.addActionListener(e -> {
-
-			vp.setContenido(menu, "Bienvenido(a) al sistema de Fino Follaje!");
-
-		});
-
-		v.tBuscar.addFocusListener(new FocusAdapter() {
+		in.tBuscar.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				v.tBuscar.setText("");
+				in.tBuscar.setText("");
 			}
 		});
 
-		v.tBuscar.addKeyListener(new KeyAdapter() {
+		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				buscar(v.tBuscar, v.filtro);
+				buscar(in.tBuscar, in.filtro);
 			}
 		});
 
-		vp.setContenido(v, "Lista de productos");
-
-	}
-
-	public void index(boolean fincaUno, int idApp) {
-
-		this.fincaUno = fincaUno;
-		this.idApp = idApp;
-
-		Index v = new Index();
-
-		v.modelo.setDataVector(getData(), getColumns());
-
-		v.btnAgregarProducto.addActionListener(e -> {
-
-			create();
-
-		});
-
-		v.btnEditar.addActionListener(e -> {
-
-			int id = getSelectedId(v.tableProductos, ids);
-			edit(id);
-
-		});
-
-		v.btnEliminar.addActionListener(e -> {
-
-			Producto item = (Producto) dao.getItem(getSelectedId(v.tableProductos, ids));
-
-			dao.destroy(item.getId());
-
-			if (idApp == -1) {
-				index();
-			}
-			if (idApp > -1) {
-				index(fincaUno, idApp);
-			}
-
-		});
-
-		v.btnRegresar.addActionListener(e -> {
-
-			ControllerAplicaciones ca = new ControllerAplicaciones(vp, menu);
-
-			ca.index(fincaUno);
-
-			if (idApp < 1) {
-				ca.create();
-			}
-
-			if (idApp > 0) {
-				ca.edit(idApp);
-			}
-
-		});
-
-		vp.setContenido(v, "Lista de productos");
+		vp.setContenido(in, "Lista de productos");
 
 	}
 
 	@Override
 	public void create() {
 
-		f = new Form();
+		Form f = new Form();
 
-		cargarCbxNaturaleza();
+//		ArrayList<Object> naturalezas = new DAONaturaleza().getData();
+//		for (Object o : naturalezas) {
+//			Naturaleza n = (Naturaleza) o;
+//			f.cbxProductos.addItem(n);
+//		}
+//
+//		ArrayList<Object> tipos = new DAOTipo().getData();
+//		for (Object o : tipos) {
+//			Tipo t = (Tipo) o;
+//
+//			f.cbxTipos.addItem(t);
+//		}
+//
+//		ArrayList<Object> categorias = new DAOCategoria().getData();
+//		for (Object o : categorias) {
+//			Categoria c = (Categoria) o;
+//
+//			f.cbxCategorias.addItem(c);
+//		}
 
-		cargarCbxTipo();
-
-		cargarCbxCategoria();
+		cargarCbxNaturaleza(f);
+		cargarCbxTipo(f);
+		cargarCbxCategoria(f);
 
 		f.btnAgregar.addActionListener(e -> {
 
@@ -193,23 +149,15 @@ public class ControllerProductos extends Functions implements Controller {
 
 			dao.store(item);
 
-			if (idApp == -1) {
-				index();
-			}
-			if (idApp > -1) {
-				index(fincaUno, idApp);
-			}
+			index();
 
 		});
 
-		f.btnRegresar.addActionListener(e -> {
+		f.btnCancelar.addActionListener(e -> {
 
-			if (idApp == -1) {
-				index();
-			}
-			if (idApp > -1) {
-				index(fincaUno, idApp);
-			}
+			actualizarTabla();
+
+			index();
 
 		});
 
@@ -312,60 +260,60 @@ public class ControllerProductos extends Functions implements Controller {
 
 		Producto item = (Producto) dao.getItem(id);
 
-		v = new Edit();
+		Edit ed = new Edit();
 
 		ArrayList<Object> naturalezas = new DAONaturaleza().getData();
-		v.cbxProductos.removeAllItems();
+		ed.cbxProductos.removeAllItems();
 
 		for (Object o : naturalezas) {
 			Naturaleza n = (Naturaleza) o;
-			v.cbxProductos.addItem(n);
+			ed.cbxProductos.addItem(n);
 
 			if (n.getId() == item.getIdNaturaleza()) {
-				v.cbxProductos.setSelectedItem(n);
+				ed.cbxProductos.setSelectedItem(n);
 			}
 		}
 
-		v.tNombre.setText(item.getNombre());
-		v.tCodigo.setText(item.getCodigo());
-		v.tUnidad.setText(item.getUnidades());
+		ed.tNombre.setText(item.getNombre());
+		ed.tCodigo.setText(item.getCodigo());
+		ed.tUnidad.setText(item.getUnidades());
 
 		ArrayList<Object> tipos = new DAOTipo().getData();
-		v.cbxTipos.removeAllItems();
+		ed.cbxTipos.removeAllItems();
 
 		for (Object o : tipos) {
 			Tipo t = (Tipo) o;
-			v.cbxTipos.addItem(t);
+			ed.cbxTipos.addItem(t);
 
 			if (t.getId() == item.getIdTipo()) {
-				v.cbxTipos.setSelectedItem(t);
+				ed.cbxTipos.setSelectedItem(t);
 			}
 		}
 
 		ArrayList<Object> categorias = new DAOCategoria().getData();
-		v.cbxCategorias.removeAllItems();
+		ed.cbxCategorias.removeAllItems();
 
 		for (Object o : categorias) {
 			Categoria c = (Categoria) o;
-			v.cbxCategorias.addItem(c);
+			ed.cbxCategorias.addItem(c);
 
 			if (c.getId() == item.getIdCategoria()) {
-				v.cbxCategorias.setSelectedItem(c);
+				ed.cbxCategorias.setSelectedItem(c);
 			}
 		}
 
-		v.btnActualizar.addActionListener(e -> {
-			String nombre = v.tNombre.getText();
-			String unidades = v.tUnidad.getText();
-			String codigo = v.tCodigo.getText();
+		ed.btnActualizar.addActionListener(e -> {
+			String nombre = ed.tNombre.getText();
+			String unidades = ed.tUnidad.getText();
+			String codigo = ed.tCodigo.getText();
 
-			Tipo t = (Tipo) v.cbxTipos.getSelectedItem();
+			Tipo t = (Tipo) ed.cbxTipos.getSelectedItem();
 			int idTipo = t.getId();
 
-			Categoria g = (Categoria) v.cbxCategorias.getSelectedItem();
+			Categoria g = (Categoria) ed.cbxCategorias.getSelectedItem();
 			int idCategoria = g.getId();
 
-			Naturaleza n = (Naturaleza) v.cbxProductos.getSelectedItem();
+			Naturaleza n = (Naturaleza) ed.cbxProductos.getSelectedItem();
 			int idNaturaleza = n.getId();
 
 			Producto nuevoItem = new Producto(nombre, unidades, codigo, idTipo, idCategoria, idNaturaleza);
@@ -375,33 +323,25 @@ public class ControllerProductos extends Functions implements Controller {
 				edit(item.getId());
 			}
 
-			if (idApp == -1) {
-				index();
-			}
-			if (idApp > -1) {
-				index(fincaUno, idApp);
-			}
+			index();
 		});
 
-		v.btnRegresar.addActionListener(e -> {
+		ed.btnRegresar.addActionListener(e -> {
 
-			if (idApp == -1) {
-				index();
-			}
-			if (idApp > -1) {
-				index(fincaUno, idApp);
-			}
+			actualizarTabla();
+
+			index();
 
 		});
 
-		v.btnProductos.addActionListener(e -> {
+		ed.btnProductos.addActionListener(e -> {
 
 			if (!btnOn && btnOff) {
-				setImgBtn(v.btnProductos, "/resources/ButtonOn.png");
-				v.btnTipos.setEnabled(false);
-				v.btnCategorias.setEnabled(false);
+				setImgBtn(ed.btnProductos, "/resources/ButtonOn.png");
+				ed.btnTipos.setEnabled(false);
+				ed.btnCategorias.setEnabled(false);
 
-				ControllerNaturaleza cn = new ControllerNaturaleza(v, this);
+				ControllerNaturaleza cn = new ControllerNaturaleza(ed, this);
 				cn.switchPanel = false;
 				cn.index();
 
@@ -409,11 +349,11 @@ public class ControllerProductos extends Functions implements Controller {
 			}
 
 			if (!btnOff && btnOn) {
-				setImgBtn(v.btnProductos, "/resources/ButtonOff.png");
-				v.btnTipos.setEnabled(true);
-				v.btnCategorias.setEnabled(true);
+				setImgBtn(ed.btnProductos, "/resources/ButtonOff.png");
+				ed.btnTipos.setEnabled(true);
+				ed.btnCategorias.setEnabled(true);
 
-				v.setContenido(null);
+				ed.setContenido(null);
 				btnOn = false;
 				btnOff = true;
 			}
@@ -424,14 +364,14 @@ public class ControllerProductos extends Functions implements Controller {
 
 		});
 
-		v.btnTipos.addActionListener(e -> {
+		ed.btnTipos.addActionListener(e -> {
 
 			if (!btnOn && btnOff) {
-				setImgBtn(v.btnTipos, "/resources/ButtonOn.png");
-				v.btnProductos.setEnabled(false);
-				v.btnCategorias.setEnabled(false);
+				setImgBtn(ed.btnTipos, "/resources/ButtonOn.png");
+				ed.btnProductos.setEnabled(false);
+				ed.btnCategorias.setEnabled(false);
 
-				ControllerTipo ct = new ControllerTipo(v, this);
+				ControllerTipo ct = new ControllerTipo(ed, this);
 				ct.switchPanel = false;
 				ct.index();
 
@@ -439,11 +379,11 @@ public class ControllerProductos extends Functions implements Controller {
 			}
 
 			if (!btnOff && btnOn) {
-				setImgBtn(v.btnTipos, "/resources/ButtonOff.png");
-				v.btnProductos.setEnabled(true);
-				v.btnCategorias.setEnabled(true);
+				setImgBtn(ed.btnTipos, "/resources/ButtonOff.png");
+				ed.btnProductos.setEnabled(true);
+				ed.btnCategorias.setEnabled(true);
 
-				v.setContenido(null);
+				ed.setContenido(null);
 				btnOn = false;
 				btnOff = true;
 			}
@@ -454,14 +394,14 @@ public class ControllerProductos extends Functions implements Controller {
 
 		});
 
-		v.btnCategorias.addActionListener(e -> {
+		ed.btnCategorias.addActionListener(e -> {
 
 			if (!btnOn && btnOff) {
-				setImgBtn(v.btnCategorias, "/resources/ButtonOn.png");
-				v.btnTipos.setEnabled(false);
-				v.btnProductos.setEnabled(false);
+				setImgBtn(ed.btnCategorias, "/resources/ButtonOn.png");
+				ed.btnTipos.setEnabled(false);
+				ed.btnProductos.setEnabled(false);
 
-				ControllerCategoria ca = new ControllerCategoria(v, this);
+				ControllerCategoria ca = new ControllerCategoria(ed, this);
 				ca.switchPanel = false;
 				ca.index();
 
@@ -469,11 +409,11 @@ public class ControllerProductos extends Functions implements Controller {
 			}
 
 			if (!btnOff && btnOn) {
-				setImgBtn(v.btnCategorias, "/resources/ButtonOff.png");
-				v.btnTipos.setEnabled(true);
-				v.btnProductos.setEnabled(true);
+				setImgBtn(ed.btnCategorias, "/resources/ButtonOff.png");
+				ed.btnTipos.setEnabled(true);
+				ed.btnProductos.setEnabled(true);
 
-				v.setContenido(null);
+				ed.setContenido(null);
 				btnOn = false;
 				btnOff = true;
 			}
@@ -484,7 +424,7 @@ public class ControllerProductos extends Functions implements Controller {
 
 		});
 
-		vp.setContenido(v, "Editar producto");
+		vp.setContenido(ed, "Editar producto");
 	}
 
 	@Override
@@ -556,57 +496,63 @@ public class ControllerProductos extends Functions implements Controller {
 
 	}
 
-	public void cargarCbxNaturaleza() {
-
+	public void cargarCbxNaturaleza(Form f) {
+		//Form f = new Form();
+		Edit e = new Edit();
 		ArrayList<Object> naturalezas = new DAONaturaleza().getData();
+
 		if (f != null) {
 			f.cbxProductos.removeAllItems();
 		}
-		if (v != null) {
-			v.cbxProductos.removeAllItems();
+		if (e != null) {
+			e.cbxProductos.removeAllItems();
 		}
 
 		for (Object o : naturalezas) {
-			Naturaleza n = (Naturaleza) o;
+			Naturaleza c = (Naturaleza) o;
 			if (f != null) {
-				f.cbxProductos.addItem(n);
+				f.cbxProductos.addItem(c);
 			}
-			if (v != null) {
-				v.cbxProductos.addItem(n);
+			if (e != null) {
+				e.cbxProductos.addItem(c);
 			}
-		}
 
+		}
 	}
 
-	public void cargarCbxTipo() {
+	public void cargarCbxTipo(Form f) {
+		Edit e = new Edit();
 		ArrayList<Object> tipos = new DAOTipo().getData();
 
 		if (f != null) {
 			f.cbxTipos.removeAllItems();
 		}
-		if (v != null) {
-			v.cbxTipos.removeAllItems();
+		if (e != null) {
+			e.cbxTipos.removeAllItems();
 		}
 
 		for (Object o : tipos) {
-			Tipo t = (Tipo) o;
+			Tipo c = (Tipo) o;
 			if (f != null) {
-				f.cbxTipos.addItem(t);
+				f.cbxTipos.addItem(c);
 			}
-			if (v != null) {
-				v.cbxTipos.addItem(t);
+			if (e != null) {
+				e.cbxTipos.addItem(c);
 			}
+
 		}
 	}
 
-	public void cargarCbxCategoria() {
+	public void cargarCbxCategoria(Form f) {
+		//Form f = new Form();
+		Edit e = new Edit();
 		ArrayList<Object> categorias = new DAOCategoria().getData();
 
 		if (f != null) {
 			f.cbxCategorias.removeAllItems();
 		}
-		if (v != null) {
-			v.cbxCategorias.removeAllItems();
+		if (e != null) {
+			e.cbxCategorias.removeAllItems();
 		}
 
 		for (Object o : categorias) {
@@ -614,11 +560,17 @@ public class ControllerProductos extends Functions implements Controller {
 			if (f != null) {
 				f.cbxCategorias.addItem(c);
 			}
-			if (v != null) {
-				v.cbxCategorias.addItem(c);
+			if (e != null) {
+				e.cbxCategorias.addItem(c);
 			}
 
 		}
+	}
+
+	public void actualizarTabla() {
+		Index in = new Index();
+		in.modelo.setDataVector(getData(), getColumns());
+
 	}
 
 }

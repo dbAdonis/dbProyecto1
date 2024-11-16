@@ -18,13 +18,12 @@ import java.awt.FlowLayout;
 
 public class Index extends JPanel {
     public JTextField tBuscar;
-    public JTable tableProductos;
+    public JTable table;
     public DefaultTableModel modelo;
     public TableRowSorter<DefaultTableModel> filtro;
-    public JButton btnAgregarProducto;
+    public JButton btnNuevo;
     public JButton btnEliminar;
     public JButton btnEditar;
-    public JButton btnRegresar;
 
     /**
      * Create the panel.
@@ -58,29 +57,29 @@ public class Index extends JPanel {
         
         modelo = new DefaultTableModel();
         filtro = new TableRowSorter<DefaultTableModel>(modelo);
-        tableProductos = new JTable();
-        tableProductos.setModel(modelo);
-        tableProductos.setRowHeight(30);
-        tableProductos.setRowSorter(filtro);
-        tableProductos.setFont(new Font("Calibri", Font.PLAIN, 16));  
-        tableProductos.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 16));
-        scrollPane.setViewportView(tableProductos);
+        table = new JTable();
+        table.setModel(modelo);
+        table.setRowHeight(30);
+        table.setRowSorter(filtro);
+        table.setFont(new Font("Calibri", Font.PLAIN, 16));  
+        table.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 16));
+        scrollPane.setViewportView(table);
         
         JPanel panel_2 = new JPanel();
         FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
         flowLayout.setHgap(10);
         add(panel_2, BorderLayout.SOUTH);
         
-        btnAgregarProducto = new JButton("Agregar producto");
-        btnAgregarProducto.setFocusPainted(false);
-        btnAgregarProducto.setBorder(null);
-        btnAgregarProducto.setPreferredSize(new Dimension(200, 40));
-        btnAgregarProducto.setBackground(new Color(39, 174, 96));
-        btnAgregarProducto.setForeground(Color.WHITE);;
+        btnNuevo = new JButton("Nuevo Producto");
+        btnNuevo.setFocusPainted(false);
+        btnNuevo.setBorder(null);
+        btnNuevo.setPreferredSize(new Dimension(150, 40));
+        btnNuevo.setBackground(new Color(39, 174, 96));
+        btnNuevo.setForeground(Color.WHITE);;
         //btnAgregarProducto.setBackground(SystemColor.inactiveCaptionBorder);
         //btnAgregarProducto.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnAgregarProducto.setFont(new Font("Calibri", Font.BOLD, 16)); 
-        panel_2.add(btnAgregarProducto);
+        btnNuevo.setFont(new Font("Calibri", Font.BOLD, 16)); 
+        panel_2.add(btnNuevo);
         
         btnEditar = new JButton("Editar");
         btnEditar.setBorder(null);
@@ -103,17 +102,5 @@ public class Index extends JPanel {
         //btnEliminar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
         btnEliminar.setFont(new Font("Calibri", Font.BOLD, 16));
         panel_2.add(btnEliminar);
-        
-        btnRegresar = new JButton("Regresar");
-        btnRegresar.setBorder(null);
-        btnRegresar.setFocusPainted(false);
-        btnRegresar.setPreferredSize(new Dimension(100, 40));
-		btnRegresar.setBackground(new Color(52, 108, 175));
-		btnRegresar.setForeground(Color.WHITE);
-		btnRegresar.setBounds(30, 340, 107, 42);
-        btnRegresar.setFont(new Font("Calibri", Font.BOLD, 16)); 
-        //btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        //btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
-        panel_2.add(btnRegresar);
     }
 }

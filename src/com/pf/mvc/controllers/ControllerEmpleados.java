@@ -6,11 +6,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.pf.mvc.models.dao.DAOEmpleado;
 import com.pf.mvc.models.dao.DAOFinca;
 import com.pf.mvc.models.vo.Empleado;
 import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.views.ViewPrincipal;
+import com.pf.mvc.views.empleado.Create;
 import com.pf.mvc.views.empleado.Index;
 import com.pf.mvc.views.menu.Menu;
 import com.pf.mvc.views.menu.Options;
@@ -20,229 +23,111 @@ public class ControllerEmpleados extends Functions implements Controller {
 	private DAOEmpleado dao;
 	private ViewPrincipal vp;
 	private ArrayList<Integer> ids = new ArrayList<>();
-	private Menu menu;
-	private boolean fincaUno;
-	private Index v;
-	private Options op;
 
-	public ControllerEmpleados(ViewPrincipal vp, Menu menu) {
-		dao = new DAOEmpleado();
+	public ControllerEmpleados(ViewPrincipal vp) {
+		this.dao = new DAOEmpleado();
 		this.vp = vp;
-		this.menu = menu;
-		fincaUno = true;
 	}
 
 	@Override
 	public void index() {
 
-		op = new Options();
+		Index in = new Index();
 
-		v = new Index();
+		in.modelo.setDataVector(getData(), getColumns());
 
-		buttons();
-
-		op.btnMenu.addActionListener(e -> {
-
-			vp.setContenido(menu, "Bienvenido(a) al sistema de Fino Follaje!");
-
-		});
-
-		op.btnFincaUno.addActionListener(e -> {
-
-			fincaUno = true;
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Empleados de finca 1");
-
-		});
-
-		op.btnFincaDos.addActionListener(e -> {
-
-			fincaUno = false;
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Empleados de finca 2");
-
-		});
-
-		v.btnRegresar.addActionListener(e -> {
-
-			vp.setContenido(op, "Gestionar empleados");
-
-		});
-
-		v.btnAgregar.addActionListener(e -> {
-
-			v.lblTitulo.setText("Registar nuevo empleado");
+		in.btnNuevo.addActionListener(e -> {
 
 			create();
 
-			v.tNombre.setText("");
-
 		});
 
-		v.btnEditar.addActionListener(e -> {
+		in.btnEditar.addActionListener(e -> {
 
-			int row = v.tableEmpleados.getSelectedRow();
-			if (row > -1) {
-				v.lblTitulo.setText("Editar empleado");
-				v.btnActualizar.setVisible(true);
-				v.btnActualizar.setEnabled(true);
-				v.btnCancelar.setVisible(true);
-				v.btnCancelar.setEnabled(true);
-				v.btnAgregar.setVisible(false);
-				v.btnAgregar.setEnabled(false);
-
-				int id = (int) v.tableEmpleados.getValueAt(row, 0);
-				edit(id);
+			int selectedRow = in.table.getSelectedRow();
+			if (selectedRow == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para editar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
 			}
 
-		});
-
-		v.btnEliminar.addActionListener(e -> {
-
-			int row = v.tableEmpleados.getSelectedRow();
-			int id = (int) v.tableEmpleados.getValueAt(row, 0);
-
-			destroy(id);
+			int id = getSelectedId(in.table, ids);
+			edit(id);
 
 		});
 
-		v.tBuscar.addFocusListener(new FocusAdapter() {
+		in.btnEliminar.addActionListener(e -> {
+
+			int selectedRow = in.table.getSelectedRow();
+			if (selectedRow == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			int id = getSelectedId(in.table, ids);
+			dao.destroy(id);
+			index();
+
+		});
+
+		in.tBuscar.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				v.tBuscar.setText("");
+				in.tBuscar.setText("");
 			}
 		});
 
-		v.tBuscar.addKeyListener(new KeyAdapter() {
+		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				buscar(v.tBuscar, v.filtro);
+				buscar(in.tBuscar, in.filtro);
 			}
 		});
 
-		vp.setContenido(op, "Gestionar personal");
-
-	}
-
-	public void index(boolean switchFinca) {
-
-		op = new Options();
-
-		v = new Index();
-
-		buttons();
-
-		fincaUno = switchFinca;
-
-		op.btnMenu.addActionListener(e -> {
-
-			vp.setContenido(menu, "Bienvenido(a) al sistema de Fino Follaje!");
-
-		});
-
-		op.btnFincaUno.addActionListener(e -> {
-
-			fincaUno = true;
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Empleados de finca 1");
-
-		});
-
-		op.btnFincaDos.addActionListener(e -> {
-
-			fincaUno = false;
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Empleados de finca 2");
-
-		});
-
-		v.btnRegresar.addActionListener(e -> {
-			ControllerAplicaciones ca = new ControllerAplicaciones(vp, menu);
-			ca.index(fincaUno);
-			ca.create();
-
-		});
-
-		v.btnAgregar.addActionListener(e -> {
-
-			v.lblTitulo.setText("Registar nuevo empleado");
-
-			create();
-
-			v.tNombre.setText("");
-
-		});
-
-		v.btnEditar.addActionListener(e -> {
-
-			int row = v.tableEmpleados.getSelectedRow();
-			if (row > -1) {
-				v.lblTitulo.setText("Editar empleado");
-				v.btnActualizar.setVisible(true);
-				v.btnActualizar.setEnabled(true);
-				v.btnCancelar.setVisible(true);
-				v.btnCancelar.setEnabled(true);
-				v.btnAgregar.setVisible(false);
-				v.btnAgregar.setEnabled(false);
-
-				int id = (int) v.tableEmpleados.getValueAt(row, 0);
-				edit(id);
-			}
-
-		});
-
-		v.btnEliminar.addActionListener(e -> {
-
-			int row = v.tableEmpleados.getSelectedRow();
-			int id = (int) v.tableEmpleados.getValueAt(row, 0);
-
-			destroy(id);
-
-		});
-
-		if (switchFinca) {
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Empleados de finca 1");
-		} else {
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Empleados de finca 2");
-		}
+		vp.setContenido(in, "Gestionar personal");
 
 	}
 
 	@Override
 	public void create() {
 
-		if (fincaUno) {
+		Create c = new Create();
 
-			int idFinca = 1;
-			String nombre = v.tNombre.getText();
-
-			Empleado item = new Empleado(idFinca, nombre);
-
-			store(item);
-
-		} else {
-
-			int idFinca = 2;
-			String nombre = v.tNombre.getText();
-
-			Empleado item = new Empleado(idFinca, nombre);
-
-			store(item);
+		ArrayList<Object> fincas = new DAOFinca().getData();
+		for (Object o : fincas) {
+			Finca r = (Finca) o;
+			c.cbxFincas.addItem(r);
 		}
+
+		c.btnGuardar.addActionListener(e -> {
+			String nombre = c.tNombre.getText();
+
+			Finca r = (Finca) c.cbxFincas.getSelectedItem();
+
+			if (nombre.isEmpty() || r == null) {
+				JOptionPane.showMessageDialog(c, "Todos los campos deben estar completos.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			Empleado item = new Empleado(r.getId(), nombre);
+
+			store(item);
+
+			index();
+		});
+		
+		c.btnCancelar.addActionListener(e -> {
+
+			actualizarTabla();
+
+			index();
+
+		});
+
+
+		vp.setContenido(c, "Registrar Empleado");
 
 	}
 
@@ -251,43 +136,55 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 		Empleado em = (Empleado) dao.getItem(id);
 
-		v.tNombre.setText(em.getNombre());
+		Create c = new Create();
 
-		v.btnCancelar.addActionListener(e -> {
+		c.tNombre.setText(em.getNombre());
+
+		ArrayList<Object> fincas = new DAOFinca().getData();
+		c.cbxFincas.removeAllItems();
+
+		Finca fincaEmpleado = null;
+		for (Object o : fincas) {
+			Finca r = (Finca) o;
+
+			c.cbxFincas.addItem(r);
+			if (r.getId() == em.getIdFinca()) {
+				fincaEmpleado = r;
+			}
+		}
+
+		if (fincaEmpleado != null) {
+			c.cbxFincas.setSelectedItem(fincaEmpleado);
+		}
+
+		c.btnGuardar.addActionListener(e -> {
+
+			String nombre = c.tNombre.getText();
+
+			em.setNombre(nombre);
+
+			Finca r = (Finca) c.cbxFincas.getSelectedItem();
+
+			Empleado item = new Empleado(r.getId(), nombre);
+
+			if (em.getId() > 0) {
+				dao.update(item, em.getId());
+				//edit(em.getId());
+			}
+
+			index();
+
+		});
+
+		c.btnCancelar.addActionListener(e -> {
 
 			actualizarTabla();
 
-			v.lblTitulo.setText("Registrar nuevo empleado");
-			v.btnActualizar.setVisible(false);
-			v.btnActualizar.setEnabled(false);
-			v.btnCancelar.setVisible(false);
-			v.btnCancelar.setEnabled(false);
-			v.btnAgregar.setVisible(true);
-			v.btnAgregar.setEnabled(true);
-
-			v.tNombre.setText("");
+			index();
 
 		});
-
-		v.btnActualizar.addActionListener(e -> {
-
-			String nombre = v.tNombre.getText();
-
-			Empleado item = new Empleado(em.getIdFinca(), nombre);
-
-			update(item, id);
-
-			v.lblTitulo.setText("Registrar nuevo empleado");
-			v.btnActualizar.setVisible(false);
-			v.btnActualizar.setEnabled(false);
-			v.btnCancelar.setVisible(false);
-			v.btnCancelar.setEnabled(false);
-			v.btnAgregar.setVisible(true);
-			v.btnAgregar.setEnabled(true);
-
-			v.tNombre.setText("");
-
-		});
+		
+		vp.setContenido(c, "Editar Empleado");
 
 	}
 
@@ -295,55 +192,25 @@ public class ControllerEmpleados extends Functions implements Controller {
 	public Object[][] getData() {
 
 		ArrayList<Object> list = dao.getData();
-		ArrayList<Empleado> empleadosF1 = new ArrayList<>();
-		ArrayList<Empleado> empleadosF2 = new ArrayList<>();
-		Object[][] data;
 
 		ids.clear();
+
+		Object[][] data = new Object[list.size()][getColumns().length];
 
 		int i = 0;
 
 		for (Object o : list) {
 
 			Empleado item = (Empleado) o;
-			if (item.getIdFinca() == 1) {
 
-				empleadosF1.add(item);
+			ids.add(item.getId());
 
-			}
+			data[i][0] = item.getNombre();
 
-			if (item.getIdFinca() == 2) {
+			Finca finca = (Finca) new DAOFinca().getItem(item.getIdFinca());
+			data[i][1] = finca != null ? finca.getNombre() : "Sin Finca";
+			i++;
 
-				empleadosF2.add(item);
-
-			}
-
-		}
-
-		if (fincaUno) {
-			data = new Object[empleadosF1.size()][getColumns().length];
-			for (Empleado item : empleadosF1) {
-				data[i][0] = item.getId();
-
-				Finca finca = (Finca) new DAOFinca().getItem(item.getIdFinca());
-
-				data[i][1] = finca.getNombre();
-
-				data[i][2] = item.getNombre();
-				i++;
-			}
-		} else {
-			data = new Object[empleadosF2.size()][getColumns().length];
-			for (Empleado item : empleadosF2) {
-				data[i][0] = item.getId();
-
-				Finca finca = (Finca) new DAOFinca().getItem(item.getIdFinca());
-
-				data[i][1] = finca.getNombre();
-
-				data[i][2] = item.getNombre();
-				i++;
-			}
 		}
 
 		return data;
@@ -352,11 +219,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "ID", "Finca", "Empleado" };
-	}
-
-	public void buttons() {
-		op.setImagesButtons("/resources/Plantas.png", "/resources/Personal.png", "/resources/Personal.png");
+		return new String[] { "Empleado", "Finca" };
 	}
 
 	@Override
@@ -385,17 +248,8 @@ public class ControllerEmpleados extends Functions implements Controller {
 	}
 
 	public void actualizarTabla() {
-
-		if (fincaUno) {
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Empleados de finca 1");
-		} else {
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Empleados de finca 2");
-		}
+		Index in = new Index();
+		in.modelo.setDataVector(getData(), getColumns());
 
 	}
 

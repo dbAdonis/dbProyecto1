@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.pf.mvc.models.dao.DAOCategoria;
 import com.pf.mvc.models.dao.DAONaturaleza;
+import com.pf.mvc.models.dao.DAOTipo;
+import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
+import com.pf.mvc.models.vo.Tipo;
 import com.pf.mvc.views.producto.Edit;
 import com.pf.mvc.views.general.FormGeneral;
 import com.pf.mvc.views.producto.Form;
@@ -44,6 +48,7 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 		fg.btnRegistrar.addActionListener(e->{
 			
 			create();
+			cargarCbx();
 			
 		});
 		
@@ -74,7 +79,8 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 			if(row > -1) {
 			int id = (int) fg.table.getValueAt(row, 0);
 			destroy(id);
-			cp.cargarCbxNaturaleza();
+			//cp.cargarCbxNaturaleza();
+			cargarCbx();
 			}else {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
 			}
@@ -107,7 +113,8 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 		
 		fg.tNombre.setText("");
 		
-		cp.cargarCbxNaturaleza();
+		//cp.cargarCbxNaturaleza(fg);
+		cargarCbx();
 		
 	}
 
@@ -124,7 +131,8 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 			
 			update(item, id);
 			
-			cp.cargarCbxNaturaleza();
+			//cp.cargarCbxNaturaleza(fg);
+			cargarCbx();
 			
 			
 		});
@@ -185,5 +193,34 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 		index();
 		
 	}
+	
+	public void cargarCbx() {
+		Form f = (Form) this.form; 
+
+	    f.cbxProductos.removeAllItems();
+	    f.cbxTipos.removeAllItems();
+	    f.cbxCategorias.removeAllItems();
+
+		ArrayList<Object> naturalezas = new DAONaturaleza().getData();
+		for (Object o : naturalezas) {
+			Naturaleza n = (Naturaleza) o;
+			f.cbxProductos.addItem(n);
+		}
+
+		ArrayList<Object> tipos = new DAOTipo().getData();
+		for (Object o : tipos) {
+			Tipo t = (Tipo) o;
+
+			f.cbxTipos.addItem(t);
+		}
+
+		ArrayList<Object> categorias = new DAOCategoria().getData();
+		for (Object o : categorias) {
+			Categoria c = (Categoria) o;
+
+			f.cbxCategorias.addItem(c);
+		}
+	}
+	
 
 }

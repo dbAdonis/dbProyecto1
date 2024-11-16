@@ -20,18 +20,13 @@ import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
 
 public class Index extends JPanel {
-    public JTable tableEmpleados;
+    public JTable table;
     public JTextField tBuscar;
-    public JTextField tNombre;
     public DefaultTableModel modelo;
 	public TableRowSorter<DefaultTableModel> filtro;
-    public JButton btnRegresar;
     public JButton btnEliminar;
     public JButton btnEditar;
-    public JButton btnAgregar;
-    public JLabel lblTitulo;
-    public JButton btnActualizar;
-    public JButton btnCancelar;
+    public JButton btnNuevo;
 
     /**
      * Create the panel.
@@ -69,6 +64,15 @@ public class Index extends JPanel {
         JPanel panel_4 = new JPanel();
         panel_3.add(panel_4, BorderLayout.SOUTH);
         
+        btnNuevo = new JButton("Nuevo");
+        btnNuevo.setPreferredSize(new Dimension(90, 40));
+        btnNuevo.setForeground(Color.WHITE);
+        btnNuevo.setFont(new Font("Calibri", Font.BOLD, 16));
+        btnNuevo.setFocusPainted(false);
+        btnNuevo.setBorder(null);
+        btnNuevo.setBackground(new Color(39, 174, 96));
+        panel_4.add(btnNuevo);
+        
         btnEditar = new JButton("Editar");
         btnEditar.setBorder(null);
         btnEditar.setFocusPainted(false);
@@ -93,96 +97,19 @@ public class Index extends JPanel {
         btnEliminar.setFont(new Font("Calibri", Font.BOLD, 16));
         panel_4.add(btnEliminar);
         
-        btnRegresar = new JButton("Regresar");
-        btnRegresar.setBorder(null);
-        btnRegresar.setFocusPainted(false);
-        btnRegresar.setPreferredSize(new Dimension(100, 40));
-		btnRegresar.setBackground(new Color(52, 108, 175));
-		btnRegresar.setForeground(Color.WHITE);
-		btnRegresar.setBounds(30, 340, 107, 42);
-        //btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
-        //btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnRegresar.setFont(new Font("Calibri", Font.BOLD, 16));
-        panel_4.add(btnRegresar);
-        
         JScrollPane scrollPane = new JScrollPane();
         panel_3.add(scrollPane, BorderLayout.CENTER);
         
         modelo = new DefaultTableModel();
         filtro = new TableRowSorter<DefaultTableModel>(modelo);
-        tableEmpleados = new JTable();
-        tableEmpleados.setFont(new Font("Calibri", Font.PLAIN, 16));
-        tableEmpleados.setRowHeight(30);
-        tableEmpleados.setRowSorter(filtro);
-        tableEmpleados.setModel(modelo);
+        table = new JTable();
+        table.setFont(new Font("Calibri", Font.PLAIN, 16));
+        table.setRowHeight(30);
+        table.setRowSorter(filtro);
+        table.setModel(modelo);
         
-        JTableHeader header = tableEmpleados.getTableHeader();
+        JTableHeader header = table.getTableHeader();
         header.setFont(new Font("Calibri", Font.BOLD, 16)); 
-        scrollPane.setViewportView(tableEmpleados);
-        
-        JPanel panel = new JPanel();
-        panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-        panel.setPreferredSize(new Dimension(10, 200));
-        add(panel, BorderLayout.NORTH);
-        panel.setLayout(null);
-        
-        lblTitulo = new JLabel("Registrar nuevo empleado");
-        lblTitulo.setFont(new Font("Calibri", Font.BOLD, 16));
-        lblTitulo.setBounds(10, 11, 880, 30);
-        panel.add(lblTitulo);
-        
-        JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre.setBounds(10, 56, 70, 25);
-        panel.add(lblNombre);
-        
-        tNombre = new JTextField();
-        tNombre.setFont(new Font("Calibri", Font.PLAIN, 16));
-        tNombre.setColumns(10);
-        tNombre.setBounds(85, 54, 380, 30);
-        panel.add(tNombre);
-        
-        btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(280, 106, 110, 30);
-        panel.add(btnCancelar);
-        btnCancelar.setBorder(null);
-        btnCancelar.setFocusPainted(false);
-        btnCancelar.setPreferredSize(new Dimension(100, 40));
-        btnCancelar.setBackground(new Color(52, 108, 175));
-        btnCancelar.setForeground(Color.WHITE);
-        //btnCancelar.setBounds(30, 340, 107, 42);
-        //btnCancelar.setBackground(SystemColor.inactiveCaptionBorder);
-        //btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnCancelar.setEnabled(false);
-        btnCancelar.setVisible(false);
-        btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
-        
-        btnActualizar = new JButton("Actualizar");
-        btnActualizar.setBounds(145, 106, 110, 30);
-        panel.add(btnActualizar);
-        btnActualizar.setBorder(null);
-        btnActualizar.setFocusPainted(false);
-        btnActualizar.setPreferredSize(new Dimension(200, 40));
-        btnActualizar.setBackground(new Color(39, 174, 96));
-        btnActualizar.setForeground(Color.WHITE);
-        // btnActualizar.setBounds(30, 340, 107, 42);
-         //btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
-         //btnActualizar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-         btnActualizar.setEnabled(false);
-         btnActualizar.setVisible(false);
-         btnActualizar.setFont(new Font("Calibri", Font.BOLD, 16));
-         
-         btnAgregar = new JButton("Agregar");
-         btnAgregar.setBounds(10, 106, 110, 30);
-         panel.add(btnAgregar);
-         btnAgregar.setFocusPainted(false);
-         btnAgregar.setBorder(null);
-         btnAgregar.setPreferredSize(new Dimension(200, 40));
-         btnAgregar.setBackground(new Color(39, 174, 96));
-         btnAgregar.setForeground(Color.WHITE);
-         //btnAgregar.setBounds(30, 340, 107, 42);
-         //btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
-         //btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-         btnAgregar.setFont(new Font("Calibri", Font.BOLD, 16));
+        scrollPane.setViewportView(table);
     }
 }

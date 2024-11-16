@@ -26,25 +26,25 @@ import java.awt.Insets;
 import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
+import javax.swing.border.EmptyBorder;
 
 public class Edit extends JPanel {
-	public JComboBox cbxVariedad;
-	public JComboBox cbxTrabajador;
 	public JButton btnActualizar;
-	public JButton btnRegresar;
-	public JComboBox cbxLote;
-	public JComboBox cbxLabor;
-	public JComboBox cbxFitoFerti;
-	public JDateChooser tFecha;
+	public JButton btnCancelar;
+	public DefaultTableModel modelo;
 	public JTextField tUnidades;
 	public JSpinner tPeriodoMPS;
-	public JSpinner tWK;
+	public JComboBox cbxLote;
+	public JComboBox cbxVariedad;
+	public JComboBox cbxLabor;
+	public JComboBox cbxTrabajador;
+	public JComboBox cbxFitoFerti;
 	public JSpinner tCantidad;
-	public DefaultTableModel modelo;
-	public JTable table;
+	public JSpinner tWK;
+	public JDateChooser tFecha;
 	public JButton btnLotes;
 	public JButton btnVariedades;
-	public JButton btnEmpleados;
+	public JButton btnTrabajadores;
 	public JButton btnLabores;
 	public JButton btnProductos;
 
@@ -52,294 +52,199 @@ public class Edit extends JPanel {
 	 * Create the panel.
 	 */
 	public Edit() {
-		setPreferredSize(new Dimension(900, 580));
+		setPreferredSize(new Dimension(1080, 768));
 		setLayout(new BorderLayout(0, 0));
-
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.SOUTH);
-
-		btnActualizar = new JButton("Actualizar");
-		btnActualizar.setBorder(null);
-		btnActualizar.setBorderPainted(false);
-		//btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
-		btnActualizar.setPreferredSize(new Dimension(130, 40));
-		btnActualizar.setBackground(new Color(39, 174, 96));
-		btnActualizar.setForeground(Color.WHITE);
-		btnActualizar.setBounds(30, 340, 107, 42);
-		//btnActualizar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnActualizar.setFont(new Font("Calibri", Font.BOLD, 16));
-		panel.add(btnActualizar);
-
-		btnRegresar = new JButton("Regresar");
-		btnRegresar.setBorder(null);
-		btnRegresar.setBorderPainted(false);
-		//btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
-		btnRegresar.setPreferredSize(new Dimension(100, 40));
-		btnRegresar.setBackground(new Color(52, 108, 175));
-		btnRegresar.setForeground(Color.WHITE);
-		btnRegresar.setBounds(30, 340, 107, 42);
-		//btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnRegresar.setFont(new Font("Calibri", Font.BOLD, 16));
-		panel.add(btnRegresar);
-
-		JPanel panel_1 = new JPanel();
-		add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_4 = new JPanel();
-		panel_1.add(panel_4, BorderLayout.CENTER);
-		panel_4.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_5 = new JPanel();
-		panel_5.setOpaque(false);
-		panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), null, null, null));
-		FlowLayout flowLayout = (FlowLayout) panel_5.getLayout();
-		flowLayout.setHgap(20);
-		flowLayout.setVgap(12);
-		flowLayout.setAlignment(FlowLayout.LEADING);
-		panel_5.setPreferredSize(new Dimension(10, 45));
-		panel_4.add(panel_5, BorderLayout.NORTH);
-
-		JLabel lblNombre = new JLabel("Perido MPS");
-		panel_5.add(lblNombre);
-		lblNombre.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		tPeriodoMPS = new JSpinner();
-		tPeriodoMPS.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tPeriodoMPS.setPreferredSize(new Dimension(60, 20));
-		panel_5.add(tPeriodoMPS);
-
-		JLabel lblCdigo = new JLabel("WK");
-		panel_5.add(lblCdigo);
-		lblCdigo.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		tWK = new JSpinner();
-		tWK.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tWK.setPreferredSize(new Dimension(60, 20));
-		panel_5.add(tWK);
-
-		JLabel lblUnidadDeMedida = new JLabel("Fecha");
-		panel_5.add(lblUnidadDeMedida);
-		lblUnidadDeMedida.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		tFecha = new JDateChooser();
-		tFecha.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tFecha.setMinimumSize(new Dimension(80, 20));
-		panel_5.add(tFecha);
-		tFecha.setPreferredSize(new Dimension(100, 20));
-
-		JPanel panel_6 = new JPanel();
-		panel_4.add(panel_6, BorderLayout.CENTER);
-		panel_6.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_7 = new JPanel();
-		panel_7.setOpaque(false);
-		panel_7.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
-		FlowLayout flowLayout_1 = (FlowLayout) panel_7.getLayout();
-		flowLayout_1.setAlignment(FlowLayout.LEADING);
-		flowLayout_1.setVgap(12);
-		flowLayout_1.setHgap(20);
-		panel_7.setPreferredSize(new Dimension(10, 45));
-		panel_6.add(panel_7, BorderLayout.NORTH);
-
-		JLabel lblUnidadDeMedida_1 = new JLabel("Lote");
-		panel_7.add(lblUnidadDeMedida_1);
-		lblUnidadDeMedida_1.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		cbxLote = new JComboBox();
-		cbxLote.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxLote.setPreferredSize(new Dimension(110, 20));
-		panel_7.add(cbxLote);
-
-		btnLotes = new JButton("Ver lista de lotes");
-		btnLotes.setBackground(SystemColor.inactiveCaptionBorder);
-		btnLotes.setFocusable(false);
-		btnLotes.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnLotes.setPreferredSize(new Dimension(145, 23));
-		btnLotes.setFont(new Font("Calibri", Font.ITALIC, 16));
-		panel_7.add(btnLotes);
-
-		JPanel panel_8 = new JPanel();
-		panel_6.add(panel_8, BorderLayout.CENTER);
-		panel_8.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_9 = new JPanel();
-		panel_9.setOpaque(false);
-		panel_9.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
-		panel_9.setPreferredSize(new Dimension(10, 45));
-		FlowLayout flowLayout_2 = (FlowLayout) panel_9.getLayout();
-		flowLayout_2.setVgap(12);
-		flowLayout_2.setHgap(20);
-		flowLayout_2.setAlignment(FlowLayout.LEADING);
-		panel_8.add(panel_9, BorderLayout.NORTH);
-
-		JLabel lblTipo = new JLabel("Variedad");
-		panel_9.add(lblTipo);
-		lblTipo.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		cbxVariedad = new JComboBox();
-		cbxVariedad.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxVariedad.setPreferredSize(new Dimension(150, 20));
-		panel_9.add(cbxVariedad);
-
-		btnVariedades = new JButton("Ver lista de variedades");
-		btnVariedades.setBackground(SystemColor.inactiveCaptionBorder);
-		btnVariedades.setFont(new Font("Calibri", Font.ITALIC, 16));
-		btnVariedades.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnVariedades.setFocusable(false);
-		btnVariedades.setPreferredSize(new Dimension(170, 23));
-		panel_9.add(btnVariedades);
-
-		JPanel panel_10 = new JPanel();
-		panel_8.add(panel_10, BorderLayout.CENTER);
-		panel_10.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_11 = new JPanel();
-		panel_11.setOpaque(false);
-		panel_11.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
-		panel_11.setPreferredSize(new Dimension(10, 45));
-		FlowLayout flowLayout_3 = (FlowLayout) panel_11.getLayout();
-		flowLayout_3.setAlignment(FlowLayout.LEADING);
-		flowLayout_3.setVgap(12);
-		flowLayout_3.setHgap(20);
-		panel_10.add(panel_11, BorderLayout.NORTH);
-
-		JLabel lblCategora = new JLabel("Trabajador");
-		panel_11.add(lblCategora);
-		lblCategora.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		cbxTrabajador = new JComboBox();
-		cbxTrabajador.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxTrabajador.setPreferredSize(new Dimension(340, 20));
-		panel_11.add(cbxTrabajador);
-
-		btnEmpleados = new JButton("Ver lista de trabajadores");
-		btnEmpleados.setBackground(SystemColor.inactiveCaptionBorder);
-		btnEmpleados.setFont(new Font("Calibri", Font.ITALIC, 16));
-		btnEmpleados.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnEmpleados.setFocusable(false);
-		btnEmpleados.setPreferredSize(new Dimension(170, 23));
-		panel_11.add(btnEmpleados);
-
-		JPanel panel_12 = new JPanel();
-		panel_10.add(panel_12, BorderLayout.CENTER);
-		panel_12.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_13 = new JPanel();
-		panel_13.setOpaque(false);
-		panel_13.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
-		FlowLayout flowLayout_4 = (FlowLayout) panel_13.getLayout();
-		flowLayout_4.setVgap(12);
-		flowLayout_4.setHgap(20);
-		flowLayout_4.setAlignment(FlowLayout.LEADING);
-		panel_13.setPreferredSize(new Dimension(10, 45));
-		panel_12.add(panel_13, BorderLayout.NORTH);
-
-		JLabel lblLabor = new JLabel("Labor");
-		panel_13.add(lblLabor);
-		lblLabor.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		cbxLabor = new JComboBox();
-		cbxLabor.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxLabor.setPreferredSize(new Dimension(340, 20));
-		panel_13.add(cbxLabor);
-
-		btnLabores = new JButton("Ver lista de labores");
-		btnLabores.setBackground(SystemColor.inactiveCaptionBorder);
-		btnLabores.setFont(new Font("Calibri", Font.ITALIC, 16));
-		btnLabores.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnLabores.setFocusable(false);
-		btnLabores.setPreferredSize(new Dimension(145, 23));
-		panel_13.add(btnLabores);
-
-		JPanel panel_14 = new JPanel();
-		panel_12.add(panel_14, BorderLayout.CENTER);
-		panel_14.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_15 = new JPanel();
-		panel_15.setOpaque(false);
-		panel_15.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
-		FlowLayout flowLayout_5 = (FlowLayout) panel_15.getLayout();
-		flowLayout_5.setVgap(12);
-		flowLayout_5.setHgap(20);
-		flowLayout_5.setAlignment(FlowLayout.LEADING);
-		panel_15.setPreferredSize(new Dimension(10, 45));
-		panel_14.add(panel_15, BorderLayout.NORTH);
-
-		JLabel lblFito = new JLabel("Fitosanitario - Fertilizante");
-		panel_15.add(lblFito);
-		lblFito.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		cbxFitoFerti = new JComboBox();
-		cbxFitoFerti.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxFitoFerti.setPreferredSize(new Dimension(300, 20));
-		panel_15.add(cbxFitoFerti);
-
-		btnProductos = new JButton("Ver lista de productos");
-		btnProductos.setBackground(SystemColor.inactiveCaptionBorder);
-		btnProductos.setFont(new Font("Calibri", Font.ITALIC, 16));
-		btnProductos.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnProductos.setFocusable(false);
-		btnProductos.setPreferredSize(new Dimension(150, 23));
-		panel_15.add(btnProductos);
-
-		JPanel panel_16 = new JPanel();
-		panel_14.add(panel_16, BorderLayout.CENTER);
-		panel_16.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_17 = new JPanel();
-		panel_17.setOpaque(false);
-		panel_17.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
-		FlowLayout flowLayout_6 = (FlowLayout) panel_17.getLayout();
-		flowLayout_6.setVgap(12);
-		flowLayout_6.setHgap(20);
-		flowLayout_6.setAlignment(FlowLayout.LEADING);
-		panel_17.setPreferredSize(new Dimension(10, 45));
-		panel_16.add(panel_17, BorderLayout.NORTH);
-
-		JLabel lblCantidad = new JLabel("Cantidad");
-		panel_17.add(lblCantidad);
-		lblCantidad.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		tCantidad = new JSpinner();
-		tCantidad.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tCantidad.setPreferredSize(new Dimension(60, 20));
-		panel_17.add(tCantidad);
-
-		JLabel lblUnidades = new JLabel("Unidades");
-		panel_17.add(lblUnidades);
-		lblUnidades.setFont(new Font("Calibri", Font.BOLD, 16));
-
-		tUnidades = new JTextField();
-		tUnidades.setEditable(false);
-		tUnidades.setFont(new Font("Calibri", Font.PLAIN, 16));
-		panel_17.add(tUnidades);
-		tUnidades.setColumns(10);
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setOpaque(false);
-		panel_16.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3, BorderLayout.NORTH);
-
-		JLabel lblTitulo = new JLabel("Titulo");
-		lblTitulo.setFont(new Font("Calibri", Font.BOLD, 16));
-		panel_3.add(lblTitulo);
-
-		JPanel panelContenido = new JPanel();
-		panel_2.add(panelContenido, BorderLayout.CENTER);
-		panelContenido.setLayout(new BorderLayout(0, 0));
-
-		JScrollPane scrollPane = new JScrollPane();
-		panelContenido.add(scrollPane, BorderLayout.CENTER);
 
 		modelo = new DefaultTableModel();
 
-		table = new JTable();
-		table.setModel(modelo);
-		scrollPane.setViewportView(table);
+		JPanel panelRegistro = new JPanel();
+		add(panelRegistro, BorderLayout.CENTER);
+		panelRegistro.setPreferredSize(new Dimension(10, 400));
+		panelRegistro.setMinimumSize(new Dimension(10, 200));
+		panelRegistro.setLayout(null);
+
+		JLabel label = new JLabel("Perido MPS");
+		label.setFont(new Font("Calibri", Font.BOLD, 16));
+		label.setBounds(20, 11, 80, 20);
+		panelRegistro.add(label);
+
+		tPeriodoMPS = new JSpinner();
+		tPeriodoMPS.setPreferredSize(new Dimension(60, 20));
+		tPeriodoMPS.setFont(new Font("Calibri", Font.PLAIN, 16));
+		tPeriodoMPS.setBounds(125, 11, 60, 20);
+		panelRegistro.add(tPeriodoMPS);
+
+		JLabel label_1 = new JLabel("WK");
+		label_1.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_1.setBounds(220, 11, 34, 20);
+		panelRegistro.add(label_1);
+
+		tWK = new JSpinner();
+		tWK.setPreferredSize(new Dimension(60, 20));
+		tWK.setFont(new Font("Calibri", Font.PLAIN, 16));
+		tWK.setBounds(276, 11, 60, 20);
+		panelRegistro.add(tWK);
+
+		JLabel label_2 = new JLabel("Fecha");
+		label_2.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_2.setBounds(362, 11, 49, 20);
+		panelRegistro.add(label_2);
+
+		tFecha = new JDateChooser();
+		tFecha.setPreferredSize(new Dimension(100, 20));
+		tFecha.setMinimumSize(new Dimension(80, 20));
+		tFecha.setFont(new Font("Calibri", Font.PLAIN, 16));
+		tFecha.setBounds(428, 11, 100, 20);
+		panelRegistro.add(tFecha);
+
+		JLabel label_3 = new JLabel("Lote");
+		label_3.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_3.setBounds(20, 47, 80, 20);
+		panelRegistro.add(label_3);
+
+		cbxLote = new JComboBox();
+		cbxLote.setPreferredSize(new Dimension(110, 20));
+		cbxLote.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxLote.setBounds(125, 47, 151, 20);
+		panelRegistro.add(cbxLote);
+
+		btnLotes = new JButton("Ver lista de lotes");
+		btnLotes.setPreferredSize(new Dimension(145, 23));
+		btnLotes.setFont(new Font("Calibri", Font.ITALIC, 16));
+		btnLotes.setFocusable(false);
+		btnLotes.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnLotes.setBackground(SystemColor.inactiveCaptionBorder);
+		btnLotes.setBounds(533, 46, 169, 23);
+		panelRegistro.add(btnLotes);
+
+		JLabel label_4 = new JLabel("Variedad");
+		label_4.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_4.setBounds(20, 92, 80, 20);
+		panelRegistro.add(label_4);
+
+		cbxVariedad = new JComboBox();
+		cbxVariedad.setPreferredSize(new Dimension(110, 20));
+		cbxVariedad.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxVariedad.setBounds(125, 92, 150, 20);
+		panelRegistro.add(cbxVariedad);
+
+		btnVariedades = new JButton("Ver lista de variedades");
+		btnVariedades.setPreferredSize(new Dimension(170, 23));
+		btnVariedades.setFont(new Font("Calibri", Font.ITALIC, 16));
+		btnVariedades.setFocusable(false);
+		btnVariedades.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnVariedades.setBackground(SystemColor.inactiveCaptionBorder);
+		btnVariedades.setBounds(533, 91, 169, 23);
+		panelRegistro.add(btnVariedades);
+
+		btnTrabajadores = new JButton("Ver lista de trabajadores");
+		btnTrabajadores.setPreferredSize(new Dimension(170, 23));
+		btnTrabajadores.setFont(new Font("Calibri", Font.ITALIC, 16));
+		btnTrabajadores.setFocusable(false);
+		btnTrabajadores.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnTrabajadores.setBackground(SystemColor.inactiveCaptionBorder);
+		btnTrabajadores.setBounds(533, 136, 169, 23);
+		panelRegistro.add(btnTrabajadores);
+
+		cbxTrabajador = new JComboBox();
+		cbxTrabajador.setPreferredSize(new Dimension(340, 20));
+		cbxTrabajador.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxTrabajador.setBounds(125, 137, 340, 20);
+		panelRegistro.add(cbxTrabajador);
+
+		JLabel label_5 = new JLabel("Trabajador");
+		label_5.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_5.setBounds(20, 137, 80, 20);
+		panelRegistro.add(label_5);
+
+		JLabel label_6 = new JLabel("Labor");
+		label_6.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_6.setBounds(20, 182, 80, 20);
+		panelRegistro.add(label_6);
+
+		cbxLabor = new JComboBox();
+		cbxLabor.setPreferredSize(new Dimension(340, 20));
+		cbxLabor.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxLabor.setBounds(125, 182, 340, 20);
+		panelRegistro.add(cbxLabor);
+
+		btnLabores = new JButton("Ver lista de labores");
+		btnLabores.setPreferredSize(new Dimension(145, 23));
+		btnLabores.setFont(new Font("Calibri", Font.ITALIC, 16));
+		btnLabores.setFocusable(false);
+		btnLabores.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnLabores.setBackground(SystemColor.inactiveCaptionBorder);
+		btnLabores.setBounds(533, 181, 169, 23);
+		panelRegistro.add(btnLabores);
+
+		btnProductos = new JButton("Ver lista de productos");
+		btnProductos.setPreferredSize(new Dimension(150, 23));
+		btnProductos.setFont(new Font("Calibri", Font.ITALIC, 16));
+		btnProductos.setFocusable(false);
+		btnProductos.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
+		btnProductos.setBackground(SystemColor.inactiveCaptionBorder);
+		btnProductos.setBounds(533, 226, 169, 23);
+		panelRegistro.add(btnProductos);
+
+		cbxFitoFerti = new JComboBox();
+		cbxFitoFerti.setPreferredSize(new Dimension(300, 20));
+		cbxFitoFerti.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxFitoFerti.setBounds(215, 227, 249, 20);
+		panelRegistro.add(cbxFitoFerti);
+
+		JLabel label_7 = new JLabel("Fitosanitario - Fertilizante");
+		label_7.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_7.setBounds(20, 227, 175, 20);
+		panelRegistro.add(label_7);
+
+		JLabel label_8 = new JLabel("Cantidad");
+		label_8.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_8.setBounds(20, 274, 80, 20);
+		panelRegistro.add(label_8);
+
+		tCantidad = new JSpinner();
+		tCantidad.setPreferredSize(new Dimension(60, 20));
+		tCantidad.setFont(new Font("Calibri", Font.PLAIN, 16));
+		tCantidad.setBounds(125, 274, 60, 20);
+		panelRegistro.add(tCantidad);
+
+		JLabel label_9 = new JLabel("Unidades");
+		label_9.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_9.setBounds(215, 274, 63, 20);
+		panelRegistro.add(label_9);
+
+		tUnidades = new JTextField();
+		tUnidades.setFont(new Font("Calibri", Font.PLAIN, 16));
+		tUnidades.setEditable(false);
+		tUnidades.setColumns(10);
+		tUnidades.setBounds(304, 271, 126, 26);
+		panelRegistro.add(tUnidades);
+
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setBounds(25, 334, 100, 40);
+		panelRegistro.add(btnActualizar);
+		btnActualizar.setFocusPainted(false);
+		btnActualizar.setBorder(null);
+		btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
+		btnActualizar.setPreferredSize(new Dimension(100, 40));
+		btnActualizar.setBackground(new Color(39, 174, 96));
+		btnActualizar.setForeground(Color.WHITE);
+		// btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY,
+		// null, Color.DARK_GRAY, null));
+		btnActualizar.setFont(new Font("Calibri", Font.BOLD, 16));
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(148, 334, 100, 40);
+		panelRegistro.add(btnCancelar);
+		btnCancelar.setBorder(null);
+		btnCancelar.setFocusPainted(false);
+		btnCancelar.setBackground(SystemColor.inactiveCaptionBorder);
+		btnCancelar.setPreferredSize(new Dimension(100, 40));
+		btnCancelar.setBackground(new Color(52, 108, 175));
+		btnCancelar.setForeground(Color.WHITE);
+		// btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY,
+		// null, Color.DARK_GRAY, null));
+		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
 
 	}
 

@@ -9,6 +9,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.pf.mvc.models.dao.DAOAplicacion;
 import com.pf.mvc.models.dao.DAOEmpleado;
 import com.pf.mvc.models.dao.DAOLabor;
@@ -35,156 +37,70 @@ public class ControllerAplicaciones extends Functions implements Controller {
 	private DAOAplicacion dao;
 	private ViewPrincipal vp;
 	private ArrayList<Integer> ids = new ArrayList<>();
-	private boolean fincaUno;
-	private Index v;
-	private Options op;
-	private Menu menu;
 
-	public ControllerAplicaciones(ViewPrincipal vp, Menu menu) {
+	public ControllerAplicaciones(ViewPrincipal vp) {
 		this.dao = new DAOAplicacion();
 		this.vp = vp;
-		this.menu = menu;
-		this.fincaUno = true;
 
 	}
 
 	@Override
 	public void index() {
 
-		v = new Index();
+		Index in = new Index();
+		
+		in.modelo.setDataVector(getData(), getColumns());
+		in.ajustarColumnasYExpandirTabla(in.table);
 
-		op = new Options();
 
-		buttons();
+		in.btnNuevo.addActionListener(e -> {
 
-		//
-
-		op.btnMenu.addActionListener(e -> {
-
-			vp.setContenido(menu, "Bienvenido(a) al sistema de Fino Follaje!");
-
-		});
-
-		op.btnFincaUno.addActionListener(e -> {
-
-			fincaUno = true;
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Reportes diarios de finca 1");
-
-		});
-
-		op.btnFincaDos.addActionListener(e -> {
-
-			fincaUno = false;
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Reportes diarios de finca 2");
-		});
-
-		v.btnAgregarConsumo.addActionListener(e -> {
 			create();
-			
+
 		});
 
-		v.btnEditar.addActionListener(e -> {
-			int id = getSelectedId(v.tableConsumo, ids);
+		in.btnEditar.addActionListener(e -> {
+			int selectedRow = in.table.getSelectedRow();
+			if (selectedRow == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para editar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			int id = getSelectedId(in.table, ids);
 			edit(id);
 		});
 
-		v.btnEliminar.addActionListener(e -> {
+		in.btnEliminar.addActionListener(e -> {
 
-			Aplicacion item = (Aplicacion) dao.getItem(getSelectedId(v.tableConsumo, ids));
-			dao.destroy(item.getId());
+			int selectedRow = in.table.getSelectedRow();
+			if (selectedRow == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 
-			v.modelo.setDataVector(getData(), getColumns());
+			int id = getSelectedId(in.table, ids);
+			dao.destroy(id);
+			index();
 
 		});
 
-		v.btnRegresar.addActionListener(e -> {
-
-			vp.setContenido(op, "Reportes diarios");
-
-		});
-
-		v.tBuscar.addFocusListener(new FocusAdapter() {
+		in.tBuscar.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				v.tBuscar.setText("");
+				in.tBuscar.setText("");
 			}
 		});
 
-		v.tBuscar.addKeyListener(new KeyAdapter() {
+		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				buscar(v.tBuscar, v.filtro);
+				buscar(in.tBuscar, in.filtro);
 			}
 		});
 
-		vp.setContenido(op, "Reportes diarios");
-	}
-
-	public void index(boolean switchFinca) {
-
-		v = new Index();
-
-		op = new Options();
-
-		buttons();
-
-		fincaUno = switchFinca;
-
-		op.btnMenu.addActionListener(e -> {
-
-			vp.setContenido(menu, "Bienvenido(a) al sistema de Fino Follaje!");
-
-		});
-
-		op.btnFincaUno.addActionListener(e -> {
-
-			fincaUno = true;
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Reportes diarios de finca 1");
-
-		});
-
-		op.btnFincaDos.addActionListener(e -> {
-
-			fincaUno = false;
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-			vp.setContenido(v, "Reportes diarios de finca 2");
-		});
-
-		v.btnAgregarConsumo.addActionListener(e -> {
-			create();
-		});
-
-		v.btnEditar.addActionListener(e -> {
-			int id = getSelectedId(v.tableConsumo, ids);
-			edit(id);
-		});
-
-		v.btnEliminar.addActionListener(e -> {
-
-			Aplicacion item = (Aplicacion) dao.getItem(getSelectedId(v.tableConsumo, ids));
-			dao.destroy(item.getId());
-
-			v.modelo.setDataVector(getData(), getColumns());
-
-		});
-
-		v.btnRegresar.addActionListener(e -> {
-
-			vp.setContenido(op, "Reportes diarios");
-
-		});
-
+		vp.setContenido(in, "Reportes diarios");
 	}
 
 	@Override
@@ -198,14 +114,14 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 		for (Object o : lotes) {
 			Lote l = (Lote) o;
-			f.cbxLote.addItem(l);
+			f.cbxLotes.addItem(l);
 		}
 
 		ArrayList<Object> variedades = new DAOVariedad().getData();
 
 		for (Object o : variedades) {
 			Variedad v = (Variedad) o;
-			f.cbxVariedad.addItem(v);
+			f.cbxVariedades.addItem(v);
 		}
 
 		ArrayList<Object> trabajadores = new DAOEmpleado().getData();
@@ -213,15 +129,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		for (Object o : trabajadores) {
 			Empleado e = (Empleado) o;
 
-			if (fincaUno) {
-				if (e.getIdFinca() == 1) {
-					f.cbxTrabajador.addItem(e);
-				}
-			} else {
-				if (e.getIdFinca() == 2) {
-					f.cbxTrabajador.addItem(e);
-				}
-			}
+			f.cbxTrabajadores.addItem(e);
 
 		}
 
@@ -229,7 +137,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 		for (Object o : labores) {
 			Labor la = (Labor) o;
-			f.cbxLabor.addItem(la);
+			f.cbxLabores.addItem(la);
 		}
 
 		ArrayList<Object> productos = new DAOProducto().getData();
@@ -246,107 +154,83 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			f.tUnidades.setText(p.getUnidades());
 		});
 
-//		ArrayList<Object> controles = new DAOSupervisor().getData();
-//
-//		for (Object o : controles) {
-//			Supervisor s = (Supervisor) o;
-//			f.cbxControl.addItem(s);
-//		}
-
-		f.btnAgregar.addActionListener(e -> {
+		f.btnGuardar.addActionListener(e -> {
 
 			int periodo = (int) f.tPeriodoMPS.getValue();
 			int semana = (int) f.tWK.getValue();
-			
+
 			java.util.Date fechaSeleccionada = f.tFecha.getDate();
 			DateFormat dateFormat = new SimpleDateFormat("Y-MM-dd");
 			String fecha = dateFormat.format(fechaSeleccionada);
-			
+
 			int cantidad = (int) f.tCantidad.getValue();
 
-			Lote l = (Lote) f.cbxLote.getSelectedItem();
+			Lote l = (Lote) f.cbxLotes.getSelectedItem();
 			int idLote = l.getId();
 
-			Variedad va = (Variedad) f.cbxVariedad.getSelectedItem();
+			Variedad va = (Variedad) f.cbxVariedades.getSelectedItem();
 			int idVariedad = va.getId();
 			//
-			Empleado em = (Empleado) f.cbxTrabajador.getSelectedItem();
+			Empleado em = (Empleado) f.cbxTrabajadores.getSelectedItem();
 			int idEmpleado = em.getId();
 
-			Labor la = (Labor) f.cbxLabor.getSelectedItem();
+			Labor la = (Labor) f.cbxLabores.getSelectedItem();
 			int idLabor = la.getId();
 
 			Producto p = (Producto) f.cbxFitoFerti.getSelectedItem();
 			int idProducto = p.getId();
 
-//			Supervisor s = (Supervisor) f.cbxControl.getSelectedItem();
-//			int idSupervisor = s.getId();
-
 			Aplicacion item = new Aplicacion(periodo, semana, fecha, idLote, idVariedad, idEmpleado, idLabor,
 					idProducto, cantidad, 1);
 
 			dao.store(item);
-			
-			if (fincaUno) {
-				v.modelo.setDataVector(getData(), getColumns());
-				vp.setContenido(v, "Reportes diarios de finca 1");
-			} else {
-				v.modelo.setDataVector(getData(), getColumns());
-				vp.setContenido(v, "Reportes diarios de finca 2");
-			}
-			
-		});
 
-		f.btnRegresar.addActionListener(e -> {
-
-			if (fincaUno) {
-				v.modelo.setDataVector(getData(), getColumns());
-				vp.setContenido(v, "Reportes diarios de finca 1");
-			} else {
-				v.modelo.setDataVector(getData(), getColumns());
-				vp.setContenido(v, "Reportes diarios de finca 2");
-			}
+			index();
 
 		});
 
-		f.btnLotes.addActionListener(e -> {
+		f.btnCancelar.addActionListener(e -> {
 
-			ControllerLotes cl = new ControllerLotes(fincaUno, vp, menu);
-			cl.index();
+			actualizarTabla();
 
-		});
-
-		f.btnVariedades.addActionListener(e -> {
-
-			ControllerVariedades cv = new ControllerVariedades(fincaUno, vp, menu);
-			cv.index();
+			index();
 
 		});
 
-		f.btnEmpleados.addActionListener(e -> {
+//		f.btnLotes.addActionListener(e -> {
+//
+//			ControllerLotes cl = new ControllerLotes(fincaUno, vp, menu);
+//			cl.index();
+//
+//		});
+//
+//		f.btnVariedades.addActionListener(e -> {
+//
+//			ControllerVariedades cv = new ControllerVariedades(fincaUno, vp, menu);
+//			cv.index();
+//
+//		});
+//
+//		f.btnTrabajadores.addActionListener(e -> {
+//
+//			new ControllerEmpleados(vp, menu).index(fincaUno);
+//
+//		});
+//
+//		f.btnLabores.addActionListener(e -> {
+//
+//			ControllerLabores cl = new ControllerLabores(fincaUno, vp, menu);
+//			cl.index();
+//
+//		});
+//
+//		f.btnProductos.addActionListener(e -> {
+//
+//			new ControllerProductos(vp);
+//
+//		});
 
-			new ControllerEmpleados(vp, menu).index(fincaUno);
-
-		});
-
-		f.btnLabores.addActionListener(e -> {
-
-			ControllerLabores cl = new ControllerLabores(fincaUno, vp, menu);
-			cl.index();
-
-		});
-
-		f.btnProductos.addActionListener(e -> {
-
-			new ControllerProductos(vp, menu).index(fincaUno, 0);
-
-		});
-
-		if (fincaUno) {
-			vp.setContenido(f, "Reportes diarios de finca 1");
-		} else {
-			vp.setContenido(f, "Reportes diarios de finca 2");
-		}
+		vp.setContenido(f, "Reportes diarios");
 
 	}
 
@@ -398,15 +282,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		for (Object o : trabajadores) {
 			Empleado e = (Empleado) o;
 
-			if (fincaUno) {
-				if (e.getIdFinca() == 1) {
-					ed.cbxTrabajador.addItem(e);
-				}
-			} else {
-				if (e.getIdFinca() == 2) {
-					ed.cbxTrabajador.addItem(e);
-				}
-			}
+			ed.cbxTrabajador.addItem(e);
 
 			if (e.getId() == item.getIdEmpleado()) {
 				ed.cbxTrabajador.setSelectedItem(e);
@@ -470,83 +346,62 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			Producto p = (Producto) ed.cbxFitoFerti.getSelectedItem();
 			int idProducto = p.getId();
 
-			Aplicacion nuevoItem;
-
-			if (fincaUno) {
-				nuevoItem = new Aplicacion(periodo, semana, fecha, idLote, idVariedad, idEmpleado, idLabor, idProducto,
-						cantidad, 1);
-			} else {
-				nuevoItem = new Aplicacion(periodo, semana, fecha, idLote, idVariedad, idEmpleado, idLabor, idProducto,
-						cantidad, 2);
-			}
+			Aplicacion nuevoItem = new Aplicacion(periodo, semana, fecha, idLote, idVariedad, idEmpleado, idLabor,
+					idProducto, cantidad, 1);
 
 			if (item.getId() > 0) {
 				dao.update(nuevoItem, item.getId());
 				edit(item.getId());
-				if (fincaUno) {
-					v.modelo.setDataVector(getData(), getColumns());
-					vp.setContenido(v, "Editar reporte diario de finca 1");
-				} else {
-					v.modelo.setDataVector(getData(), getColumns());
-					vp.setContenido(v, "Editar reporte diario de finca 2");
-				}
 			}
 
-		});
-
-		if (fincaUno) {
-			vp.setContenido(ed, "Editar reporte diario de finca 1");
-		} else {
-			vp.setContenido(ed, "Editar reporte diario de finca 2");
-		}
-
-		ed.btnRegresar.addActionListener(e -> {
-
-			if (fincaUno) {
-				v.modelo.setDataVector(getData(), getColumns());
-				vp.setContenido(v, "Reportes diarios de finca 1");
-			} else {
-				v.modelo.setDataVector(getData(), getColumns());
-				vp.setContenido(v, "Reportes diarios de finca 2");
-			}
+			index();
 
 		});
 
-		ed.btnLotes.addActionListener(e -> {
+		ed.btnCancelar.addActionListener(e -> {
 
-			ControllerLotes cl = new ControllerLotes(fincaUno, vp, menu);
-			cl.setIdApp(id);
-			cl.index();
+			actualizarTabla();
 
-		});
-
-		ed.btnVariedades.addActionListener(e -> {
-
-			ControllerVariedades cv = new ControllerVariedades(fincaUno, vp, menu);
-			cv.setIdApp(id);
-			cv.index();
+			index();
 
 		});
 
-		ed.btnEmpleados.addActionListener(e -> {
-
-			new ControllerEmpleados(vp, menu).index(fincaUno);
-
-		});
-
-		ed.btnLabores.addActionListener(e -> {
-
-			ControllerLabores cl = new ControllerLabores(fincaUno, vp, menu);
-			cl.setIdApp(id);
-			cl.index();
-
-		});
-
-		ed.btnProductos.addActionListener(e -> {
-
-			new ControllerProductos(vp, menu).index(fincaUno, id);
-
-		});
+//		ed.btnLotes.addActionListener(e -> {
+//
+//			ControllerLotes cl = new ControllerLotes(fincaUno, vp, menu);
+//			cl.setIdApp(id);
+//			cl.index();
+//
+//		});
+//
+//		ed.btnVariedades.addActionListener(e -> {
+//
+//			ControllerVariedades cv = new ControllerVariedades(fincaUno, vp, menu);
+//			cv.setIdApp(id);
+//			cv.index();
+//
+//		});
+//
+//		ed.btnTrabajadores.addActionListener(e -> {
+//
+//			new ControllerEmpleados(vp, menu).index(fincaUno);
+//
+//		});
+//
+//		ed.btnLabores.addActionListener(e -> {
+//
+//			ControllerLabores cl = new ControllerLabores(fincaUno, vp, menu);
+//			cl.setIdApp(id);
+//			cl.index();
+//
+//		});
+//
+//		ed.btnProductos.addActionListener(e -> {
+//
+//			new ControllerProductos(vp, menu).index(fincaUno, id);
+//
+//		});
+		vp.setContenido(ed, "Editar Reporte");
 
 	}
 
@@ -554,103 +409,49 @@ public class ControllerAplicaciones extends Functions implements Controller {
 	public Object[][] getData() {
 
 		ArrayList<Object> list = dao.getData();
-		ArrayList<Aplicacion> reportesFincaUno = new ArrayList<>();
-		ArrayList<Aplicacion> reportesFincaDos = new ArrayList<>();
-		Object[][] data;
 
 		ids.clear();
+
+		Object[][] data = new Object[list.size()][getColumns().length];
 
 		int i = 0;
 
 		for (Object o : list) {
+			
 			Aplicacion a = (Aplicacion) o;
 
 			Empleado em = (Empleado) new DAOEmpleado().getItem(a.getIdEmpleado());
 
-			if (em.getIdFinca() == 1) {
+			ids.add(a.getId());
 
-				reportesFincaUno.add(a);
+			data[i][0] = a.getPeriodo();
+			data[i][1] = a.getSemana();
+			data[i][2] = a.getFecha();
 
-			}
+			Lote lote = (Lote) new DAOLote().getItem(a.getIdLote());
+			data[i][3] = lote.getNombre();
 
-			if (em.getIdFinca() == 2) {
+			Variedad variedad = (Variedad) new DAOVariedad().getItem(a.getIdVariedad());
+			data[i][4] = variedad.getNombre();
 
-				reportesFincaDos.add(a);
+			Empleado empleado = (Empleado) new DAOEmpleado().getItem(a.getIdEmpleado());
+			data[i][5] = empleado.getNombre();
 
-			}
+			Labor labor = (Labor) new DAOLabor().getItem(a.getIdLabor());
+			data[i][6] = labor.getNombre();
 
-		}
+			Producto producto = (Producto) new DAOProducto().getItem(a.getIdProducto());
+			data[i][7] = producto.getNombre();
 
-		if (fincaUno) {
-			data = new Object[reportesFincaUno.size()][getColumns().length];
-			for (Aplicacion a : reportesFincaUno) {
+			data[i][8] = a.getCantidad();
 
-				ids.add(a.getId());
+			data[i][9] = producto.getUnidades();
 
-				data[i][0] = a.getPeriodo();
-				data[i][1] = a.getSemana();
-				data[i][2] = a.getFecha();
+			Supervisor supervisor = (Supervisor) new DAOSupervisor().getItem(a.getIdSupervisor());
+			data[i][10] = supervisor.getNombre();
 
-				Lote lote = (Lote) new DAOLote().getItem(a.getIdLote());
-				data[i][3] = lote.getNombre();
-
-				Variedad variedad = (Variedad) new DAOVariedad().getItem(a.getIdVariedad());
-				data[i][4] = variedad.getNombre();
-
-				Empleado empleado = (Empleado) new DAOEmpleado().getItem(a.getIdEmpleado());
-				data[i][5] = empleado.getNombre();
-
-				Labor labor = (Labor) new DAOLabor().getItem(a.getIdLabor());
-				data[i][6] = labor.getNombre();
-
-				Producto producto = (Producto) new DAOProducto().getItem(a.getIdProducto());
-				data[i][7] = producto.getNombre();
-
-				data[i][8] = a.getCantidad();
-
-				data[i][9] = producto.getUnidades();
-
-				Supervisor supervisor = (Supervisor) new DAOSupervisor().getItem(a.getIdSupervisor());
-				data[i][10] = supervisor.getNombre();
-
-				i++;
-			}
-		} else {
-			data = new Object[reportesFincaDos.size()][getColumns().length];
-			for (Aplicacion a : reportesFincaDos) {
-
-				ids.add(a.getId());
-
-				data[i][0] = a.getPeriodo();
-				data[i][1] = a.getSemana();
-				data[i][2] = a.getFecha();
-
-				Lote lote = (Lote) new DAOLote().getItem(a.getIdLote());
-				data[i][3] = lote.getNombre();
-
-				Variedad variedad = (Variedad) new DAOVariedad().getItem(a.getIdVariedad());
-				data[i][4] = variedad.getNombre();
-
-				Empleado empleado = (Empleado) new DAOEmpleado().getItem(a.getIdEmpleado());
-				data[i][5] = empleado.getNombre();
-
-				Labor labor = (Labor) new DAOLabor().getItem(a.getIdLabor());
-				data[i][6] = labor.getNombre();
-
-				Producto producto = (Producto) new DAOProducto().getItem(a.getIdProducto());
-				data[i][7] = producto.getNombre();
-
-				data[i][8] = a.getCantidad();
-
-				data[i][9] = producto.getUnidades();
-
-				Supervisor supervisor = (Supervisor) new DAOSupervisor().getItem(a.getIdSupervisor());
-				data[i][10] = supervisor.getNombre();
-
-				i++;
-
-			}
-
+			i++;
+			
 		}
 
 		return data;
@@ -660,10 +461,6 @@ public class ControllerAplicaciones extends Functions implements Controller {
 	public String[] getColumns() {
 		return new String[] { "PERIODO MPS", "WK", "FECHA", "LOTE", "VARIEDAD", "TRABAJADOR", "LABOR",
 				"FITOSANITARIO - FERTILIZANTE", "CANTIDAD", "UNIDADES", "CONTROL" };
-	}
-
-	public void buttons() {
-		op.setImagesButtons("/resources/Plantas.png", "/resources/Form.png", "/resources/Form.png");
 	}
 
 	@Override
@@ -681,6 +478,12 @@ public class ControllerAplicaciones extends Functions implements Controller {
 	@Override
 	public void destroy(int id) {
 		// TODO Auto-generated method stub
+
+	}
+
+	public void actualizarTabla() {
+		Index in = new Index();
+		in.modelo.setDataVector(getData(), getColumns());
 
 	}
 

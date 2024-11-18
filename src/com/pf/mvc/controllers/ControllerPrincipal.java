@@ -17,6 +17,8 @@ public class ControllerPrincipal {
 	public ControllerPrincipal() {
 		vp = new ViewPrincipal();
 	}
+	
+	//Visca el Barca
 
 	public void init() {
 		vp.setVisible(true);

@@ -16,7 +16,7 @@ public class DAOLote extends Conexion implements DAO {
 	@Override
 	public boolean store(Object o) {
 		Connection con = conectar();
-		String sql = "INSERT INTO lotes (nombre) VALUES (?);";
+		String sql = "insert into lotes (nombre, activo) VALUES (?, ?);";
 
 		try {
 
@@ -25,6 +25,7 @@ public class DAOLote extends Conexion implements DAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setString(1, item.getNombre());
+			ps.setInt(2, item.isActivo() ? 1 : 0);
 
 			ps.execute();
 
@@ -69,7 +70,7 @@ public class DAOLote extends Conexion implements DAO {
 	@Override
 	public boolean destroy(int id) {
 		Connection con = conectar();
-		String sql = "delete from lotes where id_lote = ?;";
+		String sql = "update lotes set activo = 0 where id_lote = ?;";
 
 		try {
 
@@ -107,7 +108,8 @@ public class DAOLote extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				item = new Lote(rs.getInt("id_lote"), rs.getString("nombre"));
+				item = new Lote(rs.getInt("id_lote"), rs.getString("nombre"),
+						rs.getInt("activo")==1);
 
 			}
 
@@ -125,7 +127,7 @@ public class DAOLote extends Conexion implements DAO {
 		ArrayList<Object> list = new ArrayList<Object>();
 
 		Connection con = conectar();
-		String sql = "select * from lotes;";
+		String sql = "select * from lotes where activo = 1;";
 
 		try {
 
@@ -134,7 +136,8 @@ public class DAOLote extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				Lote p = new Lote(rs.getInt("id_lote"), rs.getString("nombre"));
+				Lote p = new Lote(rs.getInt("id_lote"), rs.getString("nombre"),
+						rs.getInt("activo")==1);
 
 				list.add(p);
 

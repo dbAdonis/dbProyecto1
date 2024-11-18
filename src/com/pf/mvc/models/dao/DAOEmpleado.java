@@ -17,16 +17,17 @@ public class DAOEmpleado extends Conexion implements DAO {
 	public boolean store(Object o) {
 
 		Connection con = conectar();
-		String sql = "insert into empleados (id_finca, nombre) values (?, ?);";
+		String sql = "insert into empleados (id_finca, nombre, activo) values (?, ?, ?);";
 
 		try {
-			
+
 			Empleado e = (Empleado) o;
 
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setInt(1, e.getIdFinca());
 			ps.setString(2, e.getNombre());
+			ps.setInt(3, e.isActivo() ? 1 : 0);
 
 			ps.execute();
 
@@ -76,12 +77,12 @@ public class DAOEmpleado extends Conexion implements DAO {
 	public boolean destroy(int id) {
 
 		Connection con = conectar();
-		String sql = "delete from empleados where id_empleado = ?;";
+		String sql = "update empleados set activo = 0 where id_empleado = ?;";
 
 		try {
 
 			PreparedStatement ps = con.prepareStatement(sql);
-			
+
 			ps.setInt(1, id);
 
 			ps.execute();
@@ -116,7 +117,11 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				item = new Empleado(rs.getInt("id_empleado"), rs.getInt("id_finca"), rs.getString("nombre"));
+				item = new Empleado(
+						rs.getInt("id_empleado"), 
+						rs.getInt("id_finca"), 
+						rs.getString("nombre"),
+						rs.getInt("activo")==1);
 
 			}
 
@@ -136,7 +141,7 @@ public class DAOEmpleado extends Conexion implements DAO {
 		ArrayList<Object> list = new ArrayList<Object>();
 
 		Connection con = conectar();
-		String sql = "select * from empleados;";
+		String sql = "select * from empleados where activo = 1;";
 
 		try {
 
@@ -145,7 +150,11 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				Empleado e = new Empleado(rs.getInt("id_empleado"), rs.getInt("id_finca"), rs.getString("nombre"));
+				Empleado e = new Empleado(
+						rs.getInt("id_empleado"), 
+						rs.getInt("id_finca"), 
+						rs.getString("nombre"), 
+						rs.getInt("activo")==1);
 
 				list.add(e);
 

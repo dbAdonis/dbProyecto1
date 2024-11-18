@@ -16,7 +16,7 @@ public class DAOVariedad extends Conexion implements DAO {
 	@Override
 	public boolean store(Object o) {
 		Connection con = conectar();
-		String sql = "INSERT INTO variedades (nombre) VALUES (?);";
+		String sql = "insert into variedades (nombre, activo) VALUES (?, ?);";
 
 		try {
 
@@ -25,6 +25,7 @@ public class DAOVariedad extends Conexion implements DAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setString(1, item.getNombre());
+			ps.setInt(2, item.isActivo() ? 1 : 0);
 
 			ps.execute();
 
@@ -69,7 +70,7 @@ public class DAOVariedad extends Conexion implements DAO {
 	@Override
 	public boolean destroy(int id) {
 		Connection con = conectar();
-		String sql = "delete from variedades where id_variedad = ?;";
+		String sql = "update variedades set activo = 0 where id_variedad = ?;";
 
 		try {
 
@@ -107,7 +108,8 @@ public class DAOVariedad extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				item = new Variedad(rs.getInt("id_variedad"), rs.getString("nombre"));
+				item = new Variedad(rs.getInt("id_variedad"), rs.getString("nombre"),
+						rs.getInt("activo")==1);
 
 			}
 
@@ -126,7 +128,7 @@ public class DAOVariedad extends Conexion implements DAO {
 		ArrayList<Object> list = new ArrayList<Object>();
 
 		Connection con = conectar();
-		String sql = "select * from variedades;";
+		String sql = "select * from variedades where activo = 1;";
 
 		try {
 
@@ -135,7 +137,8 @@ public class DAOVariedad extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				Variedad p = new Variedad(rs.getInt("id_variedad"), rs.getString("nombre"));
+				Variedad p = new Variedad(rs.getInt("id_variedad"), rs.getString("nombre"),
+						rs.getInt("activo")==1);
 
 				list.add(p);
 

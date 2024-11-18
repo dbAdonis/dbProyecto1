@@ -121,7 +121,7 @@ public class ControllerLotes extends Functions implements Controller {
 				JOptionPane.showMessageDialog(in, "Debe completar el campo",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 			}else {
-				Lote item = new Lote(nombre);
+				Lote item = new Lote(nombre, true);
 
 				store(item);
 
@@ -146,7 +146,7 @@ public class ControllerLotes extends Functions implements Controller {
 				JOptionPane.showMessageDialog(in, "Debe completar el campo",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 			}else {
-				Lote item = new Lote(nombre);
+				Lote item = new Lote(nombre, true);
 
 				update(item, id);
 

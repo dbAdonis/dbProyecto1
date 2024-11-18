@@ -126,7 +126,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 				return;
 			}
 
-			Empleado item = new Empleado(r.getId(), nombre);
+			Empleado item = new Empleado(r.getId(), nombre, true);
 
 			store(item);
 			index();
@@ -172,7 +172,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 			Finca r = (Finca) c.cbxFincas.getSelectedItem();
 
-			Empleado item = new Empleado(r.getId(), nombre);
+			Empleado item = new Empleado(r.getId(), nombre, true);
 			
 			if (em.getId() > 0) {
 				update(item, em.getId());

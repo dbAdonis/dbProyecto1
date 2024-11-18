@@ -46,7 +46,7 @@ public class DAOEmpleado extends Conexion implements DAO {
 	@Override
 	public boolean update(Object o, int id) {
 		Connection con = conectar();
-		String sql = "update empleados set nombre = ? where id_empleado = ?;";
+		String sql = "update empleados set id_finca = ?, nombre = ? where id_empleado = ?;";
 
 		try {
 
@@ -54,8 +54,9 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 			PreparedStatement ps = con.prepareStatement(sql);
 
-			ps.setString(1, e.getNombre());
-			ps.setInt(2, id);
+			ps.setInt(1, e.getIdFinca());
+			ps.setString(2, e.getNombre());
+			ps.setInt(3, id);
 
 			ps.execute();
 

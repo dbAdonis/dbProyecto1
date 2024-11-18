@@ -19,6 +19,9 @@ import java.awt.Color;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.DefaultComboBoxModel;
 
 public class Index extends JPanel {
 	/**
@@ -32,12 +35,14 @@ public class Index extends JPanel {
 	public JButton btnEliminar;
 	public JButton btnEditar;
 	public TableRowSorter<DefaultTableModel> filtro;
+	public JComboBox cbxBusqueda;
+	public JComboBox cbxFinca;
 
 	/**
 	 * Create the panel.
 	 */
 	public Index() {
-		setPreferredSize(new Dimension(900, 580));
+		setPreferredSize(new Dimension(950, 580));
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
@@ -47,14 +52,36 @@ public class Index extends JPanel {
 
 		JLabel lblBuscar = new JLabel("Buscar");
 		lblBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblBuscar.setBounds(10, 34, 54, 20);
+		lblBuscar.setBounds(10, 32, 54, 20);
 		panel.add(lblBuscar);
 
 		tBuscar = new JTextField();
 		tBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tBuscar.setBounds(74, 29, 235, 30);
+		tBuscar.setBounds(74, 29, 235, 26);
 		panel.add(tBuscar);
 		tBuscar.setColumns(10);
+		
+		JLabel lblCriterioDeBsqueda = new JLabel("Criterio de b\u00FAsqueda:");
+		lblCriterioDeBsqueda.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblCriterioDeBsqueda.setBounds(338, 32, 139, 20);
+		panel.add(lblCriterioDeBsqueda);
+		
+		cbxBusqueda = new JComboBox();
+		cbxBusqueda.setModel(new DefaultComboBoxModel(new String[] {"Seleccionar"}));
+		cbxBusqueda.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxBusqueda.setBounds(487, 29, 171, 26);
+		panel.add(cbxBusqueda);
+		
+		JLabel lblOrdenarPorFinca = new JLabel("Ordenar por finca:");
+		lblOrdenarPorFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblOrdenarPorFinca.setBounds(695, 32, 123, 20);
+		panel.add(lblOrdenarPorFinca);
+		
+		cbxFinca = new JComboBox();
+		cbxFinca.setModel(new DefaultComboBoxModel(new String[] {"Seleccionar", "Todas"}));
+		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxFinca.setBounds(828, 29, 112, 26);
+		panel.add(cbxFinca);
 
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
@@ -172,6 +199,6 @@ public class Index extends JPanel {
 
 	    // Hacer que la tabla ocupe todo el ancho disponible
 	    tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+	    
 	}
-
 }

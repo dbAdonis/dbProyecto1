@@ -5,8 +5,11 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import com.pf.mvc.models.dao.DAOEmpleado;
 import com.pf.mvc.models.dao.DAOFinca;
@@ -22,11 +25,14 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 	private DAOEmpleado dao;
 	private ViewPrincipal vp;
-	private ArrayList<Integer> ids = new ArrayList<>();
+	private ArrayList<Integer> ids;
+	private int idFinca;
 
 	public ControllerEmpleados(ViewPrincipal vp) {
 		this.dao = new DAOEmpleado();
 		this.vp = vp;
+		this.idFinca = -1;
+		this.ids = new ArrayList<>();
 	}
 
 	@Override
@@ -34,8 +40,8 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 		Index in = new Index();
 
-		in.modelo.setDataVector(getData(), getColumns());
-
+		in.modelo.setDataVector(filtrarData(getData()), getColumns());
+	
 		in.btnNuevo.addActionListener(e -> {
 
 			create();
@@ -57,7 +63,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 		});
 
 		in.btnEliminar.addActionListener(e -> {
-
+			
 			int selectedRow = in.table.getSelectedRow();
 			if (selectedRow == -1) {
 				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
@@ -66,6 +72,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 			}
 
 			int id = getSelectedId(in.table, ids);
+			System.out.println(id);
 			dao.destroy(id);
 			index();
 
@@ -81,10 +88,18 @@ public class ControllerEmpleados extends Functions implements Controller {
 		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				buscar(in.tBuscar, in.filtro);
+					buscar(in.tBuscar, in.filtro, 0);
 			}
 		});
-
+		
+		cargarCbxFinca(in);
+		
+		in.cbxFinca.addActionListener(e->{
+			
+			cbxDatosFinca(in);
+			
+		});
+		
 		vp.setContenido(in, "Gestionar personal");
 
 	}
@@ -114,20 +129,18 @@ public class ControllerEmpleados extends Functions implements Controller {
 			Empleado item = new Empleado(r.getId(), nombre);
 
 			store(item);
-
 			index();
 		});
 		
 		c.btnCancelar.addActionListener(e -> {
 
-			actualizarTabla();
-
+			
 			index();
 
 		});
 
-
-		vp.setContenido(c, "Registrar Empleado");
+		c.lblTitulo.setText("Registrar nuevo empleado");
+		vp.setContenido(c, "Gestionar personal");
 
 	}
 
@@ -143,48 +156,39 @@ public class ControllerEmpleados extends Functions implements Controller {
 		ArrayList<Object> fincas = new DAOFinca().getData();
 		c.cbxFincas.removeAllItems();
 
-		Finca fincaEmpleado = null;
+		
 		for (Object o : fincas) {
 			Finca r = (Finca) o;
 
 			c.cbxFincas.addItem(r);
 			if (r.getId() == em.getIdFinca()) {
-				fincaEmpleado = r;
+				c.cbxFincas.setSelectedItem(r);
 			}
-		}
-
-		if (fincaEmpleado != null) {
-			c.cbxFincas.setSelectedItem(fincaEmpleado);
 		}
 
 		c.btnGuardar.addActionListener(e -> {
 
 			String nombre = c.tNombre.getText();
 
-			em.setNombre(nombre);
-
 			Finca r = (Finca) c.cbxFincas.getSelectedItem();
 
 			Empleado item = new Empleado(r.getId(), nombre);
-
+			
 			if (em.getId() > 0) {
-				dao.update(item, em.getId());
-				//edit(em.getId());
+				update(item, em.getId());
 			}
-
 			index();
 
 		});
 
 		c.btnCancelar.addActionListener(e -> {
 
-			actualizarTabla();
-
 			index();
 
 		});
 		
-		vp.setContenido(c, "Editar Empleado");
+		c.lblTitulo.setText("Editar empleado");
+		vp.setContenido(c, "Gestionar personal");
 
 	}
 
@@ -202,14 +206,25 @@ public class ControllerEmpleados extends Functions implements Controller {
 		for (Object o : list) {
 
 			Empleado item = (Empleado) o;
-
-			ids.add(item.getId());
+			
+			if(idFinca == item.getIdFinca()) {
+				ids.add(item.getId());
 
 			data[i][0] = item.getNombre();
 
 			Finca finca = (Finca) new DAOFinca().getItem(item.getIdFinca());
 			data[i][1] = finca != null ? finca.getNombre() : "Sin Finca";
 			i++;
+			}
+			if(idFinca == -1) {
+				ids.add(item.getId());
+
+				data[i][0] = item.getNombre();
+
+				Finca finca = (Finca) new DAOFinca().getItem(item.getIdFinca());
+				data[i][1] = finca != null ? finca.getNombre() : "Sin Finca";
+				i++;
+			}
 
 		}
 
@@ -226,16 +241,12 @@ public class ControllerEmpleados extends Functions implements Controller {
 	public void store(Object o) {
 		dao.store(o);
 
-		actualizarTabla();
-
 	}
 
 	@Override
 	public void update(Object o, int id) {
 
 		dao.update(o, id);
-
-		actualizarTabla();
 	}
 
 	@Override
@@ -243,14 +254,47 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 		dao.destroy(id);
 
-		actualizarTabla();
-
 	}
 
-	public void actualizarTabla() {
-		Index in = new Index();
-		in.modelo.setDataVector(getData(), getColumns());
-
+	
+	public void cargarCbxFinca(Index in) {
+		
+		ArrayList<Object> list = new DAOFinca().getData();
+		
+		for (Object o : list) {
+			Finca f = (Finca) o;
+			in.cbxFinca.addItem(f);
+		}
 	}
-
+	
+	public void cbxDatosFinca(Index in) {
+		
+		int ind = in.cbxFinca.getSelectedIndex();
+		
+		if(ind > 0) {
+			if(ind == 1) {
+				idFinca = -1;
+			}else {
+				Finca f = (Finca) in.cbxFinca.getSelectedItem();
+				idFinca = f.getId();
+			}
+		}
+		in.modelo.setDataVector(filtrarData(getData()), getColumns());
+	}
+	
+	public Object[][] filtrarData(Object[][] data) {
+		ArrayList<Object[]> datosFiltrados = new ArrayList<>();
+		
+		for (Object[] o : data) {
+			for (Object item : o) {
+				if(item != null) {
+					datosFiltrados.add(o);
+					break;
+				}
+			}
+		}
+		
+		return datosFiltrados.toArray(new Object[0][0]);
+	}
+	
 }

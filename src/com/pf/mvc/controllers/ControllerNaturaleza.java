@@ -11,7 +11,6 @@ import com.pf.mvc.models.dao.DAOTipo;
 import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Tipo;
-import com.pf.mvc.views.producto.Edit;
 import com.pf.mvc.views.general.FormGeneral;
 import com.pf.mvc.views.producto.Form;
 
@@ -20,21 +19,14 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 	private DAONaturaleza dao;
 	private FormGeneral fg;
 	private JPanel form;
-	private ControllerProductos cp;
+	private ArrayList<Integer> ids;
 	public boolean switchPanel;
 	
-	public ControllerNaturaleza(Form f, ControllerProductos cp) {
+	public ControllerNaturaleza(Form f) {
 		this.dao = new DAONaturaleza();
 		this.form = f;
-		this.cp = cp;
 		this.switchPanel = false;
-	}
-	
-	public ControllerNaturaleza(Edit ed, ControllerProductos cp) {
-		this.dao = new DAONaturaleza();
-		this.form = ed;
-		this.cp = cp;
-		this.switchPanel = false;
+		this.ids = new ArrayList<>();
 	}
 
 	
@@ -56,7 +48,7 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 			
 			int row = fg.table.getSelectedRow();
 			if(row > -1) {
-				int id = (int) fg.table.getValueAt(row, 0);
+				int id = getSelectedId(fg.table, ids);
 				edit(id);
 				
 				fg.btnRegistrar.setEnabled(false);
@@ -67,6 +59,7 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 				fg.btnCancelar.setVisible(true);
 				
 				fg.lblTitulo.setText("Editar producto");
+				fg.btnEditar.setEnabled(false);
 			}else {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
 			}
@@ -77,9 +70,8 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 		fg.btnEliminar.addActionListener(e->{
 			int row = fg.table.getSelectedRow();
 			if(row > -1) {
-			int id = (int) fg.table.getValueAt(row, 0);
+			int id = getSelectedId(fg.table, ids);
 			destroy(id);
-			//cp.cargarCbxNaturaleza();
 			cargarCbx();
 			}else {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
@@ -97,8 +89,6 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 		fg.lblTitulo.setText("Registrar nuevo producto");
 		if(switchPanel) {
 			((Form) form).setContenido(fg);
-		}else {
-			((Edit) form).setContenido(fg);
 		}
 	}
 
@@ -113,7 +103,6 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 		
 		fg.tNombre.setText("");
 		
-		//cp.cargarCbxNaturaleza(fg);
 		cargarCbx();
 		
 	}
@@ -131,7 +120,6 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 			
 			update(item, id);
 			
-			//cp.cargarCbxNaturaleza(fg);
 			cargarCbx();
 			
 			
@@ -140,7 +128,7 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 		fg.btnCancelar.addActionListener(e->{
 			
 			fg.tNombre.setText("");
-			
+			fg.btnEditar.setEnabled(true);
 			index();
 			
 		});
@@ -152,6 +140,9 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 	public Object[][] getData() {
 		
 		ArrayList<Object> list = dao.getData();
+		
+		ids.clear();
+		
 		Object [][] data = new Object [list.size()][getColumns().length];
 		
 		int i = 0;
@@ -160,8 +151,9 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 			 
 			Naturaleza item = (Naturaleza) o;
 			
-			data[i][0] = item.getId();
-			data[i][1] = item.getNombre();
+			ids.add(item.getId());
+			
+			data[i][0] = item.getNombre();
 			
 			i++;
 		}
@@ -171,7 +163,7 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 
 	@Override
 	public String[] getColumns() {
-		return new String [] {"ID", "Nombre"};
+		return new String [] {"Nombre"};
 	}
 
 	@Override
@@ -221,6 +213,7 @@ public class ControllerNaturaleza extends Functions implements Controller  {
 			f.cbxCategorias.addItem(c);
 		}
 	}
+	
 	
 
 }

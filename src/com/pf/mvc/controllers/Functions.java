@@ -4,17 +4,20 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import com.pf.mvc.models.vo.Finca;
+
 public class Functions {
 
 	public Functions() {}
 
-	public void buscar(JTextField tBuscar, TableRowSorter<DefaultTableModel> filtro) {
+	public void buscar(JTextField tBuscar, TableRowSorter<DefaultTableModel> filtro, int columna) {
 
 		tBuscar.addKeyListener(new KeyListener() {
 
@@ -24,7 +27,7 @@ public class Functions {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				String buscar = tBuscar.getText();
-				filtro.setRowFilter(RowFilter.regexFilter("(?i)"+buscar));
+					filtro.setRowFilter(RowFilter.regexFilter("(?i)"+buscar, columna));
 			}
 
 			@Override

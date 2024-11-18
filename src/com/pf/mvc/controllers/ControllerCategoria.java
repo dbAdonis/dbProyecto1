@@ -11,7 +11,6 @@ import com.pf.mvc.models.dao.DAOTipo;
 import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Tipo;
-import com.pf.mvc.views.producto.Edit;
 import com.pf.mvc.views.general.FormGeneral;
 import com.pf.mvc.views.producto.Form;
 
@@ -20,20 +19,11 @@ public class ControllerCategoria extends Functions implements Controller  {
 	private DAOCategoria dao;
 	private FormGeneral fg;
 	private JPanel form;
-	private ControllerProductos cp;
 	public boolean switchPanel;
 	
 	public ControllerCategoria(Form f, ControllerProductos cp) {
 		this.dao = new DAOCategoria();
 		this.form = f;
-		this.cp = cp;
-		this.switchPanel = false;
-	}
-	
-	public ControllerCategoria(Edit ed, ControllerProductos cp) {
-		this.dao = new DAOCategoria();
-		this.form = ed;
-		this.cp = cp;
 		this.switchPanel = false;
 	}
 
@@ -98,8 +88,6 @@ public class ControllerCategoria extends Functions implements Controller  {
 		fg.lblTitulo.setText("Registrar nueva categoria");
 		if(switchPanel) {
 			((Form) form).setContenido(fg);
-		}else {
-			((Edit) form).setContenido(fg);
 		}
 	}
 
@@ -120,7 +108,7 @@ public class ControllerCategoria extends Functions implements Controller  {
 
 	@Override
 	public void edit(int id) {
-		Tipo n = (Tipo) dao.getItem(id);
+		Categoria n = (Categoria) dao.getItem(id);
 		
 		fg.tNombre.setText(n.getNombre());
 		

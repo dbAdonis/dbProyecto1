@@ -11,7 +11,6 @@ import com.pf.mvc.models.dao.DAOTipo;
 import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Tipo;
-import com.pf.mvc.views.producto.Edit;
 import com.pf.mvc.views.general.FormGeneral;
 import com.pf.mvc.views.producto.Form;
 
@@ -20,21 +19,10 @@ public class ControllerTipo extends Functions implements Controller  {
 	private DAOTipo dao;
 	private FormGeneral fg;
 	private JPanel form;
-	private ControllerProductos cp;
-	public boolean switchPanel;
 	
-	public ControllerTipo(Form f, ControllerProductos cp) {
+	public ControllerTipo(Form f) {
 		this.dao = new DAOTipo();
 		this.form = f;
-		this.cp = cp;
-		this.switchPanel = false;
-	}
-	
-	public ControllerTipo(Edit ed, ControllerProductos cp) {
-		this.dao = new DAOTipo();
-		this.form = ed;
-		this.cp = cp;
-		this.switchPanel = false;
 	}
 
 	
@@ -80,7 +68,6 @@ public class ControllerTipo extends Functions implements Controller  {
 			if(row > -1) {
 			int id = (int) fg.table.getValueAt(row, 0);
 			destroy(id);
-			//cp.cargarCbxTipo();
 			cargarCbx();
 			}else {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
@@ -96,11 +83,8 @@ public class ControllerTipo extends Functions implements Controller  {
 		fg.btnCancelar.setVisible(false);
 		
 		fg.lblTitulo.setText("Registrar nuevo tipo");
-		if(switchPanel) {
 			((Form) form).setContenido(fg);
-		}else {
-			((Edit) form).setContenido(fg);
-		}
+		
 	}
 
 	@Override
@@ -114,7 +98,6 @@ public class ControllerTipo extends Functions implements Controller  {
 		
 		fg.tNombre.setText("");
 		
-		//cp.cargarCbxTipo();
 		cargarCbx();
 
 		
@@ -133,7 +116,6 @@ public class ControllerTipo extends Functions implements Controller  {
 			
 			update(item, id);
 			
-			//cp.cargarCbxTipo();
 			cargarCbx();
 
 			

@@ -42,7 +42,7 @@ public class Create extends JPanel {
         add(panel, BorderLayout.CENTER);
         panel.setLayout(null);
         
-        lblTitulo = new JLabel("Registrar nuevo empleado");
+        lblTitulo = new JLabel("Titulo");
         lblTitulo.setFont(new Font("Calibri", Font.BOLD, 16));
         lblTitulo.setBounds(27, 11, 847, 30);
         panel.add(lblTitulo);
@@ -66,11 +66,6 @@ public class Create extends JPanel {
         btnCancelar.setPreferredSize(new Dimension(100, 40));
         btnCancelar.setBackground(new Color(52, 108, 175));
         btnCancelar.setForeground(Color.WHITE);
-        //btnCancelar.setBounds(30, 340, 107, 42);
-        //btnCancelar.setBackground(SystemColor.inactiveCaptionBorder);
-        //btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-        btnCancelar.setEnabled(false);
-        btnCancelar.setVisible(false);
         btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
          
          btnGuardar = new JButton("Guardar");

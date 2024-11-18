@@ -21,12 +21,14 @@ public class ControllerLabores extends Functions implements Controller {
 	private DAOLabor dao;
 	private int idApp;
 	private ViewPrincipal vp;
-	private ArrayList<Integer> ids = new ArrayList<>();
+	private ArrayList<Integer> ids;
+	private Index in;
 
 	public ControllerLabores(ViewPrincipal vp) {
 		this.dao = new DAOLabor();
 		this.vp = vp;
 		this.idApp = -1;
+		this.ids = new ArrayList<>();
 	}
 
 	public int getIdApp() {
@@ -40,7 +42,7 @@ public class ControllerLabores extends Functions implements Controller {
 	@Override
 	public void index() {
 
-		Index in = new Index();
+		in = new Index();
 
 		in.modelo.setDataVector(getData(), getColumns());
 
@@ -52,31 +54,40 @@ public class ControllerLabores extends Functions implements Controller {
 
 		in.btnEditar.addActionListener(e -> {
 
-			int selectedRow = in.table.getSelectedRow();
-			if (selectedRow == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para editar.",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-				return;
-			}
-
 			int id = getSelectedId(in.table, ids);
+			if(id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
 			edit(id);
+			in.lblTitulo.setText("Editar labor");
+			in.btnGuardar.setEnabled(false);
+			in.btnGuardar.setVisible(false);
+			in.btnActualizar.setEnabled(true);
+			in.btnActualizar.setVisible(true);
+			in.btnCancelar.setEnabled(true);
+			in.btnCancelar.setVisible(true);
+			}
 
 		});
 
 		in.btnEliminar.addActionListener(e -> {
 
-			int selectedRow = in.table.getSelectedRow();
-			if (selectedRow == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-				return;
-			}
-
 			int id = getSelectedId(in.table, ids);
+			if(id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
 			dao.destroy(id);
 			index();
+			}
 
+		});
+		
+		in.btnRegresar.addActionListener(e->{
+			
+			new ControllerAplicaciones(vp).create();
+			
 		});
 
 		vp.setContenido(in, "Labores");
@@ -93,17 +104,12 @@ public class ControllerLabores extends Functions implements Controller {
 
 	@Override
 	public void create() {
-		Index in = new Index();
-
-		in.btnGuardar.addActionListener(e -> {
 			String nombre = in.tNombre.getText();
 
-			if (nombre.isEmpty()) {
-				JOptionPane.showMessageDialog(in, "El campo debe estar completo.", "Advertencia",
-						JOptionPane.WARNING_MESSAGE);
-				return;
-			}
-
+			if(nombre.equals("")) {
+				JOptionPane.showMessageDialog(in, "Debe completar el campo",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
 			Labor item = new Labor(nombre);
 
 			store(item);
@@ -111,24 +117,15 @@ public class ControllerLabores extends Functions implements Controller {
 			in.tNombre.setText("");
 
 			index();
-		});
 
-		in.btnCancelar.addActionListener(e -> {
+			}
 
-			actualizarTabla();
-
-			index();
-
-		});
-
-		in.tNombre.setText("");
-
+			
 	}
 
 	@Override
 	public void edit(int id) {
-		Index in = new Index();
-
+		
 		Labor la = (Labor) dao.getItem(id);
 
 		in.tNombre.setText(la.getNombre());
@@ -136,15 +133,20 @@ public class ControllerLabores extends Functions implements Controller {
 		in.btnActualizar.addActionListener(e -> {
 			String nombre = in.tNombre.getText();
 
-			Labor item = new Labor(nombre);
+			if(nombre.equals("")) {
+				JOptionPane.showMessageDialog(in, "Debe completar el campo",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
+				Labor item = new Labor(nombre);
 
 			update(item, id);
+			index();
+			}
+			
 
 		});
 
 		in.btnCancelar.addActionListener(e -> {
-
-			in.tNombre.setText("");
 
 			index();
 

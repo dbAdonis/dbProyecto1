@@ -18,6 +18,8 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Index extends JPanel {
     public JTable table;
@@ -27,6 +29,7 @@ public class Index extends JPanel {
     public JButton btnEliminar;
     public JButton btnEditar;
     public JButton btnNuevo;
+    public JComboBox cbxFinca;
 
     /**
      * Create the panel.
@@ -56,6 +59,17 @@ public class Index extends JPanel {
          panel_2.add(tBuscar);
          tBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
          tBuscar.setColumns(10);
+         
+         cbxFinca = new JComboBox();
+         cbxFinca.setModel(new DefaultComboBoxModel(new String[] {"Seleccionar", "Todas"}));
+         cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
+         cbxFinca.setBounds(552, 22, 112, 26);
+         panel_2.add(cbxFinca);
+         
+         JLabel lblFinca = new JLabel("Finca: ");
+         lblFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
+         lblFinca.setBounds(500, 25, 42, 20);
+         panel_2.add(lblFinca);
         
         JPanel panel_3 = new JPanel();
         panel_1.add(panel_3, BorderLayout.CENTER);

@@ -46,7 +46,7 @@ public class ViewPrincipal extends JFrame {
 		
 		lblTitulo = new JLabel("Titulo");
 		lblTitulo.setForeground(Color.WHITE);
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 20));
 		panel_3.add(lblTitulo);
 		
 		contenido = new JPanel();
@@ -106,6 +106,8 @@ public class ViewPrincipal extends JFrame {
 		this.setVisible(true);
 		this.pack();
 		this.setLocationRelativeTo(null);
+		
+		this.setExtendedState(MAXIMIZED_BOTH);
 	}
 
 }

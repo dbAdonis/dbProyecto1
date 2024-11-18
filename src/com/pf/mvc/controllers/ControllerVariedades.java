@@ -1,5 +1,9 @@
 package com.pf.mvc.controllers;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -18,12 +22,14 @@ public class ControllerVariedades extends Functions implements Controller {
 	private DAOVariedad dao;
 	private int idApp;
 	private ViewPrincipal vp;
-	private ArrayList<Integer> ids = new ArrayList<>();
+	private ArrayList<Integer> ids;
+	private Index in;
 
 	public ControllerVariedades(ViewPrincipal vp) {
 		this.dao = new DAOVariedad();
 		this.vp = vp;
 		this.idApp = -1;
+		this.ids = new ArrayList<>();
 	}
 
 	public int getIdApp() {
@@ -36,10 +42,24 @@ public class ControllerVariedades extends Functions implements Controller {
 
 	@Override
 	public void index() {
-
-		Index in = new Index();
+		
+		this.in = new Index();
 
 		in.modelo.setDataVector(getData(), getColumns());
+		
+		in.tBuscar.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				in.tBuscar.setText("");
+			}
+		});
+
+		in.tBuscar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+					buscar(in.tBuscar, in.filtro, 0);
+			}
+		});
 
 		in.btnGuardar.addActionListener(e -> {
 
@@ -49,31 +69,41 @@ public class ControllerVariedades extends Functions implements Controller {
 
 		in.btnEditar.addActionListener(e -> {
 
-			int selectedRow = in.table.getSelectedRow();
-			if (selectedRow == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para editar.",
+			int id = getSelectedId(in.table, ids);
+			if (id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar.",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
-				return;
+			}else {
+				edit(id);
+				in.lblTitulo.setText("Editar variedad");
+				in.btnGuardar.setEnabled(false);
+				in.btnGuardar.setVisible(false);
+				in.btnActualizar.setEnabled(true);
+				in.btnActualizar.setVisible(true);
+				in.btnCancelar.setEnabled(true);
+				in.btnCancelar.setVisible(true);
 			}
 
-			int id = getSelectedId(in.table, ids);
-			edit(id);
 
 		});
 
 		in.btnEliminar.addActionListener(e -> {
 
-			int selectedRow = in.table.getSelectedRow();
-			if (selectedRow == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-				return;
-			}
-
 			int id = getSelectedId(in.table, ids);
+			if(id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
 			dao.destroy(id);
 			index();
+			}
 
+		});
+		
+		in.btnRegresar.addActionListener(e->{
+			
+			new ControllerAplicaciones(vp).create();
+			
 		});
 
 		vp.setContenido(in, "Variedades");
@@ -91,17 +121,12 @@ public class ControllerVariedades extends Functions implements Controller {
 	@Override
 	public void create() {
 
-		Index in = new Index();
-
-		in.btnGuardar.addActionListener(e -> {
-			String nombre = in.tNombre.getText();
-
-			if (nombre.isEmpty()) {
-				JOptionPane.showMessageDialog(in, "El campo debe estar completo.", "Advertencia",
-						JOptionPane.WARNING_MESSAGE);
-				return;
-			}
-
+		String nombre = in.tNombre.getText();
+		
+		if(nombre.equals("")) {
+			JOptionPane.showMessageDialog(in, "Debe completar el campo",
+					"Advertencia", JOptionPane.WARNING_MESSAGE);
+		}else {
 			Variedad item = new Variedad(nombre);
 
 			store(item);
@@ -109,39 +134,35 @@ public class ControllerVariedades extends Functions implements Controller {
 			in.tNombre.setText("");
 
 			index();
-		});
-
-		in.btnCancelar.addActionListener(e -> {
-
-			actualizarTabla();
-
-			index();
-
-		});
-
-		in.tNombre.setText("");
+		}
+		
 	}
 
 	@Override
 	public void edit(int id) {
-		Index in = new Index();
 
-		Labor la = (Labor) dao.getItem(id);
+		Variedad va = (Variedad) dao.getItem(id);
 
-		in.tNombre.setText(la.getNombre());
+		in.tNombre.setText(va.getNombre());
 
 		in.btnActualizar.addActionListener(e -> {
 			String nombre = in.tNombre.getText();
 
+			if(nombre.equals("")) {
+				JOptionPane.showMessageDialog(in, "Debe completar el campo",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
 			Variedad item = new Variedad(nombre);
 
 			update(item, id);
+			
+			index();
+			
+			}
 
 		});
 
 		in.btnCancelar.addActionListener(e -> {
-
-			in.tNombre.setText("");
 
 			index();
 
@@ -154,6 +175,8 @@ public class ControllerVariedades extends Functions implements Controller {
 
 		ArrayList<Object> list = dao.getData();
 		Object[][] data = new Object[list.size()][getColumns().length];
+		
+		ids.clear();
 
 		int i = 0;
 
@@ -161,8 +184,9 @@ public class ControllerVariedades extends Functions implements Controller {
 
 			Variedad item = (Variedad) o;
 
-			data[i][0] = item.getId();
-			data[i][1] = item.getNombre();
+			ids.add(item.getId());
+			
+			data[i][0] = item.getNombre();
 
 			i++;
 		}
@@ -172,7 +196,7 @@ public class ControllerVariedades extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "ID", "Nombre" };
+		return new String[] {"Nombre"};
 	}
 
 	@Override

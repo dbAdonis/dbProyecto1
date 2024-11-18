@@ -149,7 +149,7 @@ public class Index extends JPanel {
 		// btnRegistrar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null,
 		// Color.BLACK, null));
 		btnGuardar.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnGuardar.setBounds(486, 53, 94, 25);
+		btnGuardar.setBounds(486, 53, 105, 25);
 		panel.add(btnGuardar);
 
 		btnActualizar = new JButton("Actualizar");
@@ -162,7 +162,7 @@ public class Index extends JPanel {
 		btnActualizar.setBackground(new Color(39, 174, 96));
 		btnActualizar.setForeground(Color.WHITE);
 		btnActualizar.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnActualizar.setBounds(486, 53, 94, 25);
+		btnActualizar.setBounds(486, 53, 105, 25);
 		panel.add(btnActualizar);
 
 		btnCancelar = new JButton("Cancelar");
@@ -177,7 +177,7 @@ public class Index extends JPanel {
 		btnCancelar.setBackground(new Color(52, 108, 175));
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnCancelar.setBounds(593, 53, 94, 25);
+		btnCancelar.setBounds(608, 53, 105, 25);
 		panel.add(btnCancelar);
 	}
 }

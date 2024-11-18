@@ -1,27 +1,32 @@
 package com.pf.mvc.controllers;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import com.pf.mvc.models.dao.DAOLote;
-import com.pf.mvc.models.vo.Labor;
 import com.pf.mvc.models.vo.Lote;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
-import com.pf.mvc.views.menu.Menu;
 
 public class ControllerLotes extends Functions implements Controller {
 
 	private DAOLote dao;
 	private int idApp;
 	private ViewPrincipal vp;
-	private ArrayList<Integer> ids = new ArrayList<>();
+	private ArrayList<Integer> ids;
+	private Index in;
 
 	public ControllerLotes(ViewPrincipal vp) {
 		this.dao = new DAOLote();
 		this.vp = vp;
 		this.idApp = -1;
+		this.ids = new ArrayList<>();
+		
 	}
 
 	public int getIdApp() {
@@ -34,44 +39,65 @@ public class ControllerLotes extends Functions implements Controller {
 
 	@Override
 	public void index() {
-
-		Index in = new Index();
+		
+		this.in = new Index();
 
 		in.modelo.setDataVector(getData(), getColumns());
+		
+		in.tBuscar.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				in.tBuscar.setText("");
+			}
+		});
+
+		in.tBuscar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+					buscar(in.tBuscar, in.filtro, 0);
+			}
+		});
 
 		in.btnGuardar.addActionListener(e -> {
 
-			create();
-
+			create();	
 		});
 
 		in.btnEditar.addActionListener(e -> {
 
-			int selectedRow = in.table.getSelectedRow();
-			if (selectedRow == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para editar.",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-				return;
-			}
-
 			int id = getSelectedId(in.table, ids);
+			if(id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
 			edit(id);
-
+			in.lblTitulo.setText("Editar lote");
+			in.btnGuardar.setEnabled(false);
+			in.btnGuardar.setVisible(false);
+			in.btnActualizar.setEnabled(true);
+			in.btnActualizar.setVisible(true);
+			in.btnCancelar.setEnabled(true);
+			in.btnCancelar.setVisible(true);
+			}
 		});
 
 		in.btnEliminar.addActionListener(e -> {
-
-			int selectedRow = in.table.getSelectedRow();
-			if (selectedRow == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-				return;
-			}
-
+			
 			int id = getSelectedId(in.table, ids);
+			if(id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
 			dao.destroy(id);
 			index();
-
+			}
+			
+		});
+		
+		in.btnRegresar.addActionListener(e->{
+			
+			new ControllerAplicaciones(vp).create();
+			
 		});
 
 		vp.setContenido(in, "Lotes");
@@ -88,59 +114,50 @@ public class ControllerLotes extends Functions implements Controller {
 
 	@Override
 	public void create() {
-
-		Index in = new Index();
-
-		in.btnGuardar.addActionListener(e -> {
+		
 			String nombre = in.tNombre.getText();
+			
+			if(nombre.equals("")) {
+				JOptionPane.showMessageDialog(in, "Debe completar el campo",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
+				Lote item = new Lote(nombre);
 
-			if (nombre.isEmpty()) {
-				JOptionPane.showMessageDialog(in, "El campo debe estar completo.", "Advertencia",
-						JOptionPane.WARNING_MESSAGE);
-				return;
+				store(item);
+
+				in.tNombre.setText("");
+
+				index();
 			}
-
-			Lote item = new Lote(nombre);
-
-			store(item);
-
-			in.tNombre.setText("");
-
-			index();
-		});
-
-		in.btnCancelar.addActionListener(e -> {
-
-			actualizarTabla();
-
-			index();
-
-		});
-
-		in.tNombre.setText("");
-
+				
 	}
 
 	@Override
 	public void edit(int id) {
-		Index in = new Index();
-
-		Labor la = (Labor) dao.getItem(id);
-
-		in.tNombre.setText(la.getNombre());
-
+		
+		Lote lo = (Lote) dao.getItem(id);
+			in.tNombre.setText(lo.getNombre());
+		
 		in.btnActualizar.addActionListener(e -> {
+			
 			String nombre = in.tNombre.getText();
 
-			Lote item = new Lote(nombre);
+			if(nombre.equals("")) {
+				JOptionPane.showMessageDialog(in, "Debe completar el campo",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+			}else {
+				Lote item = new Lote(nombre);
 
-			update(item, id);
+				update(item, id);
 
+				index();
+			}
+			
+		
+			
 		});
-
+		
 		in.btnCancelar.addActionListener(e -> {
-
-			in.tNombre.setText("");
 
 			index();
 
@@ -183,7 +200,7 @@ public class ControllerLotes extends Functions implements Controller {
 		dao.store(o);
 		index();
 	}
-
+	
 	@Override
 	public void update(Object o, int id) {
 		dao.update(o, id);

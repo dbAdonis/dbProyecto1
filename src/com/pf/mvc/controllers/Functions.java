@@ -62,8 +62,6 @@ public class Functions {
 		
 		int row = table.getSelectedRow();
 		
-		System.out.println(row);
-		
 		if(row>-1) {
 			return (int) table.getValueAt(row, 0);
 		}

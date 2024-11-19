@@ -2,6 +2,7 @@ package com.pf.mvc.views.general;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -66,6 +67,8 @@ public class Index extends JPanel {
 		panel_3.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_4.getLayout();
+		flowLayout.setHgap(10);
 		panel_3.add(panel_4, BorderLayout.SOUTH);
 
 		btnEditar = new JButton("Editar");

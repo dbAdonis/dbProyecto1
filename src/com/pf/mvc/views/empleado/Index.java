@@ -116,6 +116,7 @@ public class Index extends JPanel {
 		panel_4.add(btnEliminar);
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(null);
 		panel_3.add(scrollPane, BorderLayout.CENTER);
 
 		modelo = new DefaultTableModel();
@@ -123,11 +124,13 @@ public class Index extends JPanel {
 		table = new JTable();
 		table.setFont(new Font("Calibri", Font.PLAIN, 16));
 		table.setRowHeight(30);
+		table.setBorder(null);
 		table.setRowSorter(filtro);
 		table.setModel(modelo);
 
 		JTableHeader header = table.getTableHeader();
 		header.setFont(new Font("Calibri", Font.BOLD, 16));
+		header.setBackground(new Color(62, 85, 40));
 		scrollPane.setViewportView(table);
 	}
 }

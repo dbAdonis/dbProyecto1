@@ -60,25 +60,25 @@ public class Index extends JPanel {
 		tBuscar.setBounds(74, 29, 235, 26);
 		panel.add(tBuscar);
 		tBuscar.setColumns(10);
-		
+
 		JLabel lblCriterioDeBsqueda = new JLabel("Criterio de b\u00FAsqueda:");
 		lblCriterioDeBsqueda.setFont(new Font("Calibri", Font.PLAIN, 16));
 		lblCriterioDeBsqueda.setBounds(338, 32, 139, 20);
 		panel.add(lblCriterioDeBsqueda);
-		
+
 		cbxBusqueda = new JComboBox();
-		cbxBusqueda.setModel(new DefaultComboBoxModel(new String[] {"Seleccionar"}));
+		cbxBusqueda.setModel(new DefaultComboBoxModel(new String[] { "Seleccionar" }));
 		cbxBusqueda.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxBusqueda.setBounds(487, 29, 171, 26);
 		panel.add(cbxBusqueda);
-		
+
 		JLabel lblOrdenarPorFinca = new JLabel("Ordenar por finca:");
 		lblOrdenarPorFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
 		lblOrdenarPorFinca.setBounds(695, 32, 123, 20);
 		panel.add(lblOrdenarPorFinca);
-		
+
 		cbxFinca = new JComboBox();
-		cbxFinca.setModel(new DefaultComboBoxModel(new String[] {"Seleccionar", "Todas"}));
+		cbxFinca.setModel(new DefaultComboBoxModel(new String[] { "Seleccionar", "Todas" }));
 		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxFinca.setBounds(828, 29, 112, 26);
 		panel.add(cbxFinca);
@@ -105,8 +105,10 @@ public class Index extends JPanel {
 		scrollPane.setViewportView(table);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		panel_2.setLayout((LayoutManager) new FlowLayout(FlowLayout.CENTER, 20, 0));
+		//panel_2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
+		flowLayout.setHgap(10);
+		//panel_2.setLayout((LayoutManager) new FlowLayout(FlowLayout.CENTER, 20, 0));
 		add(panel_2, BorderLayout.SOUTH);
 
 		btnNuevo = new JButton("Nuevo Reporte");
@@ -151,54 +153,54 @@ public class Index extends JPanel {
 	}
 
 	public void ajustarColumnasYExpandirTabla(JTable tabla) {
-	    int tableWidth = tabla.getWidth(); // Ancho total del contenedor
-	    int margin = 10; // Margen adicional para evitar texto cortado
+		int tableWidth = tabla.getWidth(); // Ancho total del contenedor
+		int margin = 10; // Margen adicional para evitar texto cortado
 
-	    // Calcular los anchos necesarios
-	    int[] columnWidths = new int[tabla.getColumnCount()];
-	    int totalColumnWidth = 0;
+		// Calcular los anchos necesarios
+		int[] columnWidths = new int[tabla.getColumnCount()];
+		int totalColumnWidth = 0;
 
-	    for (int columna = 0; columna < tabla.getColumnCount(); columna++) {
-	        TableColumn tableColumn = tabla.getColumnModel().getColumn(columna);
-	        int anchoMaximo = 0;
+		for (int columna = 0; columna < tabla.getColumnCount(); columna++) {
+			TableColumn tableColumn = tabla.getColumnModel().getColumn(columna);
+			int anchoMaximo = 0;
 
-	        // Ancho del encabezado
-	        Object headerValue = tableColumn.getHeaderValue();
-	        if (headerValue != null) {
-	            int anchoEncabezado = tabla.getFontMetrics(tabla.getTableHeader().getFont())
-	                    .stringWidth(headerValue.toString());
-	            anchoMaximo = Math.max(anchoMaximo, anchoEncabezado);
-	        }
+			// Ancho del encabezado
+			Object headerValue = tableColumn.getHeaderValue();
+			if (headerValue != null) {
+				int anchoEncabezado = tabla.getFontMetrics(tabla.getTableHeader().getFont())
+						.stringWidth(headerValue.toString());
+				anchoMaximo = Math.max(anchoMaximo, anchoEncabezado);
+			}
 
-	        // Ancho del contenido en las celdas
-	        for (int fila = 0; fila < tabla.getRowCount(); fila++) {
-	            Object valorCelda = tabla.getValueAt(fila, columna);
-	            if (valorCelda != null) {
-	                int anchoCelda = tabla.getFontMetrics(tabla.getFont()).stringWidth(valorCelda.toString());
-	                anchoMaximo = Math.max(anchoMaximo, anchoCelda);
-	            }
-	        }
+			// Ancho del contenido en las celdas
+			for (int fila = 0; fila < tabla.getRowCount(); fila++) {
+				Object valorCelda = tabla.getValueAt(fila, columna);
+				if (valorCelda != null) {
+					int anchoCelda = tabla.getFontMetrics(tabla.getFont()).stringWidth(valorCelda.toString());
+					anchoMaximo = Math.max(anchoMaximo, anchoCelda);
+				}
+			}
 
-	        columnWidths[columna] = anchoMaximo + margin; // Agregar margen
-	        totalColumnWidth += columnWidths[columna];
-	    }
+			columnWidths[columna] = anchoMaximo + margin; // Agregar margen
+			totalColumnWidth += columnWidths[columna];
+		}
 
-	    // Distribuir espacio restante proporcionalmente
-	    if (totalColumnWidth < tableWidth) {
-	        int extraWidth = (tableWidth - totalColumnWidth) / tabla.getColumnCount();
+		// Distribuir espacio restante proporcionalmente
+		if (totalColumnWidth < tableWidth) {
+			int extraWidth = (tableWidth - totalColumnWidth) / tabla.getColumnCount();
 
-	        for (int columna = 0; columna < tabla.getColumnCount(); columna++) {
-	            columnWidths[columna] += extraWidth;
-	        }
-	    }
+			for (int columna = 0; columna < tabla.getColumnCount(); columna++) {
+				columnWidths[columna] += extraWidth;
+			}
+		}
 
-	    // Aplicar los anchos calculados
-	    for (int columna = 0; columna < tabla.getColumnCount(); columna++) {
-	        tabla.getColumnModel().getColumn(columna).setPreferredWidth(columnWidths[columna]);
-	    }
+		// Aplicar los anchos calculados
+		for (int columna = 0; columna < tabla.getColumnCount(); columna++) {
+			tabla.getColumnModel().getColumn(columna).setPreferredWidth(columnWidths[columna]);
+		}
 
-	    // Hacer que la tabla ocupe todo el ancho disponible
-	    tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-	    
+		// Hacer que la tabla ocupe todo el ancho disponible
+		tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
 	}
 }

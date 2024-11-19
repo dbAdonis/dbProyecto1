@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import java.awt.SystemColor;
+import javax.swing.border.LineBorder;
 
 public class Index extends JPanel {
 	public JTable table;
@@ -109,16 +110,17 @@ public class Index extends JPanel {
 		modelo = new DefaultTableModel();
 		filtro = new TableRowSorter<DefaultTableModel>(modelo);
 		table = new JTable();
+		table.setRowHeight(30);
 		table.setModel(modelo);
 		table.setRowSorter(filtro);
 		table.setFont(new Font("Calibri", Font.PLAIN, 16));
 
 		JTableHeader header = table.getTableHeader();
 		header.setFont(new Font("Calibri", Font.PLAIN, 16));
-
 		scrollPane.setViewportView(table);
 
 		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setPreferredSize(new Dimension(10, 105));
 		add(panel, BorderLayout.NORTH);
 		panel.setLayout(null);

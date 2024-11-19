@@ -111,21 +111,24 @@ public class ControllerFincas extends Functions implements Controller {
 
 	@Override
 	public void create() {
-	    String nombre = in.tNombre.getText();
+		String nombre = in.tNombre.getText();
 
-	    if (nombre.equals("")) {
-	        JOptionPane.showMessageDialog(in, "Debe completar el campo", 
-	            "Advertencia", JOptionPane.WARNING_MESSAGE);
-	    } else {
-	        Finca item = new Finca(nombre);
+	    if (nombre.isEmpty()) {
+	        JOptionPane.showMessageDialog(in, "El nombre no puede estar vacío.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+	        return;
+	    }
 
-	        dao.store(item);
+	    Finca item = new Finca(nombre, true);
 
-	        in.tNombre.setText("");
+	    String result = dao.storeFinca(item);
+
+	    JOptionPane.showMessageDialog(in, result);
+
+	    in.tNombre.setText("");
 
 	        index();
 	    }
-	}
+	
 
 
 	@Override
@@ -142,7 +145,7 @@ public class ControllerFincas extends Functions implements Controller {
 				JOptionPane.showMessageDialog(in, "Debe completar el campo",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 			}else {
-				Finca item = new Finca(nombre);
+				Finca item = new Finca(nombre, true);
 
 				update(item, id);
 

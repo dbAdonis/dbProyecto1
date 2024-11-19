@@ -42,6 +42,44 @@ public class DAOFinca extends Conexion implements DAO{
 		}
 
 	}
+	
+	public String storeFinca(Object o) {
+	    Connection con = conectar();
+	    String sql = "select * from fincas where nombre = ?;";
+
+	    try {
+	        Finca f = (Finca) o;
+
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, f.getNombre());
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            if (rs.getInt("activo") == 0) {
+	                String updateSql = "update fincas set activo = 1 where id_finca = ?";
+	                ps = con.prepareStatement(updateSql);
+	                ps.setInt(1, rs.getInt("id_finca"));
+	                ps.executeUpdate();
+	                return "Finca reactivada correctamente.";
+	            } else {
+	                return "La finca ya existe y está activa.";
+	            }
+	        } else {
+	            sql = "insert into fincas (nombre, activo) values (?, ?);";
+	            ps = con.prepareStatement(sql);
+	            ps.setString(1, f.getNombre());
+	            ps.setInt(2, f.isActivo() ? 1 : 0); 
+	            ps.execute();
+	            return "Finca registrada correctamente.";
+	        }
+	    } catch (Exception e) {
+	        System.err.println("ERROR: " + e.getMessage());
+	        return "Error al registrar o actualizar la finca.";
+	    } finally {
+	        desconectar(con);
+	    }
+	}
+
 
 	@Override
 	public boolean update(Object o, int id) {
@@ -75,7 +113,7 @@ public class DAOFinca extends Conexion implements DAO{
 	public boolean destroy(int id) {
 
 		Connection con = conectar();
-		String sql = "delete from fincas where id_finca = ?;";
+		String sql = "update fincas set activo = 0 where id_finca = ?;";
 
 		try {
 
@@ -115,7 +153,8 @@ public class DAOFinca extends Conexion implements DAO{
 
 			while (rs.next()) {
 
-				item = new Finca(rs.getInt("id_finca"), rs.getString("nombre"));
+				item = new Finca(rs.getInt("id_finca"), rs.getString("nombre"),
+						rs.getInt("activo")==1);
 
 			}
 
@@ -135,7 +174,7 @@ public class DAOFinca extends Conexion implements DAO{
 		ArrayList<Object> list = new ArrayList<Object>();
 
 		Connection con = conectar();
-		String sql = "select * from fincas;";
+		String sql = "select * from fincas where activo = 1;";
 
 		try {
 
@@ -144,7 +183,8 @@ public class DAOFinca extends Conexion implements DAO{
 
 			while (rs.next()) {
 
-				Finca item = new Finca(rs.getInt("id_finca"), rs.getString("nombre"));
+				Finca item = new Finca(rs.getInt("id_finca"), rs.getString("nombre"),
+						rs.getInt("activo")==1);
 
 				list.add(item);
 

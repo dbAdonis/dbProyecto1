@@ -65,7 +65,7 @@ public class Functions {
 		System.out.println(row);
 		
 		if(row>-1) {
-			return (int) table.getValueAt(0, row);
+			return (int) table.getValueAt(row, 0);
 		}
 		return -1;
 	}

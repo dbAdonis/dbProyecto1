@@ -88,11 +88,19 @@ public class ControllerTipo extends Functions implements Controller  {
 	public void create() {
 		
 		String nombre = fg.tNombre.getText();
-		
-		Tipo item = new Tipo(nombre);
-		
-		store(item);
-		
+
+		if (nombre.isEmpty()) {
+			JOptionPane.showMessageDialog(fg, "El nombre no puede estar vacío.", "Advertencia",
+					JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		Tipo item = new Tipo(nombre, true);
+
+		String result = dao.storeTipo(item);
+
+		JOptionPane.showMessageDialog(fg, result);
+
 		fg.tNombre.setText("");
 
 		
@@ -107,7 +115,7 @@ public class ControllerTipo extends Functions implements Controller  {
 		fg.btnActualizar.addActionListener(e->{
 			String nombre = fg.tNombre.getText();
 			
-			Tipo item = new Tipo(nombre);
+			Tipo item = new Tipo(nombre, true);
 			
 			update(item, id);
 

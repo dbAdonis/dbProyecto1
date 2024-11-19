@@ -93,13 +93,19 @@ public class ControllerCategoria extends Functions implements Controller  {
 	public void create() {
 		
 		String nombre = fg.tNombre.getText();
-		
-		Categoria item = new Categoria(nombre);
-		
-		store(item);
-		
-		fg.tNombre.setText("");
-		
+
+	    if (nombre.isEmpty()) {
+	        JOptionPane.showMessageDialog(fg, "El nombre no puede estar vacío.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+	        return;
+	    }
+
+	    Categoria item = new Categoria(nombre, true);
+
+	    String result = dao.storeCategoria(item);
+
+	    JOptionPane.showMessageDialog(fg, result);
+
+	    fg.tNombre.setText("");
 	}
 
 	@Override
@@ -111,7 +117,7 @@ public class ControllerCategoria extends Functions implements Controller  {
 		fg.btnActualizar.addActionListener(e->{
 			String nombre = fg.tNombre.getText();
 			
-			Categoria item = new Categoria(nombre);
+			Categoria item = new Categoria(nombre, true);
 			
 			update(item, id);
 			

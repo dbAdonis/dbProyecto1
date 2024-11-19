@@ -104,24 +104,24 @@ public class ControllerLabores extends Functions implements Controller {
 
 	@Override
 	public void create() {
-			String nombre = in.tNombre.getText();
+	    String nombre = in.tNombre.getText();
 
-			if(nombre.equals("")) {
-				JOptionPane.showMessageDialog(in, "Debe completar el campo",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
-			Labor item = new Labor(nombre);
+	    if (nombre.equals("")) {
+	        JOptionPane.showMessageDialog(in, "Debe completar el campo", 
+	                "Advertencia", JOptionPane.WARNING_MESSAGE);
+	    } else {
+	        Labor item = new Labor(nombre, true);
 
-			store(item);
+	        String result = dao.storeLabor(item);
 
-			in.tNombre.setText("");
+	        JOptionPane.showMessageDialog(in, result, 
+	                "Resultado de la operación", JOptionPane.INFORMATION_MESSAGE);
 
-			index();
-
-			}
-
-			
+	        in.tNombre.setText("");
+	        index();
+	    }
 	}
+
 
 	@Override
 	public void edit(int id) {
@@ -137,7 +137,7 @@ public class ControllerLabores extends Functions implements Controller {
 				JOptionPane.showMessageDialog(in, "Debe completar el campo",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 			}else {
-				Labor item = new Labor(nombre);
+				Labor item = new Labor(nombre, true);
 
 			update(item, id);
 			index();

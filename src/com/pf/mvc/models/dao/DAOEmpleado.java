@@ -43,6 +43,44 @@ public class DAOEmpleado extends Conexion implements DAO {
 		}
 
 	}
+	
+	public String storeEmpleado(Object o) {
+	    Connection con = conectar();
+	    String sql = "select * from empleados where nombre = ? and id_finca = ?;";
+	    
+	    try {
+	        Empleado e = (Empleado) o;
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, e.getNombre());
+	        ps.setInt(2, e.getIdFinca());
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            if (rs.getInt("activo") == 0) {
+	                String updateSql = "update empleados set activo = 1 where id_empleado = ?";
+	                ps = con.prepareStatement(updateSql);
+	                ps.setInt(1, rs.getInt("id_empleado"));
+	                ps.executeUpdate();
+	                return "Empleado activado correctamente.";
+	            } else {
+	                return "El empleado ya existe y está activo.";
+	            }
+	        } else {
+	            sql = "insert into empleados (id_finca, nombre, activo) values (?, ?, ?);";
+	            ps = con.prepareStatement(sql);
+	            ps.setInt(1, e.getIdFinca());
+	            ps.setString(2, e.getNombre());
+	            ps.setInt(3, e.isActivo() ? 1 : 0);
+	            ps.execute();
+	            return "Empleado registrado correctamente.";
+	        }
+	    } catch (Exception e) {
+	        System.err.println("ERROR: " + e.getMessage());
+	        return "Error al registrar o actualizar el empleado.";
+	    } finally {
+	        desconectar(con);
+	    }
+	}
 
 	@Override
 	public boolean update(Object o, int id) {

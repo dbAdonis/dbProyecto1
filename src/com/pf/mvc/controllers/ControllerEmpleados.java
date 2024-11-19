@@ -106,43 +106,41 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 	@Override
 	public void create() {
+	    Create c = new Create();
 
-		Create c = new Create();
+	    ArrayList<Object> fincas = new DAOFinca().getData();
+	    for (Object o : fincas) {
+	        Finca r = (Finca) o;
+	        c.cbxFincas.addItem(r);
+	    }
 
-		ArrayList<Object> fincas = new DAOFinca().getData();
-		for (Object o : fincas) {
-			Finca r = (Finca) o;
-			c.cbxFincas.addItem(r);
-		}
+	    c.btnGuardar.addActionListener(e -> {
+	        String nombre = c.tNombre.getText();
+	        Finca r = (Finca) c.cbxFincas.getSelectedItem();
 
-		c.btnGuardar.addActionListener(e -> {
-			String nombre = c.tNombre.getText();
+	        if (nombre.isEmpty() || r == null) {
+	            JOptionPane.showMessageDialog(c, "Todos los campos deben estar completos.", "Advertencia",
+	                    JOptionPane.WARNING_MESSAGE);
+	            return;
+	        }
 
-			Finca r = (Finca) c.cbxFincas.getSelectedItem();
+	        Empleado item = new Empleado(r.getId(), nombre, true);
 
-			if (nombre.isEmpty() || r == null) {
-				JOptionPane.showMessageDialog(c, "Todos los campos deben estar completos.", "Advertencia",
-						JOptionPane.WARNING_MESSAGE);
-				return;
-			}
+	        String result = new DAOEmpleado().storeEmpleado(item);
 
-			Empleado item = new Empleado(r.getId(), nombre, true);
+	        JOptionPane.showMessageDialog(c, result);
 
-			store(item);
-			index();
-		});
-		
-		c.btnCancelar.addActionListener(e -> {
+	        index();
+	    });
 
-			
-			index();
+	    c.btnCancelar.addActionListener(e -> {
+	        index();
+	    });
 
-		});
-
-		c.lblTitulo.setText("Registrar nuevo empleado");
-		vp.setContenido(c, "Gestionar personal");
-
+	    c.lblTitulo.setText("Registrar nuevo empleado");
+	    vp.setContenido(c, "Gestionar personal");
 	}
+
 
 	@Override
 	public void edit(int id) {

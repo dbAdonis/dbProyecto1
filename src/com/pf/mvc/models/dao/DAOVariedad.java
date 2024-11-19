@@ -39,6 +39,46 @@ public class DAOVariedad extends Conexion implements DAO {
 			desconectar(con);
 		}
 	}
+	
+	public String storeVariedad(Object o) {
+	    Connection con = conectar();
+	    String sql = "select * from variedades where nombre = ?;";
+
+	    try {
+	        Variedad item = (Variedad) o;
+	        
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, item.getNombre());
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            if (rs.getInt("activo") == 0) {
+	                String updateSql = "update variedades set activo = 1 where id_variedad = ?";
+	                ps = con.prepareStatement(updateSql);
+	                ps.setInt(1, rs.getInt("id_variedad"));
+	                ps.executeUpdate();
+	                return "Variedad activada correctamente.";
+	            } else {
+	                return "La variedad ya existe y está activa.";
+	            }
+	        } else {
+	            sql = "insert into variedades (nombre, activo) VALUES (?, ?);";
+	            ps = con.prepareStatement(sql);
+	            ps.setString(1, item.getNombre());
+	            ps.setInt(2, item.isActivo() ? 1 : 0);
+	            ps.execute();
+	            return "Variedad registrada correctamente.";
+	        }
+
+	    } catch (Exception e) {
+	        System.err.println("Error: " + e.getMessage());
+	        return "Error al registrar o actualizar la variedad.";
+	    } finally {
+	        desconectar(con);
+	    }
+	}
+
+
 
 	@Override
 	public boolean update(Object o, int id) {

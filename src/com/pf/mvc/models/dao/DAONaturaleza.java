@@ -39,6 +39,43 @@ public class DAONaturaleza extends Conexion implements DAO {
 			desconectar(con);
 		}
 	}
+	
+	public String storeNaturaleza(Object o) {
+	    Connection con = conectar();
+	    String sql = "select * from naturalezas where nombre = ?;";  
+	    try {
+	        Naturaleza item = (Naturaleza) o;
+
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, item.getNombre());
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            if (rs.getInt("activo") == 0) {
+	                String updateSql = "update naturalezas set activo = 1 where id_naturaleza = ?";
+	                ps = con.prepareStatement(updateSql);
+	                ps.setInt(1, rs.getInt("id_naturaleza"));
+	                ps.executeUpdate();
+	                return "Naturaleza activada correctamente.";
+	            } else {
+	                return "La naturaleza ya existe y está activa.";
+	            }
+	        } else {
+	            sql = "insert into naturalezas (nombre, activo) VALUES (?, ?);";
+	            ps = con.prepareStatement(sql);
+	            ps.setString(1, item.getNombre());
+	            ps.setInt(2, item.isActivo() ? 1 : 0);
+	            ps.execute();
+	            return "Naturaleza registrada correctamente.";
+	        }
+	    } catch (Exception e) {
+	        System.err.println("ERROR: " + e.getMessage());
+	        return "Error al registrar o actualizar la naturaleza.";
+	    } finally {
+	        desconectar(con);
+	    }
+	}
+
 
 	@Override
 	public boolean update(Object o, int id) {

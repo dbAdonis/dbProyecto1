@@ -9,7 +9,7 @@ import com.pf.mvc.models.conn.Conexion;
 import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Labor;
 
-public class DAOLabor extends Conexion implements DAO{
+public class DAOLabor extends Conexion implements DAO {
 
 	public DAOLabor() {
 	}
@@ -17,7 +17,7 @@ public class DAOLabor extends Conexion implements DAO{
 	@Override
 	public boolean store(Object o) {
 		Connection con = conectar();
-		String sql = "insert into labores (nombre) VALUES (?);";
+		String sql = "insert into labores (nombre, activo) VALUES (?, ?);";
 
 		try {
 
@@ -26,6 +26,7 @@ public class DAOLabor extends Conexion implements DAO{
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setString(1, item.getNombre());
+			ps.setInt(2, item.isActivo() ? 1 : 0);
 
 			ps.execute();
 
@@ -35,6 +36,43 @@ public class DAOLabor extends Conexion implements DAO{
 			System.err.println("Error: " + e.getMessage());
 			return false;
 
+		} finally {
+			desconectar(con);
+		}
+	}
+
+	public String storeLabor(Object o) {
+		Connection con = conectar();
+		String sql = "select * from labores where nombre = ?;";
+
+		try {
+			Labor item = (Labor) o;
+
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, item.getNombre());
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				if (rs.getInt("activo") == 0) {
+					String updateSql = "update labores set activo = 1 where id_labor = ?";
+					ps = con.prepareStatement(updateSql);
+					ps.setInt(1, rs.getInt("id_labor"));
+					ps.executeUpdate();
+					return "Labor activada correctamente.";
+				} else {
+					return "La labor ya existe y está activa.";
+				}
+			} else {
+				sql = "insert into labores (nombre, activo) VALUES (?, ?);";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, item.getNombre());
+				ps.setInt(2, item.isActivo() ? 1 : 0);
+				ps.execute();
+				return "Labor registrada correctamente.";
+			}
+		} catch (Exception e) {
+			System.err.println("Error: " + e.getMessage());
+			return "Error al registrar o actualizar la labor.";
 		} finally {
 			desconectar(con);
 		}
@@ -70,7 +108,7 @@ public class DAOLabor extends Conexion implements DAO{
 	@Override
 	public boolean destroy(int id) {
 		Connection con = conectar();
-		String sql = "delete from labores where id_labor = ?;";
+		String sql = "update labores set activo = 0 where id_labor = ?;";
 
 		try {
 
@@ -108,7 +146,7 @@ public class DAOLabor extends Conexion implements DAO{
 
 			while (rs.next()) {
 
-				item = new Labor(rs.getInt("id_labor"), rs.getString("nombre"));
+				item = new Labor(rs.getInt("id_labor"), rs.getString("nombre"), rs.getInt("activo") == 1);
 			}
 
 		} catch (Exception e) {
@@ -125,7 +163,7 @@ public class DAOLabor extends Conexion implements DAO{
 		ArrayList<Object> list = new ArrayList<Object>();
 
 		Connection con = conectar();
-		String sql = "select * from labores;";
+		String sql = "select * from labores where activo = 1;";
 
 		try {
 
@@ -134,7 +172,7 @@ public class DAOLabor extends Conexion implements DAO{
 
 			while (rs.next()) {
 
-				Labor p = new Labor(rs.getInt("id_labor"), rs.getString("nombre"));
+				Labor p = new Labor(rs.getInt("id_labor"), rs.getString("nombre"), rs.getInt("activo") == 1);
 
 				list.add(p);
 

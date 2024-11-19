@@ -120,20 +120,21 @@ public class ControllerVariedades extends Functions implements Controller {
 	@Override
 	public void create() {
 
-		String nombre = in.tNombre.getText();
+	    String nombre = in.tNombre.getText();
 
-		if (nombre.equals("")) {
-			JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia", JOptionPane.WARNING_MESSAGE);
-		} else {
-			Variedad item = new Variedad(nombre, true);
+	    if (nombre.equals("")) {
+	        JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia", JOptionPane.WARNING_MESSAGE);
+	    } else {
+	        Variedad item = new Variedad(nombre, true);
 
-			store(item);
+	        String result = dao.storeVariedad(item);
 
-			in.tNombre.setText("");
+	        JOptionPane.showMessageDialog(in, result, "Resultado", JOptionPane.INFORMATION_MESSAGE);
 
-			index();
-		}
+	        in.tNombre.setText("");
 
+	        index();
+	    }
 	}
 
 	@Override

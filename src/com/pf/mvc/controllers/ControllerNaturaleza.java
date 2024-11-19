@@ -94,18 +94,23 @@ public class ControllerNaturaleza extends Functions implements Controller {
 
 	@Override
 	public void create() {
+	    String nombre = fg.tNombre.getText();
 
-		String nombre = fg.tNombre.getText();
+	    if (nombre.isEmpty()) {
+	        JOptionPane.showMessageDialog(fg, "El nombre no puede estar vacío.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+	        return;
+	    }
 
-		Naturaleza item = new Naturaleza(nombre, true);
+	    Naturaleza item = new Naturaleza(nombre, true);
 
-		store(item);
+	    String result = dao.storeNaturaleza(item);
 
-		fg.tNombre.setText("");
+	    JOptionPane.showMessageDialog(fg, result);
 
-		cargarCbx();
-
+	    fg.tNombre.setText("");
+	    cargarCbx();
 	}
+
 
 	@Override
 	public void edit(int id) {

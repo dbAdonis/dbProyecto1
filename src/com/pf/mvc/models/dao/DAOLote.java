@@ -39,6 +39,45 @@ public class DAOLote extends Conexion implements DAO {
 			desconectar(con);
 		}
 	}
+	
+	public String storeLote(Object o) {
+	    Connection con = conectar();
+	    String sql = "select * from lotes where nombre = ?;";  
+
+	    try {
+	        Lote item = (Lote) o;
+
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, item.getNombre());
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            if (rs.getInt("activo") == 0) {
+	                String updateSql = "update lotes set activo = 1 where id_lote = ?";
+	                ps = con.prepareStatement(updateSql);
+	                ps.setInt(1, rs.getInt("id_lote"));
+	                ps.executeUpdate();
+	                return "Lote activado correctamente.";
+	            } else {
+	                return "El lote ya existe y está activo.";
+	            }
+	        } else {
+	            sql = "insert into lotes (nombre, activo) VALUES (?, ?);";
+	            ps = con.prepareStatement(sql);
+	            ps.setString(1, item.getNombre());
+	            ps.setInt(2, item.isActivo() ? 1 : 0);
+	            ps.execute();
+	            return "Lote registrado correctamente.";
+	        }
+
+	    } catch (Exception e) {
+	        System.err.println("Error: " + e.getMessage());
+	        return "Error al registrar o activar el lote.";
+	    } finally {
+	        desconectar(con);
+	    }
+	}
+
 
 	@Override
 	public boolean update(Object o, int id) {

@@ -114,23 +114,24 @@ public class ControllerLotes extends Functions implements Controller {
 
 	@Override
 	public void create() {
-		
-			String nombre = in.tNombre.getText();
-			
-			if(nombre.equals("")) {
-				JOptionPane.showMessageDialog(in, "Debe completar el campo",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
-				Lote item = new Lote(nombre, true);
+	    String nombre = in.tNombre.getText();
 
-				store(item);
+	    if (nombre.equals("")) {
+	        JOptionPane.showMessageDialog(in, "Debe completar el campo", 
+	            "Advertencia", JOptionPane.WARNING_MESSAGE);
+	    } else {
+	        Lote item = new Lote(nombre, true);
 
-				in.tNombre.setText("");
+	        String result = dao.storeLote(item);
 
-				index();
-			}
-				
+	        JOptionPane.showMessageDialog(in, result, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+
+	        in.tNombre.setText("");
+
+	        index();
+	    }
 	}
+
 
 	@Override
 	public void edit(int id) {

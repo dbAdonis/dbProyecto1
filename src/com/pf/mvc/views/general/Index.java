@@ -26,7 +26,6 @@ public class Index extends JPanel {
 	public JTextField tNombre;
 	public DefaultTableModel modelo;
 	public TableRowSorter<DefaultTableModel> filtro;
-	public JButton btnRegresar;
 	public JButton btnEliminar;
 	public JButton btnEditar;
 	public JButton btnGuardar;
@@ -94,18 +93,6 @@ public class Index extends JPanel {
 		// Color.BLACK, null));
 		btnEliminar.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_4.add(btnEliminar);
-
-		btnRegresar = new JButton("Regresar");
-		btnRegresar.setBorder(null);
-		btnRegresar.setFocusPainted(false);
-		btnRegresar.setPreferredSize(new Dimension(100, 40));
-		btnRegresar.setBackground(new Color(52, 108, 175));
-		btnRegresar.setForeground(Color.WHITE);
-		// btnRegresar.setBackground(SystemColor.inactiveCaptionBorder);
-		// btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null,
-		// Color.BLACK, null));
-		btnRegresar.setFont(new Font("Calibri", Font.BOLD, 16));
-		panel_4.add(btnRegresar);
 
 		JScrollPane scrollPane = new JScrollPane();
 		panel_3.add(scrollPane, BorderLayout.CENTER);

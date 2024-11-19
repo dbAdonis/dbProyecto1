@@ -94,11 +94,11 @@ public class ControllerLotes extends Functions implements Controller {
 			
 		});
 		
-		in.btnRegresar.addActionListener(e->{
-			
-			new ControllerAplicaciones(vp).create();
-			
-		});
+//		in.btnRegresar.addActionListener(e->{
+//			
+//			new ControllerAplicaciones(vp).create();
+//			
+//		});
 
 		vp.setContenido(in, "Lotes");
 

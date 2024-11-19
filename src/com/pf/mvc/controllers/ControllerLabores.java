@@ -83,12 +83,6 @@ public class ControllerLabores extends Functions implements Controller {
 			}
 
 		});
-		
-//		in.btnRegresar.addActionListener(e->{
-//			
-//			new ControllerAplicaciones(vp).create();
-//			
-//		});
 
 		vp.setContenido(in, "Labores");
 

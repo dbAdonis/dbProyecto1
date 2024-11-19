@@ -99,12 +99,6 @@ public class ControllerVariedades extends Functions implements Controller {
 
 		});
 
-//		in.btnRegresar.addActionListener(e -> {
-//
-//			new ControllerAplicaciones(vp).create();
-//
-//		});
-
 		vp.setContenido(in, "Variedades");
 
 		in.btnGuardar.setEnabled(true);

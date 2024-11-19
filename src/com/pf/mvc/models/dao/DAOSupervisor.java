@@ -38,6 +38,44 @@ public class DAOSupervisor extends Conexion implements DAO {
 			desconectar(con);
 		}
 	}
+	
+	public String storeSupervisor(Object o) {
+	    Connection con = conectar();
+	    String sql = "select * from supervisores where nombre = ?;";
+
+	    try {
+	        Supervisor item = (Supervisor) o;
+
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, item.getNombre());
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            if (rs.getInt("activo") == 0) {
+	                String updateSql = "update supervisores set activo = 1 where id_supervisor = ?";
+	                ps = con.prepareStatement(updateSql);
+	                ps.setInt(1, rs.getInt("id_supervisor"));
+	                ps.executeUpdate();
+	                return "Supervisor reactivado correctamente.";
+	            } else {
+	                return "El supervisor ya existe y está activo.";
+	            }
+	        } else {
+	            sql = "insert into supervisores (nombre, activo) values (?, ?);";
+	            ps = con.prepareStatement(sql);
+	            ps.setString(1, item.getNombre());
+	            ps.setInt(2, item.isActivo() ? 1 : 0); 
+	            ps.execute();
+	            return "Supervisor registrado correctamente.";
+	        }
+	    } catch (Exception e) {
+	        System.err.println("Error: " + e.getMessage());
+	        return "Error al registrar o actualizar el supervisor.";
+	    } finally {
+	        desconectar(con);
+	    }
+	}
+
 
 	@Override
 	public boolean update(Object o, int id) {
@@ -69,7 +107,7 @@ public class DAOSupervisor extends Conexion implements DAO {
 	@Override
 	public boolean destroy(int id) {
 		Connection con = conectar();
-		String sql = "delete from supervisores where id_supervisor = ?;";
+		String sql = "update supervisores set activo = 0 where id_supervisor = ?;";
 
 		try {
 
@@ -107,7 +145,8 @@ public class DAOSupervisor extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				item = new Supervisor(rs.getInt("id_supervisor"), rs.getString("nombre"));
+				item = new Supervisor(rs.getInt("id_supervisor"), rs.getString("nombre"),
+						rs.getInt("activo")==1);
 
 			}
 
@@ -126,7 +165,7 @@ public class DAOSupervisor extends Conexion implements DAO {
 		ArrayList<Object> list = new ArrayList<Object>();
 
 		Connection con = conectar();
-		String sql = "select * from supervisores;";
+		String sql = "select * from supervisores where activo = 1;";
 
 		try {
 
@@ -135,7 +174,8 @@ public class DAOSupervisor extends Conexion implements DAO {
 
 			while (rs.next()) {
 
-				Supervisor p = new Supervisor(rs.getInt("id_supervisor"), rs.getString("nombre"));
+				Supervisor p = new Supervisor(rs.getInt("id_supervisor"), rs.getString("nombre"),
+						rs.getInt("activo")==1);
 
 				list.add(p);
 

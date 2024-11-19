@@ -98,6 +98,12 @@ public class ControllerPrincipal {
 			new ControllerCategoria(vp).index();
 			
 		});
+		
+		vp.btnSupervisor.addActionListener(e->{
+			setSelectedButton(vp.btnSupervisor);
+			new ControllerSupervisores(vp).index();
+			
+		});
 
 		setSelectedButton(vp.btnGestionarPersonal);
 		new ControllerEmpleados(vp).index();

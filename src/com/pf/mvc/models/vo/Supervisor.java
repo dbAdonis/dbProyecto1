@@ -4,15 +4,18 @@ public class Supervisor {
 
 	private int id;
 	private String nombre;
+	private boolean activo;
 
-	public Supervisor(String nombre) {
+	public Supervisor(String nombre, boolean activo) {
 		this.id = 0;
 		this.nombre = nombre;
+		this.activo = true;
 	}
 
-	public Supervisor(int id, String nombre) {
+	public Supervisor(int id, String nombre, boolean activo) {
 		this.id = id;
 		this.nombre = nombre;
+		this.activo = activo;
 	}
 
 	public int getId() {
@@ -29,6 +32,14 @@ public class Supervisor {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 	@Override

@@ -38,10 +38,11 @@ public class ViewPrincipal extends JFrame {
 	public JButton btnGestionarNaturalezas;
 	public JButton btnGestionarTipos;
 	public JButton btnGestionarCategorias;
+	public JButton btnSupervisor;
 
 	public ViewPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 811, 566);
+		setBounds(100, 100, 928, 720);
 		contentPane = new JPanel();
 		contentPane.setPreferredSize(new Dimension(900, 600));
 		contentPane.setBorder(null);
@@ -206,6 +207,15 @@ public class ViewPrincipal extends JFrame {
 		btnGestionarTipos.setIcon(iconImgLine);
 		btnGestionarCategorias.setIcon(iconImgLine);
 		panel.add(btnFincas);
+		
+		btnSupervisor = new JButton("Supervisores");
+		btnSupervisor.setPreferredSize(new Dimension(200, 45));
+		btnSupervisor.setForeground(Color.WHITE);
+		btnSupervisor.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnSupervisor.setFocusPainted(false);
+		btnSupervisor.setBorder(null);
+		btnSupervisor.setBackground(new Color(62, 85, 40));
+		panel.add(btnSupervisor);
 	}
 
 	public void setContenido(JComponent c, String titulo) {

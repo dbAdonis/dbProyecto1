@@ -38,12 +38,14 @@ public class ControllerAplicaciones extends Functions implements Controller {
 	private ViewPrincipal vp;
 	private ArrayList<Integer> ids;
 	private int idFinca;
+	private int selectedIndex;
 
 	public ControllerAplicaciones(ViewPrincipal vp) {
 		this.dao = new DAOAplicacion();
 		this.vp = vp;
 		this.ids = new ArrayList<>();
 		this.idFinca = -1;
+		this.selectedIndex = 0;
 	}
 
 	@Override
@@ -98,8 +100,17 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				buscar(in.tBuscar, in.filtro, 0);
+				buscar(in.tBuscar, in.filtro, selectedIndex);
 			}
+		});
+		
+		in.cbxBusqueda.addActionListener(e->{
+			
+			if(in.cbxBusqueda.getSelectedIndex()>0) {
+				selectedIndex = in.cbxBusqueda.getSelectedIndex()-1;
+			}
+			System.out.println(selectedIndex);
+			
 		});
 		
 		cargarCbxFinca(in);
@@ -205,35 +216,6 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 		});
 
-		f.btnLotes.addActionListener(e -> {
-
-			new ControllerLotes(vp).index();;
-
-		});
-
-		f.btnVariedades.addActionListener(e -> {
-
-			new ControllerVariedades(vp).index();
-
-		});
-
-		f.btnTrabajadores.addActionListener(e -> {
-
-			new ControllerEmpleados(vp).index();
-
-		});
-
-		f.btnLabores.addActionListener(e -> {
-
-			new ControllerLabores(vp).index();
-
-		});
-
-		f.btnProductos.addActionListener(e -> {
-
-			new ControllerProductos(vp);
-
-		});
 
 		vp.setContenido(f, "Reportes diarios");
 
@@ -368,36 +350,6 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			actualizarTabla();
 
 			index();
-
-		});
-
-		ed.btnLotes.addActionListener(e -> {
-
-			new ControllerLotes(vp).index();;
-
-		});
-
-		ed.btnVariedades.addActionListener(e -> {
-
-			new ControllerVariedades(vp).index();
-
-		});
-
-		ed.btnTrabajadores.addActionListener(e -> {
-
-			new ControllerEmpleados(vp).index();
-
-		});
-
-		ed.btnLabores.addActionListener(e -> {
-
-			new ControllerLabores(vp).index();
-
-		});
-
-		ed.btnProductos.addActionListener(e -> {
-
-			new ControllerProductos(vp);
 
 		});
 

@@ -42,11 +42,6 @@ public class Edit extends JPanel {
 	public JSpinner tCantidad;
 	public JSpinner tWK;
 	public JDateChooser tFecha;
-	public JButton btnLotes;
-	public JButton btnVariedades;
-	public JButton btnTrabajadores;
-	public JButton btnLabores;
-	public JButton btnProductos;
 
 	/**
 	 * Create the panel.
@@ -108,15 +103,6 @@ public class Edit extends JPanel {
 		cbxLote.setBounds(125, 47, 151, 20);
 		panelRegistro.add(cbxLote);
 
-		btnLotes = new JButton("Ver lista de lotes");
-		btnLotes.setPreferredSize(new Dimension(145, 23));
-		btnLotes.setFont(new Font("Calibri", Font.ITALIC, 16));
-		btnLotes.setFocusable(false);
-		btnLotes.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnLotes.setBackground(SystemColor.inactiveCaptionBorder);
-		btnLotes.setBounds(533, 46, 169, 23);
-		panelRegistro.add(btnLotes);
-
 		JLabel label_4 = new JLabel("Variedad");
 		label_4.setFont(new Font("Calibri", Font.BOLD, 16));
 		label_4.setBounds(20, 92, 80, 20);
@@ -127,24 +113,6 @@ public class Edit extends JPanel {
 		cbxVariedad.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxVariedad.setBounds(125, 92, 150, 20);
 		panelRegistro.add(cbxVariedad);
-
-		btnVariedades = new JButton("Ver lista de variedades");
-		btnVariedades.setPreferredSize(new Dimension(170, 23));
-		btnVariedades.setFont(new Font("Calibri", Font.ITALIC, 16));
-		btnVariedades.setFocusable(false);
-		btnVariedades.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnVariedades.setBackground(SystemColor.inactiveCaptionBorder);
-		btnVariedades.setBounds(533, 91, 169, 23);
-		panelRegistro.add(btnVariedades);
-
-		btnTrabajadores = new JButton("Ver lista de trabajadores");
-		btnTrabajadores.setPreferredSize(new Dimension(170, 23));
-		btnTrabajadores.setFont(new Font("Calibri", Font.ITALIC, 16));
-		btnTrabajadores.setFocusable(false);
-		btnTrabajadores.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnTrabajadores.setBackground(SystemColor.inactiveCaptionBorder);
-		btnTrabajadores.setBounds(533, 136, 169, 23);
-		panelRegistro.add(btnTrabajadores);
 
 		cbxTrabajador = new JComboBox();
 		cbxTrabajador.setPreferredSize(new Dimension(340, 20));
@@ -167,24 +135,6 @@ public class Edit extends JPanel {
 		cbxLabor.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxLabor.setBounds(125, 182, 340, 20);
 		panelRegistro.add(cbxLabor);
-
-		btnLabores = new JButton("Ver lista de labores");
-		btnLabores.setPreferredSize(new Dimension(145, 23));
-		btnLabores.setFont(new Font("Calibri", Font.ITALIC, 16));
-		btnLabores.setFocusable(false);
-		btnLabores.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnLabores.setBackground(SystemColor.inactiveCaptionBorder);
-		btnLabores.setBounds(533, 181, 169, 23);
-		panelRegistro.add(btnLabores);
-
-		btnProductos = new JButton("Ver lista de productos");
-		btnProductos.setPreferredSize(new Dimension(150, 23));
-		btnProductos.setFont(new Font("Calibri", Font.ITALIC, 16));
-		btnProductos.setFocusable(false);
-		btnProductos.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, Color.DARK_GRAY, null));
-		btnProductos.setBackground(SystemColor.inactiveCaptionBorder);
-		btnProductos.setBounds(533, 226, 169, 23);
-		panelRegistro.add(btnProductos);
 
 		cbxFitoFerti = new JComboBox();
 		cbxFitoFerti.setPreferredSize(new Dimension(300, 20));

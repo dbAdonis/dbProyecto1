@@ -22,6 +22,7 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JPasswordField;
 
 public class Index extends JPanel {
 	/**
@@ -67,20 +68,21 @@ public class Index extends JPanel {
 		panel.add(lblCriterioDeBsqueda);
 
 		cbxBusqueda = new JComboBox();
-		cbxBusqueda.setModel(new DefaultComboBoxModel(new String[] { "Seleccionar" }));
+		cbxBusqueda.setModel(new DefaultComboBoxModel(new String[] {"Seleccionar", "Periodo MPS", "Semana", "Fecha", "Lote", "Variedad", "Trabajador", "Labor", "Fitosanitario - Fertilizante"}));
+		cbxBusqueda.setSelectedIndex(0);
 		cbxBusqueda.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxBusqueda.setBounds(487, 29, 171, 26);
+		cbxBusqueda.setBounds(487, 29, 200, 26);
 		panel.add(cbxBusqueda);
 
 		JLabel lblOrdenarPorFinca = new JLabel("Ordenar por finca:");
 		lblOrdenarPorFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblOrdenarPorFinca.setBounds(695, 32, 123, 20);
+		lblOrdenarPorFinca.setBounds(717, 32, 123, 20);
 		panel.add(lblOrdenarPorFinca);
 
 		cbxFinca = new JComboBox();
 		cbxFinca.setModel(new DefaultComboBoxModel(new String[] { "Seleccionar", "Todas" }));
 		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxFinca.setBounds(828, 29, 112, 26);
+		cbxFinca.setBounds(850, 29, 112, 26);
 		panel.add(cbxFinca);
 
 		JPanel panel_1 = new JPanel();

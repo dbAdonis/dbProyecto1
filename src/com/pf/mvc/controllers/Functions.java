@@ -19,6 +19,7 @@ public class Functions {
 
 	public void buscar(JTextField tBuscar, TableRowSorter<DefaultTableModel> filtro, int columna) {
 
+		
 		tBuscar.addKeyListener(new KeyListener() {
 
 			@Override

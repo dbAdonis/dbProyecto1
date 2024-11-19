@@ -33,6 +33,7 @@ public class ViewPrincipal extends JFrame {
 	public JButton btnVariedades;
 	public JButton btnLabores;
 	private JPanel panel;
+	public JButton btnFincas;
 
 	public ViewPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -146,6 +147,15 @@ public class ViewPrincipal extends JFrame {
 		btnLotes.setIcon(iconImgFlecha);
 		btnVariedades.setIcon(iconImgFlecha);
 		btnLabores.setIcon(iconImgFlecha);
+		
+		btnFincas = new JButton("Fincas");
+		btnFincas.setPreferredSize(new Dimension(200, 45));
+		btnFincas.setForeground(Color.WHITE);
+		btnFincas.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnFincas.setFocusPainted(false);
+		btnFincas.setBorder(null);
+		btnFincas.setBackground(new Color(62, 85, 40));
+		panel.add(btnFincas);
 	}
 
 	public void setContenido(JComponent c, String titulo) {

@@ -17,8 +17,6 @@ public class ControllerPrincipal {
 	public ControllerPrincipal() {
 		vp = new ViewPrincipal();
 	}
-	
-	//Visca el Barca
 
 	public void init() {
 		vp.setVisible(true);
@@ -38,7 +36,6 @@ public class ControllerPrincipal {
 				setSelectedButton(vp.btnReportesDiarios);
 				new ControllerAplicaciones(vp).index();
 				vp.desplegarPanelBtnReportes();
-				vp.ocultarPanelBtnReportes();
 			}
 		});
 
@@ -73,6 +70,12 @@ public class ControllerPrincipal {
 			setSelectedButton(vp.btnLabores);
 			new ControllerLabores(vp).index();
 			}
+		});
+		
+		vp.btnFincas.addActionListener(e->{
+			
+			new ControllerFincas(vp).index();
+			
 		});
 
 		setSelectedButton(vp.btnGestionarPersonal);

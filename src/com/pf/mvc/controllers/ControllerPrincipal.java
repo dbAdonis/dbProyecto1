@@ -27,6 +27,7 @@ public class ControllerPrincipal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setSelectedButton(vp.btnGestionarPersonal);
+				vp.ocultarPanelBtnReportes();
 				new ControllerEmpleados(vp).index();
 			}
 		});
@@ -36,6 +37,8 @@ public class ControllerPrincipal {
 			public void actionPerformed(ActionEvent e) {
 				setSelectedButton(vp.btnReportesDiarios);
 				new ControllerAplicaciones(vp).index();
+				vp.desplegarPanelBtnReportes();
+				vp.ocultarPanelBtnReportes();
 			}
 		});
 
@@ -43,7 +46,32 @@ public class ControllerPrincipal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setSelectedButton(vp.btnProductos);
+				vp.ocultarPanelBtnReportes();
 				new ControllerProductos(vp).index();
+			}
+		});
+		
+		vp.btnLotes.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			setSelectedButton(vp.btnLotes);
+			new ControllerLotes(vp).index();
+			}
+		});
+		
+		vp.btnVariedades.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			setSelectedButton(vp.btnVariedades);
+			new ControllerVariedades(vp).index();
+			}
+		});
+		
+		vp.btnLabores.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			setSelectedButton(vp.btnLabores);
+			new ControllerLabores(vp).index();
 			}
 		});
 
@@ -54,7 +82,7 @@ public class ControllerPrincipal {
 
 	private void setSelectedButton(JButton button) {
 		if (botonSeleccionado != null) {
-			botonSeleccionado.setBackground(null);
+			botonSeleccionado.setBackground(new Color(62, 85, 40));
 			botonSeleccionado.setForeground(Color.white);
 		}
 

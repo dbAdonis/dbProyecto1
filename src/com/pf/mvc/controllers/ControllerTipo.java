@@ -11,6 +11,7 @@ import com.pf.mvc.models.dao.DAOTipo;
 import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Tipo;
+import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.FormGeneral;
 import com.pf.mvc.views.producto.Form;
 
@@ -18,11 +19,11 @@ public class ControllerTipo extends Functions implements Controller  {
 	
 	private DAOTipo dao;
 	private FormGeneral fg;
-	private JPanel form;
+	private ViewPrincipal vp;
 	
-	public ControllerTipo(Form f) {
+	public ControllerTipo(ViewPrincipal vp) {
 		this.dao = new DAOTipo();
-		this.form = f;
+		this.vp = vp;
 	}
 
 	
@@ -32,22 +33,20 @@ public class ControllerTipo extends Functions implements Controller  {
 		this.fg = new FormGeneral();
 		
 		fg.modelo.setDataVector(getData(), getColumns());
+		ocultarColumna(fg.table);
 		
 		fg.btnRegistrar.addActionListener(e->{
 			
 			create();
-			cargarCbx();
 
 			
 		});
 		
 		fg.btnEditar.addActionListener(e->{
 			
-			int row = fg.table.getSelectedRow();
-			if(row > -1) {
-				int id = (int) fg.table.getValueAt(row, 0);
+			int id = getSelectedId(fg.table);
+			if(id > -1) {
 				edit(id);
-				
 				fg.btnRegistrar.setEnabled(false);
 				fg.btnRegistrar.setVisible(false);
 				fg.btnActualizar.setEnabled(true);
@@ -64,11 +63,9 @@ public class ControllerTipo extends Functions implements Controller  {
 		});
 		
 		fg.btnEliminar.addActionListener(e->{
-			int row = fg.table.getSelectedRow();
-			if(row > -1) {
-			int id = (int) fg.table.getValueAt(row, 0);
+			int id = getSelectedId(fg.table);
+			if(id > -1) {
 			destroy(id);
-			cargarCbx();
 			}else {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
 			}
@@ -83,7 +80,7 @@ public class ControllerTipo extends Functions implements Controller  {
 		fg.btnCancelar.setVisible(false);
 		
 		fg.lblTitulo.setText("Registrar nuevo tipo");
-			((Form) form).setContenido(fg);
+			vp.setContenido(fg, "Tipos");
 		
 	}
 
@@ -97,8 +94,6 @@ public class ControllerTipo extends Functions implements Controller  {
 		store(item);
 		
 		fg.tNombre.setText("");
-		
-		cargarCbx();
 
 		
 	}
@@ -115,8 +110,6 @@ public class ControllerTipo extends Functions implements Controller  {
 			Tipo item = new Tipo(nombre);
 			
 			update(item, id);
-			
-			cargarCbx();
 
 			
 			
@@ -179,32 +172,5 @@ public class ControllerTipo extends Functions implements Controller  {
 		
 	}
 	
-	public void cargarCbx() {
-		Form f = (Form) this.form; 
-
-	    f.cbxProductos.removeAllItems();
-	    f.cbxTipos.removeAllItems();
-	    f.cbxCategorias.removeAllItems();
-
-		ArrayList<Object> naturalezas = new DAONaturaleza().getData();
-		for (Object o : naturalezas) {
-			Naturaleza n = (Naturaleza) o;
-			f.cbxProductos.addItem(n);
-		}
-
-		ArrayList<Object> tipos = new DAOTipo().getData();
-		for (Object o : tipos) {
-			Tipo t = (Tipo) o;
-
-			f.cbxTipos.addItem(t);
-		}
-
-		ArrayList<Object> categorias = new DAOCategoria().getData();
-		for (Object o : categorias) {
-			Categoria c = (Categoria) o;
-
-			f.cbxCategorias.addItem(c);
-		}
-	}
 
 }

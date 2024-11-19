@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 
 import com.pf.mvc.models.vo.Finca;
@@ -30,7 +31,6 @@ public class Functions {
 				String buscar = tBuscar.getText();
 					filtro.setRowFilter(RowFilter.regexFilter("(?i)"+buscar, columna));
 			}
-
 			@Override
 			public void keyPressed(KeyEvent e) {}
 
@@ -44,6 +44,28 @@ public class Functions {
 		
 		if(row>-1) {
 			return ids.get(row);
+		}
+		return -1;
+	}
+	
+	public void ocultarColumna(JTable tabla) {
+		
+		TableColumn columna = tabla.getColumnModel().getColumn(0);
+		columna.setMinWidth(0);
+		columna.setMaxWidth(0);
+		columna.setPreferredWidth(0);
+		
+	}
+
+	
+	public int getSelectedId(JTable table) {
+		
+		int row = table.getSelectedRow();
+		
+		System.out.println(row);
+		
+		if(row>-1) {
+			return (int) table.getValueAt(0, row);
 		}
 		return -1;
 	}

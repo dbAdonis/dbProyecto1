@@ -46,6 +46,7 @@ public class ControllerVariedades extends Functions implements Controller {
 		this.in = new Index();
 
 		in.modelo.setDataVector(getData(), getColumns());
+		ocultarColumna(in.table);
 
 		in.tBuscar.addFocusListener(new FocusAdapter() {
 			@Override
@@ -57,7 +58,7 @@ public class ControllerVariedades extends Functions implements Controller {
 		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				buscar(in.tBuscar, in.filtro, 0);
+				buscar(in.tBuscar, in.filtro, 1);
 			}
 		});
 
@@ -69,7 +70,7 @@ public class ControllerVariedades extends Functions implements Controller {
 
 		in.btnEditar.addActionListener(e -> {
 
-			int id = getSelectedId(in.table, ids);
+			int id = getSelectedId(in.table);
 			if (id == -1) {
 				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar.", "Advertencia",
 						JOptionPane.WARNING_MESSAGE);
@@ -88,7 +89,7 @@ public class ControllerVariedades extends Functions implements Controller {
 
 		in.btnEliminar.addActionListener(e -> {
 
-			int id = getSelectedId(in.table, ids);
+			int id = getSelectedId(in.table);
 			if (id == -1) {
 				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar", "Advertencia",
 						JOptionPane.WARNING_MESSAGE);
@@ -179,7 +180,8 @@ public class ControllerVariedades extends Functions implements Controller {
 
 			ids.add(item.getId());
 
-			data[i][0] = item.getNombre();
+			data[i][0] = item.getId();
+			data[i][1] = item.getNombre();
 
 			i++;
 		}
@@ -189,7 +191,7 @@ public class ControllerVariedades extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "Nombre" };
+		return new String[] { "ID", "Nombre" };
 	}
 
 	@Override

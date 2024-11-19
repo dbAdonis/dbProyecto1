@@ -34,6 +34,10 @@ public class ViewPrincipal extends JFrame {
 	public JButton btnLabores;
 	private JPanel panel;
 	public JButton btnFincas;
+	public JPanel panelBtnProductos;
+	public JButton btnGestionarNaturalezas;
+	public JButton btnGestionarTipos;
+	public JButton btnGestionarCategorias;
 
 	public ViewPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,13 +144,55 @@ public class ViewPrincipal extends JFrame {
 		btnProductos.setForeground(Color.WHITE);
 		btnProductos.setBackground(new Color(62, 85, 40));
 
-		ImageIcon imgFlecha = new ImageIcon(getClass().getResource("/resources/line.png"));
+		ImageIcon imgLine = new ImageIcon(getClass().getResource("/resources/line.png"));
 
-		ImageIcon iconImgFlecha = new ImageIcon(imgFlecha.getImage().getScaledInstance(15, 20, Image.SCALE_DEFAULT));
+		ImageIcon iconImgLine = new ImageIcon(imgLine.getImage().getScaledInstance(15, 20, Image.SCALE_DEFAULT));
 
-		btnLotes.setIcon(iconImgFlecha);
-		btnVariedades.setIcon(iconImgFlecha);
-		btnLabores.setIcon(iconImgFlecha);
+		btnLotes.setIcon(iconImgLine);
+		btnVariedades.setIcon(iconImgLine);
+		btnLabores.setIcon(iconImgLine);
+		
+		panelBtnProductos = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelBtnProductos.getLayout();
+		flowLayout.setVgap(0);
+		panelBtnProductos.setPreferredSize(new Dimension(200, 135));
+		panel.add(panelBtnProductos);
+		
+		btnGestionarNaturalezas = new JButton("Gestionar naturalezas");
+		btnGestionarNaturalezas.setPreferredSize(new Dimension(200, 45));
+		btnGestionarNaturalezas.setMaximumSize(new Dimension(200, 23));
+		btnGestionarNaturalezas.setIconTextGap(10);
+		btnGestionarNaturalezas.setHorizontalAlignment(SwingConstants.LEFT);
+		btnGestionarNaturalezas.setForeground(Color.WHITE);
+		btnGestionarNaturalezas.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnGestionarNaturalezas.setFocusPainted(false);
+		btnGestionarNaturalezas.setBorder(null);
+		btnGestionarNaturalezas.setBackground(new Color(62, 85, 40));
+		panelBtnProductos.add(btnGestionarNaturalezas);
+		
+		btnGestionarTipos = new JButton("Gestionar tipos");
+		btnGestionarTipos.setPreferredSize(new Dimension(200, 45));
+		btnGestionarTipos.setMaximumSize(new Dimension(200, 23));
+		btnGestionarTipos.setIconTextGap(10);
+		btnGestionarTipos.setHorizontalAlignment(SwingConstants.LEFT);
+		btnGestionarTipos.setForeground(Color.WHITE);
+		btnGestionarTipos.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnGestionarTipos.setFocusPainted(false);
+		btnGestionarTipos.setBorder(null);
+		btnGestionarTipos.setBackground(new Color(62, 85, 40));
+		panelBtnProductos.add(btnGestionarTipos);
+		
+		btnGestionarCategorias = new JButton("Gestionar categorias");
+		btnGestionarCategorias.setPreferredSize(new Dimension(200, 45));
+		btnGestionarCategorias.setMaximumSize(new Dimension(200, 23));
+		btnGestionarCategorias.setIconTextGap(10);
+		btnGestionarCategorias.setHorizontalAlignment(SwingConstants.LEFT);
+		btnGestionarCategorias.setForeground(Color.WHITE);
+		btnGestionarCategorias.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnGestionarCategorias.setFocusPainted(false);
+		btnGestionarCategorias.setBorder(null);
+		btnGestionarCategorias.setBackground(new Color(62, 85, 40));
+		panelBtnProductos.add(btnGestionarCategorias);
 		
 		btnFincas = new JButton("Fincas");
 		btnFincas.setPreferredSize(new Dimension(200, 45));
@@ -155,6 +201,10 @@ public class ViewPrincipal extends JFrame {
 		btnFincas.setFocusPainted(false);
 		btnFincas.setBorder(null);
 		btnFincas.setBackground(new Color(62, 85, 40));
+		
+		btnGestionarNaturalezas.setIcon(iconImgLine);
+		btnGestionarTipos.setIcon(iconImgLine);
+		btnGestionarCategorias.setIcon(iconImgLine);
 		panel.add(btnFincas);
 	}
 
@@ -180,6 +230,7 @@ public class ViewPrincipal extends JFrame {
 
 		this.setExtendedState(MAXIMIZED_BOTH);
 		ocultarPanelBtnReportes();
+		ocultarPanelBtnProductos();
 	}
 
 	public void desplegarPanelBtnReportes() {
@@ -200,6 +251,29 @@ public class ViewPrincipal extends JFrame {
 		if (alto > 0) {
 
 			panelBtnReportes.setPreferredSize(new Dimension(150, 0));
+			panel.repaint();
+			panel.revalidate();
+		}
+	}
+	
+	public void desplegarPanelBtnProductos() {
+		int alto = panelBtnProductos.getHeight();
+
+		if (alto == 0) {
+
+			panelBtnProductos.setPreferredSize(new Dimension(200, 135));
+			panel.repaint();
+			panel.revalidate();
+		}
+	}
+
+	public void ocultarPanelBtnProductos() {
+
+		int alto = panelBtnProductos.getHeight();
+
+		if (alto > 0) {
+
+			panelBtnProductos.setPreferredSize(new Dimension(150, 0));
 			panel.repaint();
 			panel.revalidate();
 		}

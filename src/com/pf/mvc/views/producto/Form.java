@@ -34,9 +34,6 @@ public class Form extends JPanel {
 	public JTextField tCodigo;
 	public JTextField tUnidad;
 	public JComboBox<Naturaleza> cbxProductos;
-	public JButton btnProductos;
-	public JButton btnTipos;
-	public JButton btnCategorias;
 	public JComboBox<Tipo> cbxTipos;
 	public JComboBox<Categoria> cbxCategorias;
 
@@ -83,18 +80,6 @@ public class Form extends JPanel {
 		tNombre.setBounds(155, 75, 366, 26);
 		panel_4.add(tNombre);
 		
-		JLabel label_11 = new JLabel("Agregar nuevo en la lista");
-		label_11.setFont(new Font("Calibri", Font.ITALIC, 16));
-		label_11.setBounds(371, 33, 161, 20);
-		panel_4.add(label_11);
-		
-		btnProductos = new JButton("");
-		btnProductos.setPreferredSize(new Dimension(35, 23));
-		btnProductos.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnProductos.setBackground(SystemColor.scrollbar);
-		btnProductos.setBounds(556, 30, 35, 23);
-		panel_4.add(btnProductos);
-		
 		tCodigo = new JTextField();
 		tCodigo.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tCodigo.setColumns(15);
@@ -110,18 +95,6 @@ public class Form extends JPanel {
 		label_13.setFont(new Font("Calibri", Font.BOLD, 16));
 		label_13.setBounds(21, 171, 125, 20);
 		panel_4.add(label_13);
-		
-		btnTipos = new JButton("");
-		btnTipos.setPreferredSize(new Dimension(35, 23));
-		btnTipos.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnTipos.setBackground(SystemColor.scrollbar);
-		btnTipos.setBounds(556, 222, 35, 23);
-		panel_4.add(btnTipos);
-		
-		JLabel label_14 = new JLabel("Agregar nuevo en la lista");
-		label_14.setFont(new Font("Calibri", Font.ITALIC, 16));
-		label_14.setBounds(371, 225, 161, 20);
-		panel_4.add(label_14);
 		
 		cbxTipos = new JComboBox<Tipo>();
 		cbxTipos.setPreferredSize(new Dimension(150, 20));
@@ -144,18 +117,6 @@ public class Form extends JPanel {
 		cbxCategorias.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxCategorias.setBounds(155, 264, 173, 20);
 		panel_4.add(cbxCategorias);
-		
-		JLabel label_17 = new JLabel("Agregar nuevo en la lista");
-		label_17.setFont(new Font("Calibri", Font.ITALIC, 16));
-		label_17.setBounds(371, 264, 161, 20);
-		panel_4.add(label_17);
-		
-		btnCategorias = new JButton("");
-		btnCategorias.setPreferredSize(new Dimension(35, 23));
-		btnCategorias.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnCategorias.setBackground(SystemColor.scrollbar);
-		btnCategorias.setBounds(556, 261, 35, 23);
-		panel_4.add(btnCategorias);
 		
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.setBounds(28, 334, 100, 40);
@@ -208,10 +169,6 @@ public class Form extends JPanel {
 		ImageIcon imgBtn = new ImageIcon(getClass().getResource("/resources/ButtonOff.png"));
 		
 		ImageIcon iconImgBtn = new ImageIcon(imgBtn.getImage().getScaledInstance(30, 27, Image.SCALE_DEFAULT));
-		
-		btnProductos.setIcon(iconImgBtn);
-		btnTipos.setIcon(iconImgBtn);
-		btnCategorias.setIcon(iconImgBtn);
 		
 	}
 	

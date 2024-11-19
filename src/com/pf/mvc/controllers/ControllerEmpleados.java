@@ -41,6 +41,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 		Index in = new Index();
 
 		in.modelo.setDataVector(filtrarData(getData()), getColumns());
+		ocultarColumna(in.table);
 	
 		in.btnNuevo.addActionListener(e -> {
 
@@ -57,7 +58,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 				return;
 			}
 
-			int id = getSelectedId(in.table, ids);
+			int id = getSelectedId(in.table);
 			edit(id);
 
 		});
@@ -71,10 +72,10 @@ public class ControllerEmpleados extends Functions implements Controller {
 				return;
 			}
 
-			int id = getSelectedId(in.table, ids);
+			int id = getSelectedId(in.table);
 			System.out.println(id);
 			dao.destroy(id);
-			index();
+			index(); 
 
 		});
 
@@ -88,7 +89,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-					buscar(in.tBuscar, in.filtro, 0);
+					buscar(in.tBuscar, in.filtro, 1);
 			}
 		});
 		
@@ -208,19 +209,21 @@ public class ControllerEmpleados extends Functions implements Controller {
 			if(idFinca == item.getIdFinca()) {
 				ids.add(item.getId());
 
-			data[i][0] = item.getNombre();
+				data[i][0] = item.getId();
+				data[i][1] = item.getNombre();
 
-			Finca finca = (Finca) new DAOFinca().getItem(item.getIdFinca());
-			data[i][1] = finca != null ? finca.getNombre() : "Sin Finca";
-			i++;
+				Finca finca = (Finca) new DAOFinca().getItem(item.getIdFinca());
+				data[i][2] = finca != null ? finca.getNombre() : "Sin Finca";
+				i++;
 			}
 			if(idFinca == -1) {
 				ids.add(item.getId());
 
-				data[i][0] = item.getNombre();
+				data[i][0] = item.getId();
+				data[i][1] = item.getNombre();
 
 				Finca finca = (Finca) new DAOFinca().getItem(item.getIdFinca());
-				data[i][1] = finca != null ? finca.getNombre() : "Sin Finca";
+				data[i][2] = finca != null ? finca.getNombre() : "Sin Finca";
 				i++;
 			}
 
@@ -232,7 +235,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "Empleado", "Finca" };
+		return new String[] { "ID", "Empleado", "Finca" };
 	}
 
 	@Override
@@ -278,6 +281,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 			}
 		}
 		in.modelo.setDataVector(filtrarData(getData()), getColumns());
+		ocultarColumna(in.table);
 	}
 	
 	public Object[][] filtrarData(Object[][] data) {

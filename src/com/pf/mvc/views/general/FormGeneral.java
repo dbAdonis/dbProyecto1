@@ -44,6 +44,8 @@ public class FormGeneral extends JPanel {
         panel_2.setLayout(new BorderLayout(0, 0));
 
         JPanel panel_1 = new JPanel();
+        FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
+        flowLayout_1.setAlignment(FlowLayout.LEADING);
         panel_1.setPreferredSize(new Dimension(10, 40));
         panel_2.add(panel_1, BorderLayout.NORTH);
 

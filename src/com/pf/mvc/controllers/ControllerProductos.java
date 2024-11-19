@@ -43,6 +43,7 @@ public class ControllerProductos extends Functions implements Controller {
 		Index in = new Index();
 
 		in.modelo.setDataVector(getData(), getColumns());
+		ocultarColumna(in.table);
 
 		in.btnNuevo.addActionListener(e -> {
 
@@ -59,7 +60,7 @@ public class ControllerProductos extends Functions implements Controller {
 				return;
 			}
 
-			int id = getSelectedId(in.table, ids);
+			int id = getSelectedId(in.table);
 			edit(id);
 
 		});
@@ -73,7 +74,7 @@ public class ControllerProductos extends Functions implements Controller {
 				return;
 			}
 
-			int id = getSelectedId(in.table, ids);
+			int id = getSelectedId(in.table);
 			dao.destroy(id);
 			index();
 
@@ -89,7 +90,7 @@ public class ControllerProductos extends Functions implements Controller {
 		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				buscar(in.tBuscar, in.filtro, 0);
+				buscar(in.tBuscar, in.filtro, 1);
 			}
 		});
 
@@ -154,95 +155,6 @@ public class ControllerProductos extends Functions implements Controller {
 			actualizarTabla();
 
 			index();
-
-		});
-
-		f.btnProductos.addActionListener(e -> {
-
-			if (!btnOn && btnOff) {
-				setImgBtn(f.btnProductos, "/resources/ButtonOn.png");
-				f.btnTipos.setEnabled(false);
-				f.btnCategorias.setEnabled(false);
-
-				ControllerNaturaleza cn = new ControllerNaturaleza(f);
-				cn.switchPanel = true;
-				cn.index();
-
-				btnOn = true;
-			}
-
-			if (!btnOff && btnOn) {
-				setImgBtn(f.btnProductos, "/resources/ButtonOff.png");
-				f.btnTipos.setEnabled(true);
-				f.btnCategorias.setEnabled(true);
-
-				f.setContenido(null);
-				btnOn = false;
-				btnOff = true;
-			}
-
-			if (btnOn) {
-				btnOff = false;
-			}
-
-		});
-
-		f.btnTipos.addActionListener(e -> {
-
-			if (!btnOn && btnOff) {
-				setImgBtn(f.btnTipos, "/resources/ButtonOn.png");
-				f.btnProductos.setEnabled(false);
-				f.btnCategorias.setEnabled(false);
-
-				ControllerTipo ct = new ControllerTipo(f);
-				ct.index();
-
-				btnOn = true;
-			}
-
-			if (!btnOff && btnOn) {
-				setImgBtn(f.btnTipos, "/resources/ButtonOff.png");
-				f.btnProductos.setEnabled(true);
-				f.btnCategorias.setEnabled(true);
-
-				f.setContenido(null);
-				btnOn = false;
-				btnOff = true;
-			}
-
-			if (btnOn) {
-				btnOff = false;
-			}
-
-		});
-
-		f.btnCategorias.addActionListener(e -> {
-
-			if (!btnOn && btnOff) {
-				setImgBtn(f.btnCategorias, "/resources/ButtonOn.png");
-				f.btnTipos.setEnabled(false);
-				f.btnProductos.setEnabled(false);
-
-				ControllerCategoria ca = new ControllerCategoria(f, this);
-				ca.switchPanel = true;
-				ca.index();
-
-				btnOn = true;
-			}
-
-			if (!btnOff && btnOn) {
-				setImgBtn(f.btnCategorias, "/resources/ButtonOff.png");
-				f.btnTipos.setEnabled(true);
-				f.btnProductos.setEnabled(true);
-
-				f.setContenido(null);
-				btnOn = false;
-				btnOff = true;
-			}
-
-			if (btnOn) {
-				btnOff = false;
-			}
 
 		});
 
@@ -330,95 +242,6 @@ public class ControllerProductos extends Functions implements Controller {
 
 		});
 
-		f.btnProductos.addActionListener(e -> {
-
-			if (!btnOn && btnOff) {
-				setImgBtn(f.btnProductos, "/resources/ButtonOn.png");
-				f.btnTipos.setEnabled(false);
-				f.btnCategorias.setEnabled(false);
-
-				ControllerNaturaleza cn = new ControllerNaturaleza(f);
-				cn.switchPanel = true;
-				cn.index();
-
-				btnOn = true;
-			}
-
-			if (!btnOff && btnOn) {
-				setImgBtn(f.btnProductos, "/resources/ButtonOff.png");
-				f.btnTipos.setEnabled(true);
-				f.btnCategorias.setEnabled(true);
-
-				f.setContenido(null);
-				btnOn = false;
-				btnOff = true;
-			}
-
-			if (btnOn) {
-				btnOff = false;
-			}
-
-		});
-
-		f.btnTipos.addActionListener(e -> {
-
-			if (!btnOn && btnOff) {
-				setImgBtn(f.btnTipos, "/resources/ButtonOn.png");
-				f.btnProductos.setEnabled(false);
-				f.btnCategorias.setEnabled(false);
-
-				ControllerTipo ct = new ControllerTipo(f);
-				ct.index();
-
-				btnOn = true;
-			}
-
-			if (!btnOff && btnOn) {
-				setImgBtn(f.btnTipos, "/resources/ButtonOff.png");
-				f.btnProductos.setEnabled(true);
-				f.btnCategorias.setEnabled(true);
-
-				f.setContenido(null);
-				btnOn = false;
-				btnOff = true;
-			}
-
-			if (btnOn) {
-				btnOff = false;
-			}
-
-		});
-
-		f.btnCategorias.addActionListener(e -> {
-
-			if (!btnOn && btnOff) {
-				setImgBtn(f.btnCategorias, "/resources/ButtonOn.png");
-				f.btnTipos.setEnabled(false);
-				f.btnProductos.setEnabled(false);
-
-				ControllerCategoria ca = new ControllerCategoria(f, this);
-				ca.switchPanel = true;
-				ca.index();
-
-				btnOn = true;
-			}
-
-			if (!btnOff && btnOn) {
-				setImgBtn(f.btnCategorias, "/resources/ButtonOff.png");
-				f.btnTipos.setEnabled(true);
-				f.btnProductos.setEnabled(true);
-
-				f.setContenido(null);
-				btnOn = false;
-				btnOff = true;
-			}
-
-			if (btnOn) {
-				btnOff = false;
-			}
-
-		});
-
 		vp.setContenido(f, "Editar producto");
 	}
 
@@ -437,20 +260,22 @@ public class ControllerProductos extends Functions implements Controller {
 			Producto p = (Producto) o;
 
 			ids.add(p.getId());
+			
+			data[i][0] = p.getId();
 
 			Naturaleza naturaleza = (Naturaleza) new DAONaturaleza().getItem(p.getIdNaturaleza());
-			data[i][0] = naturaleza.getNombre();
+			data[i][1] = naturaleza.getNombre();
 
 			Tipo tipo = (Tipo) new DAOTipo().getItem(p.getIdTipo());
-			data[i][1] = tipo.getNombre();
+			data[i][2] = tipo.getNombre();
 
-			data[i][2] = p.getCodigo();
+			data[i][3] = p.getCodigo();
 
 			Categoria categoria = (Categoria) new DAOCategoria().getItem(p.getIdCategoria());
-			data[i][3] = categoria.getNombre();
+			data[i][4] = categoria.getNombre();
 
-			data[i][4] = p.getNombre();
-			data[i][5] = p.getUnidades();
+			data[i][5] = p.getNombre();
+			data[i][6] = p.getUnidades();
 
 			i++;
 		}
@@ -470,7 +295,7 @@ public class ControllerProductos extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "Producto", "Tipo", "Código", "Categoría", "Nombre", "Unidades" };
+		return new String[] { "ID", "Producto", "Tipo", "Código", "Categoría", "Nombre", "Unidades" };
 	}
 
 	@Override

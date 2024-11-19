@@ -53,9 +53,9 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 		Index in = new Index();
 		
-		in.modelo.setDataVector(filtrarData(getData()), getColumns());
+		in.modelo.setDataVector(getData(), getColumns());
 		in.ajustarColumnasYExpandirTabla(in.table);
-
+		//ocultarColumna(in.table);
 
 		in.btnNuevo.addActionListener(e -> {
 
@@ -64,27 +64,27 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		});
 
 		in.btnEditar.addActionListener(e -> {
-			int selectedRow = in.table.getSelectedRow();
-			if (selectedRow == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para editar.",
+			int id = getSelectedId(in.table);
+			System.out.println(getSelectedId(in.table));
+			if (id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar.",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
-				return;
+			}else {
+			edit(id);	
 			}
 
-			int id = getSelectedId(in.table, ids);
-			edit(id);
 		});
 
 		in.btnEliminar.addActionListener(e -> {
 
 			int selectedRow = in.table.getSelectedRow();
-			if (selectedRow == -1) {
+			if (selectedRow == 0) {
 				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 
-			int id = getSelectedId(in.table, ids);
+			int id = getSelectedId(in.table);
 			dao.destroy(id);
 			index();
 
@@ -107,7 +107,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		in.cbxBusqueda.addActionListener(e->{
 			
 			if(in.cbxBusqueda.getSelectedIndex()>0) {
-				selectedIndex = in.cbxBusqueda.getSelectedIndex()-1;
+				selectedIndex = in.cbxBusqueda.getSelectedIndex();
 			}
 			System.out.println(selectedIndex);
 			
@@ -225,6 +225,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 	public void edit(int id) {
 
 		Aplicacion item = (Aplicacion) dao.getItem(id);
+		System.out.println(item.getIdLote());
 
 		Edit ed = new Edit();
 
@@ -235,9 +236,10 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			Lote l = (Lote) o;
 			ed.cbxLote.addItem(l);
 
-			if (l.getId() == item.getIdLote()) {
-				ed.cbxLote.setSelectedItem(l);
-			}
+			System.out.println(l.getId());
+//			if (l.getId() == item.getIdLote()) {
+//				ed.cbxLote.setSelectedItem(l);
+//			}
 		}
 
 		ed.tPeriodoMPS.setValue(item.getPeriodo());
@@ -377,59 +379,61 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			
 			if(idFinca == em.getIdFinca()) {
 				ids.add(a.getId());
-				data[i][0] = a.getPeriodo();
-				data[i][1] = a.getSemana();
-				data[i][2] = a.getFecha();
+				data[i][0] = a.getId();
+				data[i][1] = a.getPeriodo();
+				data[i][2] = a.getSemana();
+				data[i][3] = a.getFecha();
 
 				Lote lote = (Lote) new DAOLote().getItem(a.getIdLote());
-				data[i][3] = lote.getNombre();
+				data[i][4] = lote.getNombre();
 
 				Variedad variedad = (Variedad) new DAOVariedad().getItem(a.getIdVariedad());
-				data[i][4] = variedad.getNombre();
+				data[i][5] = variedad.getNombre();
 
-				data[i][5] = em.getNombre();
+				data[i][6] = em.getNombre();
 
 				Labor labor = (Labor) new DAOLabor().getItem(a.getIdLabor());
-				data[i][6] = labor.getNombre();
+				data[i][7] = labor.getNombre();
 
 				Producto producto = (Producto) new DAOProducto().getItem(a.getIdProducto());
-				data[i][7] = producto.getNombre();
+				data[i][8] = producto.getNombre();
 
-				data[i][8] = a.getCantidad();
+				data[i][9] = a.getCantidad();
 
-				data[i][9] = producto.getUnidades();
+				data[i][10] = producto.getUnidades();
 
 				Supervisor supervisor = (Supervisor) new DAOSupervisor().getItem(a.getIdSupervisor());
-				data[i][10] = supervisor.getNombre();
+				data[i][11] = supervisor.getNombre();
 
 				i++;
 			}
 			if(idFinca == -1) {
 				ids.add(a.getId());
-				data[i][0] = a.getPeriodo();
-				data[i][1] = a.getSemana();
-				data[i][2] = a.getFecha();
+				data[i][0] = a.getId();
+				data[i][1] = a.getPeriodo();
+				data[i][2] = a.getSemana();
+				data[i][3] = a.getFecha();
 
 				Lote lote = (Lote) new DAOLote().getItem(a.getIdLote());
-				data[i][3] = lote.getNombre();
+				data[i][4] = lote.getNombre();
 
 				Variedad variedad = (Variedad) new DAOVariedad().getItem(a.getIdVariedad());
-				data[i][4] = variedad.getNombre();
+				data[i][5] = variedad.getNombre();
 
-				data[i][5] = em.getNombre();
+				data[i][6] = em.getNombre();
 
 				Labor labor = (Labor) new DAOLabor().getItem(a.getIdLabor());
-				data[i][6] = labor.getNombre();
+				data[i][7] = labor.getNombre();
 
 				Producto producto = (Producto) new DAOProducto().getItem(a.getIdProducto());
-				data[i][7] = producto.getNombre();
+				data[i][8] = producto.getNombre();
 
-				data[i][8] = a.getCantidad();
+				data[i][9] = a.getCantidad();
 
-				data[i][9] = producto.getUnidades();
+				data[i][10] = producto.getUnidades();
 
 				Supervisor supervisor = (Supervisor) new DAOSupervisor().getItem(a.getIdSupervisor());
-				data[i][10] = supervisor.getNombre();
+				data[i][11] = supervisor.getNombre();
 
 				i++;
 			}
@@ -441,7 +445,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "PERIODO MPS", "WK", "FECHA", "LOTE", "VARIEDAD", "TRABAJADOR", "LABOR",
+		return new String[] {"ID", "PERIODO MPS", "WK", "FECHA", "LOTE", "VARIEDAD", "TRABAJADOR", "LABOR",
 				"FITOSANITARIO - FERTILIZANTE", "CANTIDAD", "UNIDADES", "CONTROL" };
 	}
 
@@ -487,6 +491,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		}
 		in.modelo.setDataVector(filtrarData(getData()), getColumns());
 		in.ajustarColumnasYExpandirTabla(in.table);
+		ocultarColumna(in.table);
 	}
 	
 	public Object[][] filtrarData(Object[][] data) {

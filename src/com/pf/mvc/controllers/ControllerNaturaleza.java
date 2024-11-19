@@ -11,6 +11,7 @@ import com.pf.mvc.models.dao.DAOTipo;
 import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Tipo;
+import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.FormGeneral;
 import com.pf.mvc.views.producto.Form;
 
@@ -18,15 +19,15 @@ public class ControllerNaturaleza extends Functions implements Controller {
 
 	private DAONaturaleza dao;
 	private FormGeneral fg;
-	private JPanel form;
 	private ArrayList<Integer> ids;
 	public boolean switchPanel;
+	private ViewPrincipal vp;
 
-	public ControllerNaturaleza(Form f) {
+	public ControllerNaturaleza(ViewPrincipal vp) {
 		this.dao = new DAONaturaleza();
-		this.form = f;
 		this.switchPanel = false;
 		this.ids = new ArrayList<>();
+		this.vp = vp;
 	}
 
 	@Override
@@ -35,21 +36,19 @@ public class ControllerNaturaleza extends Functions implements Controller {
 		this.fg = new FormGeneral();
 
 		fg.modelo.setDataVector(getData(), getColumns());
+		ocultarColumna(fg.table);
 
 		fg.btnRegistrar.addActionListener(e -> {
 
 			create();
-			cargarCbx();
 
 		});
 
 		fg.btnEditar.addActionListener(e -> {
 
-			int row = fg.table.getSelectedRow();
-			if (row > -1) {
-				int id = getSelectedId(fg.table, ids);
+			int id = getSelectedId(fg.table);
+			if (id > -1) {
 				edit(id);
-
 				fg.btnRegistrar.setEnabled(false);
 				fg.btnRegistrar.setVisible(false);
 				fg.btnActualizar.setEnabled(true);
@@ -67,11 +66,9 @@ public class ControllerNaturaleza extends Functions implements Controller {
 		});
 
 		fg.btnEliminar.addActionListener(e -> {
-			int row = fg.table.getSelectedRow();
-			if (row > -1) {
-				int id = getSelectedId(fg.table, ids);
+			int id = getSelectedId(fg.table);
+			if (id > -1) {
 				destroy(id);
-				cargarCbx();
 			} else {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error",
 						JOptionPane.WARNING_MESSAGE);
@@ -87,9 +84,7 @@ public class ControllerNaturaleza extends Functions implements Controller {
 		fg.btnCancelar.setVisible(false);
 
 		fg.lblTitulo.setText("Registrar nuevo producto");
-		if (switchPanel) {
-			((Form) form).setContenido(fg);
-		}
+		vp.setContenido(fg, "Naturalezas");
 	}
 
 	@Override
@@ -108,7 +103,6 @@ public class ControllerNaturaleza extends Functions implements Controller {
 	    JOptionPane.showMessageDialog(fg, result);
 
 	    fg.tNombre.setText("");
-	    cargarCbx();
 	}
 
 
@@ -125,7 +119,6 @@ public class ControllerNaturaleza extends Functions implements Controller {
 
 			update(item, id);
 
-			cargarCbx();
 
 		});
 
@@ -156,7 +149,8 @@ public class ControllerNaturaleza extends Functions implements Controller {
 
 			ids.add(item.getId());
 
-			data[i][0] = item.getNombre();
+			data[i][0] = item.getId();
+			data[i][1] = item.getNombre();
 
 			i++;
 		}
@@ -166,7 +160,7 @@ public class ControllerNaturaleza extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "Nombre" };
+		return new String[] { "ID", "Nombre" };
 	}
 
 	@Override
@@ -189,32 +183,5 @@ public class ControllerNaturaleza extends Functions implements Controller {
 
 	}
 
-	public void cargarCbx() {
-		Form f = (Form) this.form;
-
-		f.cbxProductos.removeAllItems();
-		f.cbxTipos.removeAllItems();
-		f.cbxCategorias.removeAllItems();
-
-		ArrayList<Object> naturalezas = new DAONaturaleza().getData();
-		for (Object o : naturalezas) {
-			Naturaleza n = (Naturaleza) o;
-			f.cbxProductos.addItem(n);
-		}
-
-		ArrayList<Object> tipos = new DAOTipo().getData();
-		for (Object o : tipos) {
-			Tipo t = (Tipo) o;
-
-			f.cbxTipos.addItem(t);
-		}
-
-		ArrayList<Object> categorias = new DAOCategoria().getData();
-		for (Object o : categorias) {
-			Categoria c = (Categoria) o;
-
-			f.cbxCategorias.addItem(c);
-		}
-	}
 
 }

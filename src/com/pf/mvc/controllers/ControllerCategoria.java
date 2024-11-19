@@ -11,6 +11,7 @@ import com.pf.mvc.models.dao.DAOTipo;
 import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Tipo;
+import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.FormGeneral;
 import com.pf.mvc.views.producto.Form;
 
@@ -18,13 +19,13 @@ public class ControllerCategoria extends Functions implements Controller  {
 	
 	private DAOCategoria dao;
 	private FormGeneral fg;
-	private JPanel form;
 	public boolean switchPanel;
+	private ViewPrincipal vp;
 	
-	public ControllerCategoria(Form f, ControllerProductos cp) {
+	public ControllerCategoria(ViewPrincipal vp) {
 		this.dao = new DAOCategoria();
-		this.form = f;
 		this.switchPanel = false;
+		this.vp = vp;
 	}
 
 	
@@ -34,21 +35,24 @@ public class ControllerCategoria extends Functions implements Controller  {
 		this.fg = new FormGeneral();
 		
 		fg.modelo.setDataVector(getData(), getColumns());
+		ocultarColumna(fg.table);
 		
 		fg.btnRegistrar.addActionListener(e->{
 			
 			create();
-			cargarCbx();
 			
 		});
 		
 		fg.btnEditar.addActionListener(e->{
 			
 			int row = fg.table.getSelectedRow();
-			if(row > -1) {
-				int id = (int) fg.table.getValueAt(row, 0);
+			if(row == -1) {
+				JOptionPane.showMessageDialog(fg, "Debe seleccionar un registro para editar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			int id = getSelectedId(fg.table);
 				edit(id);
-				
 				fg.btnRegistrar.setEnabled(false);
 				fg.btnRegistrar.setVisible(false);
 				fg.btnActualizar.setEnabled(true);
@@ -57,24 +61,20 @@ public class ControllerCategoria extends Functions implements Controller  {
 				fg.btnCancelar.setVisible(true);
 				
 				fg.lblTitulo.setText("Editar categoria");
-			}else {
-				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
-			}
-			
 			
 		});
 		
 		fg.btnEliminar.addActionListener(e->{
 			int row = fg.table.getSelectedRow();
-			if(row > -1) {
-			int id = (int) fg.table.getValueAt(row, 0);
-			destroy(id);
-			//cp.cargarCbxCategoria();
-			cargarCbx();
+			if(row == -1) {
+				JOptionPane.showMessageDialog(fg, "Debe seleccionar un registro para eliminar.",
+						"Advertencia", JOptionPane.WARNING_MESSAGE);
+				return;
 
-			}else {
-				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
 			}
+			int id = getSelectedId(fg.table);
+			destroy(id);
+			index();
 			
 		});
 		
@@ -86,9 +86,7 @@ public class ControllerCategoria extends Functions implements Controller  {
 		fg.btnCancelar.setVisible(false);
 		
 		fg.lblTitulo.setText("Registrar nueva categoria");
-		if(switchPanel) {
-			((Form) form).setContenido(fg);
-		}
+		vp.setContenido(fg, "Categorías");
 	}
 
 	@Override
@@ -101,8 +99,6 @@ public class ControllerCategoria extends Functions implements Controller  {
 		store(item);
 		
 		fg.tNombre.setText("");
-		
-		//cp.cargarCbxCategoria();
 		
 	}
 
@@ -118,11 +114,6 @@ public class ControllerCategoria extends Functions implements Controller  {
 			Categoria item = new Categoria(nombre);
 			
 			update(item, id);
-			
-			//cp.cargarCbxCategoria();
-			cargarCbx();
-
-			
 			
 		});
 		
@@ -181,34 +172,6 @@ public class ControllerCategoria extends Functions implements Controller  {
 		dao.destroy(id);
 		index();
 		
-	}
-	
-	public void cargarCbx() {
-		Form f = (Form) this.form; 
-
-	    f.cbxProductos.removeAllItems();
-	    f.cbxTipos.removeAllItems();
-	    f.cbxCategorias.removeAllItems();
-
-		ArrayList<Object> naturalezas = new DAONaturaleza().getData();
-		for (Object o : naturalezas) {
-			Naturaleza n = (Naturaleza) o;
-			f.cbxProductos.addItem(n);
-		}
-
-		ArrayList<Object> tipos = new DAOTipo().getData();
-		for (Object o : tipos) {
-			Tipo t = (Tipo) o;
-
-			f.cbxTipos.addItem(t);
-		}
-
-		ArrayList<Object> categorias = new DAOCategoria().getData();
-		for (Object o : categorias) {
-			Categoria c = (Categoria) o;
-
-			f.cbxCategorias.addItem(c);
-		}
 	}
 
 }

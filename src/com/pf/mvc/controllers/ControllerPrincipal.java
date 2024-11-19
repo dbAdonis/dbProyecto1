@@ -26,6 +26,7 @@ public class ControllerPrincipal {
 			public void actionPerformed(ActionEvent e) {
 				setSelectedButton(vp.btnGestionarPersonal);
 				vp.ocultarPanelBtnReportes();
+				vp.ocultarPanelBtnProductos();
 				new ControllerEmpleados(vp).index();
 			}
 		});
@@ -36,6 +37,7 @@ public class ControllerPrincipal {
 				setSelectedButton(vp.btnReportesDiarios);
 				new ControllerAplicaciones(vp).index();
 				vp.desplegarPanelBtnReportes();
+				vp.ocultarPanelBtnProductos();
 			}
 		});
 
@@ -45,6 +47,7 @@ public class ControllerPrincipal {
 				setSelectedButton(vp.btnProductos);
 				vp.ocultarPanelBtnReportes();
 				new ControllerProductos(vp).index();
+				vp.desplegarPanelBtnProductos();
 			}
 		});
 		
@@ -75,6 +78,24 @@ public class ControllerPrincipal {
 		vp.btnFincas.addActionListener(e->{
 			setSelectedButton(vp.btnFincas);
 			new ControllerFincas(vp).index();
+			
+		});
+		
+		vp.btnGestionarNaturalezas.addActionListener(e->{
+			setSelectedButton(vp.btnGestionarNaturalezas);
+			new ControllerNaturaleza(vp).index();
+			
+		});
+		
+		vp.btnGestionarTipos.addActionListener(e->{
+			setSelectedButton(vp.btnGestionarTipos);
+			new ControllerTipo(vp).index();
+			
+		});
+		
+		vp.btnGestionarCategorias.addActionListener(e->{
+			setSelectedButton(vp.btnGestionarCategorias);
+			new ControllerCategoria(vp).index();
 			
 		});
 

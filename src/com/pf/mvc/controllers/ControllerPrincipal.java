@@ -73,7 +73,7 @@ public class ControllerPrincipal {
 		});
 		
 		vp.btnFincas.addActionListener(e->{
-			
+			setSelectedButton(vp.btnFincas);
 			new ControllerFincas(vp).index();
 			
 		});

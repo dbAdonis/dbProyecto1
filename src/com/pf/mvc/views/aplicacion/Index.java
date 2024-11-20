@@ -23,6 +23,8 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPasswordField;
+import javax.swing.border.EmptyBorder;
+import java.awt.SystemColor;
 
 public class Index extends JPanel {
 	/**
@@ -43,7 +45,7 @@ public class Index extends JPanel {
 	 * Create the panel.
 	 */
 	public Index() {
-		setPreferredSize(new Dimension(950, 580));
+		setPreferredSize(new Dimension(1033, 595));
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
@@ -52,40 +54,42 @@ public class Index extends JPanel {
 		panel.setLayout(null);
 
 		JLabel lblBuscar = new JLabel("Buscar");
-		lblBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblBuscar.setFont(new Font("Calibri", Font.PLAIN, 19));
 		lblBuscar.setBounds(10, 32, 54, 20);
 		panel.add(lblBuscar);
 
 		tBuscar = new JTextField();
 		tBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tBuscar.setBounds(74, 29, 235, 26);
+		tBuscar.setBounds(74, 29, 267, 26);
 		panel.add(tBuscar);
 		tBuscar.setColumns(10);
 
 		JLabel lblCriterioDeBsqueda = new JLabel("Criterio de b\u00FAsqueda:");
-		lblCriterioDeBsqueda.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblCriterioDeBsqueda.setBounds(338, 32, 139, 20);
+		lblCriterioDeBsqueda.setFont(new Font("Calibri", Font.PLAIN, 19));
+		lblCriterioDeBsqueda.setBounds(353, 32, 172, 20);
 		panel.add(lblCriterioDeBsqueda);
 
 		cbxBusqueda = new JComboBox();
 		cbxBusqueda.setModel(new DefaultComboBoxModel(new String[] {"Seleccionar", "Periodo MPS", "Semana", "Fecha", "Lote", "Variedad", "Trabajador", "Labor", "Fitosanitario - Fertilizante"}));
 		cbxBusqueda.setSelectedIndex(0);
-		cbxBusqueda.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxBusqueda.setBounds(487, 29, 200, 26);
+		cbxBusqueda.setFont(new Font("Calibri", Font.PLAIN, 19));
+		cbxBusqueda.setBounds(526, 29, 200, 26);
 		panel.add(cbxBusqueda);
 
 		JLabel lblOrdenarPorFinca = new JLabel("Ordenar por finca:");
-		lblOrdenarPorFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblOrdenarPorFinca.setBounds(717, 32, 123, 20);
+		lblOrdenarPorFinca.setFont(new Font("Calibri", Font.PLAIN, 19));
+		lblOrdenarPorFinca.setBounds(749, 32, 148, 20);
 		panel.add(lblOrdenarPorFinca);
 
 		cbxFinca = new JComboBox();
 		cbxFinca.setModel(new DefaultComboBoxModel(new String[] { "Seleccionar", "Todas" }));
-		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxFinca.setBounds(850, 29, 112, 26);
+		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 19));
+		cbxFinca.setBounds(898, 29, 112, 26);
 		panel.add(cbxFinca);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.text);
+		panel_1.setBorder(new EmptyBorder(7, 7, 7, 7));
 		add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
 
@@ -95,7 +99,7 @@ public class Index extends JPanel {
 		modelo = new DefaultTableModel();
 		filtro = new TableRowSorter<DefaultTableModel>(modelo);
 		table = new JTable(modelo);
-		table.setFont(new Font("Calibri", Font.PLAIN, 16));
+		table.setFont(new Font("Calibri", Font.PLAIN, 17));
 		table.setRowHeight(30);
 		table.setRowSorter(filtro);
 		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -103,10 +107,12 @@ public class Index extends JPanel {
 		table.setModel(modelo);
 
 		JTableHeader header = table.getTableHeader();
-		header.setFont(new Font("Calibri", Font.BOLD, 16));
+		header.setFont(new Font("Calibri", Font.BOLD, 18));
+		header.setBackground(new Color(201, 224, 154));
 		scrollPane.setViewportView(table);
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(SystemColor.text);
 		//panel_2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
 		flowLayout.setHgap(10);
@@ -123,7 +129,7 @@ public class Index extends JPanel {
 		// btnAgregarConsumo.setBackground(SystemColor.inactiveCaptionBorder);
 		// btnAgregarConsumo.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK,
 		// null, Color.BLACK, null));
-		btnNuevo.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnNuevo.setFont(new Font("Calibri", Font.BOLD, 19));
 		panel_2.add(btnNuevo);
 
 		btnEditar = new JButton("Editar");
@@ -136,7 +142,7 @@ public class Index extends JPanel {
 		// btnEditar.setBackground(SystemColor.inactiveCaptionBorder);
 		// btnEditar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null,
 		// Color.BLACK, null));
-		btnEditar.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnEditar.setFont(new Font("Calibri", Font.BOLD, 19));
 		panel_2.add(btnEditar);
 
 		btnEliminar = new JButton("Eliminar");
@@ -149,7 +155,7 @@ public class Index extends JPanel {
 		// btnEliminar.setBackground(SystemColor.inactiveCaptionBorder);
 		// btnEliminar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null,
 		// Color.BLACK, null));
-		btnEliminar.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnEliminar.setFont(new Font("Calibri", Font.BOLD, 19));
 		panel_2.add(btnEliminar);
 
 	}

@@ -87,7 +87,7 @@ public class FormGeneral extends JPanel {
         btnRegistrar.setPreferredSize(new Dimension(300, 40));
         btnRegistrar.setBackground(new Color(39, 174, 96));
         btnRegistrar.setForeground(Color.WHITE);
-        btnRegistrar.setBounds(246, 7, 95, 23);
+        btnRegistrar.setBounds(246, 7, 109, 23);
         panel_5.add(btnRegistrar);
         //btnRegistrar.setBounds(30, 340, 107, 42);
         //btnRegistrar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));

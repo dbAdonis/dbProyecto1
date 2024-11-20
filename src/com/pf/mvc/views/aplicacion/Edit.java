@@ -63,14 +63,14 @@ public class Edit extends JPanel {
 		panelRegistro.setLayout(null);
 
 		JLabel label = new JLabel("Perido MPS");
-		label.setFont(new Font("Calibri", Font.BOLD, 16));
-		label.setBounds(20, 11, 80, 20);
+		label.setFont(new Font("Dialog", Font.BOLD, 19));
+		label.setBounds(20, 11, 116, 20);
 		panelRegistro.add(label);
 
 		tPeriodoMPS = new JSpinner();
 		tPeriodoMPS.setPreferredSize(new Dimension(60, 20));
 		tPeriodoMPS.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tPeriodoMPS.setBounds(125, 11, 60, 20);
+		tPeriodoMPS.setBounds(148, 15, 60, 20);
 		panelRegistro.add(tPeriodoMPS);
 
 		JLabel label_1 = new JLabel("WK");
@@ -85,7 +85,7 @@ public class Edit extends JPanel {
 		panelRegistro.add(tWK);
 
 		JLabel label_2 = new JLabel("Fecha");
-		label_2.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_2.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_2.setBounds(362, 11, 49, 20);
 		panelRegistro.add(label_2);
 
@@ -93,78 +93,78 @@ public class Edit extends JPanel {
 		tFecha.setPreferredSize(new Dimension(100, 20));
 		tFecha.setMinimumSize(new Dimension(80, 20));
 		tFecha.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tFecha.setBounds(428, 11, 100, 20);
+		tFecha.setBounds(423, 11, 105, 24);
 		panelRegistro.add(tFecha);
 
 		JLabel label_3 = new JLabel("Lote");
-		label_3.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_3.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_3.setBounds(20, 47, 80, 20);
 		panelRegistro.add(label_3);
 
 		cbxLote = new JComboBox();
 		cbxLote.setPreferredSize(new Dimension(110, 20));
 		cbxLote.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxLote.setBounds(125, 47, 151, 20);
+		cbxLote.setBounds(135, 54, 168, 26);
 		panelRegistro.add(cbxLote);
 
 		JLabel label_4 = new JLabel("Variedad");
-		label_4.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_4.setBounds(20, 92, 80, 20);
+		label_4.setFont(new Font("Dialog", Font.BOLD, 19));
+		label_4.setBounds(20, 92, 105, 20);
 		panelRegistro.add(label_4);
 
 		cbxVariedad = new JComboBox();
 		cbxVariedad.setPreferredSize(new Dimension(110, 20));
 		cbxVariedad.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxVariedad.setBounds(125, 92, 150, 20);
+		cbxVariedad.setBounds(135, 93, 168, 26);
 		panelRegistro.add(cbxVariedad);
 
 		cbxTrabajadores = new JComboBox();
 		cbxTrabajadores.setPreferredSize(new Dimension(340, 20));
 		cbxTrabajadores.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxTrabajadores.setBounds(125, 137, 340, 20);
+		cbxTrabajadores.setBounds(135, 141, 340, 26);
 		panelRegistro.add(cbxTrabajadores);
 
 		JLabel label_5 = new JLabel("Trabajador");
-		label_5.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_5.setBounds(20, 137, 80, 20);
+		label_5.setFont(new Font("Dialog", Font.BOLD, 19));
+		label_5.setBounds(20, 137, 105, 20);
 		panelRegistro.add(label_5);
 
 		JLabel label_6 = new JLabel("Labor");
-		label_6.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_6.setBounds(20, 182, 80, 20);
+		label_6.setFont(new Font("Dialog", Font.BOLD, 19));
+		label_6.setBounds(20, 182, 105, 20);
 		panelRegistro.add(label_6);
 
 		cbxLabor = new JComboBox();
 		cbxLabor.setPreferredSize(new Dimension(340, 20));
 		cbxLabor.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxLabor.setBounds(125, 182, 340, 20);
+		cbxLabor.setBounds(135, 186, 340, 26);
 		panelRegistro.add(cbxLabor);
 
 		cbxFitoFerti = new JComboBox();
 		cbxFitoFerti.setPreferredSize(new Dimension(300, 20));
 		cbxFitoFerti.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxFitoFerti.setBounds(215, 227, 249, 20);
+		cbxFitoFerti.setBounds(279, 231, 249, 26);
 		panelRegistro.add(cbxFitoFerti);
 
 		JLabel label_7 = new JLabel("Fitosanitario - Fertilizante");
-		label_7.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_7.setBounds(20, 227, 175, 20);
+		label_7.setFont(new Font("Dialog", Font.BOLD, 19));
+		label_7.setBounds(20, 227, 243, 20);
 		panelRegistro.add(label_7);
 
 		JLabel label_8 = new JLabel("Cantidad");
-		label_8.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_8.setBounds(20, 274, 80, 20);
+		label_8.setFont(new Font("Dialog", Font.BOLD, 19));
+		label_8.setBounds(20, 274, 105, 20);
 		panelRegistro.add(label_8);
 
 		tCantidad = new JSpinner();
 		tCantidad.setPreferredSize(new Dimension(60, 20));
 		tCantidad.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tCantidad.setBounds(125, 274, 60, 20);
+		tCantidad.setBounds(125, 274, 60, 23);
 		panelRegistro.add(tCantidad);
 
 		JLabel label_9 = new JLabel("Unidades");
-		label_9.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_9.setBounds(215, 274, 63, 20);
+		label_9.setFont(new Font("Dialog", Font.BOLD, 19));
+		label_9.setBounds(215, 274, -90, 20);
 		panelRegistro.add(label_9);
 
 		tUnidades = new JTextField();
@@ -201,26 +201,31 @@ public class Edit extends JPanel {
 		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
 		
 		label_10 = new JLabel("Finca");
-		label_10.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_10.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_10.setBounds(553, 11, 49, 20);
 		panelRegistro.add(label_10);
 		
 		cbxFinca = new JComboBox();
 		cbxFinca.setPreferredSize(new Dimension(110, 20));
 		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxFinca.setBounds(612, 11, 151, 20);
+		cbxFinca.setBounds(612, 11, 151, 26);
 		panelRegistro.add(cbxFinca);
 		
 		label_11 = new JLabel("Supervisor");
-		label_11.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_11.setBounds(786, 11, 74, 20);
+		label_11.setFont(new Font("Calibri", Font.BOLD, 19));
+		label_11.setBounds(786, 11, 85, 20);
 		panelRegistro.add(label_11);
 		
 		cbxSupervisor = new JComboBox();
 		cbxSupervisor.setPreferredSize(new Dimension(110, 20));
 		cbxSupervisor.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxSupervisor.setBounds(877, 11, 151, 20);
+		cbxSupervisor.setBounds(877, 11, 151, 24);
 		panelRegistro.add(cbxSupervisor);
+		
+		JLabel label_12 = new JLabel("Unidades");
+		label_12.setFont(new Font("Calibri", Font.BOLD, 19));
+		label_12.setBounds(215, 277, 77, 20);
+		panelRegistro.add(label_12);
 
 	}
 

@@ -56,6 +56,7 @@ public class Form extends JPanel {
 
 		JPanel panelRegistro = new JPanel();
 		add(panelRegistro, BorderLayout.CENTER);
+		panelRegistro.setBackground(Color.WHITE);
 		panelRegistro.setPreferredSize(new Dimension(10, 400));
 		panelRegistro.setMinimumSize(new Dimension(10, 200));
 		panelRegistro.setLayout(null);
@@ -124,7 +125,7 @@ public class Form extends JPanel {
 
 		JLabel label_5 = new JLabel("Trabajador");
 		label_5.setFont(new Font("Calibri", Font.BOLD, 19));
-		label_5.setBounds(20, 137, 80, 20);
+		label_5.setBounds(20, 137, 93, 20);
 		panelRegistro.add(label_5);
 
 		JLabel label_6 = new JLabel("Labor");
@@ -162,7 +163,7 @@ public class Form extends JPanel {
 
 		JLabel label_9 = new JLabel("Unidades");
 		label_9.setFont(new Font("Calibri", Font.BOLD, 19));
-		label_9.setBounds(215, 274, 63, 20);
+		label_9.setBounds(215, 274, 77, 20);
 		panelRegistro.add(label_9);
 
 		tUnidades = new JTextField();

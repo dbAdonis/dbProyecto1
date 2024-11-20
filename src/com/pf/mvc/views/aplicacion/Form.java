@@ -61,41 +61,41 @@ public class Form extends JPanel {
 		panelRegistro.setLayout(null);
 
 		JLabel label = new JLabel("Perido MPS");
-		label.setFont(new Font("Calibri", Font.BOLD, 16));
-		label.setBounds(20, 11, 80, 20);
+		label.setFont(new Font("Calibri", Font.BOLD, 19));
+		label.setBounds(20, 11, 93, 20);
 		panelRegistro.add(label);
 
 		tPeriodoMPS = new JSpinner();
 		tPeriodoMPS.setPreferredSize(new Dimension(60, 20));
 		tPeriodoMPS.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tPeriodoMPS.setBounds(125, 11, 60, 20);
+		tPeriodoMPS.setBounds(125, 11, 60, 26);
 		panelRegistro.add(tPeriodoMPS);
 
 		JLabel label_1 = new JLabel("WK");
-		label_1.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_1.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_1.setBounds(220, 11, 34, 20);
 		panelRegistro.add(label_1);
 
 		tWK = new JSpinner();
 		tWK.setPreferredSize(new Dimension(60, 20));
 		tWK.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tWK.setBounds(276, 11, 60, 20);
+		tWK.setBounds(276, 11, 60, 26);
 		panelRegistro.add(tWK);
 
 		JLabel label_2 = new JLabel("Fecha");
-		label_2.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_2.setBounds(362, 11, 49, 20);
+		label_2.setFont(new Font("Calibri", Font.BOLD, 19));
+		label_2.setBounds(362, 11, 60, 20);
 		panelRegistro.add(label_2);
 
 		tFecha = new JDateChooser();
 		tFecha.setPreferredSize(new Dimension(100, 20));
 		tFecha.setMinimumSize(new Dimension(80, 20));
 		tFecha.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tFecha.setBounds(428, 11, 100, 20);
+		tFecha.setBounds(428, 11, 113, 26);
 		panelRegistro.add(tFecha);
 
 		JLabel label_3 = new JLabel("Lote");
-		label_3.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_3.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_3.setBounds(20, 47, 80, 20);
 		panelRegistro.add(label_3);
 
@@ -106,51 +106,51 @@ public class Form extends JPanel {
 		panelRegistro.add(cbxLotes);
 
 		JLabel label_4 = new JLabel("Variedad");
-		label_4.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_4.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_4.setBounds(20, 92, 80, 20);
 		panelRegistro.add(label_4);
 
 		cbxVariedades = new JComboBox();
 		cbxVariedades.setPreferredSize(new Dimension(110, 20));
 		cbxVariedades.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxVariedades.setBounds(125, 92, 150, 20);
+		cbxVariedades.setBounds(125, 92, 150, 26);
 		panelRegistro.add(cbxVariedades);
 
 		cbxTrabajadores = new JComboBox();
 		cbxTrabajadores.setPreferredSize(new Dimension(340, 20));
 		cbxTrabajadores.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxTrabajadores.setBounds(125, 137, 340, 20);
+		cbxTrabajadores.setBounds(125, 137, 340, 26);
 		panelRegistro.add(cbxTrabajadores);
 
 		JLabel label_5 = new JLabel("Trabajador");
-		label_5.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_5.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_5.setBounds(20, 137, 80, 20);
 		panelRegistro.add(label_5);
 
 		JLabel label_6 = new JLabel("Labor");
-		label_6.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_6.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_6.setBounds(20, 182, 80, 20);
 		panelRegistro.add(label_6);
 
 		cbxLabores = new JComboBox();
 		cbxLabores.setPreferredSize(new Dimension(340, 20));
 		cbxLabores.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxLabores.setBounds(125, 182, 340, 20);
+		cbxLabores.setBounds(125, 182, 340, 26);
 		panelRegistro.add(cbxLabores);
 
 		cbxFitoFerti = new JComboBox();
 		cbxFitoFerti.setPreferredSize(new Dimension(300, 20));
 		cbxFitoFerti.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxFitoFerti.setBounds(215, 227, 249, 20);
+		cbxFitoFerti.setBounds(253, 228, 249, 26);
 		panelRegistro.add(cbxFitoFerti);
 
 		JLabel label_7 = new JLabel("Fitosanitario - Fertilizante");
-		label_7.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_7.setBounds(20, 227, 175, 20);
+		label_7.setFont(new Font("Calibri", Font.BOLD, 19));
+		label_7.setBounds(20, 227, 221, 20);
 		panelRegistro.add(label_7);
 
 		JLabel label_8 = new JLabel("Cantidad");
-		label_8.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_8.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_8.setBounds(20, 274, 80, 20);
 		panelRegistro.add(label_8);
 
@@ -161,7 +161,7 @@ public class Form extends JPanel {
 		panelRegistro.add(tCantidad);
 
 		JLabel label_9 = new JLabel("Unidades");
-		label_9.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_9.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_9.setBounds(215, 274, 63, 20);
 		panelRegistro.add(label_9);
 
@@ -183,7 +183,7 @@ public class Form extends JPanel {
 		btnGuardar.setForeground(Color.WHITE);
 		// btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY,
 		// null, Color.DARK_GRAY, null));
-		btnGuardar.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnGuardar.setFont(new Font("Calibri", Font.BOLD, 19));
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(148, 334, 100, 40);
@@ -196,28 +196,28 @@ public class Form extends JPanel {
 		btnCancelar.setForeground(Color.WHITE);
 		// btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY,
 		// null, Color.DARK_GRAY, null));
-		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 19));
 		
 		JLabel lblFinca = new JLabel("Finca");
-		lblFinca.setFont(new Font("Calibri", Font.BOLD, 16));
-		lblFinca.setBounds(553, 11, 49, 20);
+		lblFinca.setFont(new Font("Calibri", Font.BOLD, 19));
+		lblFinca.setBounds(553, 11, 47, 20);
 		panelRegistro.add(lblFinca);
 		
 		cbxFinca = new JComboBox();
 		cbxFinca.setPreferredSize(new Dimension(110, 20));
 		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxFinca.setBounds(612, 11, 151, 20);
+		cbxFinca.setBounds(612, 11, 151, 26);
 		panelRegistro.add(cbxFinca);
 		
 		cbxSupervisor = new JComboBox();
 		cbxSupervisor.setPreferredSize(new Dimension(110, 20));
 		cbxSupervisor.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxSupervisor.setBounds(877, 11, 151, 20);
+		cbxSupervisor.setBounds(889, 12, 151, 26);
 		panelRegistro.add(cbxSupervisor);
 		
 		JLabel lblSupervisor = new JLabel("Supervisor");
-		lblSupervisor.setFont(new Font("Calibri", Font.BOLD, 16));
-		lblSupervisor.setBounds(786, 11, 74, 20);
+		lblSupervisor.setFont(new Font("Calibri", Font.BOLD, 19));
+		lblSupervisor.setBounds(786, 11, 91, 20);
 		panelRegistro.add(lblSupervisor);
 
 	}

@@ -60,8 +60,9 @@ public class ViewPrincipal extends JFrame {
 		panel_2.add(panel_3, BorderLayout.NORTH);
 
 		lblTitulo = new JLabel("Titulo");
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setForeground(Color.WHITE);
-		lblTitulo.setFont(new Font("Calibri", Font.BOLD, 20));
+		lblTitulo.setFont(new Font("Calibri", Font.BOLD, 25));
 		panel_3.add(lblTitulo);
 
 		contenido = new JPanel();
@@ -75,22 +76,24 @@ public class ViewPrincipal extends JFrame {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
 
 		btnGestionarPersonal = new JButton("Gestionar Personal");
+		btnGestionarPersonal.setHorizontalAlignment(SwingConstants.LEFT);
 		btnGestionarPersonal.setIconTextGap(10);
-		btnGestionarPersonal.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnGestionarPersonal.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnGestionarPersonal.setPreferredSize(new Dimension(200, 45));
 		panel.add(btnGestionarPersonal);
 		btnGestionarPersonal.setFocusPainted(false);
-		btnGestionarPersonal.setBorder(null);
+		btnGestionarPersonal.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnGestionarPersonal.setForeground(Color.WHITE);
 		btnGestionarPersonal.setBackground(new Color(62, 85, 40));
 
 
 		btnReportesDiarios = new JButton("Reportes Diarios");
-		btnReportesDiarios.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnReportesDiarios.setHorizontalAlignment(SwingConstants.LEFT);
+		btnReportesDiarios.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnReportesDiarios.setPreferredSize(new Dimension(200, 45));
 		panel.add(btnReportesDiarios);
 		btnReportesDiarios.setFocusPainted(false);
-		btnReportesDiarios.setBorder(null);
+		btnReportesDiarios.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnReportesDiarios.setForeground(Color.WHITE);
 		btnReportesDiarios.setBackground(new Color(62, 85, 40));
 
@@ -102,46 +105,47 @@ public class ViewPrincipal extends JFrame {
 
 		btnLotes = new JButton("Gestionar lotes");
 		btnLotes.setMaximumSize(new Dimension(200, 23));
-		btnLotes.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnLotes.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnLotes.setHorizontalAlignment(SwingConstants.LEFT);
 		btnLotes.setIconTextGap(10);
 		btnLotes.setPreferredSize(new Dimension(200, 45));
 		btnLotes.setForeground(Color.WHITE);
 		btnLotes.setFocusPainted(false);
-		btnLotes.setBorder(null);
+		btnLotes.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnLotes.setBackground(new Color(62, 85, 40));
 		panelBtnReportes.add(btnLotes);
 
 		btnVariedades = new JButton("Gestionar variedades");
 		btnVariedades.setMaximumSize(new Dimension(200, 23));
-		btnVariedades.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnVariedades.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnVariedades.setIconTextGap(10);
 		btnVariedades.setHorizontalAlignment(SwingConstants.LEFT);
 		btnVariedades.setPreferredSize(new Dimension(200, 45));
 		btnVariedades.setForeground(Color.WHITE);
 		btnVariedades.setFocusPainted(false);
-		btnVariedades.setBorder(null);
+		btnVariedades.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnVariedades.setBackground(new Color(62, 85, 40));
 		panelBtnReportes.add(btnVariedades);
 
 		btnLabores = new JButton("Gestionar labores");
 		btnLabores.setMaximumSize(new Dimension(200, 23));
-		btnLabores.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnLabores.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnLabores.setIconTextGap(10);
 		btnLabores.setHorizontalAlignment(SwingConstants.LEFT);
 		btnLabores.setPreferredSize(new Dimension(200, 45));
 		btnLabores.setForeground(Color.WHITE);
 		btnLabores.setFocusPainted(false);
-		btnLabores.setBorder(null);
+		btnLabores.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnLabores.setBackground(new Color(62, 85, 40));
 		panelBtnReportes.add(btnLabores);
 
 		btnProductos = new JButton("Productos");
-		btnProductos.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnProductos.setHorizontalAlignment(SwingConstants.LEFT);
+		btnProductos.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnProductos.setPreferredSize(new Dimension(200, 45));
 		panel.add(btnProductos);
 		btnProductos.setFocusPainted(false);
-		btnProductos.setBorder(null);
+		btnProductos.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnProductos.setForeground(Color.WHITE);
 		btnProductos.setBackground(new Color(62, 85, 40));
 
@@ -165,9 +169,9 @@ public class ViewPrincipal extends JFrame {
 		btnGestionarNaturalezas.setIconTextGap(10);
 		btnGestionarNaturalezas.setHorizontalAlignment(SwingConstants.LEFT);
 		btnGestionarNaturalezas.setForeground(Color.WHITE);
-		btnGestionarNaturalezas.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnGestionarNaturalezas.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnGestionarNaturalezas.setFocusPainted(false);
-		btnGestionarNaturalezas.setBorder(null);
+		btnGestionarNaturalezas.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnGestionarNaturalezas.setBackground(new Color(62, 85, 40));
 		panelBtnProductos.add(btnGestionarNaturalezas);
 		
@@ -177,9 +181,9 @@ public class ViewPrincipal extends JFrame {
 		btnGestionarTipos.setIconTextGap(10);
 		btnGestionarTipos.setHorizontalAlignment(SwingConstants.LEFT);
 		btnGestionarTipos.setForeground(Color.WHITE);
-		btnGestionarTipos.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnGestionarTipos.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnGestionarTipos.setFocusPainted(false);
-		btnGestionarTipos.setBorder(null);
+		btnGestionarTipos.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnGestionarTipos.setBackground(new Color(62, 85, 40));
 		panelBtnProductos.add(btnGestionarTipos);
 		
@@ -189,18 +193,19 @@ public class ViewPrincipal extends JFrame {
 		btnGestionarCategorias.setIconTextGap(10);
 		btnGestionarCategorias.setHorizontalAlignment(SwingConstants.LEFT);
 		btnGestionarCategorias.setForeground(Color.WHITE);
-		btnGestionarCategorias.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnGestionarCategorias.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnGestionarCategorias.setFocusPainted(false);
-		btnGestionarCategorias.setBorder(null);
+		btnGestionarCategorias.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnGestionarCategorias.setBackground(new Color(62, 85, 40));
 		panelBtnProductos.add(btnGestionarCategorias);
 		
 		btnFincas = new JButton("Fincas");
+		btnFincas.setHorizontalAlignment(SwingConstants.LEFT);
 		btnFincas.setPreferredSize(new Dimension(200, 45));
 		btnFincas.setForeground(Color.WHITE);
-		btnFincas.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnFincas.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnFincas.setFocusPainted(false);
-		btnFincas.setBorder(null);
+		btnFincas.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnFincas.setBackground(new Color(62, 85, 40));
 		
 		btnGestionarNaturalezas.setIcon(iconImgLine);
@@ -209,11 +214,12 @@ public class ViewPrincipal extends JFrame {
 		panel.add(btnFincas);
 		
 		btnSupervisor = new JButton("Supervisores");
+		btnSupervisor.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSupervisor.setPreferredSize(new Dimension(200, 45));
 		btnSupervisor.setForeground(Color.WHITE);
-		btnSupervisor.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnSupervisor.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnSupervisor.setFocusPainted(false);
-		btnSupervisor.setBorder(null);
+		btnSupervisor.setBorder(new EmptyBorder(0, 10, 0, 0));
 		btnSupervisor.setBackground(new Color(62, 85, 40));
 		panel.add(btnSupervisor);
 	}

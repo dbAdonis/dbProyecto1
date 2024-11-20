@@ -99,7 +99,7 @@ public class ControllerSupervisores extends Functions implements Controller {
 			
 		});
 
-		vp.setContenido(in, "Fincas");
+		vp.setContenido(in, "Supervisores");
 
 		in.btnGuardar.setEnabled(true);
 		in.btnGuardar.setVisible(true);
@@ -108,7 +108,7 @@ public class ControllerSupervisores extends Functions implements Controller {
 		in.btnCancelar.setEnabled(false);
 		in.btnCancelar.setVisible(false);
 
-		in.lblTitulo.setText("Registrar nueva finca");
+		in.lblTitulo.setText("Registrar nuevo Supervisor");
 	}
 
 	@Override

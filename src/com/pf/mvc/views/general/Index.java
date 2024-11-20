@@ -37,7 +37,7 @@ public class Index extends JPanel {
 	 * Create the panel.
 	 */
 	public Index() {
-		setPreferredSize(new Dimension(900, 580));
+		setPreferredSize(new Dimension(1015, 645));
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_1 = new JPanel();

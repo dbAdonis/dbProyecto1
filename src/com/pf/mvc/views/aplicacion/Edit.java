@@ -37,11 +37,15 @@ public class Edit extends JPanel {
 	public JComboBox cbxLote;
 	public JComboBox cbxVariedad;
 	public JComboBox cbxLabor;
-	public JComboBox cbxTrabajador;
+	public JComboBox cbxTrabajadores;
 	public JComboBox cbxFitoFerti;
 	public JSpinner tCantidad;
 	public JSpinner tWK;
 	public JDateChooser tFecha;
+	private JLabel label_10;
+	public JComboBox cbxFinca;
+	private JLabel label_11;
+	public JComboBox cbxSupervisor;
 
 	/**
 	 * Create the panel.
@@ -114,11 +118,11 @@ public class Edit extends JPanel {
 		cbxVariedad.setBounds(125, 92, 150, 20);
 		panelRegistro.add(cbxVariedad);
 
-		cbxTrabajador = new JComboBox();
-		cbxTrabajador.setPreferredSize(new Dimension(340, 20));
-		cbxTrabajador.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxTrabajador.setBounds(125, 137, 340, 20);
-		panelRegistro.add(cbxTrabajador);
+		cbxTrabajadores = new JComboBox();
+		cbxTrabajadores.setPreferredSize(new Dimension(340, 20));
+		cbxTrabajadores.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxTrabajadores.setBounds(125, 137, 340, 20);
+		panelRegistro.add(cbxTrabajadores);
 
 		JLabel label_5 = new JLabel("Trabajador");
 		label_5.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -195,6 +199,28 @@ public class Edit extends JPanel {
 		// btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY,
 		// null, Color.DARK_GRAY, null));
 		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
+		
+		label_10 = new JLabel("Finca");
+		label_10.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_10.setBounds(553, 11, 49, 20);
+		panelRegistro.add(label_10);
+		
+		cbxFinca = new JComboBox();
+		cbxFinca.setPreferredSize(new Dimension(110, 20));
+		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxFinca.setBounds(612, 11, 151, 20);
+		panelRegistro.add(cbxFinca);
+		
+		label_11 = new JLabel("Supervisor");
+		label_11.setFont(new Font("Calibri", Font.BOLD, 16));
+		label_11.setBounds(786, 11, 74, 20);
+		panelRegistro.add(label_11);
+		
+		cbxSupervisor = new JComboBox();
+		cbxSupervisor.setPreferredSize(new Dimension(110, 20));
+		cbxSupervisor.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxSupervisor.setBounds(877, 11, 151, 20);
+		panelRegistro.add(cbxSupervisor);
 
 	}
 

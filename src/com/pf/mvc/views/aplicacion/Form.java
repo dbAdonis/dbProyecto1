@@ -42,6 +42,8 @@ public class Form extends JPanel {
 	public JComboBox cbxFitoFerti;
 	public JSpinner tCantidad;
 	public JComboBox cbxLotes;
+	public JComboBox cbxFinca;
+	public JComboBox cbxSupervisor;
 
 	/**
 	 * Create the panel.
@@ -195,6 +197,28 @@ public class Form extends JPanel {
 		// btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY,
 		// null, Color.DARK_GRAY, null));
 		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
+		
+		JLabel lblFinca = new JLabel("Finca");
+		lblFinca.setFont(new Font("Calibri", Font.BOLD, 16));
+		lblFinca.setBounds(553, 11, 49, 20);
+		panelRegistro.add(lblFinca);
+		
+		cbxFinca = new JComboBox();
+		cbxFinca.setPreferredSize(new Dimension(110, 20));
+		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxFinca.setBounds(612, 11, 151, 20);
+		panelRegistro.add(cbxFinca);
+		
+		cbxSupervisor = new JComboBox();
+		cbxSupervisor.setPreferredSize(new Dimension(110, 20));
+		cbxSupervisor.setFont(new Font("Calibri", Font.PLAIN, 16));
+		cbxSupervisor.setBounds(877, 11, 151, 20);
+		panelRegistro.add(cbxSupervisor);
+		
+		JLabel lblSupervisor = new JLabel("Supervisor");
+		lblSupervisor.setFont(new Font("Calibri", Font.BOLD, 16));
+		lblSupervisor.setBounds(786, 11, 74, 20);
+		panelRegistro.add(lblSupervisor);
 
 	}
 

@@ -76,7 +76,7 @@ public class ControllerSupervisores extends Functions implements Controller {
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 			}else {
 			edit(id);
-			in.lblTitulo.setText("Editar finca");
+			in.lblTitulo.setText("Editar supervisor");
 			in.btnGuardar.setEnabled(false);
 			in.btnGuardar.setVisible(false);
 			in.btnActualizar.setEnabled(true);
@@ -136,8 +136,8 @@ public class ControllerSupervisores extends Functions implements Controller {
 	@Override
 	public void edit(int id) {
 		
-		Finca f = (Finca) dao.getItem(id);
-			in.tNombre.setText(f.getNombre());
+		Supervisor s = (Supervisor) dao.getItem(id);
+			in.tNombre.setText(s.getNombre());
 		
 		in.btnActualizar.addActionListener(e -> {
 			

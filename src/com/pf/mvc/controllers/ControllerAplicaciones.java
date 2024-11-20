@@ -55,7 +55,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		
 		in.modelo.setDataVector(getData(), getColumns());
 		in.ajustarColumnasYExpandirTabla(in.table);
-		//ocultarColumna(in.table);
+		ocultarColumna(in.table);
 
 		in.btnNuevo.addActionListener(e -> {
 
@@ -143,15 +143,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			f.cbxVariedades.addItem(v);
 		}
 
-		ArrayList<Object> trabajadores = new DAOEmpleado().getData();
-
-		for (Object o : trabajadores) {
-			Empleado e = (Empleado) o;
-
-			f.cbxTrabajadores.addItem(e);
-
-		}
-
+		
 		ArrayList<Object> labores = new DAOLabor().getData();
 
 		for (Object o : labores) {
@@ -165,6 +157,36 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			Producto p = (Producto) o;
 			f.cbxFitoFerti.addItem(p);
 		}
+		
+		ArrayList<Object> fincas = new DAOFinca().getData();
+		
+		for (Object o : fincas) {
+			Finca finca = (Finca) o;
+			f.cbxFinca.addItem(finca);
+		}
+		ArrayList<Object> trabajadores = new DAOEmpleado().getData();
+		
+		f.cbxFinca.addActionListener(e->{
+			f.cbxTrabajadores.removeAllItems();
+			Finca finca = (Finca) f.cbxFinca.getSelectedItem();
+				
+				for (Object o : trabajadores) {
+					Empleado em = (Empleado) o;
+
+					if(finca.getId() == em.getIdFinca()) {
+						f.cbxTrabajadores.addItem(em);
+					}
+				}
+				
+			
+		});
+		
+		ArrayList<Object> supervisores = new DAOSupervisor().getData();
+		
+		for (Object o : supervisores) {
+			Supervisor s = (Supervisor) o;
+			f.cbxSupervisor.addItem(s);
+		}
 
 		f.cbxFitoFerti.addActionListener(e -> {
 
@@ -172,6 +194,8 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 			f.tUnidades.setText(p.getUnidades());
 		});
+		
+		
 
 		f.btnGuardar.addActionListener(e -> {
 
@@ -198,9 +222,12 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 			Producto p = (Producto) f.cbxFitoFerti.getSelectedItem();
 			int idProducto = p.getId();
+			
+			Supervisor s = (Supervisor) f.cbxSupervisor.getSelectedItem();
+			int idSupervisor = s.getId();
 
 			Aplicacion item = new Aplicacion(periodo, semana, fecha, idLote, idVariedad, idEmpleado, idLabor,
-					idProducto, cantidad, 1);
+					idProducto, cantidad, idSupervisor);
 
 			dao.store(item);
 
@@ -265,19 +292,6 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			}
 		}
 
-		ArrayList<Object> trabajadores = new DAOEmpleado().getData();
-		ed.cbxTrabajador.removeAllItems();
-
-		for (Object o : trabajadores) {
-			Empleado e = (Empleado) o;
-
-			ed.cbxTrabajador.addItem(e);
-
-			if (e.getId() == item.getIdEmpleado()) {
-				ed.cbxTrabajador.setSelectedItem(e);
-			}
-		}
-
 		ArrayList<Object> labores = new DAOLabor().getData();
 		ed.cbxLabor.removeAllItems();
 
@@ -301,6 +315,60 @@ public class ControllerAplicaciones extends Functions implements Controller {
 				ed.cbxFitoFerti.setSelectedItem(p);
 			}
 		}
+		
+		ArrayList<Object> fincas = new DAOFinca().getData();
+		
+		for (Object o : fincas) {
+			Finca finca = (Finca) o;
+			ed.cbxFinca.addItem(finca);
+		}
+		
+		ArrayList<Object> supervisores = new DAOSupervisor().getData();
+		
+		for (Object o : supervisores) {
+			Supervisor s = (Supervisor) o;
+			ed.cbxSupervisor.addItem(s);
+			
+			if(s.getId() == item.getIdSupervisor()) {
+				ed.cbxSupervisor.setSelectedItem(s);
+				
+			}
+		}
+		
+		ArrayList<Object> trabajadores = new DAOEmpleado().getData();
+		
+		for (Object ob : trabajadores) {
+			Empleado em = (Empleado) ob;
+
+			if(em.getId() == item.getIdEmpleado()) {
+				Finca finca = (Finca) new DAOFinca().getItem(em.getIdFinca());
+				
+				if(finca.getId() == em.getIdFinca()) {
+					for (Object o : trabajadores) {
+						Empleado emp = (Empleado) o;
+						if(finca.getId() == emp.getIdFinca()) {
+							ed.cbxTrabajadores.addItem(emp);
+						}
+						ed.cbxTrabajadores.setSelectedItem(em);
+					}
+				}
+			}
+		}
+		
+		ed.cbxFinca.addActionListener(e->{
+			
+			ed.cbxTrabajadores.removeAllItems();
+			Finca finca = (Finca) ed.cbxFinca.getSelectedItem();
+				
+				for (Object o : trabajadores) {
+					Empleado em = (Empleado) o;
+
+					if(finca.getId() == em.getIdFinca()) {
+						ed.cbxTrabajadores.addItem(em);
+					}
+				}
+			
+		});
 
 		ed.cbxFitoFerti.addActionListener(e -> {
 
@@ -326,7 +394,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			Variedad va = (Variedad) ed.cbxVariedad.getSelectedItem();
 			int idVariedad = va.getId();
 
-			Empleado en = (Empleado) ed.cbxTrabajador.getSelectedItem();
+			Empleado en = (Empleado) ed.cbxTrabajadores.getSelectedItem();
 			int idEmpleado = en.getId();
 
 			Labor la = (Labor) ed.cbxLabor.getSelectedItem();
@@ -334,9 +402,12 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 			Producto p = (Producto) ed.cbxFitoFerti.getSelectedItem();
 			int idProducto = p.getId();
+			
+			Supervisor s = (Supervisor) ed.cbxSupervisor.getSelectedItem();
+			int idSupervisor = s.getId();
 
 			Aplicacion nuevoItem = new Aplicacion(periodo, semana, fecha, idLote, idVariedad, idEmpleado, idLabor,
-					idProducto, cantidad, 1);
+					idProducto, cantidad, idSupervisor);
 
 			if (item.getId() > 0) {
 				dao.update(nuevoItem, item.getId());

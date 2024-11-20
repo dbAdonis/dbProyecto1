@@ -69,7 +69,7 @@ public class Form extends JPanel {
 		tPeriodoMPS = new JSpinner();
 		tPeriodoMPS.setPreferredSize(new Dimension(60, 20));
 		tPeriodoMPS.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tPeriodoMPS.setBounds(125, 11, 60, 26);
+		tPeriodoMPS.setBounds(125, 9, 60, 26);
 		panelRegistro.add(tPeriodoMPS);
 
 		JLabel label_1 = new JLabel("WK");
@@ -80,7 +80,7 @@ public class Form extends JPanel {
 		tWK = new JSpinner();
 		tWK.setPreferredSize(new Dimension(60, 20));
 		tWK.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tWK.setBounds(276, 11, 60, 26);
+		tWK.setBounds(274, 9, 60, 26);
 		panelRegistro.add(tWK);
 
 		JLabel label_2 = new JLabel("Fecha");
@@ -103,7 +103,7 @@ public class Form extends JPanel {
 		cbxLotes = new JComboBox();
 		cbxLotes.setPreferredSize(new Dimension(110, 20));
 		cbxLotes.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxLotes.setBounds(125, 47, 151, 20);
+		cbxLotes.setBounds(125, 47, 151, 26);
 		panelRegistro.add(cbxLotes);
 
 		JLabel label_4 = new JLabel("Variedad");
@@ -142,7 +142,7 @@ public class Form extends JPanel {
 		cbxFitoFerti = new JComboBox();
 		cbxFitoFerti.setPreferredSize(new Dimension(300, 20));
 		cbxFitoFerti.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxFitoFerti.setBounds(253, 228, 249, 26);
+		cbxFitoFerti.setBounds(251, 225, 249, 26);
 		panelRegistro.add(cbxFitoFerti);
 
 		JLabel label_7 = new JLabel("Fitosanitario - Fertilizante");
@@ -158,7 +158,7 @@ public class Form extends JPanel {
 		tCantidad = new JSpinner();
 		tCantidad.setPreferredSize(new Dimension(60, 20));
 		tCantidad.setFont(new Font("Calibri", Font.PLAIN, 16));
-		tCantidad.setBounds(125, 274, 60, 20);
+		tCantidad.setBounds(125, 272, 60, 26);
 		panelRegistro.add(tCantidad);
 
 		JLabel label_9 = new JLabel("Unidades");
@@ -170,7 +170,7 @@ public class Form extends JPanel {
 		tUnidades.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tUnidades.setEditable(false);
 		tUnidades.setColumns(10);
-		tUnidades.setBounds(304, 271, 126, 26);
+		tUnidades.setBounds(302, 272, 126, 26);
 		panelRegistro.add(tUnidades);
 
 		btnGuardar = new JButton("Guardar");

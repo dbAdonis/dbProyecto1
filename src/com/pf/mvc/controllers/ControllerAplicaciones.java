@@ -28,7 +28,6 @@ import com.pf.mvc.models.vo.Producto;
 import com.pf.mvc.models.vo.Supervisor;
 import com.pf.mvc.models.vo.Variedad;
 import com.pf.mvc.views.ViewPrincipal;
-import com.pf.mvc.views.aplicacion.Edit;
 import com.pf.mvc.views.aplicacion.Form;
 import com.pf.mvc.views.aplicacion.Index;
 
@@ -254,14 +253,16 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		Aplicacion item = (Aplicacion) dao.getItem(id);
 		System.out.println(item.getIdLote());
 
-		Edit ed = new Edit();
+		Form ed = new Form();
+		
+		ed.btnGuardar.setText("Actualizar");
 
 		ArrayList<Object> lotes = new DAOLote().getData();
-		ed.cbxLote.removeAllItems();
+		ed.cbxLotes.removeAllItems();
 
 		for (Object o : lotes) {
 			Lote l = (Lote) o;
-			ed.cbxLote.addItem(l);
+			ed.cbxLotes.addItem(l);
 
 			System.out.println(l.getId());
 //			if (l.getId() == item.getIdLote()) {
@@ -281,26 +282,26 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		ed.tCantidad.setValue(item.getCantidad());
 
 		ArrayList<Object> variedades = new DAOVariedad().getData();
-		ed.cbxVariedad.removeAllItems();
+		ed.cbxVariedades.removeAllItems();
 
 		for (Object o : variedades) {
 			Variedad va = (Variedad) o;
-			ed.cbxVariedad.addItem(va);
+			ed.cbxVariedades.addItem(va);
 
 			if (va.getId() == item.getIdVariedad()) {
-				ed.cbxVariedad.setSelectedItem(va);
+				ed.cbxVariedades.setSelectedItem(va);
 			}
 		}
 
 		ArrayList<Object> labores = new DAOLabor().getData();
-		ed.cbxLabor.removeAllItems();
+		ed.cbxLabores.removeAllItems();
 
 		for (Object o : labores) {
 			Labor l = (Labor) o;
-			ed.cbxLabor.addItem(l);
+			ed.cbxLabores.addItem(l);
 
 			if (l.getId() == item.getIdLabor()) {
-				ed.cbxLabor.setSelectedItem(l);
+				ed.cbxLabores.setSelectedItem(l);
 			}
 		}
 
@@ -377,7 +378,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			ed.tUnidades.setText(p.getUnidades());
 		});
 
-		ed.btnActualizar.addActionListener(e -> {
+		ed.btnGuardar.addActionListener(e -> {
 
 			int periodo = (int) ed.tPeriodoMPS.getValue();
 			int semana = (int) ed.tWK.getValue();
@@ -388,16 +389,16 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			String fecha = dateFormat.format(fechaSeleccionada);
 			int cantidad = (int) ed.tCantidad.getValue();
 
-			Lote l = (Lote) ed.cbxLote.getSelectedItem();
+			Lote l = (Lote) ed.cbxLotes.getSelectedItem();
 			int idLote = l.getId();
 
-			Variedad va = (Variedad) ed.cbxVariedad.getSelectedItem();
+			Variedad va = (Variedad) ed.cbxVariedades.getSelectedItem();
 			int idVariedad = va.getId();
 
 			Empleado en = (Empleado) ed.cbxTrabajadores.getSelectedItem();
 			int idEmpleado = en.getId();
 
-			Labor la = (Labor) ed.cbxLabor.getSelectedItem();
+			Labor la = (Labor) ed.cbxLabores.getSelectedItem();
 			int idLabor = la.getId();
 
 			Producto p = (Producto) ed.cbxFitoFerti.getSelectedItem();

@@ -21,6 +21,8 @@ import java.awt.SystemColor;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Create extends JPanel {
     public JTextField tNombre;
@@ -37,28 +39,31 @@ public class Create extends JPanel {
         setLayout(new BorderLayout(0, 0));
         
         JPanel panel = new JPanel();
-        panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
         panel.setPreferredSize(new Dimension(10, 200));
         add(panel, BorderLayout.CENTER);
         panel.setLayout(null);
         
         lblTitulo = new JLabel("Titulo");
-        lblTitulo.setFont(new Font("Calibri", Font.BOLD, 16));
+        lblTitulo.setFont(new Font("Calibri", Font.BOLD, 30));
         lblTitulo.setBounds(27, 11, 847, 30);
         panel.add(lblTitulo);
         
         JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre.setBounds(27, 70, 70, 25);
+        lblNombre.setFont(new Font("Calibri", Font.BOLD, 21));
+        lblNombre.setBounds(27, 70, 83, 25);
         panel.add(lblNombre);
         
         tNombre = new JTextField();
         tNombre.setFont(new Font("Calibri", Font.PLAIN, 16));
         tNombre.setColumns(10);
-        tNombre.setBounds(102, 68, 380, 30);
+        tNombre.setBounds(118, 69, 380, 30);
         panel.add(tNombre);
         
         btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnCancelar.setBounds(157, 177, 110, 30);
         panel.add(btnCancelar);
         btnCancelar.setBorder(null);
@@ -66,7 +71,7 @@ public class Create extends JPanel {
         btnCancelar.setPreferredSize(new Dimension(100, 40));
         btnCancelar.setBackground(new Color(52, 108, 175));
         btnCancelar.setForeground(Color.WHITE);
-        btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16));
+        btnCancelar.setFont(new Font("Calibri", Font.BOLD, 19));
          
          btnGuardar = new JButton("Guardar");
          btnGuardar.setBounds(27, 177, 110, 30);
@@ -79,15 +84,16 @@ public class Create extends JPanel {
          //btnAgregar.setBounds(30, 340, 107, 42);
          //btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
          //btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
-         btnGuardar.setFont(new Font("Calibri", Font.BOLD, 16));
+         btnGuardar.setFont(new Font("Calibri", Font.BOLD, 19));
          
          JLabel lblFinca = new JLabel("Finca");
-         lblFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
-         lblFinca.setBounds(27, 121, 70, 25);
+         lblFinca.setFont(new Font("Calibri", Font.BOLD, 21));
+         lblFinca.setBounds(27, 121, 83, 25);
          panel.add(lblFinca);
          
          cbxFincas = new JComboBox<Finca>();
-         cbxFincas.setBounds(102, 121, 135, 25);
+         cbxFincas.setFont(new Font("Calibri", Font.PLAIN, 16));
+         cbxFincas.setBounds(118, 123, 135, 25);
          panel.add(cbxFincas);
     }
 }

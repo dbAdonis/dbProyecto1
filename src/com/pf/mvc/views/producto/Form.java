@@ -59,63 +59,63 @@ public class Form extends JPanel {
 		panel_4.setLayout(null);
 		
 		JLabel label = new JLabel("Producto");
-		label.setFont(new Font("Calibri", Font.BOLD, 16));
-		label.setBounds(21, 33, 65, 20);
+		label.setFont(new Font("Calibri", Font.BOLD, 20));
+		label.setBounds(21, 33, 142, 20);
 		panel_4.add(label);
 		
 		cbxProductos = new JComboBox<Naturaleza>();
 		cbxProductos.setPreferredSize(new Dimension(200, 20));
 		cbxProductos.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxProductos.setBounds(155, 33, 173, 20);
+		cbxProductos.setBounds(204, 33, 173, 26);
 		panel_4.add(cbxProductos);
 		
 		JLabel label_1 = new JLabel("Nombre");
-		label_1.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_1.setBounds(21, 78, 65, 20);
+		label_1.setFont(new Font("Calibri", Font.BOLD, 20));
+		label_1.setBounds(21, 78, 142, 20);
 		panel_4.add(label_1);
 		
 		tNombre = new JTextField();
 		tNombre.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tNombre.setColumns(30);
-		tNombre.setBounds(155, 75, 366, 26);
+		tNombre.setBounds(204, 75, 366, 26);
 		panel_4.add(tNombre);
 		
 		tCodigo = new JTextField();
 		tCodigo.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tCodigo.setColumns(15);
-		tCodigo.setBounds(155, 120, 173, 26);
+		tCodigo.setBounds(204, 120, 173, 26);
 		panel_4.add(tCodigo);
 		
 		JLabel label_12 = new JLabel("C\u00F3digo");
-		label_12.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_12.setBounds(21, 123, 47, 20);
+		label_12.setFont(new Font("Calibri", Font.BOLD, 20));
+		label_12.setBounds(21, 123, 142, 20);
 		panel_4.add(label_12);
 		
 		JLabel label_13 = new JLabel("Unidad de medida");
-		label_13.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_13.setBounds(21, 171, 125, 20);
+		label_13.setFont(new Font("Calibri", Font.BOLD, 20));
+		label_13.setBounds(21, 171, 160, 20);
 		panel_4.add(label_13);
 		
 		cbxTipos = new JComboBox<Tipo>();
 		cbxTipos.setPreferredSize(new Dimension(150, 20));
 		cbxTipos.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxTipos.setBounds(155, 222, 173, 20);
+		cbxTipos.setBounds(204, 222, 173, 26);
 		panel_4.add(cbxTipos);
 		
 		JLabel label_15 = new JLabel("Tipo");
-		label_15.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_15.setBounds(21, 222, 65, 20);
+		label_15.setFont(new Font("Calibri", Font.BOLD, 20));
+		label_15.setBounds(21, 222, 142, 20);
 		panel_4.add(label_15);
 		
 		JLabel label_16 = new JLabel("Categor\u00EDa");
-		label_16.setFont(new Font("Calibri", Font.BOLD, 16));
-		label_16.setBounds(21, 264, 65, 20);
+		label_16.setFont(new Font("Calibri", Font.BOLD, 20));
+		label_16.setBounds(21, 264, 142, 20);
 		panel_4.add(label_16);
 		
 		cbxCategorias = new JComboBox<Categoria>();
 		cbxCategorias.setPreferredSize(new Dimension(150, 20));
 		cbxCategorias.setFont(new Font("Calibri", Font.PLAIN, 16));
-		cbxCategorias.setBounds(155, 264, 173, 20);
+		cbxCategorias.setBounds(204, 264, 173, 26);
 		panel_4.add(cbxCategorias);
 		
 		btnAgregar = new JButton("Agregar");
@@ -123,7 +123,7 @@ public class Form extends JPanel {
 		panel_4.add(btnAgregar);
 		btnAgregar.setFocusPainted(false);
 		btnAgregar.setBorder(null);
-		btnAgregar.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
+		btnAgregar.setFont(new Font("Calibri", Font.BOLD, 19)); // Fuente Calibri 16
 		btnAgregar.setPreferredSize(new Dimension(100, 40));
 		btnAgregar.setBackground(new Color(39, 174, 96));
 		btnAgregar.setForeground(Color.WHITE);
@@ -133,7 +133,7 @@ public class Form extends JPanel {
 		panel_4.add(btnCancelar);
 		btnCancelar.setFocusPainted(false);
 		btnCancelar.setBorder(null);
-		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 16)); // Fuente Calibri 16
+		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 19)); // Fuente Calibri 16
 		btnCancelar.setPreferredSize(new Dimension(100, 40));
 		btnCancelar.setBackground(new Color(52, 108, 175));
 		btnCancelar.setForeground(Color.WHITE);
@@ -141,7 +141,7 @@ public class Form extends JPanel {
 		tUnidad = new JTextField();
 		tUnidad.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tUnidad.setColumns(15);
-		tUnidad.setBounds(155, 168, 173, 26);
+		tUnidad.setBounds(204, 168, 173, 26);
 		panel_4.add(tUnidad);
 		
 		JPanel panel_5 = new JPanel();

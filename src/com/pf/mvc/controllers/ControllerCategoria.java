@@ -3,22 +3,16 @@ package com.pf.mvc.controllers;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import com.pf.mvc.models.dao.DAOCategoria;
-import com.pf.mvc.models.dao.DAONaturaleza;
-import com.pf.mvc.models.dao.DAOTipo;
 import com.pf.mvc.models.vo.Categoria;
-import com.pf.mvc.models.vo.Naturaleza;
-import com.pf.mvc.models.vo.Tipo;
 import com.pf.mvc.views.ViewPrincipal;
-import com.pf.mvc.views.general.FormGeneral;
-import com.pf.mvc.views.producto.Form;
+import com.pf.mvc.views.general.Index;
 
 public class ControllerCategoria extends Functions implements Controller  {
 	
 	private DAOCategoria dao;
-	private FormGeneral fg;
+	private Index in;
 	public boolean switchPanel;
 	private ViewPrincipal vp;
 	
@@ -31,71 +25,69 @@ public class ControllerCategoria extends Functions implements Controller  {
 	
 	@Override
 	public void index() {
+		this.in = new Index();
+		in.modelo.setDataVector(getData(), getColumns());
+		ocultarColumna(in.table);
 		
-		this.fg = new FormGeneral();
-		
-		fg.modelo.setDataVector(getData(), getColumns());
-		ocultarColumna(fg.table);
-		
-		fg.btnRegistrar.addActionListener(e->{
+		in.btnGuardar.addActionListener(e->{
 			
 			create();
 			
 		});
 		
-		fg.btnEditar.addActionListener(e->{
+		in.btnEditar.addActionListener(e->{
 			
-			int row = fg.table.getSelectedRow();
+			int row = in.table.getSelectedRow();
 			if(row == -1) {
-				JOptionPane.showMessageDialog(fg, "Debe seleccionar un registro para editar.",
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar.",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
-			int id = getSelectedId(fg.table);
+			int id = getSelectedId(in.table);
 				edit(id);
-				fg.btnRegistrar.setEnabled(false);
-				fg.btnRegistrar.setVisible(false);
-				fg.btnActualizar.setEnabled(true);
-				fg.btnActualizar.setVisible(true);
-				fg.btnCancelar.setEnabled(true);
-				fg.btnCancelar.setVisible(true);
+				in.btnGuardar.setEnabled(false);
+				in.btnGuardar.setVisible(false);
+				in.btnActualizar.setEnabled(true);
+				in.btnActualizar.setVisible(true);
+				in.btnCancelar.setEnabled(true);
+				in.btnCancelar.setVisible(true);
 				
-				fg.lblTitulo.setText("Editar categoria");
+				in.lblTitulo.setText("Editar categoria");
 			
 		});
 		
-		fg.btnEliminar.addActionListener(e->{
-			int row = fg.table.getSelectedRow();
+		in.btnEliminar.addActionListener(e->{
+			int row = in.table.getSelectedRow();
 			if(row == -1) {
-				JOptionPane.showMessageDialog(fg, "Debe seleccionar un registro para eliminar.",
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar.",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 				return;
 
 			}
-			int id = getSelectedId(fg.table);
+			int id = getSelectedId(in.table);
 			destroy(id);
 			index();
 			
 		});
 		
-		fg.btnRegistrar.setEnabled(true);
-		fg.btnRegistrar.setVisible(true);
-		fg.btnActualizar.setEnabled(false);
-		fg.btnActualizar.setVisible(false);
-		fg.btnCancelar.setEnabled(false);
-		fg.btnCancelar.setVisible(false);
+		in.btnGuardar.setEnabled(true);
+		in.btnGuardar.setVisible(true);
+		in.btnActualizar.setEnabled(false);
+		in.btnActualizar.setVisible(false);
+		in.btnCancelar.setEnabled(false);
+		in.btnCancelar.setVisible(false);
 		
-		fg.lblTitulo.setText("Registrar nueva categoria");
-		vp.setContenido(fg, "Categorías");
+		in.lblTitulo.setText("Registrar nueva categoria");
+		vp.setContenido(in, "Categorías");
 	}
 
 	@Override
 	public void create() {
 		
-		String nombre = fg.tNombre.getText();
+		String nombre = in.tNombre.getText();
 
 	    if (nombre.isEmpty()) {
-	        JOptionPane.showMessageDialog(fg, "El nombre no puede estar vacío.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+	        JOptionPane.showMessageDialog(in, "El nombre no puede estar vacío.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 	        return;
 	    }
 
@@ -103,19 +95,19 @@ public class ControllerCategoria extends Functions implements Controller  {
 
 	    String result = dao.storeCategoria(item);
 
-	    JOptionPane.showMessageDialog(fg, result);
+	    JOptionPane.showMessageDialog(in, result);
 
-	    fg.tNombre.setText("");
+	    in.tNombre.setText("");
 	}
 
 	@Override
 	public void edit(int id) {
 		Categoria n = (Categoria) dao.getItem(id);
 		
-		fg.tNombre.setText(n.getNombre());
+		in.tNombre.setText(n.getNombre());
 		
-		fg.btnActualizar.addActionListener(e->{
-			String nombre = fg.tNombre.getText();
+		in.btnActualizar.addActionListener(e->{
+			String nombre = in.tNombre.getText();
 			
 			Categoria item = new Categoria(nombre, true);
 			
@@ -123,9 +115,9 @@ public class ControllerCategoria extends Functions implements Controller  {
 			
 		});
 		
-		fg.btnCancelar.addActionListener(e->{
+		in.btnCancelar.addActionListener(e->{
 			
-			fg.tNombre.setText("");
+			in.tNombre.setText("");
 			
 			index();
 			

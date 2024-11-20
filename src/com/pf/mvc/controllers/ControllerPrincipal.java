@@ -78,6 +78,8 @@ public class ControllerPrincipal {
 		vp.btnFincas.addActionListener(e->{
 			setSelectedButton(vp.btnFincas);
 			new ControllerFincas(vp).index();
+			vp.ocultarPanelBtnReportes();
+			vp.ocultarPanelBtnProductos();
 			
 		});
 		
@@ -102,6 +104,8 @@ public class ControllerPrincipal {
 		vp.btnSupervisor.addActionListener(e->{
 			setSelectedButton(vp.btnSupervisor);
 			new ControllerSupervisores(vp).index();
+			vp.ocultarPanelBtnReportes();
+			vp.ocultarPanelBtnProductos();
 			
 		});
 

@@ -13,12 +13,13 @@ import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Tipo;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.FormGeneral;
+import com.pf.mvc.views.general.Index;
 import com.pf.mvc.views.producto.Form;
 
 public class ControllerTipo extends Functions implements Controller  {
 	
 	private DAOTipo dao;
-	private FormGeneral fg;
+	private Index in;
 	private ViewPrincipal vp;
 	
 	public ControllerTipo(ViewPrincipal vp) {
@@ -30,31 +31,31 @@ public class ControllerTipo extends Functions implements Controller  {
 	@Override
 	public void index() {
 		
-		this.fg = new FormGeneral();
+		this.in = new Index();
 		
-		fg.modelo.setDataVector(getData(), getColumns());
-		ocultarColumna(fg.table);
+		in.modelo.setDataVector(getData(), getColumns());
+		ocultarColumna(in.table);
 		
-		fg.btnRegistrar.addActionListener(e->{
+		in.btnGuardar.addActionListener(e->{
 			
 			create();
 
 			
 		});
 		
-		fg.btnEditar.addActionListener(e->{
+		in.btnEditar.addActionListener(e->{
 			
-			int id = getSelectedId(fg.table);
+			int id = getSelectedId(in.table);
 			if(id > -1) {
 				edit(id);
-				fg.btnRegistrar.setEnabled(false);
-				fg.btnRegistrar.setVisible(false);
-				fg.btnActualizar.setEnabled(true);
-				fg.btnActualizar.setVisible(true);
-				fg.btnCancelar.setEnabled(true);
-				fg.btnCancelar.setVisible(true);
+				in.btnGuardar.setEnabled(false);
+				in.btnGuardar.setVisible(false);
+				in.btnActualizar.setEnabled(true);
+				in.btnActualizar.setVisible(true);
+				in.btnCancelar.setEnabled(true);
+				in.btnCancelar.setVisible(true);
 				
-				fg.lblTitulo.setText("Editar tipo");
+				in.lblTitulo.setText("Editar tipo");
 			}else {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", JOptionPane.WARNING_MESSAGE);
 			}
@@ -62,8 +63,8 @@ public class ControllerTipo extends Functions implements Controller  {
 			
 		});
 		
-		fg.btnEliminar.addActionListener(e->{
-			int id = getSelectedId(fg.table);
+		in.btnEliminar.addActionListener(e->{
+			int id = getSelectedId(in.table);
 			if(id > -1) {
 			destroy(id);
 			}else {
@@ -72,25 +73,25 @@ public class ControllerTipo extends Functions implements Controller  {
 			
 		});
 		
-		fg.btnRegistrar.setEnabled(true);
-		fg.btnRegistrar.setVisible(true);
-		fg.btnActualizar.setEnabled(false);
-		fg.btnActualizar.setVisible(false);
-		fg.btnCancelar.setEnabled(false);
-		fg.btnCancelar.setVisible(false);
+		in.btnGuardar.setEnabled(true);
+		in.btnGuardar.setVisible(true);
+		in.btnActualizar.setEnabled(false);
+		in.btnActualizar.setVisible(false);
+		in.btnCancelar.setEnabled(false);
+		in.btnCancelar.setVisible(false);
 		
-		fg.lblTitulo.setText("Registrar nuevo tipo");
-			vp.setContenido(fg, "Tipos");
+		in.lblTitulo.setText("Registrar nuevo tipo");
+			vp.setContenido(in, "Tipos");
 		
 	}
 
 	@Override
 	public void create() {
 		
-		String nombre = fg.tNombre.getText();
+		String nombre = in.tNombre.getText();
 
 		if (nombre.isEmpty()) {
-			JOptionPane.showMessageDialog(fg, "El nombre no puede estar vacío.", "Advertencia",
+			JOptionPane.showMessageDialog(in, "El nombre no puede estar vacío.", "Advertencia",
 					JOptionPane.WARNING_MESSAGE);
 			return;
 		}
@@ -99,9 +100,9 @@ public class ControllerTipo extends Functions implements Controller  {
 
 		String result = dao.storeTipo(item);
 
-		JOptionPane.showMessageDialog(fg, result);
+		JOptionPane.showMessageDialog(in, result);
 
-		fg.tNombre.setText("");
+		in.tNombre.setText("");
 
 		
 	}
@@ -110,10 +111,10 @@ public class ControllerTipo extends Functions implements Controller  {
 	public void edit(int id) {
 		Tipo n = (Tipo) dao.getItem(id);
 		
-		fg.tNombre.setText(n.getNombre());
+		in.tNombre.setText(n.getNombre());
 		
-		fg.btnActualizar.addActionListener(e->{
-			String nombre = fg.tNombre.getText();
+		in.btnActualizar.addActionListener(e->{
+			String nombre = in.tNombre.getText();
 			
 			Tipo item = new Tipo(nombre, true);
 			
@@ -123,9 +124,9 @@ public class ControllerTipo extends Functions implements Controller  {
 			
 		});
 		
-		fg.btnCancelar.addActionListener(e->{
+		in.btnCancelar.addActionListener(e->{
 			
-			fg.tNombre.setText("");
+			in.tNombre.setText("");
 			
 			index();
 			

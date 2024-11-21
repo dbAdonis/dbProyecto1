@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 import com.pf.mvc.models.vo.Finca;
 
 import java.awt.Font;
@@ -81,9 +83,6 @@ public class Create extends JPanel {
          btnGuardar.setPreferredSize(new Dimension(200, 40));
          btnGuardar.setBackground(new Color(39, 174, 96));
          btnGuardar.setForeground(Color.WHITE);
-         //btnAgregar.setBounds(30, 340, 107, 42);
-         //btnAgregar.setBackground(SystemColor.inactiveCaptionBorder);
-         //btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
          btnGuardar.setFont(new Font("Calibri", Font.BOLD, 19));
          
          JLabel lblFinca = new JLabel("Finca");
@@ -95,5 +94,7 @@ public class Create extends JPanel {
          cbxFincas.setFont(new Font("Calibri", Font.PLAIN, 16));
          cbxFincas.setBounds(118, 123, 135, 25);
          panel.add(cbxFincas);
+         
+         AutoCompleteDecorator.decorate(cbxFincas);
     }
 }

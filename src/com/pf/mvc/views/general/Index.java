@@ -107,7 +107,12 @@ public class Index extends JPanel {
 		scrollPane.setBorder(new LineBorder(UIManager.getColor("CheckBox.focus")));
 		panel_3.add(scrollPane, BorderLayout.CENTER);
 
-		modelo = new DefaultTableModel();
+		modelo = new DefaultTableModel() {
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false; 
+	        }
+	    };
 		filtro = new TableRowSorter<DefaultTableModel>(modelo);
 		table = new JTable();
 		table.setRowHeight(30);

@@ -55,7 +55,7 @@ public class ControllerProductos extends Functions implements Controller {
 
 			int selectedRow = in.table.getSelectedRow();
 			if (selectedRow == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para editar.",
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un producto de la tabla para editar.",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
@@ -69,7 +69,7 @@ public class ControllerProductos extends Functions implements Controller {
 
 			int selectedRow = in.table.getSelectedRow();
 			if (selectedRow == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un producto de la tabla para eliminar.",
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
@@ -103,63 +103,82 @@ public class ControllerProductos extends Functions implements Controller {
 
 		Form f = new Form();
 
-//		ArrayList<Object> naturalezas = new DAONaturaleza().getData();
-//		for (Object o : naturalezas) {
-//			Naturaleza n = (Naturaleza) o;
-//			f.cbxProductos.addItem(n);
-//		}
-//
-//		ArrayList<Object> tipos = new DAOTipo().getData();
-//		for (Object o : tipos) {
-//			Tipo t = (Tipo) o;
-//
-//			f.cbxTipos.addItem(t);
-//		}
-//
-//		ArrayList<Object> categorias = new DAOCategoria().getData();
-//		for (Object o : categorias) {
-//			Categoria c = (Categoria) o;
-//
-//			f.cbxCategorias.addItem(c);
-//		}
-
 		cargarCbxNaturaleza(f);
 		cargarCbxTipo(f);
 		cargarCbxCategoria(f);
 
 		f.btnAgregar.addActionListener(e -> {
 
-			String nombre = f.tNombre.getText();
-			String unidades = f.tUnidad.getText();
-			String codigo = f.tCodigo.getText();
+			String nombre = f.tNombre.getText().trim();
+			String unidades = f.tUnidad.getText().trim();
+			String codigo = f.tCodigo.getText().trim();
 
 			Tipo t = (Tipo) f.cbxTipos.getSelectedItem();
-			int idTipo = t.getId();
-
 			Categoria g = (Categoria) f.cbxCategorias.getSelectedItem();
-			int idCategoria = g.getId();
-
 			Naturaleza n = (Naturaleza) f.cbxProductos.getSelectedItem();
-			int idNaturaleza = n.getId();
 
-			Producto item = new Producto(nombre, unidades, codigo, idTipo, idCategoria, idNaturaleza);
+			if (nombre.isEmpty()) {
+				JOptionPane.showMessageDialog(f, "El campo 'Nombre' es obligatorio.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 
-			dao.store(item);
+			if (codigo.isEmpty()) {
+				JOptionPane.showMessageDialog(f, "El campo 'Código' es obligatorio.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 
-			index();
+			if (unidades.isEmpty()) {
+				JOptionPane.showMessageDialog(f, "El campo 'Unidad de medida' es obligatorio.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 
+			if (t == null) {
+				JOptionPane.showMessageDialog(f, "Debe seleccionar un Tipo.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			if (g == null) {
+				JOptionPane.showMessageDialog(f, "Debe seleccionar una Categoría.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			if (n == null) {
+				JOptionPane.showMessageDialog(f, "Debe seleccionar una Naturaleza.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			try {
+				int idTipo = t.getId();
+				int idCategoria = g.getId();
+				int idNaturaleza = n.getId();
+
+				Producto item = new Producto(nombre, unidades, codigo, idTipo, idCategoria, idNaturaleza);
+
+				dao.store(item);
+
+				JOptionPane.showMessageDialog(f, "Producto registrado correctamente.", "Éxito",
+						JOptionPane.INFORMATION_MESSAGE);
+
+				index();
+
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(f, "Ocurrió un error al guardar el producto: " + ex.getMessage(), "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		});
 
 		f.btnCancelar.addActionListener(e -> {
-
 			actualizarTabla();
-
 			index();
-
 		});
 
 		vp.setContenido(f, "Agregar productos");
-
 	}
 
 	@Override
@@ -172,11 +191,9 @@ public class ControllerProductos extends Functions implements Controller {
 
 		ArrayList<Object> naturalezas = new DAONaturaleza().getData();
 		f.cbxProductos.removeAllItems();
-
 		for (Object o : naturalezas) {
 			Naturaleza n = (Naturaleza) o;
 			f.cbxProductos.addItem(n);
-
 			if (n.getId() == item.getIdNaturaleza()) {
 				f.cbxProductos.setSelectedItem(n);
 			}
@@ -188,11 +205,9 @@ public class ControllerProductos extends Functions implements Controller {
 
 		ArrayList<Object> tipos = new DAOTipo().getData();
 		f.cbxTipos.removeAllItems();
-
 		for (Object o : tipos) {
 			Tipo t = (Tipo) o;
 			f.cbxTipos.addItem(t);
-
 			if (t.getId() == item.getIdTipo()) {
 				f.cbxTipos.setSelectedItem(t);
 			}
@@ -200,46 +215,83 @@ public class ControllerProductos extends Functions implements Controller {
 
 		ArrayList<Object> categorias = new DAOCategoria().getData();
 		f.cbxCategorias.removeAllItems();
-
 		for (Object o : categorias) {
 			Categoria c = (Categoria) o;
 			f.cbxCategorias.addItem(c);
-
 			if (c.getId() == item.getIdCategoria()) {
 				f.cbxCategorias.setSelectedItem(c);
 			}
 		}
 
 		f.btnAgregar.addActionListener(e -> {
-			String nombre = f.tNombre.getText();
-			String unidades = f.tUnidad.getText();
-			String codigo = f.tCodigo.getText();
+			String nombre = f.tNombre.getText().trim();
+			String unidades = f.tUnidad.getText().trim();
+			String codigo = f.tCodigo.getText().trim();
 
 			Tipo t = (Tipo) f.cbxTipos.getSelectedItem();
-			int idTipo = t.getId();
-
 			Categoria g = (Categoria) f.cbxCategorias.getSelectedItem();
-			int idCategoria = g.getId();
-
 			Naturaleza n = (Naturaleza) f.cbxProductos.getSelectedItem();
-			int idNaturaleza = n.getId();
 
-			Producto nuevoItem = new Producto(nombre, unidades, codigo, idTipo, idCategoria, idNaturaleza);
-
-			if (item.getId() > 0) {
-				dao.update(nuevoItem, item.getId());
-				edit(item.getId());
+			if (nombre.isEmpty()) {
+				JOptionPane.showMessageDialog(f, "El campo 'Nombre' es obligatorio.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
 			}
 
-			index();
+			if (codigo.isEmpty()) {
+				JOptionPane.showMessageDialog(f, "El campo 'Código' es obligatorio.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			if (unidades.isEmpty()) {
+				JOptionPane.showMessageDialog(f, "El campo 'Unidad de medida' es obligatorio.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			if (t == null) {
+				JOptionPane.showMessageDialog(f, "Debe seleccionar un Tipo.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			if (g == null) {
+				JOptionPane.showMessageDialog(f, "Debe seleccionar una Categoría.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			if (n == null) {
+				JOptionPane.showMessageDialog(f, "Debe seleccionar una Naturaleza.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			try {
+				int idTipo = t.getId();
+				int idCategoria = g.getId();
+				int idNaturaleza = n.getId();
+
+				Producto nuevoItem = new Producto(nombre, unidades, codigo, idTipo, idCategoria, idNaturaleza);
+
+				if (item.getId() > 0) {
+					dao.update(nuevoItem, item.getId());
+					JOptionPane.showMessageDialog(f, "Producto actualizado correctamente.", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+
+				index();
+
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(f, "Ocurrió un error al actualizar el producto: " + ex.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
+			}
 		});
 
 		f.btnCancelar.addActionListener(e -> {
-
 			actualizarTabla();
-
 			index();
-
 		});
 
 		vp.setContenido(f, "Editar producto");
@@ -260,7 +312,7 @@ public class ControllerProductos extends Functions implements Controller {
 			Producto p = (Producto) o;
 
 			ids.add(p.getId());
-			
+
 			data[i][0] = p.getId();
 
 			Naturaleza naturaleza = (Naturaleza) new DAONaturaleza().getItem(p.getIdNaturaleza());

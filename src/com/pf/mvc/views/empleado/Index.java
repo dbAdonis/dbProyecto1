@@ -12,6 +12,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
+import com.pf.mvc.models.vo.Finca;
+
 import java.awt.Font;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
@@ -30,7 +34,7 @@ public class Index extends JPanel {
 	public JButton btnEliminar;
 	public JButton btnEditar;
 	public JButton btnNuevo;
-	public JComboBox cbxFinca;
+	public JComboBox<Finca> cbxFinca;
 
 	/**
 	 * Create the panel.
@@ -61,11 +65,13 @@ public class Index extends JPanel {
 		tBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tBuscar.setColumns(10);
 
-		cbxFinca = new JComboBox();
+		cbxFinca = new JComboBox<Finca>();
 		cbxFinca.setModel(new DefaultComboBoxModel(new String[] { "Seleccionar", "Todas" }));
 		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 19));
 		cbxFinca.setBounds(552, 22, 112, 26);
 		panel_2.add(cbxFinca);
+
+		AutoCompleteDecorator.decorate(cbxFinca);
 
 		JLabel lblFinca = new JLabel("Finca: ");
 		lblFinca.setFont(new Font("Calibri", Font.PLAIN, 19));
@@ -100,9 +106,6 @@ public class Index extends JPanel {
 		btnEditar.setBackground(new Color(204, 153, 0));
 		btnEditar.setForeground(Color.WHITE);
 		btnEditar.setBounds(30, 340, 107, 42);
-		// btnEditar.setBackground(SystemColor.inactiveCaptionBorder);
-		// btnEditar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null,
-		// Color.BLACK, null));
 		btnEditar.setFont(new Font("Calibri", Font.BOLD, 19));
 		panel_4.add(btnEditar);
 
@@ -113,16 +116,18 @@ public class Index extends JPanel {
 		btnEliminar.setBackground(new Color(153, 0, 0));
 		btnEliminar.setForeground(Color.WHITE);
 		btnEliminar.setBounds(30, 340, 107, 42);
-		// btnEliminar.setBackground(SystemColor.inactiveCaptionBorder);
-		// btnEliminar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null,
-		// Color.BLACK, null));
 		btnEliminar.setFont(new Font("Calibri", Font.BOLD, 19));
 		panel_4.add(btnEliminar);
 
 		JScrollPane scrollPane = new JScrollPane();
 		panel_3.add(scrollPane, BorderLayout.CENTER);
 
-		modelo = new DefaultTableModel();
+		modelo = new DefaultTableModel() {
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false; 
+	        }
+	    };
 		filtro = new TableRowSorter<DefaultTableModel>(modelo);
 		table = new JTable();
 		table.setFont(new Font("Calibri", Font.PLAIN, 17));
@@ -130,7 +135,6 @@ public class Index extends JPanel {
 		table.setBorder(null);
 		table.setRowSorter(filtro);
 		table.setModel(modelo);
-	
 
 		JTableHeader header = table.getTableHeader();
 		header.setFont(new Font("Calibri", Font.BOLD, 18));

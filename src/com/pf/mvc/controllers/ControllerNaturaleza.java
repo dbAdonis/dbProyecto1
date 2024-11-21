@@ -1,5 +1,9 @@
 package com.pf.mvc.controllers;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -76,6 +80,20 @@ public class ControllerNaturaleza extends Functions implements Controller {
 			}
 
 		});
+		
+		in.tBuscar.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				in.tBuscar.setText("");
+			}
+		});
+
+		in.tBuscar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				buscar(in.tBuscar, in.filtro, 1);
+			}
+		});
 
 		in.btnGuardar.setEnabled(true);
 		in.btnGuardar.setVisible(true);
@@ -104,6 +122,7 @@ public class ControllerNaturaleza extends Functions implements Controller {
 	    JOptionPane.showMessageDialog(in, result);
 
 	    in.tNombre.setText("");
+	    index();
 	}
 
 
@@ -115,6 +134,12 @@ public class ControllerNaturaleza extends Functions implements Controller {
 
 		in.btnActualizar.addActionListener(e -> {
 			String nombre = in.tNombre.getText();
+			
+			if (nombre.isEmpty()) {
+				JOptionPane.showMessageDialog(in, "El nombre no puede estar vacío.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 
 			Naturaleza item = new Naturaleza(nombre, true);
 

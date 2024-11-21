@@ -58,7 +58,12 @@ public class Index extends JPanel {
         JScrollPane scrollPane = new JScrollPane();
         panel_1.add(scrollPane, BorderLayout.CENTER);
         
-        modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel() {
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false; 
+	        }
+	    };
         filtro = new TableRowSorter<DefaultTableModel>(modelo);
         table = new JTable();
         table.setModel(modelo);
@@ -81,8 +86,6 @@ public class Index extends JPanel {
         btnNuevo.setPreferredSize(new Dimension(150, 40));
         btnNuevo.setBackground(new Color(39, 174, 96));
         btnNuevo.setForeground(Color.WHITE);;
-        //btnAgregarProducto.setBackground(SystemColor.inactiveCaptionBorder);
-        //btnAgregarProducto.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
         btnNuevo.setFont(new Font("Calibri", Font.BOLD, 19)); 
         panel_2.add(btnNuevo);
         
@@ -92,8 +95,6 @@ public class Index extends JPanel {
         btnEditar.setPreferredSize(new Dimension(90, 40));
 		btnEditar.setBackground(new Color(204, 153, 0));
 		btnEditar.setForeground(Color.WHITE);
-        //btnEditar.setBackground(SystemColor.inactiveCaptionBorder);
-        //btnEditar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
         btnEditar.setFont(new Font("Calibri", Font.BOLD, 19));
         panel_2.add(btnEditar);
         
@@ -103,8 +104,6 @@ public class Index extends JPanel {
         btnEliminar.setPreferredSize(new Dimension(90, 40));
 		btnEliminar.setBackground(new Color(153, 0, 0));
 		btnEliminar.setForeground(Color.WHITE);
-        //btnEliminar.setBackground(SystemColor.inactiveCaptionBorder);
-        //btnEliminar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, Color.BLACK, null));
         btnEliminar.setFont(new Font("Calibri", Font.BOLD, 19));
         panel_2.add(btnEliminar);
     }

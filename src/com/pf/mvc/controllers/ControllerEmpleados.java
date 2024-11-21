@@ -170,6 +170,12 @@ public class ControllerEmpleados extends Functions implements Controller {
 			String nombre = c.tNombre.getText();
 
 			Finca r = (Finca) c.cbxFincas.getSelectedItem();
+			
+			 if (nombre.isEmpty() || r == null) {
+		            JOptionPane.showMessageDialog(c, "Todos los campos deben estar completos.", "Advertencia",
+		                    JOptionPane.WARNING_MESSAGE);
+		            return;
+		        }
 
 			Empleado item = new Empleado(r.getId(), nombre, true);
 			

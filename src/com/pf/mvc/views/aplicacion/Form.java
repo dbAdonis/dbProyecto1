@@ -20,6 +20,16 @@ import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
+import com.pf.mvc.models.vo.Empleado;
+import com.pf.mvc.models.vo.Finca;
+import com.pf.mvc.models.vo.Labor;
+import com.pf.mvc.models.vo.Lote;
+import com.pf.mvc.models.vo.Naturaleza;
+import com.pf.mvc.models.vo.Producto;
+import com.pf.mvc.models.vo.Supervisor;
+import com.pf.mvc.models.vo.Variedad;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.Insets;
@@ -31,19 +41,18 @@ import javax.swing.border.EmptyBorder;
 public class Form extends JPanel {
 	public JButton btnGuardar;
 	public JButton btnCancelar;
-	public DefaultTableModel modelo;
 	public JTextField tUnidades;
 	public JSpinner tWK;
 	public JSpinner tPeriodoMPS;
 	public JDateChooser tFecha;
-	public JComboBox cbxVariedades;
-	public JComboBox cbxTrabajadores;
-	public JComboBox cbxLabores;
-	public JComboBox cbxFitoFerti;
+	public JComboBox<Variedad> cbxVariedades;
+	public JComboBox<Empleado> cbxTrabajadores;
+	public JComboBox<Labor> cbxLabores;
+	public JComboBox<Producto> cbxFitoFerti;
 	public JSpinner tCantidad;
-	public JComboBox cbxLotes;
-	public JComboBox cbxFinca;
-	public JComboBox cbxSupervisor;
+	public JComboBox<Lote> cbxLotes;
+	public JComboBox<Finca> cbxFinca;
+	public JComboBox<Supervisor> cbxSupervisor;
 
 	/**
 	 * Create the panel.
@@ -51,8 +60,6 @@ public class Form extends JPanel {
 	public Form() {
 		setPreferredSize(new Dimension(1080, 768));
 		setLayout(new BorderLayout(0, 0));
-
-		modelo = new DefaultTableModel();
 
 		JPanel panelRegistro = new JPanel();
 		add(panelRegistro, BorderLayout.CENTER);
@@ -100,28 +107,34 @@ public class Form extends JPanel {
 		label_3.setBounds(20, 47, 80, 20);
 		panelRegistro.add(label_3);
 
-		cbxLotes = new JComboBox();
+		cbxLotes = new JComboBox<Lote>();
 		cbxLotes.setPreferredSize(new Dimension(110, 20));
 		cbxLotes.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxLotes.setBounds(125, 47, 151, 26);
 		panelRegistro.add(cbxLotes);
+
+		AutoCompleteDecorator.decorate(cbxLotes);
 
 		JLabel label_4 = new JLabel("Variedad");
 		label_4.setFont(new Font("Calibri", Font.BOLD, 19));
 		label_4.setBounds(20, 92, 80, 20);
 		panelRegistro.add(label_4);
 
-		cbxVariedades = new JComboBox();
+		cbxVariedades = new JComboBox<Variedad>();
 		cbxVariedades.setPreferredSize(new Dimension(110, 20));
 		cbxVariedades.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxVariedades.setBounds(125, 92, 150, 26);
 		panelRegistro.add(cbxVariedades);
 
-		cbxTrabajadores = new JComboBox();
+		AutoCompleteDecorator.decorate(cbxVariedades);
+
+		cbxTrabajadores = new JComboBox<Empleado>();
 		cbxTrabajadores.setPreferredSize(new Dimension(340, 20));
 		cbxTrabajadores.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxTrabajadores.setBounds(125, 137, 340, 26);
 		panelRegistro.add(cbxTrabajadores);
+
+		AutoCompleteDecorator.decorate(cbxTrabajadores);
 
 		JLabel label_5 = new JLabel("Trabajador");
 		label_5.setFont(new Font("Calibri", Font.BOLD, 19));
@@ -133,17 +146,21 @@ public class Form extends JPanel {
 		label_6.setBounds(20, 182, 80, 20);
 		panelRegistro.add(label_6);
 
-		cbxLabores = new JComboBox();
+		cbxLabores = new JComboBox<Labor>();
 		cbxLabores.setPreferredSize(new Dimension(340, 20));
 		cbxLabores.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxLabores.setBounds(125, 182, 340, 26);
 		panelRegistro.add(cbxLabores);
 
-		cbxFitoFerti = new JComboBox();
+		AutoCompleteDecorator.decorate(cbxLabores);
+
+		cbxFitoFerti = new JComboBox<Producto>();
 		cbxFitoFerti.setPreferredSize(new Dimension(300, 20));
 		cbxFitoFerti.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxFitoFerti.setBounds(251, 225, 249, 26);
 		panelRegistro.add(cbxFitoFerti);
+
+		AutoCompleteDecorator.decorate(cbxFitoFerti);
 
 		JLabel label_7 = new JLabel("Fitosanitario - Fertilizante");
 		label_7.setFont(new Font("Calibri", Font.BOLD, 19));
@@ -182,8 +199,6 @@ public class Form extends JPanel {
 		btnGuardar.setPreferredSize(new Dimension(100, 40));
 		btnGuardar.setBackground(new Color(39, 174, 96));
 		btnGuardar.setForeground(Color.WHITE);
-		// btnAgregar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY,
-		// null, Color.DARK_GRAY, null));
 		btnGuardar.setFont(new Font("Calibri", Font.BOLD, 19));
 
 		btnCancelar = new JButton("Cancelar");
@@ -195,27 +210,29 @@ public class Form extends JPanel {
 		btnCancelar.setPreferredSize(new Dimension(100, 40));
 		btnCancelar.setBackground(new Color(52, 108, 175));
 		btnCancelar.setForeground(Color.WHITE);
-		// btnRegresar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY,
-		// null, Color.DARK_GRAY, null));
 		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 19));
-		
+
 		JLabel lblFinca = new JLabel("Finca");
 		lblFinca.setFont(new Font("Calibri", Font.BOLD, 19));
 		lblFinca.setBounds(553, 11, 47, 20);
 		panelRegistro.add(lblFinca);
-		
-		cbxFinca = new JComboBox();
+
+		cbxFinca = new JComboBox<Finca>();
 		cbxFinca.setPreferredSize(new Dimension(110, 20));
 		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxFinca.setBounds(612, 11, 151, 26);
 		panelRegistro.add(cbxFinca);
-		
-		cbxSupervisor = new JComboBox();
+
+		AutoCompleteDecorator.decorate(cbxFinca);
+
+		cbxSupervisor = new JComboBox<Supervisor>();
 		cbxSupervisor.setPreferredSize(new Dimension(110, 20));
 		cbxSupervisor.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxSupervisor.setBounds(889, 12, 151, 26);
 		panelRegistro.add(cbxSupervisor);
-		
+
+		AutoCompleteDecorator.decorate(cbxSupervisor);
+
 		JLabel lblSupervisor = new JLabel("Supervisor");
 		lblSupervisor.setFont(new Font("Calibri", Font.BOLD, 19));
 		lblSupervisor.setBounds(786, 11, 91, 20);

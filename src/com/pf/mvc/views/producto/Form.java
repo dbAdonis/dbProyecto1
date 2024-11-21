@@ -21,6 +21,8 @@ import java.awt.SystemColor;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Producto;
@@ -69,6 +71,8 @@ public class Form extends JPanel {
 		cbxProductos.setBounds(204, 33, 173, 26);
 		panel_4.add(cbxProductos);
 		
+		AutoCompleteDecorator.decorate(cbxProductos);
+		
 		JLabel label_1 = new JLabel("Nombre");
 		label_1.setFont(new Font("Calibri", Font.BOLD, 20));
 		label_1.setBounds(21, 78, 142, 20);
@@ -102,6 +106,8 @@ public class Form extends JPanel {
 		cbxTipos.setBounds(204, 222, 173, 26);
 		panel_4.add(cbxTipos);
 		
+		AutoCompleteDecorator.decorate(cbxTipos);
+		
 		JLabel label_15 = new JLabel("Tipo");
 		label_15.setFont(new Font("Calibri", Font.BOLD, 20));
 		label_15.setBounds(21, 222, 142, 20);
@@ -118,12 +124,14 @@ public class Form extends JPanel {
 		cbxCategorias.setBounds(204, 264, 173, 26);
 		panel_4.add(cbxCategorias);
 		
+		AutoCompleteDecorator.decorate(cbxCategorias);
+		
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.setBounds(28, 334, 100, 40);
 		panel_4.add(btnAgregar);
 		btnAgregar.setFocusPainted(false);
 		btnAgregar.setBorder(null);
-		btnAgregar.setFont(new Font("Calibri", Font.BOLD, 19)); // Fuente Calibri 16
+		btnAgregar.setFont(new Font("Calibri", Font.BOLD, 19));
 		btnAgregar.setPreferredSize(new Dimension(100, 40));
 		btnAgregar.setBackground(new Color(39, 174, 96));
 		btnAgregar.setForeground(Color.WHITE);
@@ -133,7 +141,7 @@ public class Form extends JPanel {
 		panel_4.add(btnCancelar);
 		btnCancelar.setFocusPainted(false);
 		btnCancelar.setBorder(null);
-		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 19)); // Fuente Calibri 16
+		btnCancelar.setFont(new Font("Calibri", Font.BOLD, 19));
 		btnCancelar.setPreferredSize(new Dimension(100, 40));
 		btnCancelar.setBackground(new Color(52, 108, 175));
 		btnCancelar.setForeground(Color.WHITE);

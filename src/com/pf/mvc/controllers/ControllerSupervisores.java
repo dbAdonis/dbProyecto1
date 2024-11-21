@@ -98,6 +98,20 @@ public class ControllerSupervisores extends Functions implements Controller {
 			}
 			
 		});
+		
+		in.tBuscar.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				in.tBuscar.setText("");
+			}
+		});
+
+		in.tBuscar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				buscar(in.tBuscar, in.filtro, 1);
+			}
+		});
 
 		vp.setContenido(in, "Supervisores");
 

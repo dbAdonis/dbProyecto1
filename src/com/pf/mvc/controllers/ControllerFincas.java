@@ -74,7 +74,7 @@ public class ControllerFincas extends Functions implements Controller {
 						"Advertencia", JOptionPane.WARNING_MESSAGE);
 			}else {
 			edit(id);
-			in.lblTitulo.setText("Editar finca");
+			in.lblTitulo.setText("Editar Finca");
 			in.btnGuardar.setEnabled(false);
 			in.btnGuardar.setVisible(false);
 			in.btnActualizar.setEnabled(true);
@@ -106,7 +106,7 @@ public class ControllerFincas extends Functions implements Controller {
 		in.btnCancelar.setEnabled(false);
 		in.btnCancelar.setVisible(false);
 
-		in.lblTitulo.setText("Registrar nueva finca");
+		in.lblTitulo.setText("Registrar nueva Finca");
 	}
 
 	@Override

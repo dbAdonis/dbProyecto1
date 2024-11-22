@@ -677,7 +677,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 	public void actualizarTabla() {
 		Index in = new Index();
-		in.modelo.setDataVector(getData(), getColumns());
+		in.modelo.setDataVector(dao.getAplicaciones(), getColumns());
 
 	}
 

@@ -191,7 +191,7 @@ public class ControllerVariedades extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "ID", "Nombre" };
+		return new String[] { "ID", "NOMBRE" };
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public class ControllerVariedades extends Functions implements Controller {
 		index();
 
 	}
-
+ 
 	@Override
 	public void destroy(int id) {
 		dao.destroy(id);

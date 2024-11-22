@@ -246,7 +246,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "ID", "Empleado", "Finca" };
+		return new String[] { "ID", "EMPLEADO", "FINCA" };
 	}
 
 	@Override

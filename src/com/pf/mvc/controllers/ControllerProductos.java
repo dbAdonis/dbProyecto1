@@ -347,14 +347,14 @@ public class ControllerProductos extends Functions implements Controller {
 
 	@Override
 	public String[] getColumns() {
-		return new String[] { "ID", "Producto", "Tipo", "Código", "Categoría", "Nombre", "Unidades" };
+		return new String[] { "ID", "PRODUCTO", "TIPO", "CÓDIGO", "CATEGORÍA", "NOMBRE", "UNIDADES" };
 	}
 
 	@Override
 	public void store(Object o) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 
-	}
+	} 
 
 	@Override
 	public void update(Object o, int id) {

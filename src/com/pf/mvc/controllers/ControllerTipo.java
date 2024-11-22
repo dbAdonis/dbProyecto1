@@ -182,7 +182,7 @@ public class ControllerTipo extends Functions implements Controller  {
 
 	@Override
 	public String[] getColumns() {
-		return new String [] {"ID", "Nombre"};
+		return new String [] {"ID", "NOMBRE"};
 	}
 
 	@Override

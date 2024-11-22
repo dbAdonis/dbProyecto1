@@ -39,7 +39,6 @@ public class ViewPrincipal extends JFrame {
 	public JButton btnGestionarTipos;
 	public JButton btnGestionarCategorias;
 	public JButton btnSupervisor;
-	public JButton btnInicio;
 
 	public ViewPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,17 +74,6 @@ public class ViewPrincipal extends JFrame {
 		panel.setPreferredSize(new Dimension(200, 10));
 		panel.setBackground(new Color(62, 85, 40));
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
-		
-		btnInicio = new JButton("Inicio");
-		btnInicio.setPreferredSize(new Dimension(200, 45));
-		btnInicio.setIconTextGap(10);
-		btnInicio.setHorizontalAlignment(SwingConstants.LEFT);
-		btnInicio.setForeground(Color.WHITE);
-		btnInicio.setFont(new Font("Dialog", Font.PLAIN, 17));
-		btnInicio.setFocusPainted(false);
-		btnInicio.setBorder(new EmptyBorder(0, 10, 0, 0));
-		btnInicio.setBackground(new Color(62, 85, 40));
-		panel.add(btnInicio);
 
 		btnGestionarPersonal = new JButton("Gestionar Personal");
 		btnGestionarPersonal.setHorizontalAlignment(SwingConstants.LEFT);

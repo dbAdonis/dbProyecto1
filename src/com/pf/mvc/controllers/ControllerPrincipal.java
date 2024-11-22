@@ -20,16 +20,6 @@ public class ControllerPrincipal {
 
 	public void init() {
 		vp.setVisible(true);
-
-		vp.btnInicio.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setSelectedButton(vp.btnInicio);
-				vp.ocultarPanelBtnReportes();
-				vp.ocultarPanelBtnProductos();
-				new ControllerEmpleados(vp).inicio();
-			}
-		});
 		
 		vp.btnGestionarPersonal.addActionListener(new ActionListener() {
 			@Override
@@ -119,8 +109,8 @@ public class ControllerPrincipal {
 			
 		});
 
-		setSelectedButton(vp.btnInicio);
-		new ControllerEmpleados(vp).index();
+		setSelectedButton(vp.btnReportesDiarios);
+		new ControllerAplicaciones(vp).index();
 		vp.init();
 	}
 

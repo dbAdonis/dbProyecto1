@@ -15,7 +15,7 @@ import com.pf.mvc.models.vo.Lote;
 import com.pf.mvc.models.vo.Variedad;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
-import com.pf.mvc.views.menu.Menu;
+import com.pf.mvc.views.menu.Inicio;
 
 public class ControllerVariedades extends Functions implements Controller {
 

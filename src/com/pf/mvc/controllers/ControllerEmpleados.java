@@ -18,7 +18,7 @@ import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.empleado.Create;
 import com.pf.mvc.views.empleado.Index;
-import com.pf.mvc.views.menu.Menu;
+import com.pf.mvc.views.menu.Inicio;
 import com.pf.mvc.views.menu.Options;
 
 public class ControllerEmpleados extends Functions implements Controller {
@@ -33,6 +33,11 @@ public class ControllerEmpleados extends Functions implements Controller {
 		this.vp = vp;
 		this.idFinca = -1;
 		this.ids = new ArrayList<>();
+	}
+	
+	public void inicio() {
+		Inicio inicio = new Inicio();
+		vp.setContenido(inicio, "Bienvenido al Sistema Fino Follaje.");
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -42,7 +43,7 @@ public class ControllerProductos extends Functions implements Controller {
 
 		Index in = new Index();
 
-		in.modelo.setDataVector(getData(), getColumns());
+		in.modelo.setDataVector(dao.getProductos(), getColumns());
 		ocultarColumna(in.table);
 
 		in.btnNuevo.addActionListener(e -> {

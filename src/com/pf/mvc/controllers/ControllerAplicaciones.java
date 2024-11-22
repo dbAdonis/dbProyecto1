@@ -52,7 +52,7 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 		Index in = new Index();
 
-		in.modelo.setDataVector(getData(), getColumns());
+		in.modelo.setDataVector(dao.getAplicaciones(), getColumns());
 		in.ajustarColumnasYExpandirTabla(in.table);
 		ocultarColumna(in.table);
 
@@ -169,6 +169,11 @@ public class ControllerAplicaciones extends Functions implements Controller {
 				}
 			}
 		});
+		
+		if (f.cbxFinca.getItemCount() > 0) {
+	        f.cbxFinca.setSelectedIndex(0); // Selecciona la primera finca
+	        f.cbxFinca.getActionListeners()[0].actionPerformed(null); // Dispara el ActionListener
+	    }
 
 		ArrayList<Object> supervisores = new DAOSupervisor().getData();
 		for (Object o : supervisores) {
@@ -180,6 +185,11 @@ public class ControllerAplicaciones extends Functions implements Controller {
 			Producto p = (Producto) f.cbxFitoFerti.getSelectedItem();
 			f.tUnidades.setText(p.getUnidades());
 		});
+		
+		if (f.cbxFitoFerti.getItemCount() > 0) {
+	        f.cbxFitoFerti.setSelectedIndex(0); // Selecciona el primer producto
+	        f.cbxFitoFerti.getActionListeners()[0].actionPerformed(null); // Dispara el ActionListener
+	    }
 
 		f.btnGuardar.addActionListener(e -> {
 			try {
@@ -406,6 +416,11 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 			ed.tUnidades.setText(p.getUnidades());
 		});
+		
+		if (ed.cbxFitoFerti.getItemCount() > 0) {
+	        ed.cbxFitoFerti.setSelectedIndex(0); // Selecciona el primer producto
+	        ed.cbxFitoFerti.getActionListeners()[0].actionPerformed(null); // Dispara el ActionListener
+	    }
 
 		ed.btnGuardar.addActionListener(e -> {
 		    try {

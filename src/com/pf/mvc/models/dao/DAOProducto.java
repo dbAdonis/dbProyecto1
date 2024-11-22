@@ -179,5 +179,51 @@ public class DAOProducto extends Conexion implements DAO {
 
 		return list;
 	}
+	
+	public Object[][] getProductos() {
+	    Connection con = conectar();
+	    String sql = "select p.id_producto, p.nombre, p.unidades, p.codigo, " +
+	                 "t.nombre as tipo, c.nombre as categoria, n.nombre as naturaleza " +
+	                 "from productos p " +
+	                 "inner join tipos t on p.id_tipo = t.id_tipo " +
+	                 "inner join categorias c on p.id_categoria = c.id_categoria " +
+	                 "inner join naturalezas n on p.id_naturaleza = n.id_naturaleza " +
+	                 "order by p.id_producto;";
+
+	    try {
+	        PreparedStatement ps = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	        ResultSet rs = ps.executeQuery();
+
+	        rs.last();
+	        int contadorFilas = rs.getRow();
+	        rs.beforeFirst();
+
+	        Object[][] data = new Object[contadorFilas][7]; 
+	        int i = 0;
+
+	        while (rs.next()) {
+	            data[i][0] = rs.getInt("id_producto");      
+	            data[i][1] = rs.getString("nombre");        
+	            data[i][2] = rs.getString("unidades");  
+	            data[i][3] = rs.getString("codigo");  
+	            data[i][4] = rs.getString("tipo");  
+	            data[i][5] = rs.getString("categoria"); 
+	            data[i][6] = rs.getString("naturaleza");   
+	            i++;
+	        }
+
+	        return data;
+
+	    } catch (Exception e) {
+	        System.err.println("Error: " + e.getMessage());
+	        return new Object[1][1]; 
+
+	    } finally {
+	        desconectar(con);
+	    }
+	}
+
+	
+	
 
 }

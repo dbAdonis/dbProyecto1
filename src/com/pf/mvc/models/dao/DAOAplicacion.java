@@ -172,4 +172,73 @@ public class DAOAplicacion extends Conexion implements DAO {
 
         return list;
     }
+    
+    //Este es el nuevo metodo
+    
+    public Object[][] getAplicaciones() {
+    	
+        Connection con = conectar();
+        String sql = "select a.id_aplicacion,"
+        		+ " a.periodo, a.semana,"
+        		+ " a.fecha, l.nombre as lote,"
+        		+ " v.nombre as variedad,"
+        		+ " e.nombre as empleado,"
+        		+ " la.nombre as labor,"
+        		+ " p.nombre as producto,"
+        		+ " a.cantidad,"
+        		+ " p.unidades,"
+        		+ " s.nombre as supervisor"
+        		+ " from aplicaciones a inner join lotes l on a.id_lote = l.id_lote"
+        		+ " inner join variedades v on a.id_variedad = v.id_variedad"
+        		+ " inner join empleados e on a.id_empleado = e.id_empleado"
+        		+ " inner join labores la on a.id_labor = la.id_labor"
+        		+ " inner join productos p on a.id_producto = p.id_producto"
+        		+ " inner join supervisores s on a.id_supervisor = s.id_supervisor"
+        		+ " order by a.id_aplicacion desc limit 200;";
+
+        try {
+            
+        	PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            //ps.getFetchSize()
+            //Error: 0 no retorna la cantidad de filas
+            
+            rs.last();
+            int contadorFilas =rs.getRow();
+            rs.beforeFirst();
+
+            Object[][] data = new Object[contadorFilas][12];
+            int i = 0;
+            
+            while (rs.next()) {
+            	
+            	data[i][0] = rs.getInt("id_aplicacion");
+            	data[i][1] = rs.getInt("periodo");
+            	data[i][2] = rs.getInt("semana");
+            	data[i][3] = rs.getString("fecha");
+            	data[i][4] = rs.getString("lote");
+            	data[i][5] = rs.getString("variedad");
+            	data[i][6] = rs.getString("empleado");
+            	data[i][7] = rs.getString("labor");
+            	data[i][8] = rs.getString("producto");
+            	data[i][9] = rs.getInt("cantidad");
+            	data[i][10] = rs.getString("unidades");
+            	data[i][11] = rs.getString("supervisor");
+                
+                i++;
+            }
+            
+           
+            
+            return data;
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            return new Object[1][1];
+
+        } finally {
+            desconectar(con);
+        }
+
+    }
 }

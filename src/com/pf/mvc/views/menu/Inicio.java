@@ -51,7 +51,7 @@ public class Inicio extends JPanel {
         panel_1.add(panel, BorderLayout.CENTER);
         
         lblImagen = new JLabel();
-        lblImagen.setPreferredSize(new Dimension(250, 250));
+        lblImagen.setPreferredSize(new Dimension(400, 400));
         lblImagen.setBorder(null);
         lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
         lblImagen.setFont(new Font("Calibri", Font.BOLD, 16)); // Estilo Calibri 16 para el encabezado

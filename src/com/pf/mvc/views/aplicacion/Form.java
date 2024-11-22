@@ -8,6 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+
 import java.awt.Font;
 import java.awt.Image;
 
@@ -74,10 +76,12 @@ public class Form extends JPanel {
 		panelRegistro.add(label);
 
 		tPeriodoMPS = new JSpinner();
+		tPeriodoMPS.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); 
 		tPeriodoMPS.setPreferredSize(new Dimension(60, 20));
 		tPeriodoMPS.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tPeriodoMPS.setBounds(125, 9, 60, 26);
 		panelRegistro.add(tPeriodoMPS);
+
 
 		JLabel label_1 = new JLabel("WK");
 		label_1.setFont(new Font("Calibri", Font.BOLD, 19));
@@ -85,6 +89,7 @@ public class Form extends JPanel {
 		panelRegistro.add(label_1);
 
 		tWK = new JSpinner();
+		tWK.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); 
 		tWK.setPreferredSize(new Dimension(60, 20));
 		tWK.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tWK.setBounds(274, 9, 60, 26);
@@ -173,6 +178,7 @@ public class Form extends JPanel {
 		panelRegistro.add(label_8);
 
 		tCantidad = new JSpinner();
+		tCantidad.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); 
 		tCantidad.setPreferredSize(new Dimension(60, 20));
 		tCantidad.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tCantidad.setBounds(125, 272, 60, 26);

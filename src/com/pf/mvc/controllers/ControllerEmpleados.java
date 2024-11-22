@@ -45,7 +45,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 		Index in = new Index();
 
-		in.modelo.setDataVector(filtrarData(getData()), getColumns());
+		in.modelo.setDataVector(filtrarData(dao.getEmpleados()), getColumns());
 		ocultarColumna(in.table);
 	
 		in.btnNuevo.addActionListener(e -> {

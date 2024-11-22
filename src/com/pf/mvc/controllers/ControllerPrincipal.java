@@ -120,7 +120,7 @@ public class ControllerPrincipal {
 		});
 
 		setSelectedButton(vp.btnInicio);
-		new ControllerEmpleados(vp).inicio();
+		new ControllerEmpleados(vp).index();
 		vp.init();
 	}
 

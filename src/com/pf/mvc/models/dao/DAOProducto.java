@@ -203,12 +203,12 @@ public class DAOProducto extends Conexion implements DAO {
 
 	        while (rs.next()) {
 	            data[i][0] = rs.getInt("id_producto");      
-	            data[i][1] = rs.getString("nombre");        
-	            data[i][2] = rs.getString("unidades");  
+	            data[i][1] = rs.getString("naturaleza");        
+	            data[i][2] = rs.getString("tipo");  
 	            data[i][3] = rs.getString("codigo");  
-	            data[i][4] = rs.getString("tipo");  
-	            data[i][5] = rs.getString("categoria"); 
-	            data[i][6] = rs.getString("naturaleza");   
+	            data[i][4] = rs.getString("categoria");  
+	            data[i][5] = rs.getString("nombre"); 
+	            data[i][6] = rs.getString("unidades");   
 	            i++;
 	        }
 

@@ -419,7 +419,7 @@ public class ControllerProductos extends Functions implements Controller {
 
 	public void actualizarTabla() {
 		Index in = new Index();
-		in.modelo.setDataVector(getData(), getColumns());
+		in.modelo.setDataVector(dao.getProductos(), getColumns());
 
 	}
 

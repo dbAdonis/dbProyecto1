@@ -39,6 +39,10 @@ import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
+import javax.swing.UIManager;
 
 public class Form extends JPanel {
 	public JButton btnGuardar;
@@ -60,13 +64,16 @@ public class Form extends JPanel {
 	 * Create the panel.
 	 */
 	public Form() {
+		setBackground(SystemColor.menu);
 		setPreferredSize(new Dimension(1080, 768));
-		setLayout(new BorderLayout(0, 0));
+		setLayout(null);
 
 		JPanel panelRegistro = new JPanel();
-		add(panelRegistro, BorderLayout.CENTER);
-		panelRegistro.setBackground(Color.WHITE);
-		panelRegistro.setPreferredSize(new Dimension(10, 400));
+		panelRegistro.setBorder(new LineBorder(SystemColor.controlHighlight, 3));
+		panelRegistro.setBounds(12, 25, 1056, 634);
+		add(panelRegistro);
+		panelRegistro.setBackground(SystemColor.menu);
+		panelRegistro.setPreferredSize(new Dimension(10, 200));
 		panelRegistro.setMinimumSize(new Dimension(10, 200));
 		panelRegistro.setLayout(null);
 
@@ -113,6 +120,7 @@ public class Form extends JPanel {
 		panelRegistro.add(label_3);
 
 		cbxLotes = new JComboBox<Lote>();
+		cbxLotes.setBorder(null);
 		cbxLotes.setPreferredSize(new Dimension(110, 20));
 		cbxLotes.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxLotes.setBounds(125, 47, 151, 26);
@@ -126,6 +134,7 @@ public class Form extends JPanel {
 		panelRegistro.add(label_4);
 
 		cbxVariedades = new JComboBox<Variedad>();
+		cbxVariedades.setBorder(null);
 		cbxVariedades.setPreferredSize(new Dimension(110, 20));
 		cbxVariedades.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxVariedades.setBounds(125, 92, 150, 26);
@@ -134,6 +143,7 @@ public class Form extends JPanel {
 		AutoCompleteDecorator.decorate(cbxVariedades);
 
 		cbxTrabajadores = new JComboBox<Empleado>();
+		cbxTrabajadores.setBorder(null);
 		cbxTrabajadores.setPreferredSize(new Dimension(340, 20));
 		cbxTrabajadores.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxTrabajadores.setBounds(125, 137, 340, 26);
@@ -152,6 +162,7 @@ public class Form extends JPanel {
 		panelRegistro.add(label_6);
 
 		cbxLabores = new JComboBox<Labor>();
+		cbxLabores.setBorder(null);
 		cbxLabores.setPreferredSize(new Dimension(340, 20));
 		cbxLabores.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxLabores.setBounds(125, 182, 340, 26);
@@ -160,6 +171,7 @@ public class Form extends JPanel {
 		AutoCompleteDecorator.decorate(cbxLabores);
 
 		cbxFitoFerti = new JComboBox<Producto>();
+		cbxFitoFerti.setBorder(null);
 		cbxFitoFerti.setPreferredSize(new Dimension(300, 20));
 		cbxFitoFerti.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxFitoFerti.setBounds(251, 225, 249, 26);
@@ -190,6 +202,7 @@ public class Form extends JPanel {
 		panelRegistro.add(label_9);
 
 		tUnidades = new JTextField();
+		tUnidades.setBorder(null);
 		tUnidades.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tUnidades.setEditable(false);
 		tUnidades.setColumns(10);
@@ -197,10 +210,14 @@ public class Form extends JPanel {
 		panelRegistro.add(tUnidades);
 
 		btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnGuardar.setBounds(25, 334, 100, 40);
 		panelRegistro.add(btnGuardar);
 		btnGuardar.setFocusPainted(false);
-		btnGuardar.setBorder(null);
+		btnGuardar.setBorder(new LineBorder(new Color(0, 128, 0), 3));
 		btnGuardar.setBackground(SystemColor.inactiveCaptionBorder);
 		btnGuardar.setPreferredSize(new Dimension(100, 40));
 		btnGuardar.setBackground(new Color(39, 174, 96));
@@ -210,7 +227,7 @@ public class Form extends JPanel {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(148, 334, 100, 40);
 		panelRegistro.add(btnCancelar);
-		btnCancelar.setBorder(null);
+		btnCancelar.setBorder(new LineBorder(new Color(0, 0, 139), 3));
 		btnCancelar.setFocusPainted(false);
 		btnCancelar.setBackground(SystemColor.inactiveCaptionBorder);
 		btnCancelar.setPreferredSize(new Dimension(100, 40));
@@ -224,6 +241,7 @@ public class Form extends JPanel {
 		panelRegistro.add(lblFinca);
 
 		cbxFinca = new JComboBox<Finca>();
+		cbxFinca.setBorder(null);
 		cbxFinca.setPreferredSize(new Dimension(110, 20));
 		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxFinca.setBounds(612, 11, 151, 26);
@@ -232,6 +250,7 @@ public class Form extends JPanel {
 		AutoCompleteDecorator.decorate(cbxFinca);
 
 		cbxSupervisor = new JComboBox<Supervisor>();
+		cbxSupervisor.setBorder(null);
 		cbxSupervisor.setPreferredSize(new Dimension(110, 20));
 		cbxSupervisor.setFont(new Font("Calibri", Font.PLAIN, 16));
 		cbxSupervisor.setBounds(889, 12, 151, 26);

@@ -18,6 +18,8 @@ import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewPrincipal extends JFrame {
 
@@ -70,8 +72,9 @@ public class ViewPrincipal extends JFrame {
 		contenido.setLayout(new BorderLayout(0, 0));
 
 		panel = new JPanel();
+		panel.setBorder(new EmptyBorder(20, 0, 0, 0));
 		panel_2.add(panel, BorderLayout.WEST);
-		panel.setPreferredSize(new Dimension(200, 10));
+		panel.setPreferredSize(new Dimension(210, 10));
 		panel.setBackground(new Color(62, 85, 40));
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
 
@@ -82,7 +85,7 @@ public class ViewPrincipal extends JFrame {
 		btnGestionarPersonal.setPreferredSize(new Dimension(200, 45));
 		panel.add(btnGestionarPersonal);
 		btnGestionarPersonal.setFocusPainted(false);
-		btnGestionarPersonal.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnGestionarPersonal.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnGestionarPersonal.setForeground(Color.WHITE);
 		btnGestionarPersonal.setBackground(new Color(62, 85, 40));
 
@@ -93,7 +96,7 @@ public class ViewPrincipal extends JFrame {
 		btnReportesDiarios.setPreferredSize(new Dimension(200, 45));
 		panel.add(btnReportesDiarios);
 		btnReportesDiarios.setFocusPainted(false);
-		btnReportesDiarios.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnReportesDiarios.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnReportesDiarios.setForeground(Color.WHITE);
 		btnReportesDiarios.setBackground(new Color(62, 85, 40));
 
@@ -104,6 +107,10 @@ public class ViewPrincipal extends JFrame {
 		panel.add(panelBtnReportes);
 
 		btnLotes = new JButton("Gestionar lotes");
+		btnLotes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnLotes.setMaximumSize(new Dimension(200, 23));
 		btnLotes.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnLotes.setHorizontalAlignment(SwingConstants.LEFT);
@@ -111,7 +118,7 @@ public class ViewPrincipal extends JFrame {
 		btnLotes.setPreferredSize(new Dimension(200, 45));
 		btnLotes.setForeground(Color.WHITE);
 		btnLotes.setFocusPainted(false);
-		btnLotes.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnLotes.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnLotes.setBackground(new Color(62, 85, 40));
 		panelBtnReportes.add(btnLotes);
 
@@ -123,11 +130,15 @@ public class ViewPrincipal extends JFrame {
 		btnVariedades.setPreferredSize(new Dimension(200, 45));
 		btnVariedades.setForeground(Color.WHITE);
 		btnVariedades.setFocusPainted(false);
-		btnVariedades.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnVariedades.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnVariedades.setBackground(new Color(62, 85, 40));
 		panelBtnReportes.add(btnVariedades);
 
 		btnLabores = new JButton("Gestionar labores");
+		btnLabores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnLabores.setMaximumSize(new Dimension(200, 23));
 		btnLabores.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnLabores.setIconTextGap(10);
@@ -135,7 +146,7 @@ public class ViewPrincipal extends JFrame {
 		btnLabores.setPreferredSize(new Dimension(200, 45));
 		btnLabores.setForeground(Color.WHITE);
 		btnLabores.setFocusPainted(false);
-		btnLabores.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnLabores.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnLabores.setBackground(new Color(62, 85, 40));
 		panelBtnReportes.add(btnLabores);
 
@@ -145,7 +156,7 @@ public class ViewPrincipal extends JFrame {
 		btnProductos.setPreferredSize(new Dimension(200, 45));
 		panel.add(btnProductos);
 		btnProductos.setFocusPainted(false);
-		btnProductos.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnProductos.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnProductos.setForeground(Color.WHITE);
 		btnProductos.setBackground(new Color(62, 85, 40));
 
@@ -164,6 +175,10 @@ public class ViewPrincipal extends JFrame {
 		panel.add(panelBtnProductos);
 		
 		btnGestionarNaturalezas = new JButton("Gestionar naturalezas");
+		btnGestionarNaturalezas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnGestionarNaturalezas.setPreferredSize(new Dimension(200, 45));
 		btnGestionarNaturalezas.setMaximumSize(new Dimension(200, 23));
 		btnGestionarNaturalezas.setIconTextGap(10);
@@ -171,7 +186,7 @@ public class ViewPrincipal extends JFrame {
 		btnGestionarNaturalezas.setForeground(Color.WHITE);
 		btnGestionarNaturalezas.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnGestionarNaturalezas.setFocusPainted(false);
-		btnGestionarNaturalezas.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnGestionarNaturalezas.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnGestionarNaturalezas.setBackground(new Color(62, 85, 40));
 		panelBtnProductos.add(btnGestionarNaturalezas);
 		
@@ -183,7 +198,7 @@ public class ViewPrincipal extends JFrame {
 		btnGestionarTipos.setForeground(Color.WHITE);
 		btnGestionarTipos.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnGestionarTipos.setFocusPainted(false);
-		btnGestionarTipos.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnGestionarTipos.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnGestionarTipos.setBackground(new Color(62, 85, 40));
 		panelBtnProductos.add(btnGestionarTipos);
 		
@@ -195,7 +210,7 @@ public class ViewPrincipal extends JFrame {
 		btnGestionarCategorias.setForeground(Color.WHITE);
 		btnGestionarCategorias.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnGestionarCategorias.setFocusPainted(false);
-		btnGestionarCategorias.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnGestionarCategorias.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnGestionarCategorias.setBackground(new Color(62, 85, 40));
 		panelBtnProductos.add(btnGestionarCategorias);
 		
@@ -205,7 +220,7 @@ public class ViewPrincipal extends JFrame {
 		btnFincas.setForeground(Color.WHITE);
 		btnFincas.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnFincas.setFocusPainted(false);
-		btnFincas.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnFincas.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnFincas.setBackground(new Color(62, 85, 40));
 		
 		btnGestionarNaturalezas.setIcon(iconImgLine);
@@ -219,7 +234,7 @@ public class ViewPrincipal extends JFrame {
 		btnSupervisor.setForeground(Color.WHITE);
 		btnSupervisor.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnSupervisor.setFocusPainted(false);
-		btnSupervisor.setBorder(new EmptyBorder(0, 10, 0, 0));
+		btnSupervisor.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnSupervisor.setBackground(new Color(62, 85, 40));
 		panel.add(btnSupervisor);
 	}

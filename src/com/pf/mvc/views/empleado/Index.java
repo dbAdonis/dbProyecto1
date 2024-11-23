@@ -25,6 +25,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Index extends JPanel {
 	public JTable table;
@@ -50,32 +52,34 @@ public class Index extends JPanel {
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(null);
-		panel_2.setPreferredSize(new Dimension(10, 70));
+		panel_2.setPreferredSize(new Dimension(10, 80));
 		panel_1.add(panel_2, BorderLayout.NORTH);
 		panel_2.setLayout(null);
 
 		JLabel lblBuscar = new JLabel("Buscar:");
-		lblBuscar.setBounds(12, 25, 67, 20);
+		lblBuscar.setBounds(48, 28, 67, 20);
 		panel_2.add(lblBuscar);
-		lblBuscar.setFont(new Font("Calibri", Font.PLAIN, 19));
+		lblBuscar.setFont(new Font("Calibri", Font.PLAIN, 20));
 
 		tBuscar = new JTextField();
-		tBuscar.setBounds(91, 22, 370, 26);
+		tBuscar.setBorder(null);
+		tBuscar.setBounds(117, 23, 370, 33);
 		panel_2.add(tBuscar);
 		tBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
 		tBuscar.setColumns(10);
 
 		cbxFinca = new JComboBox<Finca>();
+		cbxFinca.setBorder(null);
 		cbxFinca.setModel(new DefaultComboBoxModel(new String[] { "Seleccionar", "Todas" }));
 		cbxFinca.setFont(new Font("Calibri", Font.PLAIN, 19));
-		cbxFinca.setBounds(552, 22, 112, 26);
+		cbxFinca.setBounds(583, 21, 112, 34);
 		panel_2.add(cbxFinca);
 
 		AutoCompleteDecorator.decorate(cbxFinca);
 
 		JLabel lblFinca = new JLabel("Finca: ");
-		lblFinca.setFont(new Font("Calibri", Font.PLAIN, 19));
-		lblFinca.setBounds(493, 25, 49, 20);
+		lblFinca.setFont(new Font("Calibri", Font.PLAIN, 20));
+		lblFinca.setBounds(518, 28, 53, 20);
 		panel_2.add(lblFinca);
 
 		JPanel panel_3 = new JPanel();
@@ -85,41 +89,54 @@ public class Index extends JPanel {
 		panel_3.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(SystemColor.text);
+		panel_4.setBackground(new Color(220, 220, 220));
 		FlowLayout flowLayout = (FlowLayout) panel_4.getLayout();
 		flowLayout.setHgap(10);
 		panel_3.add(panel_4, BorderLayout.SOUTH);
 
 		btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNuevo.setPreferredSize(new Dimension(90, 40));
 		btnNuevo.setForeground(Color.WHITE);
-		btnNuevo.setFont(new Font("Calibri", Font.BOLD, 19));
+		btnNuevo.setFont(new Font("Calibri", Font.BOLD, 20));
 		btnNuevo.setFocusPainted(false);
-		btnNuevo.setBorder(null);
+		btnNuevo.setBorder(new LineBorder(new Color(0, 128, 0), 3));
 		btnNuevo.setBackground(new Color(39, 174, 96));
 		panel_4.add(btnNuevo);
 
 		btnEditar = new JButton("Editar");
-		btnEditar.setBorder(null);
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnEditar.setBorder(new LineBorder(new Color(255, 140, 0), 3));
 		btnEditar.setFocusPainted(false);
 		btnEditar.setPreferredSize(new Dimension(90, 40));
 		btnEditar.setBackground(new Color(204, 153, 0));
 		btnEditar.setForeground(Color.WHITE);
 		btnEditar.setBounds(30, 340, 107, 42);
-		btnEditar.setFont(new Font("Calibri", Font.BOLD, 19));
+		btnEditar.setFont(new Font("Calibri", Font.BOLD, 20));
 		panel_4.add(btnEditar);
 
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBorder(null);
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnEliminar.setBorder(new LineBorder(new Color(220, 20, 60), 3));
 		btnEliminar.setFocusPainted(false);
 		btnEliminar.setPreferredSize(new Dimension(90, 40));
 		btnEliminar.setBackground(new Color(153, 0, 0));
 		btnEliminar.setForeground(Color.WHITE);
 		btnEliminar.setBounds(30, 340, 107, 42);
-		btnEliminar.setFont(new Font("Calibri", Font.BOLD, 19));
+		btnEliminar.setFont(new Font("Calibri", Font.BOLD, 20));
 		panel_4.add(btnEliminar);
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel_3.add(scrollPane, BorderLayout.CENTER);
 
 		modelo = new DefaultTableModel() {
@@ -130,14 +147,14 @@ public class Index extends JPanel {
 	    };
 		filtro = new TableRowSorter<DefaultTableModel>(modelo);
 		table = new JTable();
-		table.setFont(new Font("Calibri", Font.PLAIN, 17));
+		table.setFont(new Font("Calibri", Font.PLAIN, 18));
 		table.setRowHeight(30);
 		table.setBorder(null);
 		table.setRowSorter(filtro);
 		table.setModel(modelo);
 
 		JTableHeader header = table.getTableHeader();
-		header.setFont(new Font("Calibri", Font.BOLD, 18));
+		header.setFont(new Font("Calibri", Font.BOLD, 19));
 		header.setBackground(new Color(201, 224, 154));
 		scrollPane.setViewportView(table);
 	}

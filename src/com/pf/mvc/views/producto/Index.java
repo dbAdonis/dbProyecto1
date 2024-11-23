@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class Index extends JPanel {
     public JTextField tBuscar;
@@ -39,11 +40,12 @@ public class Index extends JPanel {
         panel.setLayout(null);
         
         JLabel lblBuscar = new JLabel("Buscar");
-        lblBuscar.setFont(new Font("Calibri", Font.PLAIN, 19)); 
+        lblBuscar.setFont(new Font("Calibri", Font.PLAIN, 20)); 
         lblBuscar.setBounds(12, 25, 67, 26);
         panel.add(lblBuscar);
         
         tBuscar = new JTextField();
+        tBuscar.setBorder(null);
         tBuscar.setFont(new Font("Calibri", Font.PLAIN, 16));
         tBuscar.setBounds(71, 21, 801, 30);
         panel.add(tBuscar);
@@ -56,6 +58,7 @@ public class Index extends JPanel {
         panel_1.setLayout(new BorderLayout(0, 0));
         
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel_1.add(scrollPane, BorderLayout.CENTER);
         
         modelo = new DefaultTableModel() {
@@ -69,42 +72,42 @@ public class Index extends JPanel {
         table.setModel(modelo);
         table.setRowHeight(30);
         table.setRowSorter(filtro);
-        table.setFont(new Font("Calibri", Font.PLAIN, 17));  
-        table.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 18));
+        table.setFont(new Font("Calibri", Font.PLAIN, 18));  
+        table.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 19));
         table.getTableHeader().setBackground(new Color(201, 224, 154));
         scrollPane.setViewportView(table);
         
         JPanel panel_2 = new JPanel();
-        panel_2.setBackground(SystemColor.text);
+        panel_2.setBackground(new Color(220, 220, 220));
         FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
         flowLayout.setHgap(10);
         add(panel_2, BorderLayout.SOUTH);
         
         btnNuevo = new JButton("Nuevo Producto");
         btnNuevo.setFocusPainted(false);
-        btnNuevo.setBorder(null);
+        btnNuevo.setBorder(new LineBorder(new Color(0, 128, 0), 3));
         btnNuevo.setPreferredSize(new Dimension(150, 40));
         btnNuevo.setBackground(new Color(39, 174, 96));
         btnNuevo.setForeground(Color.WHITE);;
-        btnNuevo.setFont(new Font("Calibri", Font.BOLD, 19)); 
+        btnNuevo.setFont(new Font("Calibri", Font.BOLD, 20)); 
         panel_2.add(btnNuevo);
         
         btnEditar = new JButton("Editar");
-        btnEditar.setBorder(null);
+        btnEditar.setBorder(new LineBorder(new Color(255, 140, 0), 3));
         btnEditar.setFocusPainted(false);
         btnEditar.setPreferredSize(new Dimension(90, 40));
 		btnEditar.setBackground(new Color(204, 153, 0));
 		btnEditar.setForeground(Color.WHITE);
-        btnEditar.setFont(new Font("Calibri", Font.BOLD, 19));
+        btnEditar.setFont(new Font("Calibri", Font.BOLD, 20));
         panel_2.add(btnEditar);
         
         btnEliminar = new JButton("Eliminar");
         btnEliminar.setFocusPainted(false);
-        btnEliminar.setBorder(null);
+        btnEliminar.setBorder(new LineBorder(new Color(220, 20, 60), 3));
         btnEliminar.setPreferredSize(new Dimension(90, 40));
 		btnEliminar.setBackground(new Color(153, 0, 0));
 		btnEliminar.setForeground(Color.WHITE);
-        btnEliminar.setFont(new Font("Calibri", Font.BOLD, 19));
+        btnEliminar.setFont(new Font("Calibri", Font.BOLD, 20));
         panel_2.add(btnEliminar);
     }
 }

@@ -7,6 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+
+import com.pf.mvc.views.borde.BotonRedondeado;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Font;
@@ -23,9 +26,9 @@ public class Index extends JPanel {
     public JTable table;
     public DefaultTableModel modelo;
     public TableRowSorter<DefaultTableModel> filtro;
-    public JButton btnNuevo;
-    public JButton btnEliminar;
-    public JButton btnEditar;
+    public BotonRedondeado btnNuevo;
+    public BotonRedondeado btnEliminar;
+    public BotonRedondeado btnEditar;
 
     /**
      * Create the panel.
@@ -83,7 +86,7 @@ public class Index extends JPanel {
         flowLayout.setHgap(10);
         add(panel_2, BorderLayout.SOUTH);
         
-        btnNuevo = new JButton("Nuevo Producto");
+        btnNuevo = new BotonRedondeado("Nuevo Producto",20);
         btnNuevo.setFocusPainted(false);
         btnNuevo.setBorder(new LineBorder(new Color(0, 128, 0), 3));
         btnNuevo.setPreferredSize(new Dimension(150, 40));
@@ -92,7 +95,7 @@ public class Index extends JPanel {
         btnNuevo.setFont(new Font("Calibri", Font.BOLD, 20)); 
         panel_2.add(btnNuevo);
         
-        btnEditar = new JButton("Editar");
+        btnEditar = new BotonRedondeado("Editar",20);
         btnEditar.setBorder(new LineBorder(new Color(255, 140, 0), 3));
         btnEditar.setFocusPainted(false);
         btnEditar.setPreferredSize(new Dimension(90, 40));
@@ -101,7 +104,7 @@ public class Index extends JPanel {
         btnEditar.setFont(new Font("Calibri", Font.BOLD, 20));
         panel_2.add(btnEditar);
         
-        btnEliminar = new JButton("Eliminar");
+        btnEliminar = new BotonRedondeado("Eliminar",20);
         btnEliminar.setFocusPainted(false);
         btnEliminar.setBorder(new LineBorder(new Color(220, 20, 60), 3));
         btnEliminar.setPreferredSize(new Dimension(90, 40));

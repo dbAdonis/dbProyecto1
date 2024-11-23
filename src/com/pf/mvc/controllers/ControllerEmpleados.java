@@ -34,7 +34,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 		this.idFinca = -1;
 		this.ids = new ArrayList<>();
 	}
-	
+
 	public void inicio() {
 		Inicio inicio = new Inicio();
 		vp.setContenido(inicio, "Bienvenido al Sistema Fino Follaje.");
@@ -47,7 +47,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 		in.modelo.setDataVector(filtrarData(dao.getEmpleados()), getColumns());
 		ocultarColumna(in.table);
-	
+
 		in.btnNuevo.addActionListener(e -> {
 
 			create();
@@ -69,7 +69,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 		});
 
 		in.btnEliminar.addActionListener(e -> {
-			
+
 			int selectedRow = in.table.getSelectedRow();
 			if (selectedRow == -1) {
 				JOptionPane.showMessageDialog(in, "Debe seleccionar un empleado de la tabla para eliminar.",
@@ -80,7 +80,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 			int id = getSelectedId(in.table);
 			System.out.println(id);
 			dao.destroy(id);
-			index(); 
+			index();
 
 		});
 
@@ -94,73 +94,74 @@ public class ControllerEmpleados extends Functions implements Controller {
 		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-					buscar(in.tBuscar, in.filtro, 1);
+				buscar(in.tBuscar, in.filtro, 1);
 			}
 		});
-		
+
 		cargarCbxFinca(in);
-		
-		in.cbxFinca.addActionListener(e->{
-			
+
+		in.cbxFinca.addActionListener(e -> {
+
 			cbxDatosFinca(in);
-			
+
 		});
-		
+
 		vp.setContenido(in, "Gestionar personal");
 
 	}
 
 	@Override
 	public void create() {
-	    Create c = new Create();
+		Create c = new Create();
 
-	    ArrayList<Object> fincas = new DAOFinca().getData();
-	    for (Object o : fincas) {
-	        Finca r = (Finca) o;
-	        c.cbxFincas.addItem(r);
-	    }
+		ArrayList<Object> fincas = new DAOFinca().getData();
+		for (Object o : fincas) {
+			Finca r = (Finca) o;
+			c.cbxFincas.addItem(r);
+		}
 
-	    c.btnGuardar.addActionListener(e -> {
-	        String nombre = c.tNombre.getText();
-	        Finca r = (Finca) c.cbxFincas.getSelectedItem();
+		c.btnGuardar.addActionListener(e -> {
+			String nombre = c.tNombre.getText();
+			Finca r = (Finca) c.cbxFincas.getSelectedItem();
 
-	        if (nombre.isEmpty() || r == null) {
-	            JOptionPane.showMessageDialog(c, "Todos los campos deben estar completos.", "Advertencia",
-	                    JOptionPane.WARNING_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || r == null) {
+				JOptionPane.showMessageDialog(c, "Todos los campos deben estar completos.", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 
-	        Empleado item = new Empleado(r.getId(), nombre, true);
+			Empleado item = new Empleado(r.getId(), nombre, true);
 
-	        String result = new DAOEmpleado().storeEmpleado(item);
+			String result = new DAOEmpleado().storeEmpleado(item);
 
-	        JOptionPane.showMessageDialog(c, result);
+			JOptionPane.showMessageDialog(c, result);
 
-	        index();
-	    });
+			index();
+		});
 
-	    c.btnCancelar.addActionListener(e -> {
-	        index();
-	    });
+		c.btnCancelar.addActionListener(e -> {
+			index();
+		});
 
-	    c.lblTitulo.setText("Registrar nuevo empleado");
-	    vp.setContenido(c, "Gestionar personal");
+		c.lblTitulo.setText("Registrar nuevo empleado");
+		vp.setContenido(c, "Gestionar personal");
 	}
-
 
 	@Override
 	public void edit(int id) {
 
 		Empleado em = (Empleado) dao.getItem(id);
-
 		Create c = new Create();
+		if (em == null) {
+			JOptionPane.showMessageDialog(c, "El registro no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
 		c.tNombre.setText(em.getNombre());
 
 		ArrayList<Object> fincas = new DAOFinca().getData();
 		c.cbxFincas.removeAllItems();
 
-		
 		for (Object o : fincas) {
 			Finca r = (Finca) o;
 
@@ -175,19 +176,23 @@ public class ControllerEmpleados extends Functions implements Controller {
 			String nombre = c.tNombre.getText();
 
 			Finca r = (Finca) c.cbxFincas.getSelectedItem();
-			
-			 if (nombre.isEmpty() || r == null) {
-		            JOptionPane.showMessageDialog(c, "Todos los campos deben estar completos.", "Advertencia",
-		                    JOptionPane.WARNING_MESSAGE);
-		            return;
-		        }
 
-			Empleado item = new Empleado(r.getId(), nombre, true);
-			
-			if (em.getId() > 0) {
-				update(item, em.getId());
+			if (nombre.isEmpty()) {
+				JOptionPane.showMessageDialog(c, "Debe completar el campo", "Advertencia", JOptionPane.WARNING_MESSAGE);
+			} else {
+				Empleado item = new Empleado(r.getId(), nombre, true);
+				boolean actualizado = dao.update(item, id);
+
+				if (actualizado) {
+					JOptionPane.showMessageDialog(c, "El registro se actualizó correctamente.", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(c, "No se pudo actualizar el registro. Intente nuevamente.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
+				index();
 			}
-			index();
 
 		});
 
@@ -196,7 +201,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 			index();
 
 		});
-		
+
 		c.lblTitulo.setText("Editar empleado");
 		vp.setContenido(c, "Gestionar personal");
 
@@ -216,8 +221,8 @@ public class ControllerEmpleados extends Functions implements Controller {
 		for (Object o : list) {
 
 			Empleado item = (Empleado) o;
-			
-			if(idFinca == item.getIdFinca()) {
+
+			if (idFinca == item.getIdFinca()) {
 				ids.add(item.getId());
 
 				data[i][0] = item.getId();
@@ -227,7 +232,7 @@ public class ControllerEmpleados extends Functions implements Controller {
 				data[i][2] = finca != null ? finca.getNombre() : "Sin Finca";
 				i++;
 			}
-			if(idFinca == -1) {
+			if (idFinca == -1) {
 				ids.add(item.getId());
 
 				data[i][0] = item.getId();
@@ -268,25 +273,24 @@ public class ControllerEmpleados extends Functions implements Controller {
 
 	}
 
-	
 	public void cargarCbxFinca(Index in) {
-		
+
 		ArrayList<Object> list = new DAOFinca().getData();
-		
+
 		for (Object o : list) {
 			Finca f = (Finca) o;
 			in.cbxFinca.addItem(f);
 		}
 	}
-	
+
 	public void cbxDatosFinca(Index in) {
-		
+
 		int ind = in.cbxFinca.getSelectedIndex();
-		
-		if(ind > 0) {
-			if(ind == 1) {
+
+		if (ind > 0) {
+			if (ind == 1) {
 				idFinca = -1;
-			}else {
+			} else {
 				Finca f = (Finca) in.cbxFinca.getSelectedItem();
 				idFinca = f.getId();
 			}
@@ -294,20 +298,20 @@ public class ControllerEmpleados extends Functions implements Controller {
 		in.modelo.setDataVector(filtrarData(getData()), getColumns());
 		ocultarColumna(in.table);
 	}
-	
+
 	public Object[][] filtrarData(Object[][] data) {
 		ArrayList<Object[]> datosFiltrados = new ArrayList<>();
-		
+
 		for (Object[] o : data) {
 			for (Object item : o) {
-				if(item != null) {
+				if (item != null) {
 					datosFiltrados.add(o);
 					break;
 				}
 			}
 		}
-		
+
 		return datosFiltrados.toArray(new Object[0][0]);
 	}
-	
+
 }

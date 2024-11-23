@@ -32,6 +32,7 @@ import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Producto;
 import com.pf.mvc.models.vo.Supervisor;
 import com.pf.mvc.models.vo.Variedad;
+import com.pf.mvc.views.borde.BotonRedondeado;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.Insets;
@@ -45,8 +46,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.UIManager;
 
 public class Form extends JPanel {
-	public JButton btnGuardar;
-	public JButton btnCancelar;
+	public BotonRedondeado btnGuardar;
+	public BotonRedondeado btnCancelar;
 	public JTextField tUnidades;
 	public JSpinner tWK;
 	public JSpinner tPeriodoMPS;
@@ -209,7 +210,7 @@ public class Form extends JPanel {
 		tUnidades.setBounds(302, 272, 126, 26);
 		panelRegistro.add(tUnidades);
 
-		btnGuardar = new JButton("Guardar");
+		btnGuardar = new BotonRedondeado("Guardar",20);
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -224,7 +225,7 @@ public class Form extends JPanel {
 		btnGuardar.setForeground(Color.WHITE);
 		btnGuardar.setFont(new Font("Calibri", Font.BOLD, 19));
 
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new BotonRedondeado("Cancelar",20);
 		btnCancelar.setBounds(148, 334, 100, 40);
 		panelRegistro.add(btnCancelar);
 		btnCancelar.setBorder(new LineBorder(new Color(0, 0, 139), 3));

@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import com.pf.mvc.models.dao.DAOCategoria;
 import com.pf.mvc.models.vo.Categoria;
+import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
 
@@ -122,22 +123,32 @@ public class ControllerCategoria extends Functions implements Controller {
 	@Override
 	public void edit(int id) {
 		Categoria n = (Categoria) dao.getItem(id);
-
+		if (n == null) {
+			JOptionPane.showMessageDialog(in, "El registro no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		in.tNombre.setText(n.getNombre());
 
 		in.btnActualizar.addActionListener(e -> {
 			String nombre = in.tNombre.getText();
 
 			if (nombre.isEmpty()) {
-				JOptionPane.showMessageDialog(in, "Todos los campos deben estar completos.", "Advertencia",
+				JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia",
 						JOptionPane.WARNING_MESSAGE);
-				return;
+			} else {
+				Categoria item = new Categoria(nombre, true);
+				boolean actualizado = dao.update(item, id);
+
+				if (actualizado) {
+					JOptionPane.showMessageDialog(in, "El registro se actualizó correctamente.", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(in, "No se pudo actualizar el registro. Intente nuevamente.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
+				index();
 			}
-
-			Categoria item = new Categoria(nombre, true);
-
-			update(item, id);
-			index();
 
 		});
 

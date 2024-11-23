@@ -96,7 +96,8 @@ public class DAOVariedad extends Conexion implements DAO {
 
 			ps.execute();
 
-			return true;
+			int rowsAffected = ps.executeUpdate();
+	        return rowsAffected > 0;
 
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());

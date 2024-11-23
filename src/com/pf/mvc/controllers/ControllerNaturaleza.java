@@ -13,6 +13,7 @@ import com.pf.mvc.models.dao.DAOCategoria;
 import com.pf.mvc.models.dao.DAONaturaleza;
 import com.pf.mvc.models.dao.DAOTipo;
 import com.pf.mvc.models.vo.Categoria;
+import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Tipo;
 import com.pf.mvc.views.ViewPrincipal;
@@ -80,7 +81,7 @@ public class ControllerNaturaleza extends Functions implements Controller {
 			}
 
 		});
-		
+
 		in.tBuscar.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -108,44 +109,54 @@ public class ControllerNaturaleza extends Functions implements Controller {
 
 	@Override
 	public void create() {
-	    String nombre = in.tNombre.getText();
+		String nombre = in.tNombre.getText();
 
-	    if (nombre.isEmpty()) {
-	        JOptionPane.showMessageDialog(in, "El nombre no puede estar vacío.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-	        return;
-	    }
+		if (nombre.isEmpty()) {
+			JOptionPane.showMessageDialog(in, "El nombre no puede estar vacío.", "Advertencia",
+					JOptionPane.WARNING_MESSAGE);
+			return;
+		}
 
-	    Naturaleza item = new Naturaleza(nombre, true);
+		Naturaleza item = new Naturaleza(nombre, true);
 
-	    String result = dao.storeNaturaleza(item);
+		String result = dao.storeNaturaleza(item);
 
-	    JOptionPane.showMessageDialog(in, result);
+		JOptionPane.showMessageDialog(in, result);
 
-	    in.tNombre.setText("");
-	    index();
+		in.tNombre.setText("");
+		index();
 	}
-
 
 	@Override
 	public void edit(int id) {
 		Naturaleza n = (Naturaleza) dao.getItem(id);
+		if (n == null) {
+			JOptionPane.showMessageDialog(in, "El registro no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
 		in.tNombre.setText(n.getNombre());
 
 		in.btnActualizar.addActionListener(e -> {
 			String nombre = in.tNombre.getText();
-			
+
 			if (nombre.isEmpty()) {
-				JOptionPane.showMessageDialog(in, "El nombre no puede estar vacío.", "Advertencia",
+				JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia",
 						JOptionPane.WARNING_MESSAGE);
-				return;
+			} else {
+				Naturaleza item = new Naturaleza(nombre, true);
+				boolean actualizado = dao.update(item, id);
+
+				if (actualizado) {
+					JOptionPane.showMessageDialog(in, "El registro se actualizó correctamente.", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(in, "No se pudo actualizar el registro. Intente nuevamente.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
+				index();
 			}
-
-			Naturaleza item = new Naturaleza(nombre, true);
-
-			update(item, id);
-
-
 		});
 
 		in.btnCancelar.addActionListener(e -> {
@@ -208,6 +219,5 @@ public class ControllerNaturaleza extends Functions implements Controller {
 		index();
 
 	}
-
 
 }

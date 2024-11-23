@@ -50,7 +50,7 @@ public class ControllerLabores extends Functions implements Controller {
 
 		in.modelo.setDataVector(getData(), getColumns());
 		ocultarColumna(in.table);
-		
+
 		in.tBuscar.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -61,7 +61,7 @@ public class ControllerLabores extends Functions implements Controller {
 		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-					buscar(in.tBuscar, in.filtro, 1);
+				buscar(in.tBuscar, in.filtro, 1);
 			}
 		});
 
@@ -74,18 +74,18 @@ public class ControllerLabores extends Functions implements Controller {
 		in.btnEditar.addActionListener(e -> {
 
 			int id = getSelectedId(in.table);
-			if(id == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
-			edit(id);
-			in.lblTitulo.setText("Editar labor");
-			in.btnGuardar.setEnabled(false);
-			in.btnGuardar.setVisible(false);
-			in.btnActualizar.setEnabled(true);
-			in.btnActualizar.setVisible(true);
-			in.btnCancelar.setEnabled(true);
-			in.btnCancelar.setVisible(true);
+			if (id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
+				edit(id);
+				in.lblTitulo.setText("Editar labor");
+				in.btnGuardar.setEnabled(false);
+				in.btnGuardar.setVisible(false);
+				in.btnActualizar.setEnabled(true);
+				in.btnActualizar.setVisible(true);
+				in.btnCancelar.setEnabled(true);
+				in.btnCancelar.setVisible(true);
 			}
 
 		});
@@ -93,12 +93,12 @@ public class ControllerLabores extends Functions implements Controller {
 		in.btnEliminar.addActionListener(e -> {
 
 			int id = getSelectedId(in.table);
-			if(id == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
-			dao.destroy(id);
-			index();
+			if (id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
+				dao.destroy(id);
+				index();
 			}
 
 		});
@@ -117,45 +117,52 @@ public class ControllerLabores extends Functions implements Controller {
 
 	@Override
 	public void create() {
-	    String nombre = in.tNombre.getText();
+		String nombre = in.tNombre.getText();
 
-	    if (nombre.equals("")) {
-	        JOptionPane.showMessageDialog(in, "Debe completar el campo", 
-	                "Advertencia", JOptionPane.WARNING_MESSAGE);
-	    } else {
-	        Labor item = new Labor(nombre, true);
+		if (nombre.equals("")) {
+			JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia", JOptionPane.WARNING_MESSAGE);
+		} else {
+			Labor item = new Labor(nombre, true);
 
-	        String result = dao.storeLabor(item);
+			String result = dao.storeLabor(item);
 
-	        JOptionPane.showMessageDialog(in, result, 
-	                "Resultado de la operación", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(in, result, "Resultado de la operación", JOptionPane.INFORMATION_MESSAGE);
 
-	        in.tNombre.setText("");
-	        index();
-	    }
+			in.tNombre.setText("");
+			index();
+		}
 	}
-
 
 	@Override
 	public void edit(int id) {
-		
-		Labor la = (Labor) dao.getItem(id);
 
+		Labor la = (Labor) dao.getItem(id);
+		if (la == null) {
+			JOptionPane.showMessageDialog(in, "El registro no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		in.tNombre.setText(la.getNombre());
 
 		in.btnActualizar.addActionListener(e -> {
 			String nombre = in.tNombre.getText();
 
-			if(nombre.equals("")) {
-				JOptionPane.showMessageDialog(in, "Debe completar el campo",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
+			if (nombre.isEmpty()) {
+				JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
 				Labor item = new Labor(nombre, true);
+				boolean actualizado = dao.update(item, id);
 
-			update(item, id);
-			index();
+				if (actualizado) {
+					JOptionPane.showMessageDialog(in, "El registro se actualizó correctamente.", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(in, "No se pudo actualizar el registro. Intente nuevamente.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
+				index();
 			}
-			
 
 		});
 

@@ -15,6 +15,7 @@ import javax.swing.table.TableRowSorter;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import com.pf.mvc.models.vo.Finca;
+import com.pf.mvc.views.borde.BotonRedondeado;
 
 import java.awt.Font;
 import javax.swing.border.BevelBorder;
@@ -28,9 +29,9 @@ import java.awt.event.ActionEvent;
 
 public class Create extends JPanel {
     public JTextField tNombre;
-    public JButton btnGuardar;
+    public BotonRedondeado btnGuardar;
     public JLabel lblTitulo;
-    public JButton btnCancelar;
+    public BotonRedondeado btnCancelar;
     public JComboBox<Finca> cbxFincas;
 
     /**
@@ -64,7 +65,7 @@ public class Create extends JPanel {
         tNombre.setBounds(112, 99, 380, 30);
         panel.add(tNombre);
         
-        btnCancelar = new JButton("Cancelar");
+        btnCancelar = new BotonRedondeado("Cancelar",20);
         btnCancelar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         	}
@@ -78,7 +79,7 @@ public class Create extends JPanel {
         btnCancelar.setForeground(Color.WHITE);
         btnCancelar.setFont(new Font("Calibri", Font.BOLD, 19));
          
-         btnGuardar = new JButton("Guardar");
+         btnGuardar = new BotonRedondeado("Guardar",20);
          btnGuardar.setBounds(27, 230, 110, 30);
          panel.add(btnGuardar);
          btnGuardar.setFocusPainted(false);

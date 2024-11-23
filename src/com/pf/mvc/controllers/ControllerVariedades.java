@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import com.pf.mvc.models.dao.DAOLote;
 import com.pf.mvc.models.dao.DAOVariedad;
+import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.models.vo.Labor;
 import com.pf.mvc.models.vo.Lote;
 import com.pf.mvc.models.vo.Variedad;
@@ -115,43 +116,53 @@ public class ControllerVariedades extends Functions implements Controller {
 	@Override
 	public void create() {
 
-	    String nombre = in.tNombre.getText();
+		String nombre = in.tNombre.getText();
 
-	    if (nombre.equals("")) {
-	        JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia", JOptionPane.WARNING_MESSAGE);
-	    } else {
-	        Variedad item = new Variedad(nombre, true);
+		if (nombre.equals("")) {
+			JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia", JOptionPane.WARNING_MESSAGE);
+		} else {
+			Variedad item = new Variedad(nombre, true);
 
-	        String result = dao.storeVariedad(item);
+			String result = dao.storeVariedad(item);
 
-	        JOptionPane.showMessageDialog(in, result, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(in, result, "Resultado", JOptionPane.INFORMATION_MESSAGE);
 
-	        in.tNombre.setText("");
+			in.tNombre.setText("");
 
-	        index();
-	    }
+			index();
+		}
 	}
 
 	@Override
 	public void edit(int id) {
 
 		Variedad va = (Variedad) dao.getItem(id);
+		if (va == null) {
+			JOptionPane.showMessageDialog(in, "El registro no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
 		in.tNombre.setText(va.getNombre());
 
 		in.btnActualizar.addActionListener(e -> {
 			String nombre = in.tNombre.getText();
 
-			if (nombre.equals("")) {
+			if (nombre.isEmpty()) {
 				JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia",
 						JOptionPane.WARNING_MESSAGE);
 			} else {
 				Variedad item = new Variedad(nombre, true);
+				boolean actualizado = dao.update(item, id);
 
-				update(item, id);
+				if (actualizado) {
+					JOptionPane.showMessageDialog(in, "El registro se actualizó correctamente.", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(in, "No se pudo actualizar el registro. Intente nuevamente.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 
 				index();
-
 			}
 
 		});
@@ -206,7 +217,7 @@ public class ControllerVariedades extends Functions implements Controller {
 		index();
 
 	}
- 
+
 	@Override
 	public void destroy(int id) {
 		dao.destroy(id);

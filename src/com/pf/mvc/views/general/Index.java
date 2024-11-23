@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
+import com.pf.mvc.views.borde.BotonRedondeado;
+
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.border.BevelBorder;
@@ -30,9 +32,9 @@ public class Index extends JPanel {
 	public JTextField tNombre;
 	public DefaultTableModel modelo;
 	public TableRowSorter<DefaultTableModel> filtro;
-	public JButton btnEliminar;
-	public JButton btnEditar;
-	public JButton btnGuardar;
+	public BotonRedondeado btnEliminar;
+	public BotonRedondeado btnEditar;
+	public BotonRedondeado btnGuardar;
 	public JLabel lblTitulo;
 	public JButton btnActualizar;
 	public JButton btnCancelar;
@@ -80,8 +82,10 @@ public class Index extends JPanel {
 		flowLayout.setHgap(10);
 		panel_3.add(panel_4, BorderLayout.SOUTH);
 
-		btnEditar = new JButton("Editar");
-		btnEditar.setBorder(new LineBorder(new Color(255, 140, 0), 3));
+		btnEditar = new BotonRedondeado("Editar", 20);
+		//btnEditar.setBorder(new LineBorder(new Color(255, 140, 0), 3));
+		//btnEditar.setBorder(new BotonRedondeado(20));
+		btnEditar.setContentAreaFilled(false);
 		btnEditar.setFocusPainted(false);
 		btnEditar.setPreferredSize(new Dimension(90, 40));
 		btnEditar.setBackground(new Color(204, 153, 0));
@@ -92,8 +96,8 @@ public class Index extends JPanel {
 		btnEditar.setFont(new Font("Calibri", Font.BOLD, 20));
 		panel_4.add(btnEditar);
 
-		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBorder(new LineBorder(new Color(220, 20, 60), 3));
+		btnEliminar = new BotonRedondeado("Eliminar",20);
+		//btnEliminar.setBorder(new LineBorder(new Color(220, 20, 60), 3));
 		btnEliminar.setFocusPainted(false);
 		btnEliminar.setPreferredSize(new Dimension(90, 40));
 		btnEliminar.setBackground(new Color(153, 0, 0));
@@ -150,13 +154,9 @@ public class Index extends JPanel {
 		tNombre.setBounds(97, 135, 334, 39);
 		panel.add(tNombre);
 
-		btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnGuardar = new BotonRedondeado("Guardar",20);
 		btnGuardar.setFocusPainted(false);
-		btnGuardar.setBorder(new LineBorder(new Color(0, 128, 0), 3));
+		btnGuardar.setBorder(new LineBorder(new Color(0, 128, 0), 3, true));
 		btnGuardar.setPreferredSize(new Dimension(200, 40));
 		btnGuardar.setBackground(new Color(39, 174, 96));
 		btnGuardar.setForeground(Color.WHITE);
@@ -164,10 +164,10 @@ public class Index extends JPanel {
 		// btnRegistrar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null,
 		// Color.BLACK, null));
 		btnGuardar.setFont(new Font("Calibri", Font.BOLD, 20));
-		btnGuardar.setBounds(63, 230, 105, 33);
+		btnGuardar.setBounds(63, 230, 119, 33);
 		panel.add(btnGuardar);
 
-		btnActualizar = new JButton("Actualizar");
+		btnActualizar = new BotonRedondeado("Actualizar",20);
 		btnActualizar.setBorder(new LineBorder(new Color(0, 128, 0), 3));
 		// btnActualizar.setBackground(SystemColor.inactiveCaptionBorder);
 		// btnActualizar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK,
@@ -181,7 +181,7 @@ public class Index extends JPanel {
 		btnActualizar.setBounds(63, 230, 119, 33);
 		panel.add(btnActualizar);
 
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new BotonRedondeado("Cancelar",20);
 		btnCancelar.setFocusPainted(false);
 		btnCancelar.setBorder(new LineBorder(new Color(0, 0, 139), 3));
 		// btnCancelar.setBackground(SystemColor.inactiveCaptionBorder);

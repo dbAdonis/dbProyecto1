@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.pf.mvc.models.dao.DAOLote;
+import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.models.vo.Lote;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
@@ -26,7 +27,7 @@ public class ControllerLotes extends Functions implements Controller {
 		this.vp = vp;
 		this.idApp = -1;
 		this.ids = new ArrayList<>();
-		
+
 	}
 
 	public int getIdApp() {
@@ -39,12 +40,12 @@ public class ControllerLotes extends Functions implements Controller {
 
 	@Override
 	public void index() {
-		
+
 		this.in = new Index();
 
 		in.modelo.setDataVector(getData(), getColumns());
 		ocultarColumna(in.table);
-		
+
 		in.tBuscar.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -55,44 +56,44 @@ public class ControllerLotes extends Functions implements Controller {
 		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-					buscar(in.tBuscar, in.filtro, 1);
+				buscar(in.tBuscar, in.filtro, 1);
 			}
 		});
 
 		in.btnGuardar.addActionListener(e -> {
 
-			create();	
+			create();
 		});
 
 		in.btnEditar.addActionListener(e -> {
 
 			int id = getSelectedId(in.table);
-			if(id == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
-			edit(id);
-			in.lblTitulo.setText("Editar lote");
-			in.btnGuardar.setEnabled(false);
-			in.btnGuardar.setVisible(false);
-			in.btnActualizar.setEnabled(true);
-			in.btnActualizar.setVisible(true);
-			in.btnCancelar.setEnabled(true);
-			in.btnCancelar.setVisible(true);
+			if (id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
+				edit(id);
+				in.lblTitulo.setText("Editar lote");
+				in.btnGuardar.setEnabled(false);
+				in.btnGuardar.setVisible(false);
+				in.btnActualizar.setEnabled(true);
+				in.btnActualizar.setVisible(true);
+				in.btnCancelar.setEnabled(true);
+				in.btnCancelar.setVisible(true);
 			}
 		});
 
 		in.btnEliminar.addActionListener(e -> {
-			
+
 			int id = getSelectedId(in.table);
-			if(id == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
-			dao.destroy(id);
-			index();
+			if (id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
+				dao.destroy(id);
+				index();
 			}
-			
+
 		});
 
 		vp.setContenido(in, "Lotes");
@@ -109,50 +110,57 @@ public class ControllerLotes extends Functions implements Controller {
 
 	@Override
 	public void create() {
-	    String nombre = in.tNombre.getText();
+		String nombre = in.tNombre.getText();
 
-	    if (nombre.equals("")) {
-	        JOptionPane.showMessageDialog(in, "Debe completar el campo", 
-	            "Advertencia", JOptionPane.WARNING_MESSAGE);
-	    } else {
-	        Lote item = new Lote(nombre, true);
+		if (nombre.equals("")) {
+			JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia", JOptionPane.WARNING_MESSAGE);
+		} else {
+			Lote item = new Lote(nombre, true);
 
-	        String result = dao.storeLote(item);
+			String result = dao.storeLote(item);
 
-	        JOptionPane.showMessageDialog(in, result, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(in, result, "Resultado", JOptionPane.INFORMATION_MESSAGE);
 
-	        in.tNombre.setText("");
+			in.tNombre.setText("");
 
-	        index();
-	    }
+			index();
+		}
 	}
-
 
 	@Override
 	public void edit(int id) {
-		
+
 		Lote lo = (Lote) dao.getItem(id);
-			in.tNombre.setText(lo.getNombre());
-		
+		if (lo == null) {
+			JOptionPane.showMessageDialog(in, "El registro no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		in.tNombre.setText(lo.getNombre());
+
 		in.btnActualizar.addActionListener(e -> {
-			
+
 			String nombre = in.tNombre.getText();
 
-			if(nombre.equals("")) {
-				JOptionPane.showMessageDialog(in, "Debe completar el campo",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
+			if (nombre.isEmpty()) {
+				JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
 				Lote item = new Lote(nombre, true);
+				boolean actualizado = dao.update(item, id);
 
-				update(item, id);
+				if (actualizado) {
+					JOptionPane.showMessageDialog(in, "El registro se actualizó correctamente.", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(in, "No se pudo actualizar el registro. Intente nuevamente.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 
 				index();
 			}
-			
-		
-			
+
 		});
-		
+
 		in.btnCancelar.addActionListener(e -> {
 
 			index();
@@ -197,7 +205,7 @@ public class ControllerLotes extends Functions implements Controller {
 		dao.store(o);
 		index();
 	}
-	
+
 	@Override
 	public void update(Object o, int id) {
 		dao.update(o, id);
@@ -211,7 +219,7 @@ public class ControllerLotes extends Functions implements Controller {
 		index();
 
 	}
-	
+
 	public void actualizarTabla() {
 		Index in = new Index();
 		in.modelo.setDataVector(getData(), getColumns());

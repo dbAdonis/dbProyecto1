@@ -28,7 +28,7 @@ public class ControllerFincas extends Functions implements Controller {
 		this.vp = vp;
 		this.idApp = -1;
 		this.ids = new ArrayList<>();
-		
+
 	}
 
 	public int getIdApp() {
@@ -41,12 +41,12 @@ public class ControllerFincas extends Functions implements Controller {
 
 	@Override
 	public void index() {
-		
+
 		this.in = new Index();
 
 		in.modelo.setDataVector(getData(), getColumns());
 		ocultarColumna(in.table);
-		
+
 		in.tBuscar.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -57,44 +57,44 @@ public class ControllerFincas extends Functions implements Controller {
 		in.tBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-					buscar(in.tBuscar, in.filtro, 1);
+				buscar(in.tBuscar, in.filtro, 1);
 			}
 		});
 
 		in.btnGuardar.addActionListener(e -> {
 
-			create();	
+			create();
 		});
 
 		in.btnEditar.addActionListener(e -> {
 
 			int id = getSelectedId(in.table);
-			if(id == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
-			edit(id);
-			in.lblTitulo.setText("Editar Finca");
-			in.btnGuardar.setEnabled(false);
-			in.btnGuardar.setVisible(false);
-			in.btnActualizar.setEnabled(true);
-			in.btnActualizar.setVisible(true);
-			in.btnCancelar.setEnabled(true);
-			in.btnCancelar.setVisible(true);
+			if (id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para editar", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
+				edit(id);
+				in.lblTitulo.setText("Editar Finca");
+				in.btnGuardar.setEnabled(false);
+				in.btnGuardar.setVisible(false);
+				in.btnActualizar.setEnabled(true);
+				in.btnActualizar.setVisible(true);
+				in.btnCancelar.setEnabled(true);
+				in.btnCancelar.setVisible(true);
 			}
 		});
 
 		in.btnEliminar.addActionListener(e -> {
-			
+
 			int id = getSelectedId(in.table);
-			if(id == -1) {
-				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
-			dao.destroy(id);
-			index();
+			if (id == -1) {
+				JOptionPane.showMessageDialog(in, "Debe seleccionar un registro para eliminar", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
+				dao.destroy(id);
+				index();
 			}
-			
+
 		});
 
 		vp.setContenido(in, "Fincas");
@@ -113,55 +113,58 @@ public class ControllerFincas extends Functions implements Controller {
 	public void create() {
 		String nombre = in.tNombre.getText();
 
-	    if (nombre.isEmpty()) {
-	        JOptionPane.showMessageDialog(in, "El nombre no puede estar vacío.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-	        return;
-	    }
+		if (nombre.isEmpty()) {
+			JOptionPane.showMessageDialog(in, "El nombre no puede estar vacío.", "Advertencia",
+					JOptionPane.WARNING_MESSAGE);
+			return;
+		}
 
-	    Finca item = new Finca(nombre, true);
+		Finca item = new Finca(nombre, true);
 
-	    String result = dao.storeFinca(item);
+		String result = dao.storeFinca(item);
 
-	    JOptionPane.showMessageDialog(in, result);
+		JOptionPane.showMessageDialog(in, result);
 
-	    in.tNombre.setText("");
+		in.tNombre.setText("");
 
-	        index();
-	    }
-	
-
+		index();
+	}
 
 	@Override
 	public void edit(int id) {
-		
 		Finca f = (Finca) dao.getItem(id);
-			in.tNombre.setText(f.getNombre());
-		
+		if (f == null) {
+			JOptionPane.showMessageDialog(in, "El registro no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		in.tNombre.setText(f.getNombre());
+
 		in.btnActualizar.addActionListener(e -> {
-			
-			String nombre = in.tNombre.getText();
+			String nombre = in.tNombre.getText().trim();
 
-			if(nombre.equals("")) {
-				JOptionPane.showMessageDialog(in, "Debe completar el campo",
-						"Advertencia", JOptionPane.WARNING_MESSAGE);
-			}else {
+			if (nombre.isEmpty()) {
+				JOptionPane.showMessageDialog(in, "Debe completar el campo", "Advertencia",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
 				Finca item = new Finca(nombre, true);
+				boolean actualizado = dao.update(item, id);
 
-				update(item, id);
+				if (actualizado) {
+					JOptionPane.showMessageDialog(in, "El registro se actualizó correctamente.", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(in, "No se pudo actualizar el registro. Intente nuevamente.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 
 				index();
 			}
-			
-		
-			
 		});
-		
+
 		in.btnCancelar.addActionListener(e -> {
-
 			index();
-
 		});
-
 	}
 
 	@Override
@@ -200,7 +203,7 @@ public class ControllerFincas extends Functions implements Controller {
 		dao.store(o);
 		index();
 	}
-	
+
 	@Override
 	public void update(Object o, int id) {
 		dao.update(o, id);
@@ -214,7 +217,7 @@ public class ControllerFincas extends Functions implements Controller {
 		index();
 
 	}
-	
+
 	public void actualizarTabla() {
 		Index in = new Index();
 		in.modelo.setDataVector(getData(), getColumns());

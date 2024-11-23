@@ -15,6 +15,7 @@ import javax.swing.table.TableRowSorter;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import com.pf.mvc.models.vo.Finca;
+import com.pf.mvc.views.borde.BotonRedondeado;
 
 import java.awt.Font;
 import javax.swing.border.BevelBorder;
@@ -33,9 +34,9 @@ public class Index extends JPanel {
 	public JTextField tBuscar;
 	public DefaultTableModel modelo;
 	public TableRowSorter<DefaultTableModel> filtro;
-	public JButton btnEliminar;
-	public JButton btnEditar;
-	public JButton btnNuevo;
+	public BotonRedondeado btnEliminar;
+	public BotonRedondeado btnEditar;
+	public BotonRedondeado btnNuevo;
 	public JComboBox<Finca> cbxFinca;
 
 	/**
@@ -94,7 +95,7 @@ public class Index extends JPanel {
 		flowLayout.setHgap(10);
 		panel_3.add(panel_4, BorderLayout.SOUTH);
 
-		btnNuevo = new JButton("Nuevo");
+		btnNuevo = new BotonRedondeado("Nuevo",20);
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -107,7 +108,7 @@ public class Index extends JPanel {
 		btnNuevo.setBackground(new Color(39, 174, 96));
 		panel_4.add(btnNuevo);
 
-		btnEditar = new JButton("Editar");
+		btnEditar = new BotonRedondeado("Editar",20);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -121,7 +122,7 @@ public class Index extends JPanel {
 		btnEditar.setFont(new Font("Calibri", Font.BOLD, 20));
 		panel_4.add(btnEditar);
 
-		btnEliminar = new JButton("Eliminar");
+		btnEliminar = new BotonRedondeado("Eliminar",20);
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

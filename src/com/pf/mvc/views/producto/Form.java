@@ -27,11 +27,13 @@ import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Producto;
 import com.pf.mvc.models.vo.Tipo;
+import com.pf.mvc.views.borde.BotonRedondeado;
+
 import javax.swing.border.LineBorder;
 
 public class Form extends JPanel {
-	public JButton btnAgregar;
-	public JButton btnCancelar;
+	public BotonRedondeado btnAgregar;
+	public BotonRedondeado btnCancelar;
 	public JPanel contenido;
 	public JTextField tNombre;
 	public JTextField tCodigo;
@@ -135,7 +137,7 @@ public class Form extends JPanel {
 		
 		AutoCompleteDecorator.decorate(cbxCategorias);
 		
-		btnAgregar = new JButton("Agregar");
+		btnAgregar = new BotonRedondeado("Agregar",20);
 		btnAgregar.setBounds(21, 353, 100, 40);
 		panel_4.add(btnAgregar);
 		btnAgregar.setFocusPainted(false);
@@ -145,7 +147,7 @@ public class Form extends JPanel {
 		btnAgregar.setBackground(new Color(39, 174, 96));
 		btnAgregar.setForeground(Color.WHITE);
 		
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new BotonRedondeado("Cancelar",20);
 		btnCancelar.setBounds(149, 353, 100, 40);
 		panel_4.add(btnCancelar);
 		btnCancelar.setFocusPainted(false);

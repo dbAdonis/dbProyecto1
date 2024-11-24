@@ -2,15 +2,8 @@ package com.pf.mvc.views.empleado;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableRowSorter;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
@@ -18,10 +11,7 @@ import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.views.borde.BotonRedondeado;
 
 import java.awt.Font;
-import javax.swing.border.BevelBorder;
 import java.awt.Color;
-import java.awt.SystemColor;
-import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;

@@ -1,14 +1,10 @@
 package com.pf.mvc.controllers;
 
-import java.awt.Image;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import com.pf.mvc.models.dao.DAOCategoria;
 import com.pf.mvc.models.dao.DAONaturaleza;
@@ -27,14 +23,10 @@ public class ControllerProductos extends Functions implements Controller {
 	private DAOProducto dao;
 	private ViewPrincipal vp;
 	private ArrayList<Integer> ids;
-	private boolean btnOn;
-	private boolean btnOff;
 
 	public ControllerProductos(ViewPrincipal vp) {
 		dao = new DAOProducto();
 		this.vp = vp;
-		this.btnOn = false;
-		this.btnOff = true;
 		this.ids = new ArrayList<>();
 	}
 
@@ -175,7 +167,6 @@ public class ControllerProductos extends Functions implements Controller {
 		});
 
 		f.btnCancelar.addActionListener(e -> {
-			actualizarTabla();
 			index();
 		});
 
@@ -291,7 +282,6 @@ public class ControllerProductos extends Functions implements Controller {
 		});
 
 		f.btnCancelar.addActionListener(e -> {
-			actualizarTabla();
 			index();
 		});
 
@@ -336,16 +326,6 @@ public class ControllerProductos extends Functions implements Controller {
 		return data;
 	}
 
-	public void setImgBtn(JButton btn, String ruta) {
-
-		ImageIcon imgBtn = new ImageIcon(getClass().getResource(ruta));
-
-		ImageIcon iconImgBtn = new ImageIcon(imgBtn.getImage().getScaledInstance(30, 27, Image.SCALE_DEFAULT));
-
-		btn.setIcon(iconImgBtn);
-
-	}
-
 	@Override
 	public String[] getColumns() {
 		return new String[] { "ID", "PRODUCTO", "TIPO", "CÓDIGO", "CATEGORÍA", "NOMBRE", "UNIDADES" };
@@ -353,19 +333,16 @@ public class ControllerProductos extends Functions implements Controller {
 
 	@Override
 	public void store(Object o) {
-		// TODO Auto-generated method stub 
 
 	} 
 
 	@Override
 	public void update(Object o, int id) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void destroy(int id) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -415,12 +392,6 @@ public class ControllerProductos extends Functions implements Controller {
 			}
 
 		}
-	}
-
-	public void actualizarTabla() {
-		Index in = new Index();
-		in.modelo.setDataVector(dao.getProductos(), getColumns());
-
 	}
 
 }

@@ -171,8 +171,8 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		});
 		
 		if (f.cbxFinca.getItemCount() > 0) {
-	        f.cbxFinca.setSelectedIndex(0); // Selecciona la primera finca
-	        f.cbxFinca.getActionListeners()[0].actionPerformed(null); // Dispara el ActionListener
+	        f.cbxFinca.setSelectedIndex(0); 
+	        f.cbxFinca.getActionListeners()[0].actionPerformed(null); 
 	    }
 
 		ArrayList<Object> supervisores = new DAOSupervisor().getData();
@@ -187,8 +187,8 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		});
 		
 		if (f.cbxFitoFerti.getItemCount() > 0) {
-	        f.cbxFitoFerti.setSelectedIndex(0); // Selecciona el primer producto
-	        f.cbxFitoFerti.getActionListeners()[0].actionPerformed(null); // Dispara el ActionListener
+	        f.cbxFitoFerti.setSelectedIndex(0); 
+	        f.cbxFitoFerti.getActionListeners()[0].actionPerformed(null);
 	    }
 
 		f.btnGuardar.addActionListener(e -> {
@@ -282,7 +282,6 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		});
 
 		f.btnCancelar.addActionListener(e -> {
-			actualizarTabla();
 			index();
 		});
 
@@ -418,8 +417,8 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		});
 		
 		if (ed.cbxFitoFerti.getItemCount() > 0) {
-	        ed.cbxFitoFerti.setSelectedIndex(0); // Selecciona el primer producto
-	        ed.cbxFitoFerti.getActionListeners()[0].actionPerformed(null); // Dispara el ActionListener
+	        ed.cbxFitoFerti.setSelectedIndex(0);
+	        ed.cbxFitoFerti.getActionListeners()[0].actionPerformed(null); 
 	    }
 
 		ed.btnGuardar.addActionListener(e -> {
@@ -515,8 +514,6 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 
 		ed.btnCancelar.addActionListener(e -> {
-
-			actualizarTabla();
 
 			index();
 
@@ -617,19 +614,16 @@ public class ControllerAplicaciones extends Functions implements Controller {
 
 	@Override
 	public void store(Object o) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void update(Object o, int id) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void destroy(int id) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -673,12 +667,6 @@ public class ControllerAplicaciones extends Functions implements Controller {
 		}
 
 		return datosFiltrados.toArray(new Object[0][0]);
-	}
-
-	public void actualizarTabla() {
-		Index in = new Index();
-		in.modelo.setDataVector(dao.getAplicaciones(), getColumns());
-
 	}
 
 }

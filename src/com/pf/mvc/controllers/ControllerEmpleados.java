@@ -5,12 +5,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
-
 import com.pf.mvc.models.dao.DAOEmpleado;
 import com.pf.mvc.models.dao.DAOFinca;
 import com.pf.mvc.models.vo.Empleado;
@@ -18,8 +14,6 @@ import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.empleado.Create;
 import com.pf.mvc.views.empleado.Index;
-import com.pf.mvc.views.menu.Inicio;
-import com.pf.mvc.views.menu.Options;
 
 public class ControllerEmpleados extends Functions implements Controller {
 
@@ -33,11 +27,6 @@ public class ControllerEmpleados extends Functions implements Controller {
 		this.vp = vp;
 		this.idFinca = -1;
 		this.ids = new ArrayList<>();
-	}
-
-	public void inicio() {
-		Inicio inicio = new Inicio();
-		vp.setContenido(inicio, "Bienvenido al Sistema Fino Follaje.");
 	}
 
 	@Override

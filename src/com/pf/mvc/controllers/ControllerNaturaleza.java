@@ -7,31 +7,21 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
-import com.pf.mvc.models.dao.DAOCategoria;
 import com.pf.mvc.models.dao.DAONaturaleza;
-import com.pf.mvc.models.dao.DAOTipo;
-import com.pf.mvc.models.vo.Categoria;
-import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.models.vo.Naturaleza;
-import com.pf.mvc.models.vo.Tipo;
 import com.pf.mvc.views.ViewPrincipal;
-import com.pf.mvc.views.general.FormGeneral;
 import com.pf.mvc.views.general.Index;
-import com.pf.mvc.views.producto.Form;
 
 public class ControllerNaturaleza extends Functions implements Controller {
 
 	private DAONaturaleza dao;
 	private Index in;
 	private ArrayList<Integer> ids;
-	public boolean switchPanel;
 	private ViewPrincipal vp;
 
 	public ControllerNaturaleza(ViewPrincipal vp) {
 		this.dao = new DAONaturaleza();
-		this.switchPanel = false;
 		this.ids = new ArrayList<>();
 		this.vp = vp;
 	}

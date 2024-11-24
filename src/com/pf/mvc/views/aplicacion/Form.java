@@ -1,11 +1,9 @@
 package com.pf.mvc.views.aplicacion;
 
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
@@ -14,13 +12,8 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JSpinner;
-import java.awt.FlowLayout;
 import java.awt.Color;
-import javax.swing.border.BevelBorder;
-import javax.swing.table.DefaultTableModel;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
@@ -28,22 +21,16 @@ import com.pf.mvc.models.vo.Empleado;
 import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.models.vo.Labor;
 import com.pf.mvc.models.vo.Lote;
-import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Producto;
 import com.pf.mvc.models.vo.Supervisor;
 import com.pf.mvc.models.vo.Variedad;
 import com.pf.mvc.views.borde.BotonRedondeado;
 import com.toedter.calendar.JDateChooser;
 
-import java.awt.Insets;
-import java.awt.Component;
-import java.awt.Rectangle;
 import java.awt.SystemColor;
-import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
-import javax.swing.UIManager;
 
 public class Form extends JPanel {
 	public BotonRedondeado btnGuardar;
@@ -263,14 +250,6 @@ public class Form extends JPanel {
 		lblSupervisor.setFont(new Font("Calibri", Font.BOLD, 19));
 		lblSupervisor.setBounds(786, 11, 91, 20);
 		panelRegistro.add(lblSupervisor);
-
-	}
-
-	public void setBtnLote(String imgButton) {
-
-		ImageIcon imgBtn = new ImageIcon(getClass().getResource(imgButton));
-
-		ImageIcon iconImgBtn = new ImageIcon(imgBtn.getImage().getScaledInstance(37, 34, Image.SCALE_DEFAULT));
 
 	}
 }

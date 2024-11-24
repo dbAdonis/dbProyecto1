@@ -9,21 +9,13 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.pf.mvc.models.dao.DAOLabor;
-import com.pf.mvc.models.dao.DAOLote;
-import com.pf.mvc.models.dao.DAOVariedad;
-import com.pf.mvc.models.vo.Empleado;
-import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.models.vo.Labor;
-import com.pf.mvc.models.vo.Lote;
-import com.pf.mvc.models.vo.Variedad;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
-import com.pf.mvc.views.menu.Inicio;
 
 public class ControllerLabores extends Functions implements Controller {
 
 	private DAOLabor dao;
-	private int idApp;
 	private ViewPrincipal vp;
 	private ArrayList<Integer> ids;
 	private Index in;
@@ -31,16 +23,7 @@ public class ControllerLabores extends Functions implements Controller {
 	public ControllerLabores(ViewPrincipal vp) {
 		this.dao = new DAOLabor();
 		this.vp = vp;
-		this.idApp = -1;
 		this.ids = new ArrayList<>();
-	}
-
-	public int getIdApp() {
-		return idApp;
-	}
-
-	public void setIdApp(int idApp) {
-		this.idApp = idApp;
 	}
 
 	@Override
@@ -222,12 +205,6 @@ public class ControllerLabores extends Functions implements Controller {
 	public void destroy(int id) {
 		dao.destroy(id);
 		index();
-
-	}
-
-	public void actualizarTabla() {
-		Index in = new Index();
-		in.modelo.setDataVector(getData(), getColumns());
 
 	}
 

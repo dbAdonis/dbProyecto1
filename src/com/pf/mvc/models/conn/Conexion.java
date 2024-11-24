@@ -18,8 +18,6 @@ public class Conexion {
 
 	}
 	
-	// CONECTAR
-	
 	public Connection conectar() {
 		
 		Connection con = null;
@@ -36,10 +34,6 @@ public class Conexion {
 		return con;
 		
 	}
-	
-	
-	
-	// DESCONECTAR
 	
 	public void desconectar(Connection con) {
 		

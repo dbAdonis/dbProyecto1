@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 import com.pf.mvc.models.conn.Conexion;
-import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Empleado;
 
 public class DAOEmpleado extends Conexion implements DAO {
@@ -216,21 +215,18 @@ public class DAOEmpleado extends Conexion implements DAO {
 	        PreparedStatement ps = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	        ResultSet rs = ps.executeQuery();
 
-	        // Determinar la cantidad de filas en el ResultSet
 	        rs.last();
 	        int rowCount = rs.getRow();
 	        rs.beforeFirst();
 
-	        // Configurar las columnas que necesitamos
-	        Object[][] data = new Object[rowCount][4]; // 4 columnas en el SELECT
+	        Object[][] data = new Object[rowCount][4]; 
 	        int i = 0;
-
-	        // Rellenar la matriz con los datos de la consulta
+	        
 	        while (rs.next()) {
-	            data[i][0] = rs.getInt("id_empleado");  // ID del empleado
-	            data[i][1] = rs.getString("empleado");  // Nombre del empleado
-	            data[i][2] = rs.getString("finca");     // Nombre de la finca
-	            data[i][3] = rs.getInt("activo") == 1;  // Estado activo (como booleano)
+	            data[i][0] = rs.getInt("id_empleado");  
+	            data[i][1] = rs.getString("empleado");  
+	            data[i][2] = rs.getString("finca");     
+	            data[i][3] = rs.getInt("activo") == 1;  
 	            i++;
 	        }
 
@@ -238,7 +234,7 @@ public class DAOEmpleado extends Conexion implements DAO {
 
 	    } catch (Exception e) {
 	        System.err.println("Error: " + e.getMessage());
-	        return new Object[1][1]; // Retornar una matriz vacía si ocurre un error
+	        return new Object[1][1];
 
 	    } finally {
 	        desconectar(con);

@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -13,19 +12,13 @@ import java.awt.Image;
 
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
 import java.awt.Color;
-import java.awt.SystemColor;
-import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import com.pf.mvc.models.vo.Categoria;
 import com.pf.mvc.models.vo.Naturaleza;
-import com.pf.mvc.models.vo.Producto;
 import com.pf.mvc.models.vo.Tipo;
 import com.pf.mvc.views.borde.BotonRedondeado;
 
@@ -185,11 +178,6 @@ public class Form extends JPanel {
 		contenido = new JPanel();
 		panel_2.add(contenido, BorderLayout.CENTER);
 		contenido.setLayout(new BorderLayout(0, 0));
-		
-		
-		ImageIcon imgBtn = new ImageIcon(getClass().getResource("/resources/ButtonOff.png"));
-		
-		ImageIcon iconImgBtn = new ImageIcon(imgBtn.getImage().getScaledInstance(30, 27, Image.SCALE_DEFAULT));
 		
 	}
 	

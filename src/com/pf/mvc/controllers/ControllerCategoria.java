@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 
 import com.pf.mvc.models.dao.DAOCategoria;
 import com.pf.mvc.models.vo.Categoria;
-import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
 
@@ -18,12 +17,10 @@ public class ControllerCategoria extends Functions implements Controller {
 
 	private DAOCategoria dao;
 	private Index in;
-	public boolean switchPanel;
 	private ViewPrincipal vp;
 
 	public ControllerCategoria(ViewPrincipal vp) {
 		this.dao = new DAOCategoria();
-		this.switchPanel = false;
 		this.vp = vp;
 	}
 

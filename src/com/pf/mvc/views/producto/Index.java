@@ -13,8 +13,6 @@ import com.pf.mvc.views.borde.BotonRedondeado;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.FlowLayout;

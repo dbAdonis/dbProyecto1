@@ -11,10 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Font;
-import java.awt.LayoutManager;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
@@ -26,9 +23,7 @@ import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.views.borde.BotonRedondeado;
 
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import javax.swing.border.LineBorder;

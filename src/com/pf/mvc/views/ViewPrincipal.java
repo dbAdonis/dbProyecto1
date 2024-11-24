@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -17,7 +16,6 @@ import java.awt.Font;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
-import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

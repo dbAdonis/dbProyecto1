@@ -174,8 +174,6 @@ public class DAOAplicacion extends Conexion implements DAO {
         return list;
     }
     
-    //Este es el nuevo metodo
-    
     public Object[][] getAplicaciones() {
     	
         Connection con = conectar();
@@ -201,8 +199,6 @@ public class DAOAplicacion extends Conexion implements DAO {
             
         	PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            //ps.getFetchSize()
-            //Error: 0 no retorna la cantidad de filas
             
             rs.last();
             int contadorFilas =rs.getRow();

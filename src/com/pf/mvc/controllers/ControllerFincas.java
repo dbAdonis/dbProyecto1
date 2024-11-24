@@ -9,16 +9,13 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.pf.mvc.models.dao.DAOFinca;
-import com.pf.mvc.models.dao.DAOLote;
 import com.pf.mvc.models.vo.Finca;
-import com.pf.mvc.models.vo.Lote;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
 
 public class ControllerFincas extends Functions implements Controller {
 
 	private DAOFinca dao;
-	private int idApp;
 	private ViewPrincipal vp;
 	private ArrayList<Integer> ids;
 	private Index in;
@@ -26,17 +23,8 @@ public class ControllerFincas extends Functions implements Controller {
 	public ControllerFincas(ViewPrincipal vp) {
 		this.dao = new DAOFinca();
 		this.vp = vp;
-		this.idApp = -1;
 		this.ids = new ArrayList<>();
 
-	}
-
-	public int getIdApp() {
-		return idApp;
-	}
-
-	public void setIdApp(int idApp) {
-		this.idApp = idApp;
 	}
 
 	@Override
@@ -215,12 +203,6 @@ public class ControllerFincas extends Functions implements Controller {
 	public void destroy(int id) {
 		dao.destroy(id);
 		index();
-
-	}
-
-	public void actualizarTabla() {
-		Index in = new Index();
-		in.modelo.setDataVector(getData(), getColumns());
 
 	}
 

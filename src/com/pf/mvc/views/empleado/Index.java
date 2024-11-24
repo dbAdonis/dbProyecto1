@@ -3,7 +3,6 @@ package com.pf.mvc.views.empleado;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -18,7 +17,6 @@ import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.views.borde.BotonRedondeado;
 
 import java.awt.Font;
-import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.FlowLayout;

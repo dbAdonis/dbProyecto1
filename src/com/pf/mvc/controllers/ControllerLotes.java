@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.pf.mvc.models.dao.DAOLote;
-import com.pf.mvc.models.vo.Finca;
 import com.pf.mvc.models.vo.Lote;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
@@ -17,7 +16,6 @@ import com.pf.mvc.views.general.Index;
 public class ControllerLotes extends Functions implements Controller {
 
 	private DAOLote dao;
-	private int idApp;
 	private ViewPrincipal vp;
 	private ArrayList<Integer> ids;
 	private Index in;
@@ -25,19 +23,10 @@ public class ControllerLotes extends Functions implements Controller {
 	public ControllerLotes(ViewPrincipal vp) {
 		this.dao = new DAOLote();
 		this.vp = vp;
-		this.idApp = -1;
 		this.ids = new ArrayList<>();
 
 	}
-
-	public int getIdApp() {
-		return idApp;
-	}
-
-	public void setIdApp(int idApp) {
-		this.idApp = idApp;
-	}
-
+	
 	@Override
 	public void index() {
 
@@ -217,12 +206,6 @@ public class ControllerLotes extends Functions implements Controller {
 	public void destroy(int id) {
 		dao.destroy(id);
 		index();
-
-	}
-
-	public void actualizarTabla() {
-		Index in = new Index();
-		in.modelo.setDataVector(getData(), getColumns());
 
 	}
 

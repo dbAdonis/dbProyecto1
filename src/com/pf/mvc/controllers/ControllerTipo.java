@@ -7,19 +7,11 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
-import com.pf.mvc.models.dao.DAOCategoria;
-import com.pf.mvc.models.dao.DAONaturaleza;
 import com.pf.mvc.models.dao.DAOTipo;
-import com.pf.mvc.models.vo.Categoria;
-import com.pf.mvc.models.vo.Finca;
-import com.pf.mvc.models.vo.Naturaleza;
 import com.pf.mvc.models.vo.Tipo;
 import com.pf.mvc.views.ViewPrincipal;
-import com.pf.mvc.views.general.FormGeneral;
 import com.pf.mvc.views.general.Index;
-import com.pf.mvc.views.producto.Form;
 
 public class ControllerTipo extends Functions implements Controller  {
 	
@@ -214,6 +206,5 @@ public class ControllerTipo extends Functions implements Controller  {
 		index();
 		
 	}
-	
 
 }

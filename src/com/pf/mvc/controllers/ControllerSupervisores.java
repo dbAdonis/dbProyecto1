@@ -8,11 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import com.pf.mvc.models.dao.DAOFinca;
-import com.pf.mvc.models.dao.DAOLote;
 import com.pf.mvc.models.dao.DAOSupervisor;
-import com.pf.mvc.models.vo.Finca;
-import com.pf.mvc.models.vo.Lote;
 import com.pf.mvc.models.vo.Supervisor;
 import com.pf.mvc.views.ViewPrincipal;
 import com.pf.mvc.views.general.Index;
@@ -20,7 +16,6 @@ import com.pf.mvc.views.general.Index;
 public class ControllerSupervisores extends Functions implements Controller {
 
 	private DAOSupervisor dao;
-	private int idApp;
 	private ViewPrincipal vp;
 	private ArrayList<Integer> ids;
 	private Index in;
@@ -28,17 +23,8 @@ public class ControllerSupervisores extends Functions implements Controller {
 	public ControllerSupervisores(ViewPrincipal vp) {
 		this.dao = new DAOSupervisor();
 		this.vp = vp;
-		this.idApp = -1;
 		this.ids = new ArrayList<>();
 
-	}
-
-	public int getIdApp() {
-		return idApp;
-	}
-
-	public void setIdApp(int idApp) {
-		this.idApp = idApp;
 	}
 
 	@Override
@@ -238,11 +224,4 @@ public class ControllerSupervisores extends Functions implements Controller {
 		index();
 
 	}
-
-	public void actualizarTabla() {
-		Index in = new Index();
-		in.modelo.setDataVector(getData(), getColumns());
-
-	}
-
 }

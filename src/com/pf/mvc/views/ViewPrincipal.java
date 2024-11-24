@@ -72,7 +72,7 @@ public class ViewPrincipal extends JFrame {
 		panel = new JPanel();
 		panel.setBorder(new EmptyBorder(20, 0, 0, 0));
 		panel_2.add(panel, BorderLayout.WEST);
-		panel.setPreferredSize(new Dimension(210, 10));
+		panel.setPreferredSize(new Dimension(222, 10));
 		panel.setBackground(new Color(62, 85, 40));
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
 
@@ -80,7 +80,7 @@ public class ViewPrincipal extends JFrame {
 		btnGestionarPersonal.setHorizontalAlignment(SwingConstants.LEFT);
 		btnGestionarPersonal.setIconTextGap(10);
 		btnGestionarPersonal.setFont(new Font("Dialog", Font.PLAIN, 17));
-		btnGestionarPersonal.setPreferredSize(new Dimension(200, 45));
+		btnGestionarPersonal.setPreferredSize(new Dimension(222, 45));
 		panel.add(btnGestionarPersonal);
 		btnGestionarPersonal.setFocusPainted(false);
 		btnGestionarPersonal.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -89,9 +89,10 @@ public class ViewPrincipal extends JFrame {
 
 
 		btnReportesDiarios = new JButton("Reportes Diarios");
+		btnReportesDiarios.setIconTextGap(10);
 		btnReportesDiarios.setHorizontalAlignment(SwingConstants.LEFT);
 		btnReportesDiarios.setFont(new Font("Dialog", Font.PLAIN, 17));
-		btnReportesDiarios.setPreferredSize(new Dimension(200, 45));
+		btnReportesDiarios.setPreferredSize(new Dimension(222, 45));
 		panel.add(btnReportesDiarios);
 		btnReportesDiarios.setFocusPainted(false);
 		btnReportesDiarios.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -99,7 +100,7 @@ public class ViewPrincipal extends JFrame {
 		btnReportesDiarios.setBackground(new Color(62, 85, 40));
 
 		panelBtnReportes = new JPanel();
-		panelBtnReportes.setPreferredSize(new Dimension(200, 135));
+		panelBtnReportes.setPreferredSize(new Dimension(222, 135));
 		FlowLayout fl_panelBtnReportes = (FlowLayout) panelBtnReportes.getLayout();
 		fl_panelBtnReportes.setVgap(0);
 		panel.add(panelBtnReportes);
@@ -113,7 +114,7 @@ public class ViewPrincipal extends JFrame {
 		btnLotes.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnLotes.setHorizontalAlignment(SwingConstants.LEFT);
 		btnLotes.setIconTextGap(10);
-		btnLotes.setPreferredSize(new Dimension(200, 45));
+		btnLotes.setPreferredSize(new Dimension(222, 45));
 		btnLotes.setForeground(Color.WHITE);
 		btnLotes.setFocusPainted(false);
 		btnLotes.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -125,7 +126,7 @@ public class ViewPrincipal extends JFrame {
 		btnVariedades.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnVariedades.setIconTextGap(10);
 		btnVariedades.setHorizontalAlignment(SwingConstants.LEFT);
-		btnVariedades.setPreferredSize(new Dimension(200, 45));
+		btnVariedades.setPreferredSize(new Dimension(222, 45));
 		btnVariedades.setForeground(Color.WHITE);
 		btnVariedades.setFocusPainted(false);
 		btnVariedades.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -141,7 +142,7 @@ public class ViewPrincipal extends JFrame {
 		btnLabores.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnLabores.setIconTextGap(10);
 		btnLabores.setHorizontalAlignment(SwingConstants.LEFT);
-		btnLabores.setPreferredSize(new Dimension(200, 45));
+		btnLabores.setPreferredSize(new Dimension(222, 45));
 		btnLabores.setForeground(Color.WHITE);
 		btnLabores.setFocusPainted(false);
 		btnLabores.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -149,27 +150,56 @@ public class ViewPrincipal extends JFrame {
 		panelBtnReportes.add(btnLabores);
 
 		btnProductos = new JButton("Productos");
+		btnProductos.setIconTextGap(10);
 		btnProductos.setHorizontalAlignment(SwingConstants.LEFT);
 		btnProductos.setFont(new Font("Dialog", Font.PLAIN, 17));
-		btnProductos.setPreferredSize(new Dimension(200, 45));
+		btnProductos.setPreferredSize(new Dimension(222, 45));
 		panel.add(btnProductos);
 		btnProductos.setFocusPainted(false);
 		btnProductos.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnProductos.setForeground(Color.WHITE);
 		btnProductos.setBackground(new Color(62, 85, 40));
+		
+		ImageIcon imgPersonal = new ImageIcon(getClass().getResource("/resources/Personal.png"));
 
-		ImageIcon imgLine = new ImageIcon(getClass().getResource("/resources/line.png"));
+		ImageIcon iconImgPersonal = new ImageIcon(imgPersonal.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
+		ImageIcon imgReporte = new ImageIcon(getClass().getResource("/resources/Reporte2.png"));
 
-		ImageIcon iconImgLine = new ImageIcon(imgLine.getImage().getScaledInstance(15, 20, Image.SCALE_DEFAULT));
+		ImageIcon iconImgReporte = new ImageIcon(imgReporte.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
+		ImageIcon imgProductos = new ImageIcon(getClass().getResource("/resources/Productos.png"));
 
-		btnLotes.setIcon(iconImgLine);
-		btnVariedades.setIcon(iconImgLine);
-		btnLabores.setIcon(iconImgLine);
+		ImageIcon iconImgProductos = new ImageIcon(imgProductos.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
+		ImageIcon imgFincas = new ImageIcon(getClass().getResource("/resources/Finca.png"));
+
+		ImageIcon iconImgFincas = new ImageIcon(imgFincas.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
+		ImageIcon imgSupervisor = new ImageIcon(getClass().getResource("/resources/Supervisor.png"));
+
+		ImageIcon iconImgSupervisor = new ImageIcon(imgSupervisor.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
+		ImageIcon imgLote = new ImageIcon(getClass().getResource("/resources/Lote.png"));
+
+		ImageIcon iconImgLote = new ImageIcon(imgLote.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+
+		ImageIcon imgPlanta = new ImageIcon(getClass().getResource("/resources/Plantas.png"));
+
+		ImageIcon iconImgPlanta = new ImageIcon(imgPlanta.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
+		ImageIcon imgLabores = new ImageIcon(getClass().getResource("/resources/Labores.png"));
+
+		ImageIcon iconImgLabores = new ImageIcon(imgLabores.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
+		ImageIcon imgGestionar = new ImageIcon(getClass().getResource("/resources/Gestionar.png"));
+
+		ImageIcon iconImgGestionar = new ImageIcon(imgGestionar.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		
 		panelBtnProductos = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelBtnProductos.getLayout();
 		flowLayout.setVgap(0);
-		panelBtnProductos.setPreferredSize(new Dimension(200, 135));
+		panelBtnProductos.setPreferredSize(new Dimension(222, 135));
 		panel.add(panelBtnProductos);
 		
 		btnGestionarNaturalezas = new JButton("Gestionar naturalezas");
@@ -177,7 +207,7 @@ public class ViewPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnGestionarNaturalezas.setPreferredSize(new Dimension(200, 45));
+		btnGestionarNaturalezas.setPreferredSize(new Dimension(222, 45));
 		btnGestionarNaturalezas.setMaximumSize(new Dimension(200, 23));
 		btnGestionarNaturalezas.setIconTextGap(10);
 		btnGestionarNaturalezas.setHorizontalAlignment(SwingConstants.LEFT);
@@ -189,7 +219,7 @@ public class ViewPrincipal extends JFrame {
 		panelBtnProductos.add(btnGestionarNaturalezas);
 		
 		btnGestionarTipos = new JButton("Gestionar tipos");
-		btnGestionarTipos.setPreferredSize(new Dimension(200, 45));
+		btnGestionarTipos.setPreferredSize(new Dimension(222, 45));
 		btnGestionarTipos.setMaximumSize(new Dimension(200, 23));
 		btnGestionarTipos.setIconTextGap(10);
 		btnGestionarTipos.setHorizontalAlignment(SwingConstants.LEFT);
@@ -201,7 +231,7 @@ public class ViewPrincipal extends JFrame {
 		panelBtnProductos.add(btnGestionarTipos);
 		
 		btnGestionarCategorias = new JButton("Gestionar categorias");
-		btnGestionarCategorias.setPreferredSize(new Dimension(200, 45));
+		btnGestionarCategorias.setPreferredSize(new Dimension(222, 45));
 		btnGestionarCategorias.setMaximumSize(new Dimension(200, 23));
 		btnGestionarCategorias.setIconTextGap(10);
 		btnGestionarCategorias.setHorizontalAlignment(SwingConstants.LEFT);
@@ -213,28 +243,42 @@ public class ViewPrincipal extends JFrame {
 		panelBtnProductos.add(btnGestionarCategorias);
 		
 		btnFincas = new JButton("Fincas");
+		btnFincas.setIconTextGap(10);
 		btnFincas.setHorizontalAlignment(SwingConstants.LEFT);
-		btnFincas.setPreferredSize(new Dimension(200, 45));
+		btnFincas.setPreferredSize(new Dimension(222, 45));
 		btnFincas.setForeground(Color.WHITE);
 		btnFincas.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnFincas.setFocusPainted(false);
 		btnFincas.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnFincas.setBackground(new Color(62, 85, 40));
 		
-		btnGestionarNaturalezas.setIcon(iconImgLine);
-		btnGestionarTipos.setIcon(iconImgLine);
-		btnGestionarCategorias.setIcon(iconImgLine);
+		btnGestionarNaturalezas.setIcon(iconImgGestionar);
+		btnGestionarTipos.setIcon(iconImgGestionar);
+		btnGestionarCategorias.setIcon(iconImgGestionar);
 		panel.add(btnFincas);
 		
 		btnSupervisor = new JButton("Supervisores");
+		btnSupervisor.setIconTextGap(10);
 		btnSupervisor.setHorizontalAlignment(SwingConstants.LEFT);
-		btnSupervisor.setPreferredSize(new Dimension(200, 45));
+		btnSupervisor.setPreferredSize(new Dimension(222, 45));
 		btnSupervisor.setForeground(Color.WHITE);
 		btnSupervisor.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnSupervisor.setFocusPainted(false);
 		btnSupervisor.setBorder(new EmptyBorder(10, 10, 10, 10));
 		btnSupervisor.setBackground(new Color(62, 85, 40));
+		
+		btnGestionarPersonal.setIcon(iconImgPersonal);
+		btnReportesDiarios.setIcon(iconImgReporte);
+		btnProductos.setIcon(iconImgProductos);
+		btnFincas.setIcon(iconImgFincas);
+		btnSupervisor.setIcon(iconImgSupervisor);
+		btnLotes.setIcon(iconImgLote);
+		btnVariedades.setIcon(iconImgPlanta);
+		btnLabores.setIcon(iconImgLabores);
+		
 		panel.add(btnSupervisor);
+		
+		
 	}
 
 	public void setContenido(JComponent c, String titulo) {
@@ -306,6 +350,15 @@ public class ViewPrincipal extends JFrame {
 			panel.repaint();
 			panel.revalidate();
 		}
+	}
+	
+	public void setIconBtn(JButton btn, String ruta) {
+		
+		ImageIcon img = new ImageIcon(getClass().getResource(ruta));
+
+		ImageIcon iconImg = new ImageIcon(img.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
+		btn.setIcon(iconImg);
 	}
 
 }

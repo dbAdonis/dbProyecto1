@@ -13,7 +13,7 @@ public class Conexion {
 		host = "localhost";
 		user = "root";
 		pass = "";
-		db = "db_sistema_fino_follaje";
+		db = "if4100_pf_g1";
 		url = "jdbc:mysql://" + host + "/" + db;
 
 	}
